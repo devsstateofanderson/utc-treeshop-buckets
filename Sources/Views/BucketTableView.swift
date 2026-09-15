@@ -59,6 +59,9 @@ struct BucketTableView: View {
             ToolbarItemGroup {
                 Button { appState.newItem(in: bucket) } label: { Label("New Row", systemImage: "plus") }
                     .help("New row (⌘N)")
+                Button { if let row = selectedRow { appState.duplicate(row) } } label: { Label("Duplicate Row", systemImage: "plus.square.on.square") }
+                    .help("Copy this row (same rate and calculator inputs) to add another unit")
+                    .disabled(selectedRow == nil)
                 removalButton
             }
         }

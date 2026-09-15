@@ -176,6 +176,7 @@ private struct ProjectHeader: View {
                 VStack(alignment: .leading, spacing: 2) {
                     Text("Price").font(.caption).foregroundStyle(.secondary)
                     Text(Money.format(breakdown.price)).font(.largeTitle).bold().monospacedDigit()
+                        .accessibilityIdentifier("price")
                         .fixedSize()
                 }
                 .layoutPriority(1)
@@ -245,10 +246,12 @@ private struct ProjectLineRow: View {
                 }
             }
             .toggleStyle(.checkbox)
+            .accessibilityIdentifier("line.\(line.name)")
             Spacer(minLength: 8)
             if isQuantity {
                 DecimalField(label: "Quantity", value: $line.qty, placeholder: "0", maximum: ProjectText.qtyMaximum)
                     .labelsHidden()
+                    .accessibilityIdentifier("qty.\(line.name)")
                     .textFieldStyle(.roundedBorder)
                     .frame(width: 64)
                     .help("How many \(line.unit.isEmpty ? "units" : line.unit)")
@@ -381,6 +384,7 @@ private struct ActualsSection: View {
     var body: some View {
         LabeledContent("Actual hours") {
             DecimalField(label: "Actual hours", value: actualHours, placeholder: "0", maximum: Decimal(string: "99999.99")!)
+                .labelsHidden()
                 .frame(width: 120)
         }
         let quantityLines = project.sortedLines.filter { $0.bucket.rowKind == .quantity && $0.isOn }
@@ -435,6 +439,7 @@ private struct ActualQtyRow: View {
     var body: some View {
         LabeledContent {
             DecimalField(label: "Actual qty", value: actualQty, placeholder: DecimalField.string(line.qty).isEmpty ? "0" : DecimalField.string(line.qty))
+                .labelsHidden()
                 .frame(width: 120)
         } label: {
             Text(line.name)

@@ -48,7 +48,9 @@ private struct ItemForm: View {
                 if item.bucket.rowKind == .quantity {
                     OptionalTextField(label: "Source", value: $item.source, prompt: "Vendor, supplier or sub")
                 }
-                OptionalTextField(label: "Notes", value: $item.notes, prompt: "Optional", axis: .vertical)
+                OptionalTextField(label: "Notes", value: $item.notes,
+                                  prompt: item.bucket == .equipment ? "Unit number, serial number, plate, year…" : "Optional",
+                                  axis: .vertical)
             } footer: {
                 Text(usage)
             }

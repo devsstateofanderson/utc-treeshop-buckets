@@ -87,6 +87,16 @@ final class AppState {
         return project
     }
 
+    /// Copies a bucket row (name + " copy", same rate, unit, calculator inputs, source) so another unit is one click.
+    func duplicate(_ item: BucketItem) {
+        let copy = BucketItem(bucket: item.bucket, name: item.name + " copy", rateCents: item.rateCents, unit: item.unit,
+                              isActive: item.isActive, source: item.source, notes: item.notes, calcInputs: item.calcInputs,
+                              sortOrder: BucketItem.nextSortOrder(in: item.bucket, context: context))
+        context.insert(copy)
+        save()
+        selectedItem = copy.persistentModelID
+    }
+
     func duplicateSelectedProject() {
         guard let id = selectedProject, let project = context.model(for: id) as? Project else { return }
         let copy = project.duplicate(date: .now)

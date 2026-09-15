@@ -66,6 +66,13 @@ struct SettingsScreen: View {
                     Text("Every row, project and setting, in one file.").foregroundStyle(.secondary)
                 }
                 LabeledContent {
+                    Button("Add Rows from JSON…") { chooseMerge() }
+                } label: {
+                    Text("Add rows")
+                    Text("Adds a file's rows to your buckets. Rows you already have are kept; rows still at $0 are filled in.")
+                        .foregroundStyle(.secondary)
+                }
+                LabeledContent {
                     Button("Import JSON…") { chooseImport() }
                 } label: {
                     Text("Import")
@@ -120,6 +127,22 @@ struct SettingsScreen: View {
             lastTransfer = "Exported to \(url.lastPathComponent)."
         } catch {
             fail("Couldn't export", error)
+        }
+    }
+
+    /// Non-destructive: adds rows, fills in $0 rows, never deletes (DECISIONS 55).
+    private func chooseMerge() {
+        let panel = NSOpenPanel()
+        panel.title = "Add Rows from Buckets JSON"
+        panel.allowedContentTypes = [.json]
+        panel.allowsMultipleSelection = false
+        panel.canChooseDirectories = false
+        guard panel.runModal() == .OK, let url = panel.url else { return }
+        do {
+            let result = try Transfer.mergeItems(try Data(contentsOf: url), into: modelContext)
+            lastTransfer = "Added \(result.added) rows, filled in \(result.filledIn), left \(result.unchanged) unchanged (\(url.lastPathComponent))."
+        } catch {
+            fail("Couldn't add rows", error)
         }
     }
 

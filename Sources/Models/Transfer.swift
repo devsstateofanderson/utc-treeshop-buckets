@@ -182,4 +182,54 @@ enum Transfer {
                         markupPct: doc.settings.markupPct, minimumJobCents: doc.settings.minimumJobCents,
                         costOfMoneyPct: doc.settings.costOfMoneyPct)
     }
+
+    // MARK: - Add rows (merge)
+
+    struct MergeResult: Equatable, Sendable {
+        var added = 0
+        var filledIn = 0
+        var unchanged = 0
+    }
+
+    /// Adds the file's rows to the store without touching anything else (DECISIONS 55): a row whose bucket
+    /// and name already exist is left alone, except that an existing row still at $0 with no calculator
+    /// inputs is filled in from the file (rate, unit, source, notes, calcInputs). Projects and settings in
+    /// the file are ignored. This is how a starter catalog joins rows the owner already typed.
+    @MainActor
+    static func mergeItems(_ data: Data, into context: ModelContext) throws -> MergeResult {
+        let doc = try decoder().decode(TransferDocument.self, from: data)
+        guard doc.formatVersion == TransferDocument.currentFormatVersion else {
+            throw TransferError.unsupportedFormat(doc.formatVersion)
+        }
+        var existing = try context.fetch(FetchDescriptor<BucketItem>())
+        var result = MergeResult()
+        for i in doc.items {
+            let key = normalized(i.name)
+            if let match = existing.first(where: { $0.bucket == i.bucket && normalized($0.name) == key }) {
+                if match.rateCents == 0 && match.calcInputs == nil {
+                    match.rateCents = i.rateCents
+                    if i.bucket.fixedUnit == nil, !i.unit.isEmpty { match.unit = i.unit }
+                    if match.source == nil { match.source = i.source }
+                    if match.notes == nil { match.notes = i.notes }
+                    match.calcInputs = i.calcInputs?.data
+                    result.filledIn += 1
+                } else {
+                    result.unchanged += 1
+                }
+                continue
+            }
+            let order = (existing.filter { $0.bucket == i.bucket }.map(\.sortOrder).max() ?? -1) + 1
+            let item = BucketItem(bucket: i.bucket, name: i.name, rateCents: i.rateCents, unit: i.unit, isActive: i.isActive,
+                                  source: i.source, notes: i.notes, calcInputs: i.calcInputs?.data, sortOrder: order)
+            context.insert(item)
+            existing.append(item)
+            result.added += 1
+        }
+        try context.save()
+        return result
+    }
+
+    static func normalized(_ name: String) -> String {
+        name.lowercased().split(whereSeparator: { $0.isWhitespace || $0 == "-" || $0 == "_" }).joined(separator: " ")
+    }
 }

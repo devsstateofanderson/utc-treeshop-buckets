@@ -13,7 +13,7 @@ DD="${BUCKETS_DERIVED_DATA:-$HOME/Library/Developer/Xcode/DerivedData/Buckets-cl
 cd "$ROOT"
 # Regenerate the project when project.yml or any file/folder under Sources or Tests changed.
 if [[ ! -d Buckets.xcodeproj ]] || \
-   [[ -n "$(find project.yml Sources Tests -newer Buckets.xcodeproj/project.pbxproj -print -quit)" ]]; then
+   [[ -n "$(find project.yml Sources Tests UITests -newer Buckets.xcodeproj/project.pbxproj -print -quit)" ]]; then
   xcodegen generate --quiet
 fi
 mkdir -p "$ROOT/build"
