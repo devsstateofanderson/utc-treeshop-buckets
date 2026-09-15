@@ -266,7 +266,7 @@ final class ModelsTests: XCTestCase {
         XCTAssertEqual(s.markup, Decimal(string: "0.35")!)
         XCTAssertEqual(s.costOfMoney, Decimal(string: "0.07")!)
         XCTAssertEqual(s.billableHours, 1500)
-        XCTAssertEqual(Decimal(exactly: 0.1 + 0.2), Decimal(string: "0.30000000000000004")!)
+        XCTAssertEqual(Money.decimal(from: 0.1 + 0.2), Decimal(string: "0.30000000000000004")!)
         let d = UserDefaults(suiteName: "BucketsTests.settings")!
         d.removePersistentDomain(forName: "BucketsTests.settings")
         AppSettings.register(in: d)

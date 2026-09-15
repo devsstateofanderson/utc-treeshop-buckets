@@ -42,7 +42,7 @@ final class LaborCalcTests: XCTestCase {
         XCTAssertThrowsError(try LaborCalc.rateCents(wage: 3000, paidHours: -1, burden: burden, billable: 1500)) {
             XCTAssertEqual($0 as? LaborCalcError, .negativePaidHours)
         }
-        XCTAssertThrowsError(try LaborCalc.rateCents(wage: 3000, paidHours: 2080, burden: -0.1, billable: 1500)) {
+        XCTAssertThrowsError(try LaborCalc.rateCents(wage: 3000, paidHours: 2080, burden: -Decimal(string: "0.1")!, billable: 1500)) {
             XCTAssertEqual($0 as? LaborCalcError, .negativeBurden)
         }
     }

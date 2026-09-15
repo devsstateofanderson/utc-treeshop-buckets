@@ -56,17 +56,10 @@ struct AppSettings: Equatable, Sendable {
     // Exact Decimal views (DECISIONS 11, 12). `Double.description` is the shortest round-trip text,
     // so 32.5 becomes exactly 32.5, never 32.49999….
     var billableHours: Decimal { Decimal(billableHoursPerYear) }
-    var laborBurdenPctDecimal: Decimal { Decimal(exactly: laborBurdenPct) }
-    var markupPctDecimal: Decimal { Decimal(exactly: markupPct) }
-    var costOfMoneyPctDecimal: Decimal { Decimal(exactly: costOfMoneyPct) }
+    var laborBurdenPctDecimal: Decimal { Money.decimal(from: laborBurdenPct) }
+    var markupPctDecimal: Decimal { Money.decimal(from: markupPct) }
+    var costOfMoneyPctDecimal: Decimal { Money.decimal(from: costOfMoneyPct) }
     var laborBurden: Decimal { laborBurdenPctDecimal / 100 }
     var markup: Decimal { markupPctDecimal / 100 }
     var costOfMoney: Decimal { costOfMoneyPctDecimal / 100 }
-}
-
-extension Decimal {
-    /// Lifts a Double through its shortest round-trip text, never through the binary value (DECISIONS 11).
-    init(exactly double: Double) {
-        self = double.isFinite ? (Decimal(string: "\(double)") ?? 0) : 0
-    }
 }

@@ -6,6 +6,8 @@ struct DecimalField: View {
     let label: String
     @Binding var value: Decimal
     var placeholder = "0"
+    /// DECISIONS 30: hours ≤ 99,999.99; quantities ≤ 999,999.99.
+    var maximum: Decimal = Decimal(string: "999999.99")!
     @State private var text = ""
     @FocusState private var focused: Bool
 
@@ -15,21 +17,34 @@ struct DecimalField: View {
             .focused($focused)
             .onAppear { text = Self.string(value) }
             .onChange(of: text) { _, new in
-                if let parsed = Self.parse(new), parsed != value { value = parsed }
+                if let parsed = Self.parse(new, maximum: maximum), parsed != value { value = parsed }
             }
             .onChange(of: value) { _, new in
-                if Self.parse(text) != new { text = Self.string(new) }
+                if Self.parse(text, maximum: maximum) != new { text = Self.string(new) }
             }
             .onChange(of: focused) { _, isFocused in
                 if !isFocused { text = Self.string(value) }
             }
     }
 
-    static func parse(_ text: String) -> Decimal? {
+    /// Accepts only a plain non-negative number with at most two decimals (DECISIONS 51); "" is 0; anything else is nil.
+    static func parse(_ text: String, maximum: Decimal = Decimal(string: "999999.99")!) -> Decimal? {
         let trimmed = text.trimmingCharacters(in: .whitespaces)
         if trimmed.isEmpty { return 0 }
-        guard let d = Decimal(string: trimmed, locale: Locale(identifier: "en_US")), d.isFinite, d >= 0 else { return nil }
-        return Money.decimal(cents: Money.cents(d * 100))     // at most two decimals
+        guard isPlainNumber(trimmed), let d = Decimal(string: trimmed, locale: Locale(identifier: "en_US_POSIX")),
+              d.isFinite, d >= 0, d <= maximum else { return nil }
+        return d
+    }
+
+    static func isPlainNumber(_ s: String) -> Bool {
+        var seenDot = false, digits = 0, fraction = 0
+        for ch in s {
+            if ch == "." { if seenDot { return false }; seenDot = true; continue }
+            guard ch.isASCII, ch.isNumber else { return false }
+            digits += 1
+            if seenDot { fraction += 1 }
+        }
+        return digits > 0 && fraction <= 2
     }
 
     static func string(_ value: Decimal) -> String {
@@ -61,12 +76,13 @@ struct CentsField: View {
             }
     }
 
+    /// Dollars with an optional "$" and thousands separators, at most two decimals, ≤ $9,999,999.99 (DECISIONS 30, 51).
     static func parse(_ text: String) -> Int? {
         var trimmed = text.trimmingCharacters(in: .whitespaces)
         trimmed.removeAll { $0 == "$" || $0 == "," }
         if trimmed.isEmpty { return 0 }
-        guard let d = Decimal(string: trimmed, locale: Locale(identifier: "en_US")), d.isFinite, d >= 0,
-              d < 1_000_000_000 else { return nil }
+        guard DecimalField.isPlainNumber(trimmed), let d = Decimal(string: trimmed, locale: Locale(identifier: "en_US_POSIX")),
+              d.isFinite, d >= 0, d <= Decimal(string: "9999999.99")! else { return nil }
         return Money.cents(d * 100)
     }
 

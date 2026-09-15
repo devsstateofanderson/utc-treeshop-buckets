@@ -25,16 +25,20 @@ struct EquipmentCalcInputs: Codable, Equatable, Sendable {
     var costOfMoneyPct: Decimal     // whole percent, e.g. 7
 }
 
-/// The five exact components, in dollars, for display in the sheet. The stored rate is the
-/// exact sum rounded once (DECISIONS 7).
+/// The five components, in dollars, for display in the sheet, plus the exact total the stored rate
+/// comes from. Each figure is produced by ONE Decimal division so that a value which is exactly a
+/// half cent is computed exactly and then rounds half away from zero (DECISIONS 7): `Decimal`
+/// division truncates at 38 digits, so summing separately divided components would put an exact
+/// tie one unit below the boundary.
 struct EquipmentRate: Equatable, Sendable {
     var depreciation: Decimal
     var costOfMoney: Decimal
     var insurance: Decimal
     var fuelOil: Decimal
     var repairs: Decimal
+    /// The five components over their common denominator 2·life·annual, one division.
+    var total: Decimal
 
-    var total: Decimal { depreciation + costOfMoney + insurance + fuelOil + repairs }
     var rateCents: Int { Money.cents(total * 100) }
 }
 
@@ -58,31 +62,36 @@ enum EquipmentCalc {
         let c = Money.decimal(cents: price)
         let s = Money.decimal(cents: salvage)
         let i = Money.decimal(cents: insurancePerYear)
+        let f = Money.decimal(cents: fuelOilPerHour)
+        let l = lifeHours
+        let a = annualHours
 
-        // Depreciation = (Price − Salvage) ÷ LifeHours
-        let depreciation = (c - s) / lifeHours
+        // BRIEF §2.2:
+        //   Depreciation = (Price − Salvage) ÷ LifeHours
+        //   CostOfMoney  = Price × AVF × Rate ÷ AnnualHours
+        //                  N = LifeHours ÷ AnnualHours
+        //                  AVF = ((N−1)(1 + Salvage/Price) + 2) ÷ 2N ;  AVF = 1 if N ≤ 1
+        //   Insurance    = Annual$ ÷ AnnualHours
+        //   Fuel+oil     = as entered
+        //   Repairs      = Price × RepairFactor ÷ LifeHours
+        //
+        // Price × AVF × Rate ÷ AnnualHours expands to K × Rate ÷ (2·L·A) with
+        //   K = (L − A)(Price + Salvage) + 2·A·Price   when N > 1  (i.e. L > A)
+        //   K = 2·L·Price                              when N ≤ 1  (AVF = 1)
+        // so every component shares the denominator 2·L·A and the total needs one division.
+        let k: Decimal = l <= a ? 2 * l * c : (l - a) * (c + s) + 2 * a * c
+        let denominator = 2 * l * a
+        let numerator = 2 * a * (c - s) + k * costOfMoney + 2 * l * i + denominator * f + 2 * a * c * repairFactor
 
-        // N = LifeHours ÷ AnnualHours ; AVF = ((N−1)(1 + Salvage/Price) + 2) ÷ 2N ; AVF = 1 if N ≤ 1
-        let n = lifeHours / annualHours
-        let avf: Decimal = n <= 1 ? 1 : ((n - 1) * (1 + s / c) + 2) / (2 * n)
-
-        // CostOfMoney = Price × AVF × Rate ÷ AnnualHours
-        let costOfMoneyPerHour = c * avf * costOfMoney / annualHours
-
-        // Insurance = Annual$ ÷ AnnualHours
-        let insurance = i / annualHours
-
-        // Fuel + oil = as entered
-        let fuelOil = Money.decimal(cents: fuelOilPerHour)
-
-        // Repairs = Price × RepairFactor ÷ LifeHours
-        let repairs = c * repairFactor / lifeHours
-
-        return EquipmentRate(depreciation: depreciation, costOfMoney: costOfMoneyPerHour,
-                             insurance: insurance, fuelOil: fuelOil, repairs: repairs)
+        return EquipmentRate(depreciation: (c - s) / l,
+                             costOfMoney: k * costOfMoney / denominator,
+                             insurance: i / a,
+                             fuelOil: f,
+                             repairs: c * repairFactor / l,
+                             total: numerator / denominator)
     }
 
-    /// $/hr in cents: the exact sum of the five components, rounded once.
+    /// $/hr in cents: the exact total, rounded once.
     static func rateCents(
         price: Int, salvage: Int, lifeHours: Decimal, annualHours: Decimal,
         fuelOilPerHour: Int, repairFactor: Decimal, insurancePerYear: Int, costOfMoney: Decimal
