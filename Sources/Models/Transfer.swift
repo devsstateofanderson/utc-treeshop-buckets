@@ -114,7 +114,7 @@ enum Transfer {
     }
 
     @MainActor
-    static func document(from context: ModelContext, settings: Settings, exportedAt: Date) throws -> TransferDocument {
+    static func document(from context: ModelContext, settings: AppSettings, exportedAt: Date) throws -> TransferDocument {
         let items = try context.fetch(FetchDescriptor<BucketItem>())
             .sorted { ($0.bucket.index, $0.sortOrder, $0.name) < ($1.bucket.index, $1.sortOrder, $1.name) }
         let index = Dictionary(uniqueKeysWithValues: items.enumerated().map { ($1.persistentModelID, $0) })
@@ -141,14 +141,14 @@ enum Transfer {
     }
 
     @MainActor
-    static func exportJSON(from context: ModelContext, settings: Settings, exportedAt: Date) throws -> Data {
+    static func exportJSON(from context: ModelContext, settings: AppSettings, exportedAt: Date) throws -> Data {
         try encoder().encode(try document(from: context, settings: settings, exportedAt: exportedAt))
     }
 
     /// Replaces every row and project in `context` with the file's contents and returns the file's settings.
     @MainActor
     @discardableResult
-    static func importJSON(_ data: Data, into context: ModelContext) throws -> Settings {
+    static func importJSON(_ data: Data, into context: ModelContext) throws -> AppSettings {
         let doc = try decoder().decode(TransferDocument.self, from: data)
         guard doc.formatVersion == TransferDocument.currentFormatVersion else {
             throw TransferError.unsupportedFormat(doc.formatVersion)
@@ -178,7 +178,7 @@ enum Transfer {
             }
         }
         try context.save()
-        return Settings(billableHoursPerYear: doc.settings.billableHoursPerYear, laborBurdenPct: doc.settings.laborBurdenPct,
+        return AppSettings(billableHoursPerYear: doc.settings.billableHoursPerYear, laborBurdenPct: doc.settings.laborBurdenPct,
                         markupPct: doc.settings.markupPct, minimumJobCents: doc.settings.minimumJobCents,
                         costOfMoneyPct: doc.settings.costOfMoneyPct)
     }

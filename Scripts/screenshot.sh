@@ -1,17 +1,25 @@
 #!/bin/zsh
 # Launch the built app with a forced appearance, capture its window, quit.
-# Usage: Scripts/screenshot.sh light|dark [screen] [output.png]
+# Usage: Scripts/screenshot.sh light|dark [screen] [output.png] [--fixture]
 #   screen: optional name passed to the app as BUCKETS_SCREEN so it opens on that screen
 #           (buckets | projects | project | settings); default is the app's normal start.
+#   --fixture: run the app against a throwaway store holding the BRIEF §3.3 rows, written by the
+#           FixtureStoreWriter test (test target only; the app never seeds data). Reused if present;
+#           set BUCKETS_FIXTURE=fresh to rewrite it.
 # Requires Screen Recording permission for the terminal host.
 set -euo pipefail
 ROOT="$(cd "$(dirname "${(%):-%x}")/.." && pwd)"
 if [[ -z "${DEVELOPER_DIR:-}" && -d /Applications/Xcode.app/Contents/Developer ]]; then
   export DEVELOPER_DIR=/Applications/Xcode.app/Contents/Developer
 fi
-MODE="${1:-light}"
-SCREEN="${2:-}"
-OUT="${3:-$ROOT/build/screenshots/${SCREEN:-app}-$MODE.png}"
+FIXTURE=0
+ARGS=()
+for a in "$@"; do
+  if [[ "$a" == "--fixture" ]]; then FIXTURE=1; else ARGS+=("$a"); fi
+done
+MODE="${ARGS[1]:-light}"
+SCREEN="${ARGS[2]:-}"
+OUT="${ARGS[3]:-$ROOT/build/screenshots/${SCREEN:-app}-$MODE.png}"
 APP="$ROOT/build/Buckets.app"
 [[ -d "$APP" ]] || APP="$("$ROOT/Scripts/build.sh" | tail -1)"
 mkdir -p "$(dirname "$OUT")" "$ROOT/build"
@@ -19,11 +27,24 @@ WIDTOOL="$ROOT/build/window-id"
 if [[ ! -x "$WIDTOOL" || "$ROOT/Scripts/window-id.swift" -nt "$WIDTOOL" ]]; then
   swiftc -O "$ROOT/Scripts/window-id.swift" -o "$WIDTOOL"
 fi
-env BUCKETS_APPEARANCE="$MODE" ${SCREEN:+BUCKETS_SCREEN="$SCREEN"} "$APP/Contents/MacOS/Buckets" &
+STORE_ENV=()
+if [[ $FIXTURE -eq 1 ]]; then
+  FIXTURE_STORE="$ROOT/build/fixture/Buckets.store"
+  if [[ ! -f "$FIXTURE_STORE" || "${BUCKETS_FIXTURE:-}" == "fresh" ]]; then
+    mkdir -p "$(dirname "$FIXTURE_STORE")"
+    ( cd "$ROOT" && TEST_RUNNER_BUCKETS_FIXTURE_STORE="$FIXTURE_STORE" xcodebuild -project Buckets.xcodeproj -scheme Buckets \
+        -configuration Debug -derivedDataPath "${BUCKETS_DERIVED_DATA:-$HOME/Library/Developer/Xcode/DerivedData/Buckets-cli}" \
+        -destination 'platform=macOS' test -only-testing:BucketsTests/FixtureStoreWriter 2>&1 \
+        | grep -E "error:|TEST (SUCCEEDED|FAILED)" ) || true
+    [[ -f "$FIXTURE_STORE" ]] || { echo "fixture store was not written" >&2; exit 1; }
+  fi
+  STORE_ENV=(BUCKETS_STORE="$FIXTURE_STORE")
+fi
+env BUCKETS_APPEARANCE="$MODE" ${SCREEN:+BUCKETS_SCREEN="$SCREEN"} "${STORE_ENV[@]}" "$APP/Contents/MacOS/Buckets" &
 PID=$!
 WID=""
 for _ in {1..60}; do
-  WID="$("$WIDTOOL" Buckets 2>/dev/null || true)"
+  WID="$("$WIDTOOL" "$PID" 2>/dev/null || true)"
   [[ -n "$WID" ]] && break
   sleep 0.25
 done
@@ -35,7 +56,7 @@ for _ in {1..5}; do
   HEIGHT="$(sips -g pixelHeight "$OUT" 2>/dev/null | awk '/pixelHeight/ { print $2 }')"
   [[ "${HEIGHT:-0}" -ge 100 ]] && break
   sleep 0.5
-  WID="$("$WIDTOOL" Buckets 2>/dev/null || echo "$WID")"
+  WID="$("$WIDTOOL" "$PID" 2>/dev/null || echo "$WID")"
 done
 kill "$PID" 2>/dev/null || true; wait "$PID" 2>/dev/null || true
 if [[ "${HEIGHT:-0}" -lt 100 ]]; then echo "capture is ${HEIGHT:-0} px tall; rerun" >&2; exit 1; fi

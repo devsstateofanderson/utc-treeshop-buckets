@@ -2,7 +2,7 @@ import Foundation
 
 /// The five settings (BRIEF §1). Stored in UserDefaults via `@AppStorage` in the Settings screen;
 /// this struct is the same values as plain data for the Models layer (DECISIONS 12).
-struct Settings: Equatable, Sendable {
+struct AppSettings: Equatable, Sendable {
     /// Crew project-hours per year; divides labor and overhead.
     var billableHoursPerYear: Int = 1500
     /// Payroll tax + workers comp + benefits, as a whole percent of wage.
@@ -22,21 +22,21 @@ struct Settings: Equatable, Sendable {
         static let costOfMoneyPct = "costOfMoneyPct"
     }
 
-    static let defaults = Settings()
+    static let defaults = AppSettings()
 
     /// Registers the defaults so `@AppStorage` and `current` agree before anything is saved.
     static func register(in defaults: UserDefaults = .standard) {
         defaults.register(defaults: [
-            Key.billableHoursPerYear: Settings.defaults.billableHoursPerYear,
-            Key.laborBurdenPct: Settings.defaults.laborBurdenPct,
-            Key.markupPct: Settings.defaults.markupPct,
-            Key.minimumJobCents: Settings.defaults.minimumJobCents,
-            Key.costOfMoneyPct: Settings.defaults.costOfMoneyPct,
+            Key.billableHoursPerYear: AppSettings.defaults.billableHoursPerYear,
+            Key.laborBurdenPct: AppSettings.defaults.laborBurdenPct,
+            Key.markupPct: AppSettings.defaults.markupPct,
+            Key.minimumJobCents: AppSettings.defaults.minimumJobCents,
+            Key.costOfMoneyPct: AppSettings.defaults.costOfMoneyPct,
         ])
     }
 
-    static func current(from defaults: UserDefaults = .standard) -> Settings {
-        var s = Settings.defaults
+    static func current(from defaults: UserDefaults = .standard) -> AppSettings {
+        var s = AppSettings.defaults
         if defaults.object(forKey: Key.billableHoursPerYear) != nil { s.billableHoursPerYear = defaults.integer(forKey: Key.billableHoursPerYear) }
         if defaults.object(forKey: Key.laborBurdenPct) != nil { s.laborBurdenPct = defaults.double(forKey: Key.laborBurdenPct) }
         if defaults.object(forKey: Key.markupPct) != nil { s.markupPct = defaults.double(forKey: Key.markupPct) }

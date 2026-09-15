@@ -139,7 +139,7 @@ extension Bucket {
 
 extension Project {
     /// A new project: one line per active row, hourly on, quantity off with qty 1; markup and minimum from Settings.
-    static func make(name: String = "New project", date: Date, items: [BucketItem], settings: Settings) -> Project {
+    static func make(name: String = "New project", date: Date, items: [BucketItem], settings: AppSettings) -> Project {
         let project = Project(name: name, date: date, hours: 0, multiplier: 1,
                               markupPct: settings.markupPctDecimal, minimumJobCents: settings.minimumJobCents)
         project.lines = items.filter(\.isActive).map { ProjectLine(snapshotOf: $0) }
@@ -159,9 +159,9 @@ extension Project {
     }
 
     /// As if the project were created today, keeping toggles, quantities, hours and actuals:
-    /// refresh every linked line's snapshot, refresh markup and minimum from Settings,
+    /// refresh every linked line's snapshot, refresh markup and minimum from AppSettings,
     /// and append a line for every active row the project lacks.
-    func reprice(items: [BucketItem], settings: Settings) {
+    func reprice(items: [BucketItem], settings: AppSettings) {
         for line in lines { line.refreshSnapshot() }
         markupPct = settings.markupPctDecimal
         minimumJobCents = settings.minimumJobCents

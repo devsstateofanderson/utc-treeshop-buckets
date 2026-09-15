@@ -5,7 +5,7 @@ import SwiftData
 /// The §3.3 rows as `BucketItem`s in an in-memory store. Test-target only.
 @MainActor
 enum StoreFixture {
-    static let settings = Settings()
+    static let settings = AppSettings()
 
     @discardableResult
     static func insertRows(into context: ModelContext) -> [String: BucketItem] {
@@ -213,7 +213,7 @@ final class ModelsTests: XCTestCase {
         let dump = try StoreFixture.items(in: context).first { $0.name == "Dump fee" }!
         context.delete(dump)                                   // an orphan line must survive the trip
         try context.save()
-        var settings = Settings(); settings.costOfMoneyPct = 7; settings.laborBurdenPct = 32.5
+        var settings = AppSettings(); settings.costOfMoneyPct = 7; settings.laborBurdenPct = 32.5
         let stamp = Date(timeIntervalSince1970: 1_750_000_000)
 
         let data = try Transfer.exportJSON(from: context, settings: settings, exportedAt: stamp)
@@ -239,7 +239,7 @@ final class ModelsTests: XCTestCase {
 
     func testImportReplacesEverything() throws {
         _ = try StoreFixture.baseProject(in: context)
-        let data = try Transfer.exportJSON(from: context, settings: Settings(), exportedAt: .now)
+        let data = try Transfer.exportJSON(from: context, settings: AppSettings(), exportedAt: .now)
         // Importing the file into the same store must not double anything.
         try Transfer.importJSON(data, into: context)
         try Transfer.importJSON(data, into: context)
@@ -260,7 +260,7 @@ final class ModelsTests: XCTestCase {
     }
 
     func testSettingsAreExactDecimals() {
-        var s = Settings()
+        var s = AppSettings()
         s.laborBurdenPct = 32.5; s.markupPct = 35; s.costOfMoneyPct = 7
         XCTAssertEqual(s.laborBurden, Decimal(string: "0.325")!)
         XCTAssertEqual(s.markup, Decimal(string: "0.35")!)
@@ -269,10 +269,10 @@ final class ModelsTests: XCTestCase {
         XCTAssertEqual(Decimal(exactly: 0.1 + 0.2), Decimal(string: "0.30000000000000004")!)
         let d = UserDefaults(suiteName: "BucketsTests.settings")!
         d.removePersistentDomain(forName: "BucketsTests.settings")
-        Settings.register(in: d)
-        XCTAssertEqual(Settings.current(from: d), Settings.defaults)
+        AppSettings.register(in: d)
+        XCTAssertEqual(AppSettings.current(from: d), AppSettings.defaults)
         s.save(to: d)
-        XCTAssertEqual(Settings.current(from: d), s)
+        XCTAssertEqual(AppSettings.current(from: d), s)
     }
 
     func testRowHelpers() throws {
