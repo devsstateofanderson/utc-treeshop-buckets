@@ -119,6 +119,16 @@ struct BucketsApp: App {
                 FileHandle.standardError.write(Data("BUCKETS_MERGE_FILE failed: \(error)\n".utf8))
             }
         }
+        // Maintenance hook (DECISIONS 59): BUCKETS_EXPORT_FILE=<path.json> writes Settings → Export JSON on launch.
+        if let path = ProcessInfo.processInfo.environment["BUCKETS_EXPORT_FILE"], !path.isEmpty {
+            do {
+                let data = try Transfer.exportJSON(from: container.mainContext, settings: AppSettings.current(), exportedAt: .now)
+                try data.write(to: URL(fileURLWithPath: path), options: .atomic)
+                FileHandle.standardError.write(Data("BUCKETS_EXPORT_FILE: wrote \(data.count) bytes to \(path)\n".utf8))
+            } catch {
+                FileHandle.standardError.write(Data("BUCKETS_EXPORT_FILE failed: \(error)\n".utf8))
+            }
+        }
         _appState = State(initialValue: state)
         // Screenshot hook: the offscreen render draws the Settings screen itself (see AppDelegate.renderWindows).
         if ProcessInfo.processInfo.environment["BUCKETS_SNAPSHOT_DIR"] != nil {
