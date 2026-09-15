@@ -4,11 +4,11 @@ import SwiftData
 
 @MainActor
 final class TransferMergeTests: XCTestCase {
-    func testMergeAddsFillsInAndKeeps() throws {
+    func testMergeAddsUpdatesAndKeeps() throws {
         let container = try Store.inMemoryContainer()
         let context = container.mainContext
         context.insert(BucketItem(bucket: .equipment, name: "Stihl 500i", rateCents: 0, sortOrder: 0))          // typed, not priced yet
-        context.insert(BucketItem(bucket: .labor, name: "Marcus", rateCents: 5408, sortOrder: 0))               // priced: keep
+        context.insert(BucketItem(bucket: .labor, name: "Marcus", rateCents: 5408, sortOrder: 0))               // in the file: updated
         context.insert(BucketItem(bucket: .consumables, name: "Dump fee", rateCents: 7500, unit: "load", sortOrder: 0))
         try context.save()
 
@@ -24,18 +24,23 @@ final class TransferMergeTests: XCTestCase {
          "projects": [{"name": "ignored", "client": null, "date": "2026-01-01T00:00:00Z", "hours": 8, "multiplier": 1, "markupPct": 35, "minimumJobCents": 75000, "actualHours": null, "notes": null, "lines": []}]}
         """
         let result = try Transfer.mergeItems(Data(file.utf8), into: context)
-        XCTAssertEqual(result, Transfer.MergeResult(added: 1, filledIn: 1, unchanged: 2))
+        XCTAssertEqual(result, Transfer.MergeResult(added: 1, updated: 3, unchanged: 0))
         let items = try context.fetch(FetchDescriptor<BucketItem>())
         XCTAssertEqual(items.count, 4)
         let saw = items.first { $0.name == "Stihl 500i" }!
         XCTAssertEqual(saw.rateCents, 325)
         XCTAssertEqual(saw.notes, "3 units")
         XCTAssertEqual(saw.equipmentInputs?.repairFactor, Decimal(string: "2.5")!)
-        XCTAssertEqual(items.first { $0.name == "Marcus" }!.rateCents, 5408)
-        XCTAssertEqual(items.first { $0.name == "Dump fee" }!.rateCents, 7500)
+        XCTAssertEqual(items.first { $0.name == "Marcus" }!.rateCents, 9999)
+        XCTAssertEqual(items.first { $0.name == "Dump fee" }!.rateCents, 1)
         XCTAssertEqual(items.first { $0.name == "Mulch" }!.source, "Home Depot")
         XCTAssertEqual(try context.fetch(FetchDescriptor<Project>()).count, 0)
         // Running it again changes nothing.
-        XCTAssertEqual(try Transfer.mergeItems(Data(file.utf8), into: context), Transfer.MergeResult(added: 0, filledIn: 0, unchanged: 4))
+        XCTAssertEqual(try Transfer.mergeItems(Data(file.utf8), into: context), Transfer.MergeResult(added: 0, updated: 0, unchanged: 4))
+        // A row the file does not name is never touched.
+        context.insert(BucketItem(bucket: .equipment, name: "Porta Wrap", rateCents: 0, sortOrder: 5))
+        try context.save()
+        XCTAssertEqual(try Transfer.mergeItems(Data(file.utf8), into: context).unchanged, 4)
+        XCTAssertEqual(try context.fetch(FetchDescriptor<BucketItem>()).count, 5)
     }
 }

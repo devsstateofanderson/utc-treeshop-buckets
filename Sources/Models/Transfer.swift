@@ -187,14 +187,15 @@ enum Transfer {
 
     struct MergeResult: Equatable, Sendable {
         var added = 0
-        var filledIn = 0
+        var updated = 0
         var unchanged = 0
     }
 
-    /// Adds the file's rows to the store without touching anything else (DECISIONS 55): a row whose bucket
-    /// and name already exist is left alone, except that an existing row still at $0 with no calculator
-    /// inputs is filled in from the file (rate, unit, source, notes, calcInputs). Projects and settings in
-    /// the file are ignored. This is how a starter catalog joins rows the owner already typed.
+    /// Adds or updates rows from a file without deleting anything (DECISIONS 55): a row whose bucket and
+    /// name match an existing row (case- and whitespace-insensitive) has its rate, unit, source, notes and
+    /// calculator inputs replaced by the file's, unless nothing differs; any other file row is added. Rows
+    /// that are not in the file are untouched, and the file's projects and settings are ignored. This is how
+    /// a researched catalog both joins and corrects rows the owner typed from memory.
     @MainActor
     static func mergeItems(_ data: Data, into context: ModelContext) throws -> MergeResult {
         let doc = try decoder().decode(TransferDocument.self, from: data)
@@ -206,16 +207,17 @@ enum Transfer {
         for i in doc.items {
             let key = normalized(i.name)
             if let match = existing.first(where: { $0.bucket == i.bucket && normalized($0.name) == key }) {
-                if match.rateCents == 0 && match.calcInputs == nil {
-                    match.rateCents = i.rateCents
-                    if i.bucket.fixedUnit == nil, !i.unit.isEmpty { match.unit = i.unit }
-                    if match.source == nil { match.source = i.source }
-                    if match.notes == nil { match.notes = i.notes }
-                    match.calcInputs = i.calcInputs?.data
-                    result.filledIn += 1
-                } else {
-                    result.unchanged += 1
-                }
+                let unit = i.bucket.fixedUnit ?? (i.unit.isEmpty ? match.unit : i.unit)
+                let calc = i.calcInputs?.data
+                let same = match.rateCents == i.rateCents && match.unit == unit && match.source == (i.source ?? match.source)
+                    && match.notes == (i.notes ?? match.notes) && match.calcInputs == (calc ?? match.calcInputs)
+                if same { result.unchanged += 1; continue }
+                match.rateCents = i.rateCents
+                match.unit = unit
+                if let source = i.source { match.source = source }
+                if let notes = i.notes { match.notes = notes }
+                if let calc { match.calcInputs = calc }
+                result.updated += 1
                 continue
             }
             let order = (existing.filter { $0.bucket == i.bucket }.map(\.sortOrder).max() ?? -1) + 1

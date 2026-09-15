@@ -1,0 +1,33 @@
+[
+ {"bucket":"overhead","name":"General liability insurance","unit":"yr","price":2202.52,"source":"2025 P&L","notes":"2025 P&L: SCGE General Liability Insurance $2,202.52. Update when the 2026 policy renews."},
+ {"bucket":"overhead","name":"Office / shop rent","unit":"yr","price":18824.77,"source":"2025 P&L","notes":"2025 P&L: SCGE Office Rent $18,824.77."},
+ {"bucket":"overhead","name":"Phones","unit":"yr","price":4379.62,"source":"2025 P&L","notes":"2025 P&L: SCGE Phone Bills $4,379.62."},
+ {"bucket":"overhead","name":"Utilities","unit":"yr","price":3030.69,"source":"2025 P&L","notes":"2025 P&L: SCGE Utilities $3,030.69."},
+ {"bucket":"overhead","name":"Advertising & promotion","unit":"yr","price":22659.62,"source":"2025 P&L","notes":"2025 P&L: SCGE Advertising/Promotional $22,659.62 — the biggest overhead line after rent. August 2026 leads: Google 48%, referral 43% of revenue."},
+ {"bucket":"overhead","name":"Website, hosting & SEO","unit":"yr","price":3168.18,"source":"2025 P&L","notes":"2025 P&L: Website Design/Hosting/SEO $3,168.18."},
+ {"bucket":"overhead","name":"Accounting","unit":"yr","price":2800.00,"source":"2025 P&L","notes":"2025 P&L: Accounting Services $2,800."},
+ {"bucket":"overhead","name":"Jobber","unit":"yr","price":2948.91,"source":"2025 P&L","notes":"CRM / project management. 2025 P&L: Software $448.19 + Dues & subscriptions $2,500.72 = $2,948.91 for all software including Jobber (replaces the $1,800 typed from memory)."},
+ {"bucket":"overhead","name":"Taxes & licenses","unit":"yr","price":1125.39,"source":"2025 P&L","notes":"2025 P&L: SCGE Taxes and Licenses $747.79 + County $238.85 + State fees $138.75."},
+ {"bucket":"overhead","name":"Small tools & equipment under $1,000","unit":"yr","price":6500.77,"source":"2025 P&L","notes":"2025 P&L: SCOE Equipment & Tools $6,500.77. This is where Porta Wraps, fuel cans, power shovel and hand tools belong (BRIEF §2.2: under $1,000 is overhead, not an equipment row)."},
+ {"bucket":"overhead","name":"Uniforms, first aid & laundry","unit":"yr","price":308.22,"source":"2025 P&L","notes":"2025 P&L: Uniforms $256 + First Aid $41.22 + Laundry $11."},
+ {"bucket":"overhead","name":"Bank & payroll processing fees","unit":"yr","price":2559.25,"source":"2025 P&L","notes":"2025 P&L: Bank fees $408 + Overdraft fees $1,140 + Payroll processing $1,011.25."},
+ {"bucket":"overhead","name":"Travel, lodging & meals","unit":"yr","price":9347.15,"source":"2025 P&L","notes":"2025 P&L: Travel $5,879.60 + Lodging $267.68 + Tolls & parking $229.91 + Meals & entertainment $2,969.96."},
+ {"bucket":"overhead","name":"Crew water & meals on jobs","unit":"yr","price":1336.15,"source":"2025 P&L","notes":"2025 P&L: Water/Hydration/Team Meals on Jobs $1,336.15."},
+ {"bucket":"overhead","name":"Wellness & training","unit":"yr","price":2510.98,"source":"2025 P&L","notes":"2025 P&L: Wellness $2,252 + Training & Education $258.98."},
+ {"bucket":"overhead","name":"Life insurance","unit":"yr","price":3751.59,"source":"2025 P&L","notes":"2025 P&L: Life Insurance $3,751.59 (owner benefit; archive this row if you'd rather not price it into jobs)."},
+
+ {"bucket":"consumables","name":"Dump fee","unit":"load","price":110.00,"source":"Orange County landfill","notes":"ESTIMATE. 2025 P&L: Large Items Disposal $16,968.18 for the year. Replace with your average dump ticket; the brief's example was $75/load."},
+ {"bucket":"consumables","name":"Stump grinding (sub)","unit":"stump","price":240.00,"source":"Stump grinding sub","notes":"ESTIMATE. 2025 P&L: Stump Grinder $14,595 paid to the sub for the year; you quoted stump grinding ~50-70 times in 2026 YTD at a median $500. Enter the sub's real per-stump price when you have it."},
+ {"bucket":"consumables","name":"Crane rental (sub)","unit":"day","price":1800.00,"source":"Crane company","notes":"ESTIMATE (brief's example rate). 2025 P&L: Crane Rental $7,562.25 for the year. Flat all-in per day as the crane company charges it."},
+ {"bucket":"consumables","name":"Equipment rental","unit":"day","price":350.00,"source":"Rental yard","notes":"ESTIMATE. 2025 P&L: Equipment Rental $8,237.80 for the year (lifts, grinders, etc.). Enter the actual daily rate per rental on the job."},
+ {"bucket":"consumables","name":"Grapple Truck - Mike","unit":"each","price":400.00,"source":"Sub Contractor- Gaston","notes":"Your rate. 2025 P&L: Grapple $1,300 for the year."},
+
+ {"bucket":"equipment","name":"2007 Chevy Silverado 3500","unit":"hr","price":18000,"salvage":5000,"life_h":10000,"annual_h":1200,"fuel_oil_per_h":6.00,"repair_factor":0.75,"insurance_per_yr":2819,"cost_of_money_pct":0,
+  "source":"GEICO Marine policy 9300144565","notes":"Unit __ · VIN 1GCJK33D37F152070 · ESTIMATES: current value $18,000 (replace with what you paid), life 10,000 h and repair factor 0.75 per BRIEF §2.2 bigger trucks, ~1,200 h/yr, diesel ~$6/hr. Insurance $2,819/yr = 2025 fleet auto insurance $11,275.80 ÷ 4 units. 2025 fleet fuel was $13,530 and auto maintenance $22,583 across all vehicles."},
+ {"bucket":"equipment","name":"2013 Chevy Silverado 1500","unit":"hr","price":16000,"salvage":4000,"life_h":8000,"annual_h":1000,"fuel_oil_per_h":4.50,"repair_factor":0.70,"insurance_per_yr":2819,"cost_of_money_pct":0,
+  "source":"GEICO Marine policy 9300144565-0","notes":"Unit __ · VIN 3GCPCSE04DG109136 · ESTIMATES: current value $16,000, life 8,000 h (truck ≤10k GVW), repair 0.70, ~1,000 h/yr, gas ~$4.50/hr, insurance $2,819/yr (fleet policy ÷ 4)."},
+ {"bucket":"equipment","name":"Ford F250","unit":"hr","price":21000,"salvage":6000,"life_h":8000,"annual_h":800,"fuel_oil_per_h":4.50,"repair_factor":0.70,"insurance_per_yr":2819,"cost_of_money_pct":0,
+  "source":"GEICO Marine fleet policy","notes":"Manager truck, non-CDL, backup crew truck. ESTIMATES replacing the $24.29/hr typed from memory: value $21,000, life 8,000 h, repair 0.70, ~800 h/yr, gas ~$4.50/hr, insurance $2,819/yr (fleet policy ÷ 4). Press Calculate… and enter what you paid."},
+ {"bucket":"equipment","name":"Dump Trailer","unit":"hr","price":6500,"salvage":2000,"life_h":10000,"annual_h":800,"fuel_oil_per_h":0,"repair_factor":0.50,"insurance_per_yr":818,"cost_of_money_pct":0,
+  "source":"GEICO Marine policy 9300144565","notes":"2006 LOUDO trailer · VIN 1L9BU16226N383939 · ESTIMATES: current value $6,500 (a new 7x14 14K dump trailer is $8,400-$15,750), trailer repair factor 0.50 per BRIEF §2.2, ~800 h/yr, insurance $818/yr (fleet policy remainder). Replace price with what you paid."}
+]

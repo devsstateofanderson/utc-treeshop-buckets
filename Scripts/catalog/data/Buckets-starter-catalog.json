@@ -1,5 +1,5 @@
 {
-  "exportedAt": "2026-09-15T12:00:00Z",
+  "exportedAt": "2026-09-15T13:00:00Z",
   "formatVersion": 1,
   "items": [
     {
@@ -183,26 +183,6 @@
       "unit": "hr"
     },
     {
-      "bucket": "equipment",
-      "calcInputs": {
-        "annualHours": 800,
-        "costOfMoneyPct": 0,
-        "fuelOilPerHourCents": 0,
-        "insurancePerYearCents": 30000,
-        "lifeHours": 10000,
-        "priceCents": 1105000,
-        "repairFactor": 0.5,
-        "salvageCents": 330000
-      },
-      "isActive": true,
-      "name": "Dump Trailer",
-      "notes": "Unit __ \u00b7 VIN ________ \u00b7 7x14 tandem 14K dump trailer, $8,400-$15,750 new, mid $11,050 2026-09-15. Trailer repair factor 0.50 per BRIEF \u00a72.2; ~800 h/yr; insurance $300/yr estimate.",
-      "rateCents": 170,
-      "sortOrder": 9,
-      "source": "Trailer dealer",
-      "unit": "hr"
-    },
-    {
       "bucket": "consumables",
       "calcInputs": null,
       "isActive": true,
@@ -311,6 +291,317 @@
       "sortOrder": 9,
       "source": "Milwaukee",
       "unit": "each"
+    },
+    {
+      "bucket": "overhead",
+      "calcInputs": null,
+      "isActive": true,
+      "name": "General liability insurance",
+      "notes": "2025 P&L: SCGE General Liability Insurance $2,202.52. Update when the 2026 policy renews.",
+      "rateCents": 220252,
+      "sortOrder": 0,
+      "source": "2025 P&L",
+      "unit": "yr"
+    },
+    {
+      "bucket": "overhead",
+      "calcInputs": null,
+      "isActive": true,
+      "name": "Office / shop rent",
+      "notes": "2025 P&L: SCGE Office Rent $18,824.77.",
+      "rateCents": 1882477,
+      "sortOrder": 1,
+      "source": "2025 P&L",
+      "unit": "yr"
+    },
+    {
+      "bucket": "overhead",
+      "calcInputs": null,
+      "isActive": true,
+      "name": "Phones",
+      "notes": "2025 P&L: SCGE Phone Bills $4,379.62.",
+      "rateCents": 437962,
+      "sortOrder": 2,
+      "source": "2025 P&L",
+      "unit": "yr"
+    },
+    {
+      "bucket": "overhead",
+      "calcInputs": null,
+      "isActive": true,
+      "name": "Utilities",
+      "notes": "2025 P&L: SCGE Utilities $3,030.69.",
+      "rateCents": 303069,
+      "sortOrder": 3,
+      "source": "2025 P&L",
+      "unit": "yr"
+    },
+    {
+      "bucket": "overhead",
+      "calcInputs": null,
+      "isActive": true,
+      "name": "Advertising & promotion",
+      "notes": "2025 P&L: SCGE Advertising/Promotional $22,659.62 \u2014 the biggest overhead line after rent. August 2026 leads: Google 48%, referral 43% of revenue.",
+      "rateCents": 2265962,
+      "sortOrder": 4,
+      "source": "2025 P&L",
+      "unit": "yr"
+    },
+    {
+      "bucket": "overhead",
+      "calcInputs": null,
+      "isActive": true,
+      "name": "Website, hosting & SEO",
+      "notes": "2025 P&L: Website Design/Hosting/SEO $3,168.18.",
+      "rateCents": 316818,
+      "sortOrder": 5,
+      "source": "2025 P&L",
+      "unit": "yr"
+    },
+    {
+      "bucket": "overhead",
+      "calcInputs": null,
+      "isActive": true,
+      "name": "Accounting",
+      "notes": "2025 P&L: Accounting Services $2,800.",
+      "rateCents": 280000,
+      "sortOrder": 6,
+      "source": "2025 P&L",
+      "unit": "yr"
+    },
+    {
+      "bucket": "overhead",
+      "calcInputs": null,
+      "isActive": true,
+      "name": "Jobber",
+      "notes": "CRM / project management. 2025 P&L: Software $448.19 + Dues & subscriptions $2,500.72 = $2,948.91 for all software including Jobber (replaces the $1,800 typed from memory).",
+      "rateCents": 294891,
+      "sortOrder": 7,
+      "source": "2025 P&L",
+      "unit": "yr"
+    },
+    {
+      "bucket": "overhead",
+      "calcInputs": null,
+      "isActive": true,
+      "name": "Taxes & licenses",
+      "notes": "2025 P&L: SCGE Taxes and Licenses $747.79 + County $238.85 + State fees $138.75.",
+      "rateCents": 112539,
+      "sortOrder": 8,
+      "source": "2025 P&L",
+      "unit": "yr"
+    },
+    {
+      "bucket": "overhead",
+      "calcInputs": null,
+      "isActive": true,
+      "name": "Small tools & equipment under $1,000",
+      "notes": "2025 P&L: SCOE Equipment & Tools $6,500.77. This is where Porta Wraps, fuel cans, power shovel and hand tools belong (BRIEF \u00a72.2: under $1,000 is overhead, not an equipment row).",
+      "rateCents": 650077,
+      "sortOrder": 9,
+      "source": "2025 P&L",
+      "unit": "yr"
+    },
+    {
+      "bucket": "overhead",
+      "calcInputs": null,
+      "isActive": true,
+      "name": "Uniforms, first aid & laundry",
+      "notes": "2025 P&L: Uniforms $256 + First Aid $41.22 + Laundry $11.",
+      "rateCents": 30822,
+      "sortOrder": 10,
+      "source": "2025 P&L",
+      "unit": "yr"
+    },
+    {
+      "bucket": "overhead",
+      "calcInputs": null,
+      "isActive": true,
+      "name": "Bank & payroll processing fees",
+      "notes": "2025 P&L: Bank fees $408 + Overdraft fees $1,140 + Payroll processing $1,011.25.",
+      "rateCents": 255925,
+      "sortOrder": 11,
+      "source": "2025 P&L",
+      "unit": "yr"
+    },
+    {
+      "bucket": "overhead",
+      "calcInputs": null,
+      "isActive": true,
+      "name": "Travel, lodging & meals",
+      "notes": "2025 P&L: Travel $5,879.60 + Lodging $267.68 + Tolls & parking $229.91 + Meals & entertainment $2,969.96.",
+      "rateCents": 934715,
+      "sortOrder": 12,
+      "source": "2025 P&L",
+      "unit": "yr"
+    },
+    {
+      "bucket": "overhead",
+      "calcInputs": null,
+      "isActive": true,
+      "name": "Crew water & meals on jobs",
+      "notes": "2025 P&L: Water/Hydration/Team Meals on Jobs $1,336.15.",
+      "rateCents": 133615,
+      "sortOrder": 13,
+      "source": "2025 P&L",
+      "unit": "yr"
+    },
+    {
+      "bucket": "overhead",
+      "calcInputs": null,
+      "isActive": true,
+      "name": "Wellness & training",
+      "notes": "2025 P&L: Wellness $2,252 + Training & Education $258.98.",
+      "rateCents": 251098,
+      "sortOrder": 14,
+      "source": "2025 P&L",
+      "unit": "yr"
+    },
+    {
+      "bucket": "overhead",
+      "calcInputs": null,
+      "isActive": true,
+      "name": "Life insurance",
+      "notes": "2025 P&L: Life Insurance $3,751.59 (owner benefit; archive this row if you'd rather not price it into jobs).",
+      "rateCents": 375159,
+      "sortOrder": 15,
+      "source": "2025 P&L",
+      "unit": "yr"
+    },
+    {
+      "bucket": "consumables",
+      "calcInputs": null,
+      "isActive": true,
+      "name": "Dump fee",
+      "notes": "ESTIMATE. 2025 P&L: Large Items Disposal $16,968.18 for the year. Replace with your average dump ticket; the brief's example was $75/load.",
+      "rateCents": 11000,
+      "sortOrder": 10,
+      "source": "Orange County landfill",
+      "unit": "load"
+    },
+    {
+      "bucket": "consumables",
+      "calcInputs": null,
+      "isActive": true,
+      "name": "Stump grinding (sub)",
+      "notes": "ESTIMATE. 2025 P&L: Stump Grinder $14,595 paid to the sub for the year; you quoted stump grinding ~50-70 times in 2026 YTD at a median $500. Enter the sub's real per-stump price when you have it.",
+      "rateCents": 24000,
+      "sortOrder": 11,
+      "source": "Stump grinding sub",
+      "unit": "stump"
+    },
+    {
+      "bucket": "consumables",
+      "calcInputs": null,
+      "isActive": true,
+      "name": "Crane rental (sub)",
+      "notes": "ESTIMATE (brief's example rate). 2025 P&L: Crane Rental $7,562.25 for the year. Flat all-in per day as the crane company charges it.",
+      "rateCents": 180000,
+      "sortOrder": 12,
+      "source": "Crane company",
+      "unit": "day"
+    },
+    {
+      "bucket": "consumables",
+      "calcInputs": null,
+      "isActive": true,
+      "name": "Equipment rental",
+      "notes": "ESTIMATE. 2025 P&L: Equipment Rental $8,237.80 for the year (lifts, grinders, etc.). Enter the actual daily rate per rental on the job.",
+      "rateCents": 35000,
+      "sortOrder": 13,
+      "source": "Rental yard",
+      "unit": "day"
+    },
+    {
+      "bucket": "consumables",
+      "calcInputs": null,
+      "isActive": true,
+      "name": "Grapple Truck - Mike",
+      "notes": "Your rate. 2025 P&L: Grapple $1,300 for the year.",
+      "rateCents": 40000,
+      "sortOrder": 14,
+      "source": "Sub Contractor- Gaston",
+      "unit": "each"
+    },
+    {
+      "bucket": "equipment",
+      "calcInputs": {
+        "annualHours": 1200,
+        "costOfMoneyPct": 0,
+        "fuelOilPerHourCents": 600,
+        "insurancePerYearCents": 281900,
+        "lifeHours": 10000,
+        "priceCents": 1800000,
+        "repairFactor": 0.75,
+        "salvageCents": 500000
+      },
+      "isActive": true,
+      "name": "2007 Chevy Silverado 3500",
+      "notes": "Unit __ \u00b7 VIN 1GCJK33D37F152070 \u00b7 ESTIMATES: current value $18,000 (replace with what you paid), life 10,000 h and repair factor 0.75 per BRIEF \u00a72.2 bigger trucks, ~1,200 h/yr, diesel ~$6/hr. Insurance $2,819/yr = 2025 fleet auto insurance $11,275.80 \u00f7 4 units. 2025 fleet fuel was $13,530 and auto maintenance $22,583 across all vehicles.",
+      "rateCents": 1100,
+      "sortOrder": 9,
+      "source": "GEICO Marine policy 9300144565",
+      "unit": "hr"
+    },
+    {
+      "bucket": "equipment",
+      "calcInputs": {
+        "annualHours": 1000,
+        "costOfMoneyPct": 0,
+        "fuelOilPerHourCents": 450,
+        "insurancePerYearCents": 281900,
+        "lifeHours": 8000,
+        "priceCents": 1600000,
+        "repairFactor": 0.7,
+        "salvageCents": 400000
+      },
+      "isActive": true,
+      "name": "2013 Chevy Silverado 1500",
+      "notes": "Unit __ \u00b7 VIN 3GCPCSE04DG109136 \u00b7 ESTIMATES: current value $16,000, life 8,000 h (truck \u226410k GVW), repair 0.70, ~1,000 h/yr, gas ~$4.50/hr, insurance $2,819/yr (fleet policy \u00f7 4).",
+      "rateCents": 1022,
+      "sortOrder": 10,
+      "source": "GEICO Marine policy 9300144565-0",
+      "unit": "hr"
+    },
+    {
+      "bucket": "equipment",
+      "calcInputs": {
+        "annualHours": 800,
+        "costOfMoneyPct": 0,
+        "fuelOilPerHourCents": 450,
+        "insurancePerYearCents": 281900,
+        "lifeHours": 8000,
+        "priceCents": 2100000,
+        "repairFactor": 0.7,
+        "salvageCents": 600000
+      },
+      "isActive": true,
+      "name": "Ford F250",
+      "notes": "Manager truck, non-CDL, backup crew truck. ESTIMATES replacing the $24.29/hr typed from memory: value $21,000, life 8,000 h, repair 0.70, ~800 h/yr, gas ~$4.50/hr, insurance $2,819/yr (fleet policy \u00f7 4). Press Calculate\u2026 and enter what you paid.",
+      "rateCents": 1174,
+      "sortOrder": 11,
+      "source": "GEICO Marine fleet policy",
+      "unit": "hr"
+    },
+    {
+      "bucket": "equipment",
+      "calcInputs": {
+        "annualHours": 800,
+        "costOfMoneyPct": 0,
+        "fuelOilPerHourCents": 0,
+        "insurancePerYearCents": 81800,
+        "lifeHours": 10000,
+        "priceCents": 650000,
+        "repairFactor": 0.5,
+        "salvageCents": 200000
+      },
+      "isActive": true,
+      "name": "Dump Trailer",
+      "notes": "2006 LOUDO trailer \u00b7 VIN 1L9BU16226N383939 \u00b7 ESTIMATES: current value $6,500 (a new 7x14 14K dump trailer is $8,400-$15,750), trailer repair factor 0.50 per BRIEF \u00a72.2, ~800 h/yr, insurance $818/yr (fleet policy remainder). Replace price with what you paid.",
+      "rateCents": 180,
+      "sortOrder": 12,
+      "source": "GEICO Marine policy 9300144565",
+      "unit": "hr"
     },
     {
       "bucket": "materials",
