@@ -109,6 +109,16 @@ struct BucketsApp: App {
             fatalError("Buckets could not open its store at \(Store.url.path): \(error)")
         }
         let state = AppState(container: container)
+        // Maintenance hook (DECISIONS 58): BUCKETS_MERGE_FILE=<catalog.json> runs Settings → Add or Update Rows
+        // on launch, in the app's own container, and logs the result. Used to load researched catalogs.
+        if let path = ProcessInfo.processInfo.environment["BUCKETS_MERGE_FILE"], !path.isEmpty {
+            do {
+                let result = try Transfer.mergeItems(try Data(contentsOf: URL(fileURLWithPath: path)), into: container.mainContext)
+                FileHandle.standardError.write(Data("BUCKETS_MERGE_FILE: added \(result.added), updated \(result.updated), unchanged \(result.unchanged)\n".utf8))
+            } catch {
+                FileHandle.standardError.write(Data("BUCKETS_MERGE_FILE failed: \(error)\n".utf8))
+            }
+        }
         _appState = State(initialValue: state)
         // Screenshot hook: the offscreen render draws the Settings screen itself (see AppDelegate.renderWindows).
         if ProcessInfo.processInfo.environment["BUCKETS_SNAPSHOT_DIR"] != nil {
