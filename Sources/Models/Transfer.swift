@@ -84,7 +84,11 @@ enum JSONValue: Codable, Equatable {
     }
 
     static func from(data: Data) -> JSONValue? { try? JSONDecoder().decode(JSONValue.self, from: data) }
-    var data: Data? { try? JSONEncoder().encode(self) }
+    var data: Data? {
+        let encoder = JSONEncoder()
+        encoder.outputFormatting = [.sortedKeys]
+        return try? encoder.encode(self)
+    }
 }
 
 enum TransferError: Error, Equatable, LocalizedError {
@@ -209,8 +213,9 @@ enum Transfer {
             if let match = existing.first(where: { $0.bucket == i.bucket && normalized($0.name) == key }) {
                 let unit = i.bucket.fixedUnit ?? (i.unit.isEmpty ? match.unit : i.unit)
                 let calc = i.calcInputs?.data
+                let sameCalc = i.calcInputs == nil || match.calcInputs.flatMap(JSONValue.from) == i.calcInputs
                 let same = match.rateCents == i.rateCents && match.unit == unit && match.source == (i.source ?? match.source)
-                    && match.notes == (i.notes ?? match.notes) && match.calcInputs == (calc ?? match.calcInputs)
+                    && match.notes == (i.notes ?? match.notes) && sameCalc
                 if same { result.unchanged += 1; continue }
                 match.rateCents = i.rateCents
                 match.unit = unit
