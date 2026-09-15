@@ -92,6 +92,17 @@ struct LaborCalcSheet: View {
                     }
                     LabeledContent {
                         HStack {
+                            CentsField(label: "Pay per day", cents: Binding(
+                                get: { draft.wageCents * 8 },
+                                set: { draft.wageCents = Money.cents(Decimal($0) / 8) })).labelsHidden().frame(width: 110)
+                            Text("per 8-hour day").foregroundStyle(.secondary)
+                        }
+                    } label: {
+                        Text("Pay per day")
+                        Text("The way pay is agreed at hiring; $300/day is a $37.50 wage").foregroundStyle(.secondary)
+                    }
+                    LabeledContent {
+                        HStack {
                             DecimalField(label: "Paid hours per year", value: $draft.paidHours, placeholder: "2080").labelsHidden().frame(width: 110)
                             Text("hours").foregroundStyle(.secondary)
                         }
