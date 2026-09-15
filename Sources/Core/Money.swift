@@ -17,11 +17,13 @@ enum Money {
     }
 
     /// Formats Int cents as US dollars, e.g. 250150 → "$2,501.50". Negative amounts keep the sign.
+    /// Pinned to en_US so the output is the same on every machine (STS prices in US dollars).
     static func format(_ cents: Int) -> String {
         let sign = cents < 0 ? "-" : ""
         let abs = Swift.abs(cents)
         let dollars = abs / 100
         let rem = abs % 100
-        return "\(sign)$\(dollars.formatted(.number.grouping(.automatic))).\(String(format: "%02d", rem))"
+        let grouped = dollars.formatted(.number.grouping(.automatic).locale(Locale(identifier: "en_US")))
+        return "\(sign)$\(grouped).\(String(format: "%02d", rem))"
     }
 }
