@@ -31,6 +31,7 @@ private struct ProjectEditor: View {
     @AppStorage(AppSettings.Key.billableHoursPerYear) private var billableHoursPerYear = AppSettings.defaults.billableHoursPerYear
     /// Sections start open; collapsing is per project (the editor is re-created per selection).
     @State private var collapsed: Set<Bucket> = []
+    @State private var actualsExpanded = ProcessInfo.processInfo.environment["BUCKETS_SCREEN"] == "actuals"
 
     private var billableHours: Decimal { Decimal(billableHoursPerYear) }
 
@@ -57,6 +58,19 @@ private struct ProjectEditor: View {
                                 Text(bucket.title).font(.headline)
                                 Spacer()
                                 Text(Money.format(breakdown[bucket])).monospacedDigit()
+                            }
+                        }
+                    }
+                }
+                Section {
+                    DisclosureGroup(isExpanded: $actualsExpanded) {
+                        ActualsSection(project: project, billableHours: billableHours, save: save)
+                    } label: {
+                        HStack {
+                            Text("Actuals").font(.headline)
+                            Spacer()
+                            if let a = project.actuals(billableHours: billableHours) {
+                                Text(ProjectText.signed(a.totalVariance)).monospacedDigit()
                             }
                         }
                     }
@@ -97,7 +111,7 @@ private struct ProjectEditor: View {
     }
 
     private func isExpanded(_ bucket: Bucket) -> Binding<Bool> {
-        Binding(get: { !collapsed.contains(bucket) },
+        Binding(get: { !collapsed.contains(bucket) && !(actualsExpanded && ProcessInfo.processInfo.environment["BUCKETS_SCREEN"] == "actuals") },
                 set: { open in if open { collapsed.remove(bucket) } else { collapsed.insert(bucket) } })
     }
 
@@ -348,4 +362,94 @@ func rateLabel(cents: Int, unit: String) -> String {
     let money = Money.format(cents)
     if unit.isEmpty { return money }
     return unit == "each" ? "\(money) each" : "\(money)/\(unit)"
+}
+
+
+// MARK: - Actuals (BRIEF §3.5; DECISIONS 31)
+
+/// Actual hours and actual quantities, then estimate vs actual per bucket on cost at this project's rates.
+private struct ActualsSection: View {
+    @Bindable var project: Project
+    let billableHours: Decimal
+    let save: () -> Void
+
+    private var actualHours: Binding<Decimal> {
+        Binding(get: { project.actualHours ?? 0 },
+                set: { project.actualHours = $0 > 0 ? $0 : nil; save() })
+    }
+
+    var body: some View {
+        LabeledContent("Actual hours") {
+            DecimalField(label: "Actual hours", value: actualHours, placeholder: "0", maximum: Decimal(string: "99999.99")!)
+                .frame(width: 120)
+        }
+        let quantityLines = project.sortedLines.filter { $0.bucket.rowKind == .quantity && $0.isOn }
+        ForEach(quantityLines) { line in
+            ActualQtyRow(line: line, save: save)
+        }
+        if let a = project.actuals(billableHours: billableHours) {
+            Text("\(DecimalField.string(project.hours).isEmpty ? "0" : DecimalField.string(project.hours)) estimated / \(DecimalField.string(project.actualHours ?? 0)) actual hours")
+                .foregroundStyle(.secondary)
+            Grid(alignment: .trailing, horizontalSpacing: 24, verticalSpacing: 6) {
+                GridRow {
+                    Text("Bucket").gridColumnAlignment(.leading)
+                    Text("Estimate"); Text("Actual"); Text("Variance")
+                }
+                .font(.caption).foregroundStyle(.secondary)
+                ForEach(Bucket.allCases, id: \.self) { bucket in
+                    GridRow {
+                        Text(bucket.title).gridColumnAlignment(.leading)
+                        Text(Money.format(a.estimate[bucket]))
+                        Text(Money.format(a.actual[bucket]))
+                        Text(ProjectText.signed(a.variance(bucket)))
+                    }
+                    .monospacedDigit()
+                }
+                Divider()
+                GridRow {
+                    Text("Total").bold().gridColumnAlignment(.leading)
+                    Text(Money.format(a.estimate.cost)).bold()
+                    Text(Money.format(a.actual.cost)).bold()
+                    Text(ProjectText.signed(a.totalVariance) + (a.totalVariancePct.map { " (" + ProjectText.signedPercent($0) + ")" } ?? "")).bold()
+                }
+                .monospacedDigit()
+            }
+            Text("Variance is on cost at this project's rates; positive means the job cost more than estimated.")
+                .font(.caption).foregroundStyle(.secondary)
+        } else {
+            Text("Enter actual hours after the job to see estimate vs actual per bucket.")
+                .foregroundStyle(.secondary)
+        }
+    }
+}
+
+private struct ActualQtyRow: View {
+    @Bindable var line: ProjectLine
+    let save: () -> Void
+
+    private var actualQty: Binding<Decimal> {
+        Binding(get: { line.actualQty ?? 0 },
+                set: { line.actualQty = $0 > 0 ? $0 : nil; save() })
+    }
+
+    var body: some View {
+        LabeledContent {
+            DecimalField(label: "Actual qty", value: actualQty, placeholder: DecimalField.string(line.qty).isEmpty ? "0" : DecimalField.string(line.qty))
+                .frame(width: 120)
+        } label: {
+            Text(line.name)
+            Text("estimated \(DecimalField.string(line.qty).isEmpty ? "0" : DecimalField.string(line.qty)) \(line.unit)")
+                .font(.caption).foregroundStyle(.secondary)
+        }
+    }
+}
+
+extension ProjectText {
+    static func signed(_ cents: Int) -> String {
+        cents > 0 ? "+" + Money.format(cents) : Money.format(cents)
+    }
+
+    static func signedPercent(_ pct: Decimal) -> String {
+        (pct > 0 ? "+" : "") + percentString(pct)
+    }
 }

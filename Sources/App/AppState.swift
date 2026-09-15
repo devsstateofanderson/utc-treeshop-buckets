@@ -31,7 +31,7 @@ final class AppState {
         wantsSettingsWindow = screen == "settings"
         switch screen {
         case "projects": sidebar = .projects
-        case "project":
+        case "project", "actuals":
             // Opens the oldest project by date (the fixture's "Oak removal", the BRIEF §3.3 worked example).
             sidebar = .projects
             let projects = (try? context.fetch(FetchDescriptor<Project>(sortBy: [SortDescriptor(\.date, order: .forward)]))) ?? []
