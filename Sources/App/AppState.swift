@@ -90,7 +90,8 @@ final class AppState {
     /// Copies a bucket row (name + " copy", same rate, unit, calculator inputs, source) so another unit is one click.
     func duplicate(_ item: BucketItem) {
         let copy = BucketItem(bucket: item.bucket, name: item.name + " copy", rateCents: item.rateCents, unit: item.unit,
-                              isActive: item.isActive, source: item.source, notes: item.notes, calcInputs: item.calcInputs,
+                              isActive: item.isActive, source: item.source, notes: item.notes, category: item.category,
+                              link: item.link, calcInputs: item.calcInputs,
                               sortOrder: BucketItem.nextSortOrder(in: item.bucket, context: context))
         context.insert(copy)
         save()

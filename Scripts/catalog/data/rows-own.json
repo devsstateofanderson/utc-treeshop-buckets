@@ -1,0 +1,51 @@
+[
+ {
+  "bucket": "equipment",
+  "name": "Porta Wrap 15'",
+  "unit": "hr",
+  "price": 0,
+  "category": "Rigging"
+ },
+ {
+  "bucket": "equipment",
+  "name": "Porta  Wrap 25'",
+  "unit": "hr",
+  "price": 0,
+  "category": "Rigging"
+ },
+ {
+  "bucket": "equipment",
+  "name": "5 Gallon  Fuel Can- Gas",
+  "unit": "hr",
+  "price": 0,
+  "category": "Fuel cans"
+ },
+ {
+  "bucket": "equipment",
+  "name": "5 Gallon  Fuel Can- Diesel",
+  "unit": "hr",
+  "price": 0,
+  "category": "Fuel cans"
+ },
+ {
+  "bucket": "equipment",
+  "name": "5 Gallon  Fuel Can- Stihl 2 Stroke Gas",
+  "unit": "hr",
+  "price": 0,
+  "category": "Fuel cans"
+ },
+ {
+  "bucket": "equipment",
+  "name": "Power Shovel- Red",
+  "unit": "hr",
+  "price": 0,
+  "category": "Small tools"
+ },
+ {
+  "bucket": "materials",
+  "name": "Royal Palm - 100 Gallon",
+  "unit": "each",
+  "price": 250,
+  "category": "Palms"
+ }
+]

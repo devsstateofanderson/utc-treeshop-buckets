@@ -10,9 +10,21 @@ struct BucketTableView: View {
     @AppStorage(AppSettings.Key.billableHoursPerYear) private var billableHoursPerYear = AppSettings.defaults.billableHoursPerYear
     @State private var confirmingDelete = false
     @State private var confirmingArchive = false
+    @State private var search = ""
+    @State private var sortOrder: [KeyPathComparator<BucketItem>] = []
 
-    /// Filtered in memory (the enum column does not predicate well) and sorted by `sortOrder`, then name.
-    private var rows: [BucketItem] { allItems.rows(in: bucket) }
+    /// Filtered in memory (the enum column does not predicate well), searched, then sorted by the clicked
+    /// column; with no column clicked, quantity buckets sort by category then name, the rest by `sortOrder`.
+    private var rows: [BucketItem] {
+        var result = allItems.rows(in: bucket)
+        if !search.isEmpty { result = result.filter { $0.matches(search) } }
+        if !sortOrder.isEmpty {
+            result.sort(using: sortOrder)
+        } else if bucket.rowKind == .quantity {
+            result.sort { ($0.categoryText, $0.name) < ($1.categoryText, $1.name) }
+        }
+        return result
+    }
 
     private var selectedRow: BucketItem? {
         guard let id = appState.selectedItem else { return nil }
@@ -22,7 +34,9 @@ struct BucketTableView: View {
     var body: some View {
         @Bindable var appState = appState
         Group {
-            if rows.isEmpty {
+            if rows.isEmpty && !search.isEmpty {
+                ContentUnavailableView.search(text: search)
+            } else if rows.isEmpty {
                 ContentUnavailableView {
                     Label("No \(bucket.title.lowercased()) rows yet", systemImage: bucket.symbol)
                 } description: {
@@ -31,17 +45,21 @@ struct BucketTableView: View {
                     Button("New Row") { appState.newItem(in: bucket) }
                 }
             } else {
-                Table(rows, selection: $appState.selectedItem) {
-                    TableColumn("Name") { item in
+                Table(rows, selection: $appState.selectedItem, sortOrder: $sortOrder) {
+                    TableColumn("Category", value: \.categoryText) { item in
+                        Text(item.categoryText).foregroundStyle(.secondary)
+                    }
+                    .width(min: 80, ideal: 120)
+                    TableColumn("Name", value: \.name) { item in
                         Text(item.name.isEmpty ? "Untitled" : item.name)
                             .foregroundStyle(item.isActive && !item.name.isEmpty ? Color.primary : Color.secondary)
                     }
-                    .width(min: 100, ideal: 150)
-                    TableColumn("Rate") { item in
+                    .width(min: 100, ideal: 170)
+                    TableColumn("Rate", value: \.rateCents) { item in
                         RateCell(item: item, billableHours: Decimal(billableHoursPerYear))
                     }
                     .width(min: 120, ideal: 170)
-                    TableColumn("Unit") { item in
+                    TableColumn("Unit", value: \.unit) { item in
                         Text(item.unit).foregroundStyle(item.isActive ? Color.primary : Color.secondary)
                     }
                     .width(min: 50, ideal: 84)
@@ -54,7 +72,8 @@ struct BucketTableView: View {
             }
         }
         .navigationTitle(bucket.title)
-        .navigationSplitViewColumnWidth(min: 500, ideal: 560)
+        .navigationSplitViewColumnWidth(min: 560, ideal: 640)
+        .searchable(text: $search, placement: .toolbar, prompt: "Search \(bucket.title.lowercased())")
         .toolbar {
             ToolbarItemGroup {
                 Button { appState.newItem(in: bucket) } label: { Label("New Row", systemImage: "plus") }
@@ -186,4 +205,17 @@ extension Bucket {
 /// "1 project" / "3 projects".
 func projectsPhrase(_ count: Int) -> String {
     count == 1 ? "1 project" : "\(count) projects"
+}
+
+extension Bucket {
+    /// Placeholder for the Category field.
+    var categoryHint: String {
+        switch self {
+        case .labor: "Crew lead, climber, ground…"
+        case .equipment: "Chainsaws, Pole saws, Trucks, Trailers, Machines, Rigging…"
+        case .materials: "Palms, Trees, Mulch & pine straw, Soil & amendments, Sod, Irrigation…"
+        case .consumables: "Chains & bars, Fuel & oil, Batteries & chargers, Disposal, Subcontractors…"
+        case .overhead: "Insurance, Facilities, Marketing, Software, Taxes & licenses…"
+        }
+    }
 }

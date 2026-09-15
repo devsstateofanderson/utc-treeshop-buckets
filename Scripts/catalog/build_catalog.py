@@ -31,7 +31,8 @@ def build(rows):
         b = r["bucket"]
         order[b] = order.get(b, -1) + 1
         item = {"bucket": b, "name": r["name"], "unit": r.get("unit") or ("hr" if b in ("labor", "equipment") else "yr" if b == "overhead" else "each"),
-                "isActive": True, "source": r.get("source"), "notes": r.get("notes"), "calcInputs": None, "sortOrder": order[b]}
+                "isActive": True, "source": r.get("source"), "notes": r.get("notes"), "calcInputs": None, "sortOrder": order[b],
+                "category": r.get("category"), "link": r.get("link")}
         if b == "equipment" and "price" in r and "life_h" in r:
             ci = {"priceCents": cents(r["price"]), "salvageCents": cents(r.get("salvage", 0)), "lifeHours": r["life_h"],
                   "annualHours": r["annual_h"], "fuelOilPerHourCents": cents(r.get("fuel_oil_per_h", 0)),

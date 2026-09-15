@@ -41,6 +41,20 @@ private struct ItemForm: View {
                     .focused($nameFocused)
                 rateRow
                 unitRow
+                TextField("Category", text: Binding(get: { item.category ?? "" }, set: { item.category = $0.isEmpty ? nil : $0 }),
+                          prompt: Text(item.bucket.categoryHint))
+                LabeledContent {
+                    HStack {
+                        OptionalTextField(label: "Link", value: $item.link, prompt: "https://…").labelsHidden()
+                        if let url = item.productURL {
+                            Link(destination: url) { Label("Open", systemImage: "arrow.up.right.square") }
+                                .help("Open the product page")
+                        }
+                    }
+                } label: {
+                    Text("Link")
+                    Text("Product or supplier page").foregroundStyle(.secondary)
+                }
             }
             Section {
                 Toggle("Active", isOn: $item.isActive)
@@ -71,6 +85,8 @@ private struct ItemForm: View {
         .onChange(of: item.isActive) { _, _ in save() }
         .onChange(of: item.source) { _, _ in save() }
         .onChange(of: item.notes) { _, _ in save() }
+        .onChange(of: item.category) { _, _ in save() }
+        .onChange(of: item.link) { _, _ in save() }
     }
 
     // MARK: Rows

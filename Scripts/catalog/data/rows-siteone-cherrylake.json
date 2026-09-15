@@ -5,7 +5,9 @@
   "unit": "yard",
   "price": 28.75,
   "source": "SiteOne (Apopka)",
-  "notes": "public price 2026-09-15 \u00b7 Price appears on SiteOne's product listing (site blocked direct automated page fetches, so this reflects search-index/listing data); no 'log in to see price' message associated with this SKU, unlike soil/sod/irrigation items below. Confirm at Apopka/Orlando/Sanford branch as bulk pricing can vary by branch. \u00b7 You've quoted pine bark mulch at ~$100/yard and chocolate mulch at ~$116/yard installed."
+  "category": "Mulch & pine straw",
+  "link": "https://www.siteone.com/en/bumu-0010-hardwood-mulch-bulk-sold-per-cu-yd/p/658259",
+  "notes": "Public price, 2026-09-15. Price appears on SiteOne's product listing (site blocked direct automated page fetches, so this reflects searc\u2026. You quote pine bark mulch at ~$100/yard installed."
  },
  {
   "bucket": "materials",
@@ -13,7 +15,9 @@
   "unit": "yard",
   "price": 35.63,
   "source": "SiteOne (Apopka)",
-  "notes": "public price 2026-09-15 \u00b7 Public listing price; same sourcing caveat as Hardwood Mulch row. Branch pricing may vary. \u00b7 You've quoted pine bark mulch at ~$100/yard and chocolate mulch at ~$116/yard installed."
+  "category": "Mulch & pine straw",
+  "link": "https://www.siteone.com/en/bumu-0011-cy-dyed-black-mulch-bulk-sold-per-cu-yd/p/658261",
+  "notes": "Public price, 2026-09-15. Public listing price;. You quote pine bark mulch at ~$100/yard installed."
  },
  {
   "bucket": "materials",
@@ -21,7 +25,9 @@
   "unit": "yard",
   "price": 41.75,
   "source": "SiteOne (Apopka)",
-  "notes": "public price 2026-09-15 \u00b7 Public listing price; same sourcing caveat as Hardwood Mulch row. Branch pricing may vary. \u00b7 You've quoted pine bark mulch at ~$100/yard and chocolate mulch at ~$116/yard installed."
+  "category": "Mulch & pine straw",
+  "link": "https://www.siteone.com/en/bumu-0012-dyed-red-mulch-bulk-sold-per-cu-yd/p/658263",
+  "notes": "Public price, 2026-09-15. Public listing price;. You quote pine bark mulch at ~$100/yard installed."
  },
  {
   "bucket": "materials",
@@ -29,7 +35,9 @@
   "unit": "yard",
   "price": 49.31,
   "source": "SiteOne (Apopka)",
-  "notes": "public price 2026-09-15 \u00b7 Public listing price; same sourcing caveat as Hardwood Mulch row. This is the 'shredded' mulch type requested. \u00b7 You've quoted pine bark mulch at ~$100/yard and chocolate mulch at ~$116/yard installed."
+  "category": "Mulch & pine straw",
+  "link": "https://www.siteone.com/en/bumu-0015-shredded-pine-mulch-bulk-per-cu-yd/p/662310",
+  "notes": "Public price, 2026-09-15. Public listing price;. You quote pine bark mulch at ~$100/yard installed."
  },
  {
   "bucket": "materials",
@@ -37,7 +45,9 @@
   "unit": "yard",
   "price": 58.75,
   "source": "SiteOne (Apopka)",
-  "notes": "public price 2026-09-15 \u00b7 Not specifically requested but included to show the full public mulch price tier ($28.75-$58.75/yd) found at SiteOne. \u00b7 You've quoted pine bark mulch at ~$100/yard and chocolate mulch at ~$116/yard installed."
+  "category": "Mulch & pine straw",
+  "link": "https://www.siteone.com/en/bumu-0080-playground-certified-wood-chips-mulch-bulk-per-cu-yd/p/558313",
+  "notes": "Public price, 2026-09-15. Not specifically requested but included to show the full public mulch price tier ($28.75-$58.75/yd) found at S\u2026. You quote pine bark mulch at ~$100/yard installed."
  },
  {
   "bucket": "materials",
@@ -45,7 +55,9 @@
   "unit": "pallet",
   "price": 300.0,
   "source": "SiteOne (Apopka)",
-  "notes": "ESTIMATE 2026-09-15 \u00b7 SiteOne product pages (SKUs aug0066, aug0070) show 'log in to see your price' per sq ft. Estimate is a Central FL market midpoint; public ranges cited were $200-405/pallet (homeadvisor.com, homeguide.com), roughly $0.45-0.90/sq ft before installation. \u00b7 You've quoted St. Augustine pallets at $400-$1,500 installed."
+  "category": "Sod",
+  "link": "https://www.homeguide.com/costs/sod-prices",
+  "notes": "ESTIMATE, 2026-09-15. SiteOne product pages (SKUs aug0066, aug0070) show 'log in to see your price' per sq ft.. You quote St. Augustine pallets at $400-$1,500 installed."
  },
  {
   "bucket": "materials",
@@ -53,7 +65,9 @@
   "unit": "piece",
   "price": 2.0,
   "source": "SiteOne (Apopka)",
-  "notes": "ESTIMATE 2026-09-15 \u00b7 Derived from the $0.45-0.90/sq ft market range times a ~2.5 sf standard slab. SiteOne per-piece price is not public (login required). \u00b7 You've quoted St. Augustine pallets at $400-$1,500 installed."
+  "category": "Sod",
+  "link": "https://www.homeguide.com/costs/sod-prices",
+  "notes": "ESTIMATE, 2026-09-15. Derived from the $0.45-0.90/sq ft market range times a ~2.5 sf standard slab.. You quote St. Augustine pallets at $400-$1,500 installed."
  },
  {
   "bucket": "materials",
@@ -61,7 +75,9 @@
   "unit": "pallet",
   "price": 145.0,
   "source": "SiteOne (Apopka)",
-  "notes": "ESTIMATE 2026-09-15 \u00b7 SiteOne Bahia-specific SKU/price was not surfaced in search results (category page: siteone.com/en/nursery-sod/c/sh1617111). Estimate from a Central Florida sod supplier's 2026 price guide: Bahia roughly $135-150/pallet. \u00b7 You've quoted St. Augustine pallets at $400-$1,500 installed."
+  "category": "Sod",
+  "link": "https://www.osceolasod.com/blog/how-much-is-a-pallet-of-bahia-or-zoysia-sod-in-florida-2026-price-guide",
+  "notes": "ESTIMATE, 2026-09-15. SiteOne Bahia-specific SKU/price was not surfaced in search results (category page: siteone.com/en/nursery-sod\u2026. You quote St. Augustine pallets at $400-$1,500 installed."
  },
  {
   "bucket": "materials",
@@ -69,7 +85,9 @@
   "unit": "pallet",
   "price": 290.0,
   "source": "SiteOne (Apopka)",
-  "notes": "ESTIMATE 2026-09-15 \u00b7 SiteOne carries Zenith and Prizm Zoysia varieties (login required for price; one SiteOne search snippet suggested ~$1.86/sq ft for Zenith Zoysia but this could not be independently confirmed by a direct page fetch, so it is not used as the headline figure). Market range is $225-585/pallet depending on variety. \u00b7 You've quoted St. Augustine pallets at $400-$1,500 installed."
+  "category": "Sod",
+  "link": "https://www.homeguide.com/costs/sod-prices",
+  "notes": "ESTIMATE, 2026-09-15. SiteOne carries Zenith and Prizm Zoysia varieties (login required for price;. You quote St. Augustine pallets at $400-$1,500 installed."
  },
  {
   "bucket": "materials",
@@ -77,7 +95,9 @@
   "unit": "each",
   "price": 3.99,
   "source": "SiteOne (Apopka)",
-  "notes": "ESTIMATE 2026-09-15 \u00b7 SiteOne page (siteone.com/en/1804r-...) requires login. Estimate from Sprinkler Warehouse public retail price ($1.75 flash-sale / $3.99 regular 'Our Price'); a contractor trade account at SiteOne would typically be at or below this."
+  "category": "Irrigation",
+  "link": "https://www.sprinklerwarehouse.com/rain-bird-1800-spray-head-4-in-1804",
+  "notes": "ESTIMATE, 2026-09-15. SiteOne page (siteone.com/en/1804r-...) requires login."
  },
  {
   "bucket": "materials",
@@ -85,7 +105,9 @@
   "unit": "each",
   "price": 24.18,
   "source": "SiteOne (Apopka)",
-  "notes": "ESTIMATE 2026-09-15 \u00b7 SiteOne's irrigation catalog is login-gated. Estimate is Sprinkler Warehouse list price ($24.18; sale price seen at $10.98). A case of 20 was $178.99 on sale (~$8.95/unit) - contractor volume pricing is likely closer to that."
+  "category": "Irrigation",
+  "link": "https://www.sprinklerwarehouse.com/hunter-rotor-4-in-pgp-adj",
+  "notes": "ESTIMATE, 2026-09-15. SiteOne's irrigation catalog is login-gated."
  },
  {
   "bucket": "materials",
@@ -93,7 +115,9 @@
   "unit": "each",
   "price": 7.8,
   "source": "SiteOne (Apopka)",
-  "notes": "ESTIMATE 2026-09-15 \u00b7 SiteOne page (siteone.com/en/mp100090-...) requires login. Estimate derived from a 5-pack MP3000-90 retail price of $38.99 (~$7.80/nozzle) seen in search results; single-unit pricing was not independently confirmed."
+  "category": "Irrigation",
+  "link": "https://www.sprinklersupplystore.com/products/hunter-mp-rotator-nozzle-1",
+  "notes": "ESTIMATE, 2026-09-15. SiteOne page (siteone.com/en/mp100090-...) requires login."
  },
  {
   "bucket": "materials",
@@ -101,7 +125,9 @@
   "unit": "each",
   "price": 2.0,
   "source": "SiteOne (Apopka)",
-  "notes": "ESTIMATE 2026-09-15 \u00b7 SiteOne fittings are login-gated. General market data (SupplyHouse.com) puts individual Sch 40 PVC fittings at roughly $0.50-$5 each depending on fitting type; $2 is a rough midpoint, not fitting-type-specific."
+  "category": "Irrigation",
+  "link": "https://www.supplyhouse.com/PVC-Schedule-40-Fittings-14952000",
+  "notes": "ESTIMATE, 2026-09-15. SiteOne fittings are login-gated."
  },
  {
   "bucket": "materials",
@@ -109,7 +135,9 @@
   "unit": "ft",
   "price": 0.15,
   "source": "SiteOne (Apopka)",
-  "notes": "ESTIMATE 2026-09-15 \u00b7 Specific SiteOne drip-tubing SKU/price not individually verified this session (irrigation catalog pattern is login-gated). Market estimate: a 500 ft roll commonly runs $50-100, i.e. roughly $0.10-0.20/ft."
+  "category": "Irrigation",
+  "link": "https://www.angi.com/articles/drip-irrigation-cuts-down-yard-work-water-usage.htm",
+  "notes": "ESTIMATE, 2026-09-15. Specific SiteOne drip-tubing SKU/price not individually verified this session (irrigation catalog pattern is l\u2026"
  },
  {
   "bucket": "materials",
@@ -117,7 +145,9 @@
   "unit": "bag",
   "price": 47.0,
   "source": "SiteOne (Apopka)",
-  "notes": "ESTIMATE 2026-09-15 \u00b7 Login required on siteone.com (SKU 511453). Estimate triangulated from a 2013 Home Depot price of $31.78 (lawnsite.com forum, inflation-adjusted) and a current Home Depot listing of a different LESCO 50lb turf formula (16-4-8) at $49.95 used as a same-brand/same-bag-size proxy. Treat as rough."
+  "category": "Fertilizer",
+  "link": "https://www.homedepot.com/b/Outdoors-Garden-Center-Lawn-Care-Lawn-Fertilizers/LESCO/N-5yc1vZbx6bZuv",
+  "notes": "ESTIMATE, 2026-09-15. Login required on siteone.com (SKU 511453)."
  },
  {
   "bucket": "materials",
@@ -125,7 +155,9 @@
   "unit": "each",
   "price": 58.0,
   "source": "SiteOne (Apopka)",
-  "notes": "ESTIMATE 2026-09-15 \u00b7 Login required on siteone.com (SKU 86755033; restricted-use/licensed-applicator product). Public retail range seen: $57.95 (Keystone Pest Solutions), $57.99 (Gebo's), up to $84.95 (Walmart). $58 reflects the lower, more typical cluster."
+  "category": "Tree care supplies",
+  "link": "https://www.keystonepestsolutions.com/index.php?main_page=product_info&products_id=715",
+  "notes": "ESTIMATE, 2026-09-15. Login required on siteone.com (SKU 86755033;"
  },
  {
   "bucket": "materials",
@@ -133,7 +165,9 @@
   "unit": "each",
   "price": 225.0,
   "source": "Cherry Lake / wholesale nursery",
-  "notes": "ESTIMATE 2026-09-09 \u00b7 Cherrylake does not publish pricing. Figure is from Creek Nursery's wholesale availability list (Stuart, FL - Treasure Coast, not Central FL, but a current statewide wholesale-grower reference), price-list dated 9/9/26. \u00b7 You've quoted Cathedral Live Oak at ~$676 (30 gal), ~$1,674 (45 gal), ~$1,349 (65 gal) installed."
+  "category": "Trees",
+  "link": "https://www.creeknursery.com/creek_nursery_wholesale_availability.pdf",
+  "notes": "ESTIMATE, 2026-09-09. Cherrylake does not publish pricing.. You quote Cathedral Live Oak at ~$676 (30 gal), ~$1,674 (45 gal), ~$1,349 (65 gal) installed."
  },
  {
   "bucket": "materials",
@@ -141,7 +175,9 @@
   "unit": "each",
   "price": 325.0,
   "source": "Cherry Lake / wholesale nursery",
-  "notes": "ESTIMATE 2026-09-09 \u00b7 Cherrylake pricing not public. Creek Nursery (Stuart, FL) wholesale list, dated 9/9/26. \u00b7 You've quoted Cathedral Live Oak at ~$676 (30 gal), ~$1,674 (45 gal), ~$1,349 (65 gal) installed."
+  "category": "Trees",
+  "link": "https://www.creeknursery.com/creek_nursery_wholesale_availability.pdf",
+  "notes": "ESTIMATE, 2026-09-09. Cherrylake pricing not public.. You quote Cathedral Live Oak at ~$676 (30 gal), ~$1,674 (45 gal), ~$1,349 (65 gal) installed."
  },
  {
   "bucket": "materials",
@@ -149,7 +185,9 @@
   "unit": "each",
   "price": 150.0,
   "source": "Cherry Lake / wholesale nursery",
-  "notes": "ESTIMATE 2026-09-09 \u00b7 Closest available size to the requested 30gal in current public price lists. Creek Nursery (Stuart, FL), price list dated 9/9/26. \u00b7 You've quoted 30-gal Magnolia at ~$600 plus ~$400 planting."
+  "category": "Trees",
+  "link": "https://www.creeknursery.com/creek_nursery_wholesale_availability.pdf",
+  "notes": "ESTIMATE, 2026-09-09. Closest available size to the requested 30gal in current public price lists.. You quote 30-gal Magnolia at ~$600 plus ~$400 planting."
  },
  {
   "bucket": "materials",
@@ -157,7 +195,9 @@
   "unit": "each",
   "price": 650.0,
   "source": "Cherry Lake / wholesale nursery",
-  "notes": "ESTIMATE 2026-09-15 \u00b7 A Quality Plant (self-described wholesale palm nursery serving Central FL, incl. Orlando) public price for a 6ft clear-trunk Sylvester palm. Cherrylake itself does not publish pricing. \u00b7 You've quoted Sylvester palm planting at ~$250 per foot of trunk (12 ft minimum) and ~$3,250 for a 10-12 ft install."
+  "category": "Palms",
+  "link": "https://www.aqualityplant.com/sylvester-palm-silver-date-tree-phoenix-sylvestris",
+  "notes": "ESTIMATE, 2026-09-15. A Quality Plant (self-described wholesale palm nursery serving Central FL, incl.. You quote Sylvester planting at ~$250 per foot of trunk, 12 ft minimum."
  },
  {
   "bucket": "materials",
@@ -165,7 +205,9 @@
   "unit": "each",
   "price": 160.0,
   "source": "Cherry Lake / wholesale nursery",
-  "notes": "ESTIMATE 2026-09-09 \u00b7 Creek Nursery (Stuart, FL) wholesale list, dated 9/9/26, flat price across the full 10-18ft trunk range. Sabal (cabbage) palm is FL's state tree, very commonly available, and price tends to be fairly stable statewide. \u00b7 You've quoted Sabal palm delivery + planting at $395-$1,000 depending on trunk height."
+  "category": "Palms",
+  "link": "https://www.creeknursery.com/creek_nursery_wholesale_availability.pdf",
+  "notes": "ESTIMATE, 2026-09-09. Creek Nursery (Stuart, FL) wholesale list, dated 9/9/26, flat price across the full 10-18ft trunk range.. You quote Sabal delivery + planting at $395-$1,000 by trunk height."
  },
  {
   "bucket": "materials",
@@ -173,7 +215,9 @@
   "unit": "each",
   "price": 115.0,
   "source": "Cherry Lake / wholesale nursery",
-  "notes": "ESTIMATE 2026-09-09 \u00b7 Creek Nursery (Stuart, FL), price list dated 9/9/26. \u00b7 You've quoted 12-16 ft B&B Queen palm at ~$600 plus ~$1,000 planting."
+  "category": "Palms",
+  "link": "https://www.creeknursery.com/creek_nursery_wholesale_availability.pdf",
+  "notes": "ESTIMATE, 2026-09-09. Creek Nursery (Stuart, FL), price list dated 9/9/26.. You quote 12-16 ft B&B Queen palm at ~$600 plus ~$1,000 planting."
  },
  {
   "bucket": "materials",
@@ -181,7 +225,9 @@
   "unit": "each",
   "price": 195.0,
   "source": "Cherry Lake / wholesale nursery",
-  "notes": "ESTIMATE 2026-09-09 \u00b7 Creek Nursery (Stuart, FL), price list dated 9/9/26. \u00b7 You've quoted 30-gal Crape Myrtle at $250-$400 plus ~$300 planting."
+  "category": "Trees",
+  "link": "https://www.creeknursery.com/creek_nursery_wholesale_availability.pdf",
+  "notes": "ESTIMATE, 2026-09-09. Creek Nursery (Stuart, FL), price list dated 9/9/26.. You quote 30-gal Crape Myrtle at $250-$400 plus ~$300 planting."
  },
  {
   "bucket": "materials",
@@ -189,7 +235,9 @@
   "unit": "each",
   "price": 250.0,
   "source": "Cherry Lake / wholesale nursery",
-  "notes": "ESTIMATE 2026-09-09 \u00b7 Bonus size beyond the requested 15/30gal, included since it was on the current price list. Creek Nursery, dated 9/9/26. \u00b7 You've quoted 30-gal Crape Myrtle at $250-$400 plus ~$300 planting."
+  "category": "Trees",
+  "link": "https://www.creeknursery.com/creek_nursery_wholesale_availability.pdf",
+  "notes": "ESTIMATE, 2026-09-09. Bonus size beyond the requested 15/30gal, included since it was on the current price list.. You quote 30-gal Crape Myrtle at $250-$400 plus ~$300 planting."
  },
  {
   "bucket": "materials",
@@ -197,7 +245,9 @@
   "unit": "each",
   "price": 185.0,
   "source": "Cherry Lake / wholesale nursery",
-  "notes": "ESTIMATE 2026-09-09 \u00b7 Creek Nursery (Stuart, FL), price list dated 9/9/26. \u00b7 You've quoted 45-gal Bald Cypress at ~$385."
+  "category": "Trees",
+  "link": "https://www.creeknursery.com/creek_nursery_wholesale_availability.pdf",
+  "notes": "ESTIMATE, 2026-09-09. Creek Nursery (Stuart, FL), price list dated 9/9/26.. You quote 45-gal Bald Cypress at ~$385."
  },
  {
   "bucket": "materials",
@@ -205,7 +255,9 @@
   "unit": "each",
   "price": 300.0,
   "source": "Cherry Lake / wholesale nursery",
-  "notes": "ESTIMATE 2026-09-09 \u00b7 Creek Nursery (Stuart, FL), price list dated 9/9/26; closest available size to the requested 15/30gal (their list starts at 45gal). \u00b7 You've quoted 30-gal Red Flame Maple at ~$300."
+  "category": "Trees",
+  "link": "https://www.creeknursery.com/creek_nursery_wholesale_availability.pdf",
+  "notes": "ESTIMATE, 2026-09-09. Creek Nursery (Stuart, FL), price list dated 9/9/26;. You quote 30-gal Red Flame Maple at ~$300."
  },
  {
   "bucket": "materials",
@@ -213,6 +265,8 @@
   "unit": "each",
   "price": 230.0,
   "source": "Cherry Lake / wholesale nursery",
-  "notes": "ESTIMATE 2026-09-09 \u00b7 Creek Nursery (Stuart, FL), price list dated 9/9/26 (listed as 'Holy Eagleston,' apparently a typo for Holly). \u00b7 You've quoted 30-gal Dahoon Holly at ~$300 plus ~$350 planting."
+  "category": "Trees",
+  "link": "https://www.creeknursery.com/creek_nursery_wholesale_availability.pdf",
+  "notes": "ESTIMATE, 2026-09-09. Creek Nursery (Stuart, FL), price list dated 9/9/26 (listed as 'Holy Eagleston,' apparently a typo for Holly).. You quote 30-gal Dahoon Holly at ~$300 plus ~$350 planting."
  }
 ]

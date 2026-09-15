@@ -5,7 +5,9 @@
   "unit": "each",
   "price": 143.72,
   "source": "Home Depot (Apopka)",
-  "notes": "Home Depot online price 2026-09-15 \u00b7 Wekiva Foliage 64-Z3N7-QNC6 \u00b7 Ship-to-home online price. Also seen at $118.72 with a $25 Home Depot credit-card instant-savings promo applied; regular price used here. \u00b7 You've quoted Sylvester palm planting at ~$250 per foot of trunk (12 ft minimum) and ~$3,250 for a 10-12 ft install."
+  "category": "Palms",
+  "link": "https://www.homedepot.com/p/Sylvester-Palm-Live-Plant-in-a-3-Gal-Growers-Pot-Phoenix-Sylvestris-Rare-Palm-Tree-from-Florida-Beautiful-Palms-64-Z3N7-QNC6/322834930",
+  "notes": "Wekiva Foliage 64-Z3N7-QNC6. Home Depot online price, Sep 15 2026. Ship-to-home online price.. You quote Sylvester planting at ~$250 per foot of trunk, 12 ft minimum."
  },
  {
   "bucket": "materials",
@@ -13,7 +15,9 @@
   "unit": "each",
   "price": 218.14,
   "source": "Home Depot (Apopka)",
-  "notes": "Home Depot online price 2026-09-15 \u00b7 Wekiva Foliage QueenPalm10x1 \u00b7 Larger 7-gal and 15-gal Queen Palm listings (The Plant Stand of Arizona) exist on homedepot.com but showed as unavailable with no price during this search. \u00b7 You've quoted 12-16 ft B&B Queen palm at ~$600 plus ~$1,000 planting."
+  "category": "Palms",
+  "link": "https://www.homedepot.com/p/Wekiva-Foliage-Queen-Palm-Live-Plant-in-a-10-in-Growers-Pot-Syagrus-Romanzoffiana-Handsome-and-Sturdy-Evergreen-Palm-Tree-QueenPalm10x1/334118616",
+  "notes": "Wekiva Foliage QueenPalm10x1. Home Depot online price, Sep 15 2026. Larger 7-gal and 15-gal Queen Palm listings (The Plant Stand of Arizona) exist on homedepot.com but showed as\u2026. You quote 12-16 ft B&B Queen palm at ~$600 plus ~$1,000 planting."
  },
  {
   "bucket": "materials",
@@ -21,7 +25,9 @@
   "unit": "each",
   "price": 43.65,
   "source": "Home Depot (Apopka)",
-  "notes": "Home Depot online price 2026-09-15 \u00b7 national PLANT NETWORK HD7473 \u00b7 You've quoted tri-planted Robellini at ~$175 (15 gal) and ~$250 (30 gal)."
+  "category": "Palms",
+  "link": "https://www.homedepot.com/p/national-PLANT-NETWORK-2-Gal-Robellini-Palm-Tree-HD7473/313960170",
+  "notes": "national PLANT NETWORK HD7473. Home Depot online price, Sep 15 2026. You quote tri-planted Robellini at ~$175 (15 gal) and ~$250 (30 gal)."
  },
  {
   "bucket": "materials",
@@ -29,7 +35,9 @@
   "unit": "each",
   "price": 299.0,
   "source": "Home Depot (Apopka)",
-  "notes": "Home Depot online price 2026-09-15 \u00b7 The Plant Stand of Arizona 899497 \u00b7 Search results showed ~$274 as a promo/sale price and ~$299 as regular price; regular price used, treat as approximate. \u00b7 You've quoted tri-planted Robellini at ~$175 (15 gal) and ~$250 (30 gal)."
+  "category": "Palms",
+  "link": "https://www.homedepot.com/p/The-Plant-Stand-of-Arizona-25-Gal-Phoenix-Roebelenii-Pygmy-Date-Palm-Tree-Outdoor-Live-Plant-899497/315601880",
+  "notes": "The Plant Stand of Arizona 899497. Home Depot online price, Sep 15 2026. Search results showed ~$274 as a promo/sale price and ~$299 as regular price;. You quote tri-planted Robellini at ~$175 (15 gal) and ~$250 (30 gal)."
  },
  {
   "bucket": "materials",
@@ -37,23 +45,29 @@
   "unit": "each",
   "price": 190.53,
   "source": "Home Depot (Apopka)",
-  "notes": "Home Depot online price 2026-09-15 \u00b7 Wekiva Foliage FoxPalm3gx1 \u00b7 Ship-to-home price. \u00b7 You've quoted tri-planted Foxtail 30 gal at $225-$600."
+  "category": "Palms",
+  "link": "https://www.homedepot.com/p/Wekiva-Foliage-Foxtail-Palm-Live-Plant-in-a-3-gal-Growers-Pot-Wodyetia-Bifurcata-Rare-Ornamental-Palms-of-Florida-FoxPalm3gx1/334268424",
+  "notes": "Wekiva Foliage FoxPalm3gx1. Home Depot online price, Sep 15 2026. Ship-to-home price.. You quote tri-planted Foxtail 30 gal at $225-$600."
  },
  {
   "bucket": "materials",
-  "name": "Sabal Minor (Dwarf Palmetto) - related species, not true cabbage palm \u2013 10 in pot",
+  "name": "Sabal Minor (Dwarf Palmetto) \u2013 10 in pot",
   "unit": "each",
   "price": 163.49,
   "source": "Home Depot (Apopka)",
-  "notes": "Home Depot online price 2026-09-15 \u00b7 Wekiva Foliage SabaMi10x1 \u00b7 This is Sabal minor (dwarf palmetto), a smaller native relative -- NOT the large Sabal palmetto 'cabbage palm.' Listed for reference only. \u00b7 You've quoted Sabal palm delivery + planting at $395-$1,000 depending on trunk height."
+  "category": "Palms",
+  "link": "https://www.homedepot.com/p/Wekiva-Foliage-Sabal-Minor-Dwarf-Blue-Stem-Palmetto-Palm-Live-Plant-in-a-10-in-Growers-Pot-Native-Ornamental-Palms-from-Florida-SabaMi10x1/334118720",
+  "notes": "Wekiva Foliage SabaMi10x1. Home Depot online price, Sep 15 2026. This is Sabal minor (dwarf palmetto), a smaller native relative -- NOT the large Sabal palmetto 'cabbage palm.\u2026. You quote Sabal delivery + planting at $395-$1,000 by trunk height."
  },
  {
   "bucket": "materials",
-  "name": "Cabbage Tree Palm (Livistona australis, Australian species) - not FL cabbage palm \u2013 3 gal",
+  "name": "Cabbage Tree Palm (Livistona australis) \u2013 3 gal",
   "unit": "each",
   "price": 180.79,
   "source": "Home Depot (Apopka)",
-  "notes": "Home Depot online price 2026-09-15 \u00b7 Wekiva Foliage CabTree3gx1 \u00b7 Despite the name, this is Livistona australis, an Australian species in a different genus from Florida's true Sabal palmetto. Do not confuse with the state tree."
+  "category": "Palms",
+  "link": "https://www.homedepot.com/p/Wekiva-Foliage-Cabbage-Tree-Palm-Live-Plant-in-a-3-gal-Growers-Pot-Livistona-Australis-Rare-Ornamental-Palms-of-Florida-CabTree3gx1/334191626",
+  "notes": "Wekiva Foliage CabTree3gx1. Home Depot online price, Sep 15 2026. Despite the name, this is Livistona australis, an Australian species in a different genus from Florida's true\u2026"
  },
  {
   "bucket": "materials",
@@ -61,7 +75,9 @@
   "unit": "each",
   "price": 89.98,
   "source": "Home Depot (Apopka)",
-  "notes": "Home Depot online price 2026-09-15 \u00b7 Brighter Blooms PAL-WIN3"
+  "category": "Palms",
+  "link": "https://www.homedepot.com/p/Brighter-Blooms-3-Gal-Windmill-Palm-Tree-in-Pot-PAL-WIN3/316112775",
+  "notes": "Brighter Blooms PAL-WIN3. Home Depot online price, Sep 15 2026"
  },
  {
   "bucket": "materials",
@@ -69,7 +85,9 @@
   "unit": "each",
   "price": 129.98,
   "source": "Home Depot (Apopka)",
-  "notes": "Home Depot online price 2026-09-15 \u00b7 15530 \u00b7 Sold as a boxed ship-to-home plant sized by height (14 in) rather than gallon container."
+  "category": "Palms",
+  "link": "https://www.homedepot.com/p/14-Windmill-Palm-Tree-with-Beautiful-Green-Fronds-15530/315743286",
+  "notes": "15530. Home Depot online price, Sep 15 2026. Sold as a boxed ship-to-home plant sized by height (14 in) rather than gallon container."
  },
  {
   "bucket": "materials",
@@ -77,15 +95,19 @@
   "unit": "each",
   "price": 92.72,
   "source": "Home Depot (Apopka)",
-  "notes": "Home Depot online price 2026-09-15 \u00b7 Wekiva Foliage EupFan10x1"
+  "category": "Palms",
+  "link": "https://www.homedepot.com/p/Wekiva-Foliage-European-Fan-Palm-Live-Plant-in-a-10-in-Growers-Pot-Chamaerops-Humilis-Rare-Palm-Trees-from-Florida-EupFan10x1/334192900",
+  "notes": "Wekiva Foliage EupFan10x1. Home Depot online price, Sep 15 2026"
  },
  {
   "bucket": "materials",
-  "name": "Bismarck Palm (Silver Bismarck, Bismarckia nobilis) \u2013 5 gal",
+  "name": "Bismarck Palm (Silver Bismarck) \u2013 5 gal",
   "unit": "each",
   "price": 251.55,
   "source": "Home Depot (Apopka)",
-  "notes": "Home Depot online price 2026-09-15 \u00b7 Wekiva Foliage SilBis5gx1"
+  "category": "Palms",
+  "link": "https://www.homedepot.com/p/Wekiva-Foliage-Silver-Bismarck-Palm-Live-Plant-in-a-5-gal-Growers-Pot-Bismarckia-Nobilis-Rare-Ornamental-Palms-of-Florida-SilBis5gx1/334118672",
+  "notes": "Wekiva Foliage SilBis5gx1. Home Depot online price, Sep 15 2026"
  },
  {
   "bucket": "materials",
@@ -93,7 +115,9 @@
   "unit": "each",
   "price": 44.98,
   "source": "Home Depot (Apopka)",
-  "notes": "Home Depot online price 2026-09-15 \u00b7 United Nursery MAJESTYP10GRAY \u00b7 Sold as an indoor/outdoor decor-pot plant (~2-3 ft tall), not a standard nursery gallon size. Other 10-in-pot color options seen discounted to ~$19.98-$34.99 with a promotional new-credit-card $25 instant savings applied; regular-price listing used here."
+  "category": "Palms",
+  "link": "https://www.homedepot.com/p/Majesty-Palm-Live-Indoor-Outdoor-Plant-in-10-inch-Premium-Sustainable-Ecopots-Grey-Pot-with-Removeable-Drainage-Plug-MAJESTYP10GRAY/323302462",
+  "notes": "United Nursery MAJESTYP10GRAY. Home Depot online price, Sep 15 2026. Sold as an indoor/outdoor decor-pot plant (~2-3 ft tall), not a standard nursery gallon size."
  },
  {
   "bucket": "materials",
@@ -101,7 +125,9 @@
   "unit": "each",
   "price": 101.35,
   "source": "Home Depot (Apopka)",
-  "notes": "Home Depot online price 2026-09-15 \u00b7 MAGTED07G \u00b7 'Kay Parris' 7-gal cultivar (MAGKAY07G) also seen at $95.98. \u00b7 You've quoted 30-gal Magnolia at ~$600 plus ~$400 planting."
+  "category": "Trees",
+  "link": "https://www.homedepot.com/p/7-Gal-Teddy-Bear-Southern-Magnolia-Evergreen-Tree-MAGTED07G/329903656",
+  "notes": "MAGTED07G. Home Depot online price, Sep 15 2026. 'Kay Parris' 7-gal cultivar (MAGKAY07G) also seen at $95.98.. You quote 30-gal Magnolia at ~$600 plus ~$400 planting."
  },
  {
   "bucket": "materials",
@@ -109,7 +135,9 @@
   "unit": "each",
   "price": 50.49,
   "source": "Home Depot (Apopka)",
-  "notes": "Home Depot online price 2026-09-15 \u00b7 MAGLIT03G \u00b7 You've quoted 30-gal Magnolia at ~$600 plus ~$400 planting."
+  "category": "Trees",
+  "link": "https://www.homedepot.com/p/3-Gal-Little-Gem-Southern-Magnolia-Tree-MAGLIT03G/313393694",
+  "notes": "MAGLIT03G. Home Depot online price, Sep 15 2026. You quote 30-gal Magnolia at ~$600 plus ~$400 planting."
  },
  {
   "bucket": "materials",
@@ -117,7 +145,9 @@
   "unit": "each",
   "price": 195.62,
   "source": "Home Depot (Apopka)",
-  "notes": "Home Depot online price 2026-09-15 \u00b7 Brighter Blooms MAG-LIT-56-7 \u00b7 You've quoted 30-gal Magnolia at ~$600 plus ~$400 planting."
+  "category": "Trees",
+  "link": "https://www.homedepot.com/p/Brighter-Blooms-7-Gal-5-ft-to-6-ft-Little-Gem-Magnolia-Flowering-Tree-MAG-LIT-56-7/317521847",
+  "notes": "Brighter Blooms MAG-LIT-56-7. Home Depot online price, Sep 15 2026. You quote 30-gal Magnolia at ~$600 plus ~$400 planting."
  },
  {
   "bucket": "materials",
@@ -125,7 +155,9 @@
   "unit": "each",
   "price": 44.98,
   "source": "Home Depot (Apopka)",
-  "notes": "Home Depot online price 2026-09-15 \u00b7 OAKLIV01G \u00b7 You've quoted Cathedral Live Oak at ~$676 (30 gal), ~$1,674 (45 gal), ~$1,349 (65 gal) installed."
+  "category": "Trees",
+  "link": "https://www.homedepot.com/p/1-Gal-Live-Oak-Shade-Tree-OAKLIV01G/300109830",
+  "notes": "OAKLIV01G. Home Depot online price, Sep 15 2026. You quote Cathedral Live Oak at ~$676 (30 gal), ~$1,674 (45 gal), ~$1,349 (65 gal) installed."
  },
  {
   "bucket": "materials",
@@ -133,7 +165,9 @@
   "unit": "each",
   "price": 93.97,
   "source": "Home Depot (Apopka)",
-  "notes": "Home Depot online price 2026-09-15 \u00b7 OAKLIV07G \u00b7 You've quoted Cathedral Live Oak at ~$676 (30 gal), ~$1,674 (45 gal), ~$1,349 (65 gal) installed."
+  "category": "Trees",
+  "link": "https://www.homedepot.com/p/7-Gal-Live-Oak-Shade-Tree-OAKLIV07G/330185532",
+  "notes": "OAKLIV07G. Home Depot online price, Sep 15 2026. You quote Cathedral Live Oak at ~$676 (30 gal), ~$1,674 (45 gal), ~$1,349 (65 gal) installed."
  },
  {
   "bucket": "materials",
@@ -141,7 +175,9 @@
   "unit": "each",
   "price": 65.46,
   "source": "Home Depot (Apopka)",
-  "notes": "Home Depot online price 2026-09-15 \u00b7 CRMTUS03G \u00b7 Other 3-gal cultivars (Natchez, Muskogee) seen $51-$65. \u00b7 You've quoted 30-gal Crape Myrtle at $250-$400 plus ~$300 planting."
+  "category": "Trees",
+  "link": "https://www.homedepot.com/p/3-Gal-Tuscarora-Dark-Pink-Crape-Myrtle-Tree-CRMTUS03G/313615584",
+  "notes": "CRMTUS03G. Home Depot online price, Sep 15 2026. Other 3-gal cultivars (Natchez, Muskogee) seen $51-$65.. You quote 30-gal Crape Myrtle at $250-$400 plus ~$300 planting."
  },
  {
   "bucket": "materials",
@@ -149,7 +185,9 @@
   "unit": "each",
   "price": 94.48,
   "source": "Home Depot (Apopka)",
-  "notes": "Home Depot online price 2026-09-15 \u00b7 CRMMSA07G \u00b7 Price seen via site search results; exact product-page URL not isolated -- verify on category page. Other 7-gal cultivars (Tonto) similarly priced ~$83-$96. \u00b7 You've quoted 30-gal Crape Myrtle at $250-$400 plus ~$300 planting."
+  "category": "Trees",
+  "link": "https://www.homedepot.com/b/Outdoors-Garden-Center-Outdoor-Plants-Trees/Crape-Myrtle/N-5yc1vZc8rqZ1z0x48a",
+  "notes": "CRMMSA07G. Home Depot online price, Sep 15 2026. Price seen via site search results;. You quote 30-gal Crape Myrtle at $250-$400 plus ~$300 planting."
  },
  {
   "bucket": "materials",
@@ -157,7 +195,9 @@
   "unit": "each",
   "price": 69.98,
   "source": "Home Depot (Apopka)",
-  "notes": "Home Depot online price 2026-09-15 \u00b7 MAPRED05G \u00b7 You've quoted 30-gal Red Flame Maple at ~$300."
+  "category": "Trees",
+  "link": "https://www.homedepot.com/p/Red-Maple-Shade-Tree-MAPRED05G/315948272",
+  "notes": "MAPRED05G. Home Depot online price, Sep 15 2026. You quote 30-gal Red Flame Maple at ~$300."
  },
  {
   "bucket": "materials",
@@ -165,7 +205,9 @@
   "unit": "each",
   "price": 47.7,
   "source": "Home Depot (Apopka)",
-  "notes": "Home Depot online price 2026-09-15 \u00b7 CYPBAL05G \u00b7 You've quoted 45-gal Bald Cypress at ~$385."
+  "category": "Trees",
+  "link": "https://www.homedepot.com/p/Bald-Cypress-Shade-Tree-CYPBAL05G/315948264",
+  "notes": "CYPBAL05G. Home Depot online price, Sep 15 2026. You quote 45-gal Bald Cypress at ~$385."
  },
  {
   "bucket": "materials",
@@ -173,7 +215,9 @@
   "unit": "each",
   "price": 73.94,
   "source": "Home Depot (Apopka)",
-  "notes": "Home Depot online price 2026-09-15 \u00b7 ELMDRA05G"
+  "category": "Trees",
+  "link": "https://www.homedepot.com/p/5-Gal-Drake-Elm-Deciduous-Shade-Tree-ELMDRA05G/326575374",
+  "notes": "ELMDRA05G. Home Depot online price, Sep 15 2026"
  },
  {
   "bucket": "materials",
@@ -181,7 +225,9 @@
   "unit": "each",
   "price": 95.98,
   "source": "Home Depot (Apopka)",
-  "notes": "Home Depot online price 2026-09-15 \u00b7 ELMDRA07G"
+  "category": "Trees",
+  "link": "https://www.homedepot.com/p/7-Gal-Drake-Elm-Shade-Tree-ELMDRA07G/330185521",
+  "notes": "ELMDRA07G. Home Depot online price, Sep 15 2026"
  },
  {
   "bucket": "materials",
@@ -189,7 +235,9 @@
   "unit": "each",
   "price": 36.98,
   "source": "Home Depot (Apopka)",
-  "notes": "Home Depot online price 2026-09-15 \u00b7 Vigoro 11375 \u00b7 Sold as a shrub/privet, not a clipped single-trunk 'tree form' standard -- homedepot.com did not show a distinct tree-form SKU in this search."
+  "category": "Trees",
+  "link": "https://www.homedepot.com/p/Vigoro-2-5-Gal-Recurve-Ligustrum-Evergreen-Privet-Shrub-Dark-Green-Foliage-11375/330639233",
+  "notes": "Vigoro 11375. Home Depot online price, Sep 15 2026. Sold as a shrub/privet, not a clipped single-trunk 'tree form' standard -- homedepot.com did not show a distin\u2026"
  },
  {
   "bucket": "materials",
@@ -197,7 +245,9 @@
   "unit": "each",
   "price": 36.35,
   "source": "Home Depot (Apopka)",
-  "notes": "Home Depot online price 2026-09-15 \u00b7 Perfect Plants THD00053 \u00b7 Sold as a 2-pack for $72.69 total ($36.35/plant); shrub form."
+  "category": "Trees",
+  "link": "https://www.homedepot.com/p/Perfect-Plants-3-Gal-Wax-Ligustrum-Shrub-with-Wax-Leaf-Japanese-Privet-2-Pack-THD00053/312499589",
+  "notes": "Perfect Plants THD00053. Home Depot online price, Sep 15 2026. Sold as a 2-pack for $72.69 total ($36.35/plant);"
  },
  {
   "bucket": "materials",
@@ -205,7 +255,9 @@
   "unit": "each",
   "price": 70.7,
   "source": "Home Depot (Apopka)",
-  "notes": "Home Depot online price 2026-09-15 \u00b7 BronLo6x1 \u00b7 Small starter plant, not a standard nursery gallon size; no 3/7-gal loquat found on homedepot.com in this search."
+  "category": "Trees",
+  "link": "https://www.homedepot.com/p/Bronze-Loquat-Live-6-Inch-Plant-Eriobotrya-Japonica-Edible-Fruit-Bearing-Patio-Tree-BronLo6x1/333991813",
+  "notes": "BronLo6x1. Home Depot online price, Sep 15 2026. Small starter plant, not a standard nursery gallon size;"
  },
  {
   "bucket": "materials",
@@ -213,7 +265,9 @@
   "unit": "each",
   "price": 204.37,
   "source": "Home Depot (Apopka)",
-  "notes": "Home Depot online price 2026-09-15 \u00b7 Wekiva Foliage PinkTab3gx1"
+  "category": "Trees",
+  "link": "https://www.homedepot.com/p/Wekiva-Foliage-Pink-Tabebuia-Trumpet-Tree-Live-Plant-in-a-3-Gallon-Pot-Tabebuia-Heterophylla-Beautiful-Flowering-Tree-PinkTab3gx1/333992742",
+  "notes": "Wekiva Foliage PinkTab3gx1. Home Depot online price, Sep 15 2026"
  },
  {
   "bucket": "materials",
@@ -221,7 +275,9 @@
   "unit": "each",
   "price": 196.51,
   "source": "Home Depot (Apopka)",
-  "notes": "Home Depot online price 2026-09-15 \u00b7 Wekiva Foliage YellTabTr3gx1"
+  "category": "Trees",
+  "link": "https://www.homedepot.com/p/Wekiva-Foliage-Yellow-Tabebuia-Trumpet-Tree-Live-Plant-in-a-3-Gallon-Pot-Handroanthus-Chrysanthus-Beautiful-Flowering-Tree-YellTabTr3gx1/333992708",
+  "notes": "Wekiva Foliage YellTabTr3gx1. Home Depot online price, Sep 15 2026"
  },
  {
   "bucket": "materials",
@@ -229,7 +285,9 @@
   "unit": "each",
   "price": 38.46,
   "source": "Home Depot (Apopka)",
-  "notes": "Home Depot online price 2026-09-15 \u00b7 BOTRED01G"
+  "category": "Trees",
+  "link": "https://www.homedepot.com/p/1-Gal-Red-Flowering-Bottlebrush-Tree-BOTRED01G/329903650",
+  "notes": "BOTRED01G. Home Depot online price, Sep 15 2026"
  },
  {
   "bucket": "materials",
@@ -237,7 +295,9 @@
   "unit": "each",
   "price": 44.98,
   "source": "Home Depot (Apopka)",
-  "notes": "Home Depot online price 2026-09-15 \u00b7 BIRDUR01G"
+  "category": "Trees",
+  "link": "https://www.homedepot.com/p/1-Gal-River-Birch-Multi-Trunk-Shade-Tree-BIRDUR01G/313020338",
+  "notes": "BIRDUR01G. Home Depot online price, Sep 15 2026"
  },
  {
   "bucket": "materials",
@@ -245,7 +305,9 @@
   "unit": "each",
   "price": 38.76,
   "source": "Home Depot (Apopka)",
-  "notes": "Home Depot online price 2026-09-15 \u00b7 FLOWERWOOD 04503FL"
+  "category": "Trees",
+  "link": "https://www.homedepot.com/p/FLOWERWOOD-2-5-Gal-River-Birch-Deciduous-Tree-04503FL/318306295",
+  "notes": "FLOWERWOOD 04503FL. Home Depot online price, Sep 15 2026"
  },
  {
   "bucket": "materials",
@@ -253,7 +315,9 @@
   "unit": "each",
   "price": 82.99,
   "source": "Home Depot (Apopka)",
-  "notes": "Home Depot online price 2026-09-15 \u00b7 BIRDHT05G"
+  "category": "Trees",
+  "link": "https://www.homedepot.com/p/5-Gal-River-Birch-Shade-Tree-Multi-Stem-BIRDHT05G/313396790",
+  "notes": "BIRDHT05G. Home Depot online price, Sep 15 2026"
  },
  {
   "bucket": "materials",
@@ -261,7 +325,9 @@
   "unit": "each",
   "price": 84.62,
   "source": "Home Depot (Apopka)",
-  "notes": "Home Depot online price 2026-09-15 \u00b7 HOLEAG07G \u00b7 3-gal size (HOLEAG03G) also sold on homedepot.com; price not returned in this search. \u00b7 You've quoted 30-gal Dahoon Holly at ~$300 plus ~$350 planting."
+  "category": "Trees",
+  "link": "https://www.homedepot.com/p/7-Gal-Eagleston-Holly-Evergreen-Tree-HOLEAG07G/329903643",
+  "notes": "HOLEAG07G. Home Depot online price, Sep 15 2026. 3-gal size (HOLEAG03G) also sold on homedepot.com;. You quote 30-gal Dahoon Holly at ~$300 plus ~$350 planting."
  },
  {
   "bucket": "materials",
@@ -269,7 +335,9 @@
   "unit": "each",
   "price": 44.98,
   "source": "Home Depot (Apopka)",
-  "notes": "Home Depot online price 2026-09-15 \u00b7 HOLDAH01G \u00b7 5-gal size (HOLDAH05G, Ilex cassine) also listed on homedepot.com; price not returned in search results."
+  "category": "Trees",
+  "link": "https://www.homedepot.com/p/1-Gal-Dahoon-Holly-Evergreen-Tree-HOLDAH01G/315948341",
+  "notes": "HOLDAH01G. Home Depot online price, Sep 15 2026. 5-gal size (HOLDAH05G, Ilex cassine) also listed on homedepot.com;. You quote 30-gal Dahoon Holly at ~$300 plus ~$350 planting."
  },
  {
   "bucket": "materials",
@@ -277,7 +345,9 @@
   "unit": "each",
   "price": 87.29,
   "source": "Home Depot (Apopka)",
-  "notes": "Home Depot online price 2026-09-15 \u00b7 WILWEE05G"
+  "category": "Trees",
+  "link": "https://www.homedepot.com/p/5-Gal-Weeping-Willow-Shade-Tree-WILWEE05G/313397447",
+  "notes": "WILWEE05G. Home Depot online price, Sep 15 2026"
  },
  {
   "bucket": "materials",
@@ -285,7 +355,9 @@
   "unit": "each",
   "price": 32.97,
   "source": "Home Depot (Apopka)",
-  "notes": "Home Depot online price 2026-09-15 \u00b7 BELL NURSERY LEMON1MEY1PK \u00b7 3-gal Meyer Lemon (CIIM03, semi-dwarf) also listed on homedepot.com but price not returned in search."
+  "category": "Trees",
+  "link": "https://www.homedepot.com/p/BELL-NURSERY-1-Gal-Improved-Meyer-Lemon-Tree-Live-Tropical-Tree-with-White-Flower-to-Yellow-Fruit-1-Pack-LEMON1MEY1PK/317131070",
+  "notes": "BELL NURSERY LEMON1MEY1PK. Home Depot online price, Sep 15 2026. 3-gal Meyer Lemon (CIIM03, semi-dwarf) also listed on homedepot.com but price not returned in search."
  },
  {
   "bucket": "materials",
@@ -293,7 +365,9 @@
   "unit": "each",
   "price": 220.06,
   "source": "Home Depot (Apopka)",
-  "notes": "Home Depot online price 2026-09-15 \u00b7 Wekiva Foliage CalaOra3x1g \u00b7 Price is for a bundle of 3 plants (~$73.35/plant); Florida-only item, cannot ship out of state."
+  "category": "Trees",
+  "link": "https://www.homedepot.com/p/Wekiva-Foliage-Calamondin-Orange-Tree-Calamansi-3-Live-Plants-in-1-Gallon-Pots-Cannot-Ship-Out-of-Florida-Fruit-Tree-CalaOra3x1g/334095932",
+  "notes": "Wekiva Foliage CalaOra3x1g. Home Depot online price, Sep 15 2026. Price is for a bundle of 3 plants (~$73.35/plant);"
  },
  {
   "bucket": "materials",
@@ -301,7 +375,9 @@
   "unit": "bag",
   "price": 3.33,
   "source": "Home Depot (Apopka)",
-  "notes": "Home Depot online price 2026-09-15 \u00b7 Vigoro 52050196 \u00b7 Brown; sale price (reg. ~$3.67). Also sold in Black (52050197) and Red (480978/52050195) -- per-bag price not directly confirmed for those colors; a pallet of 70 bags runs $609.98-$799.00 depending on color (~$8.71-$11.41/bag equivalent). \u00b7 You've quoted pine bark mulch at ~$100/yard and chocolate mulch at ~$116/yard installed."
+  "category": "Mulch & pine straw",
+  "link": "https://www.homedepot.com/p/Vigoro-Vigoro-2-cu-ft-Premium-Brown-Wood-Shredded-Bagged-Mulch-52050196/205606287",
+  "notes": "Vigoro 52050196. Home Depot online price, Sep 15 2026. Brown;. You quote pine bark mulch at ~$100/yard installed."
  },
  {
   "bucket": "materials",
@@ -309,7 +385,9 @@
   "unit": "bale",
   "price": 39.99,
   "source": "Home Depot (Apopka)",
-  "notes": "Home Depot online price 2026-09-15 \u00b7 FLOWERWOOD Fert-008"
+  "category": "Mulch & pine straw",
+  "link": "https://www.homedepot.com/p/FLOWERWOOD-Long-Leaf-Pine-Straw-Bale-Fert-008/335540649",
+  "notes": "FLOWERWOOD Fert-008. Home Depot online price, Sep 15 2026"
  },
  {
   "bucket": "materials",
@@ -317,7 +395,9 @@
   "unit": "bale",
   "price": 44.16,
   "source": "Home Depot (Apopka)",
-  "notes": "Home Depot online price 2026-09-15 \u00b7 national PLANT NETWORK HD1379"
+  "category": "Mulch & pine straw",
+  "link": "https://www.homedepot.com/p/national-PLANT-NETWORK-Long-Leaf-Pine-Straw-Bale-HD1379/320898206",
+  "notes": "national PLANT NETWORK HD1379. Home Depot online price, Sep 15 2026"
  },
  {
   "bucket": "materials",
@@ -325,7 +405,9 @@
   "unit": "bag",
   "price": 31.48,
   "source": "Home Depot (Apopka)",
-  "notes": "Home Depot online price 2026-09-15 \u00b7 Head River Organics HRGS-1.5"
+  "category": "Soil & amendments",
+  "link": "https://www.homedepot.com/p/Head-River-Organics-1-5-cu-ft-38-5-Qts-Organic-Garden-Soil-HRGS-1-5/313327391",
+  "notes": "Head River Organics HRGS-1.5. Home Depot online price, Sep 15 2026"
  },
  {
   "bucket": "materials",
@@ -333,7 +415,9 @@
   "unit": "bag",
   "price": 7.97,
   "source": "Home Depot (Apopka)",
-  "notes": "Home Depot online price 2026-09-15 \u00b7 Vigoro 74177925 \u00b7 Closest confirmed price; requested 2 cu ft size (Miracle-Gro 75552304 / 76253300) listings exist on homedepot.com but price was not returned in search."
+  "category": "Soil & amendments",
+  "link": "https://www.homedepot.com/p/Vigoro-32-qt-Potting-Soil-Mix-74177925/305731376",
+  "notes": "Vigoro 74177925. Home Depot online price, Sep 15 2026. Closest confirmed price;"
  },
  {
   "bucket": "materials",
@@ -341,7 +425,9 @@
   "unit": "pallet",
   "price": 519.99,
   "source": "Home Depot (Apopka)",
-  "notes": "Home Depot online price 2026-09-15 \u00b7 Harmony HH400SA1 \u00b7 Per-piece (2.66 sq ft slab) pricing also sold on homedepot.com (Harmony STAUG2.6SF) but price not returned in search. \u00b7 You've quoted St. Augustine pallets at $400-$1,500 installed."
+  "category": "Sod",
+  "link": "https://www.homedepot.com/p/Harmony-400-sq-ft-St-Augustine-Sod-1-Pallet-HH400SA1/331567534",
+  "notes": "Harmony HH400SA1. Home Depot online price, Sep 15 2026. Per-piece (2.66 sq ft slab) pricing also sold on homedepot.com (Harmony STAUG2.6SF) but price not returned in\u2026. You quote St. Augustine pallets at $400-$1,500 installed."
  },
  {
   "bucket": "materials",
@@ -349,7 +435,9 @@
   "unit": "bag",
   "price": 24.57,
   "source": "Home Depot (Apopka)",
-  "notes": "Home Depot online price 2026-09-15 \u00b7 Milorganite 100539618 \u00b7 6-4-0 analysis; covers 2,500 sq ft. Pallet of 63 bags also available, seen ~$1,506-$1,537."
+  "category": "Fertilizer",
+  "link": "https://www.homedepot.com/p/Milorganite-32-lbs-Slow-Release-Nitrogen-Fertilizer-100539618/308888983",
+  "notes": "Milorganite 100539618. Home Depot online price, Sep 15 2026. 6-4-0 analysis;"
  },
  {
   "bucket": "materials",
@@ -357,7 +445,9 @@
   "unit": "bag",
   "price": 10.97,
   "source": "Home Depot (Apopka)",
-  "notes": "Home Depot online price 2026-09-15 \u00b7 Vigoro 134242"
+  "category": "Fertilizer",
+  "link": "https://www.homedepot.com/p/Vigoro-3-5-lb-All-Season-Palm-Ixora-and-Ornamental-Plant-Food-8-4-8-134242/203106249",
+  "notes": "Vigoro 134242. Home Depot online price, Sep 15 2026"
  },
  {
   "bucket": "materials",
@@ -365,7 +455,9 @@
   "unit": "each",
   "price": 27.69,
   "source": "Home Depot (Apopka)",
-  "notes": "Home Depot online price 2026-09-15 \u00b7 King Innovation 44020E"
+  "category": "Tree care supplies",
+  "link": "https://www.homedepot.com/p/King-Innovation-15-Gal-Tree-Irrigation-Watering-Bag-1-Pack-44020E/312196744",
+  "notes": "King Innovation 44020E. Home Depot online price, Sep 15 2026"
  },
  {
   "bucket": "materials",
@@ -373,7 +465,9 @@
   "unit": "roll",
   "price": 55.28,
   "source": "Home Depot (Apopka)",
-  "notes": "Home Depot online price 2026-09-15 \u00b7 AG-03100H50 \u00b7 Heavy-duty grade; lighter-duty/smaller rolls also sold starting around $19.97-$29.97."
+  "category": "Tree care supplies",
+  "link": "https://www.homedepot.com/p/3-ft-x-100-ft-Heavy-Duty-Weed-Barrier-Landscape-Fabric-for-Outdoor-Garden-Weed-Control-Fabric-in-Rolls-AG-03100H50/318324063",
+  "notes": "AG-03100H50. Home Depot online price, Sep 15 2026. Heavy-duty grade;"
  },
  {
   "bucket": "materials",
@@ -381,7 +475,9 @@
   "unit": "roll",
   "price": 75.99,
   "source": "Home Depot (Apopka)",
-  "notes": "Home Depot online price 2026-09-15 \u00b7 Century Products RS24-25 \u00b7 Other widths/lengths available (1 ft x 25 ft $48.39; 1.5 ft x 50 ft $99.45; 2.5 ft x 25 ft $106.27). \u00b7 You've quoted root barrier installs at $75-$1,538."
+  "category": "Tree care supplies",
+  "link": "https://www.homedepot.com/p/Century-Products-2-ft-x-25-ft-Root-Shield-Water-Barrier-60-mil-RS24-25/306900401",
+  "notes": "Century Products RS24-25. Home Depot online price, Sep 15 2026. Other widths/lengths available (1 ft x 25 ft $48.39;. You quote root barrier installs at $75-$1,538."
  },
  {
   "bucket": "materials",
@@ -389,7 +485,9 @@
   "unit": "bag",
   "price": 5.97,
   "source": "Home Depot (Apopka)",
-  "notes": "Home Depot online price 2026-09-15 \u00b7 Bulk discount to $5.37/bag at 64+ units."
+  "category": "Hardscape",
+  "link": "https://www.homedepot.com/p/314096667",
+  "notes": "Home Depot online price, Sep 15 2026. Bulk discount to $5.37/bag at 64+ units."
  },
  {
   "bucket": "materials",
@@ -397,7 +495,9 @@
   "unit": "bag",
   "price": 5.97,
   "source": "Home Depot (Apopka)",
-  "notes": "Home Depot online price 2026-09-15 \u00b7 Pavestone 98001 \u00b7 Bulk discount to $5.37/bag at 56+ units. Matching Paver Sand (Pavestone 98000) also sold; price not confirmed in this search."
+  "category": "Hardscape",
+  "link": "https://www.homedepot.com/p/Pavestone-52-86-lb-0-5-cu-ft-Paver-Base-98001/100580973",
+  "notes": "Pavestone 98001. Home Depot online price, Sep 15 2026. Bulk discount to $5.37/bag at 56+ units."
  },
  {
   "bucket": "materials",
@@ -405,7 +505,9 @@
   "unit": "bag",
   "price": 6.47,
   "source": "Home Depot (Apopka)",
-  "notes": "Home Depot online price 2026-09-15 \u00b7 Quikrete 110180"
+  "category": "Hardscape",
+  "link": "https://www.homedepot.com/p/Quikrete-80-lb-Concrete-Mix-110180/100318511",
+  "notes": "Quikrete 110180. Home Depot online price, Sep 15 2026"
  },
  {
   "bucket": "materials",
@@ -413,7 +515,9 @@
   "unit": "each",
   "price": 68.0,
   "source": "Home Depot (Apopka)",
-  "notes": "Home Depot online price 2026-09-15 \u00b7 BestPLUS 040408BN \u00b7 Sold 2-per-box for $136.00 total; price shown here is per-timber. Traditional pressure-treated wood 4x6x8 landscape timber also sold on homedepot.com but price not returned in search."
+  "category": "Hardscape",
+  "link": "https://www.homedepot.com/p/BestPLUS-4-in-x-4-in-x-8-ft-Brown-Recycled-Plastic-Lumber-Landscape-Timber-Edging-G-Grade-2-Per-Box-040408BN/333651645",
+  "notes": "BestPLUS 040408BN. Home Depot online price, Sep 15 2026. Sold 2-per-box for $136.00 total;"
  },
  {
   "bucket": "materials",
@@ -421,7 +525,9 @@
   "unit": "bag",
   "price": 2.37,
   "source": "Home Depot (Apopka)",
-  "notes": "Home Depot online price 2026-09-15 \u00b7 Starting price cited by search ('starts at $2.37/bag,' bulk to $2.13 at 126+); exact bag size and SKU not confirmed -- verify on category page."
+  "category": "Hardscape",
+  "link": "https://www.homedepot.com/b/Outdoors-Garden-Center-Landscaping-Supplies/Limestone/N-5yc1vZbx51Z1z13gsz",
+  "notes": "Home Depot online price, Sep 15 2026. Starting price cited by search ('starts at $2.37/bag,' bulk to $2.13 at 126+);"
  },
  {
   "bucket": "materials",
@@ -429,7 +535,9 @@
   "unit": "each",
   "price": 5.47,
   "source": "Home Depot (Apopka)",
-  "notes": "Home Depot online price 2026-09-15 \u00b7 Rain Bird 1804AP8 \u00b7 Body-only spray head; similar model 1804APPR25 seen at $8.97."
+  "category": "Irrigation",
+  "link": "https://www.homedepot.com/p/Rain-Bird-Adjustable-Pattern-4-in-Pop-Up-Spray-Head-1804AP-25/100167622",
+  "notes": "Rain Bird 1804AP8. Home Depot online price, Sep 15 2026. Body-only spray head;"
  },
  {
   "bucket": "materials",
@@ -437,7 +545,9 @@
   "unit": "each",
   "price": 16.47,
   "source": "Home Depot (Apopka)",
-  "notes": "Home Depot online price 2026-09-15 \u00b7 Rain Bird CP 5000 NP \u00b7 Current HD lineup shows this as '5000 Series' (CP 5000 NP); a 12-pack of classic 5004-nozzle-tree rotors is also sold, unit price not isolated."
+  "category": "Irrigation",
+  "link": "https://www.homedepot.com/p/Rain-Bird-5000-Series-4-in-Pop-Up-Gear-Drive-Rotor-Non-potable-Sprinkler-with-Purple-Cap-40-360-Degree-Pattern-Adj-26-38-ft-CP-5000-NP/311571006",
+  "notes": "Rain Bird CP 5000 NP. Home Depot online price, Sep 15 2026. Current HD lineup shows this as '5000 Series' (CP 5000 NP);"
  },
  {
   "bucket": "materials",
@@ -445,7 +555,9 @@
   "unit": "each",
   "price": 3.58,
   "source": "Home Depot (Apopka)",
-  "notes": "Home Depot online price 2026-09-15 \u00b7 Orbit 54520 \u00b7 Brass half-pattern twin-spray nozzle version; 2-in short-pop version (54524) seen at $2.99, pressure-regulated 12-in version (80310) at $11.15."
+  "category": "Irrigation",
+  "link": "https://www.homedepot.com/p/Orbit-4-in-Professional-Pop-Up-Spray-Head-Sprinkler-with-Brass-Half-Pattern-Twin-Spray-Nozzle-54520/311928609",
+  "notes": "Orbit 54520. Home Depot online price, Sep 15 2026. Brass half-pattern twin-spray nozzle version;"
  },
  {
   "bucket": "materials",
@@ -453,7 +565,9 @@
   "unit": "each",
   "price": 13.47,
   "source": "Home Depot (Apopka)",
-  "notes": "Home Depot online price 2026-09-15 \u00b7 Hunter Industries PGP-ADJ \u00b7 3 GPM nozzle version; some search results showed ~$10.98 for what may be the same or a similar SKU -- price can vary."
+  "category": "Irrigation",
+  "link": "https://www.homedepot.com/p/Hunter-Industries-Pop-Up-Rotary-PGP-Gear-Drive-Rotor-Sprinkler-with-3-Gallon-Per-Minute-Nozzle-PGP-ADJ/202067943",
+  "notes": "Hunter Industries PGP-ADJ. Home Depot online price, Sep 15 2026. 3 GPM nozzle version;"
  },
  {
   "bucket": "materials",
@@ -461,7 +575,9 @@
   "unit": "each",
   "price": 2.98,
   "source": "Home Depot (Apopka)",
-  "notes": "Home Depot online price 2026-09-15 \u00b7 Rain Bird 15AP \u00b7 High-efficiency HE-VAN nozzles (6-8 ft radius) also sold, seen at $4.28 each."
+  "category": "Irrigation",
+  "link": "https://www.homedepot.com/p/Rain-Bird-12-ft-to-15-ft-Adjustable-Spray-Pattern-Nozzle-15AP/100185989",
+  "notes": "Rain Bird 15AP. Home Depot online price, Sep 15 2026. High-efficiency HE-VAN nozzles (6-8 ft radius) also sold, seen at $4.28 each."
  },
  {
   "bucket": "materials",
@@ -469,7 +585,9 @@
   "unit": "each",
   "price": 9.82,
   "source": "Home Depot (Apopka)",
-  "notes": "Home Depot online price 2026-09-15 \u00b7 Charlotte Pipe PVC040100600RS \u00b7 ~98 cents/ft; bulk discount at 10+ sticks. Source is the 10-ft PVC pipe category listing -- specific product-page URL for this exact SKU not isolated during search."
+  "category": "Irrigation",
+  "link": "https://www.homedepot.com/b/Plumbing-Pipe-Fittings-Pipe-PVC-Pipe-PVC-Schedule-40-Pipe/10-ft/N-5yc1vZbueoZ1z116t7",
+  "notes": "Charlotte Pipe PVC040100600RS. Home Depot online price, Sep 15 2026. ~98 cents/ft;"
  },
  {
   "bucket": "materials",
@@ -477,7 +595,9 @@
   "unit": "each",
   "price": 6.54,
   "source": "Home Depot (Apopka)",
-  "notes": "Home Depot online price 2026-09-15 \u00b7 Charlotte Pipe PVC 04007 0600 \u00b7 ~65 cents/ft; bulk discount to $5.23 at 10+ sticks."
+  "category": "Irrigation",
+  "link": "https://www.homedepot.com/p/Charlotte-Pipe-3-4-in-x-10-ft-PVC-Schedule-40-Pressure-Plain-End-Pipe-PVC-04007-0600/100348472",
+  "notes": "Charlotte Pipe PVC 04007 0600. Home Depot online price, Sep 15 2026. ~65 cents/ft;"
  },
  {
   "bucket": "materials",
@@ -485,7 +605,9 @@
   "unit": "each",
   "price": 0.83,
   "source": "Home Depot (Apopka)",
-  "notes": "Home Depot online price 2026-09-15 \u00b7 406-010-50-P \u00b7 Sold as a 50-pack for $41.38 total; unit price shown here is per-fitting. Individual single-unit elbows (e.g. Charlotte Pipe PVC023001000HD) also sold but price not confirmed."
+  "category": "Irrigation",
+  "link": "https://www.homedepot.com/p/1-in-Schedule-40-PVC-Pipe-90-Degree-Slip-x-Slip-Elbow-Fitting-50-Pack-406-010-50-P/323907760",
+  "notes": "406-010-50-P. Home Depot online price, Sep 15 2026. Sold as a 50-pack for $41.38 total;"
  },
  {
   "bucket": "materials",
@@ -493,7 +615,9 @@
   "unit": "each",
   "price": 14.55,
   "source": "Home Depot (Apopka)",
-  "notes": "Home Depot online price 2026-09-15 \u00b7 Oatey 302312 \u00b7 Purple primer + medium blue Rain-R-Shine cement combo pack."
+  "category": "Irrigation",
+  "link": "https://www.homedepot.com/p/Oatey-8-oz-Purple-Primer-and-Rain-R-Shine-Medium-Blue-PVC-Cement-Combo-Pack-302312/311021162",
+  "notes": "Oatey 302312. Home Depot online price, Sep 15 2026. Purple primer + medium blue Rain-R-Shine cement combo pack."
  },
  {
   "bucket": "materials",
@@ -501,7 +625,9 @@
   "unit": "each",
   "price": 31.72,
   "source": "Home Depot (Apopka)",
-  "notes": "Home Depot online price 2026-09-15 \u00b7 Rain Bird DASASVF100 \u00b7 With flow control."
+  "category": "Irrigation",
+  "link": "https://www.homedepot.com/p/Rain-Bird-1-in-Anti-Siphon-Irrigation-Valve-With-Flow-Control-DASASVF100/100034016",
+  "notes": "Rain Bird DASASVF100. Home Depot online price, Sep 15 2026. With flow control."
  },
  {
   "bucket": "materials",
@@ -509,7 +635,9 @@
   "unit": "each",
   "price": 161.95,
   "source": "Home Depot (Apopka)",
-  "notes": "Home Depot online price 2026-09-15 \u00b7 Febco 765EBV-FZ 1 R \u00b7 Bronze, with freeze sensor and quarter-turn shutoff/tee handles. Smaller 3/4-in Febco models seen $120-$269; a basic Toro 1-in PVB (53300) also sold, price not returned."
+  "category": "Irrigation",
+  "link": "https://www.homedepot.com/p/Febco-1-in-Bronze-Pressure-Vacuum-Breaker-Backflow-Preventer-with-Quarter-Turn-Shutoff-and-Tee-Handles-Freeze-Sensor-765EBV-FZ-1-R/327914210",
+  "notes": "Febco 765EBV-FZ 1 R. Home Depot online price, Sep 15 2026. Bronze, with freeze sensor and quarter-turn shutoff/tee handles."
  },
  {
   "bucket": "materials",
@@ -517,6 +645,8 @@
   "unit": "roll",
   "price": 14.62,
   "source": "Home Depot (Apopka)",
-  "notes": "Home Depot online price 2026-09-15 \u00b7 Rain Bird T63-100S \u00b7 Comparable options: DIG poly tubing ~$12.53, Orbit ~$16.64, Toro Blue Stripe ~$26.99 (100 ft each)."
+  "category": "Irrigation",
+  "link": "https://www.homedepot.com/p/Rain-Bird-1-2-in-x-100-ft-Distribution-Tubing-for-Drip-Irrigation-T63-100S/202078376",
+  "notes": "Rain Bird T63-100S. Home Depot online price, Sep 15 2026. Comparable options: DIG poly tubing ~$12.53, Orbit ~$16.64, Toro Blue Stripe ~$26.99 (100 ft each)."
  }
 ]

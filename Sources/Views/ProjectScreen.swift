@@ -50,8 +50,14 @@ private struct ProjectEditor: View {
                                 Text("No \(bucket.title.lowercased()) rows on this project.")
                                     .foregroundStyle(.secondary)
                             }
-                            ForEach(lines) { line in
-                                ProjectLineRow(line: line, billableHours: billableHours)
+                            let groups = ProjectText.grouped(lines)
+                            ForEach(groups, id: \.title) { group in
+                                if groups.count > 1 {
+                                    Text(group.title).font(.caption).foregroundStyle(.secondary)
+                                }
+                                ForEach(group.lines) { line in
+                                    ProjectLineRow(line: line, billableHours: billableHours)
+                                }
                             }
                         } label: {
                             HStack {
@@ -294,6 +300,18 @@ enum ProjectMultiplier: Int, CaseIterable, Identifiable {
 
 /// The two pasteboard texts (DECISIONS 41) and the header's read-only formats.
 enum ProjectText {
+    struct LineGroup { var title: String; var lines: [ProjectLine] }
+
+    /// Lines grouped by their row's category (DECISIONS 57); uncategorised rows last under "Other".
+    static func grouped(_ lines: [ProjectLine]) -> [LineGroup] {
+        let keyed = Dictionary(grouping: lines) { $0.item?.category?.trimmingCharacters(in: .whitespaces) ?? "" }
+        let titles = keyed.keys.sorted { a, b in
+            if a.isEmpty != b.isEmpty { return b.isEmpty }
+            return a.localizedStandardCompare(b) == .orderedAscending
+        }
+        return titles.map { LineGroup(title: $0.isEmpty ? "Other" : $0, lines: keyed[$0] ?? []) }
+    }
+
     static let hoursMaximum = Decimal(string: "99999.99")!
     static let qtyMaximum = Decimal(string: "999999.99")!
 

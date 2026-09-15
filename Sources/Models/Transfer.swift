@@ -16,6 +16,8 @@ struct TransferDocument: Codable, Equatable {
         var notes: String?
         var calcInputs: JSONValue?
         var sortOrder: Int
+        var category: String?
+        var link: String?
     }
 
     struct Line: Codable, Equatable {
@@ -106,7 +108,7 @@ enum TransferError: Error, Equatable, LocalizedError {
 enum Transfer {
     static func encoder() -> JSONEncoder {
         let e = JSONEncoder()
-        e.outputFormatting = [.prettyPrinted, .sortedKeys]
+        e.outputFormatting = [.prettyPrinted, .sortedKeys, .withoutEscapingSlashes]
         e.dateEncodingStrategy = .iso8601
         return e
     }
@@ -132,7 +134,8 @@ enum Transfer {
                             costOfMoneyPct: settings.costOfMoneyPct),
             items: items.map { i in
                 .init(bucket: i.bucket, name: i.name, rateCents: i.rateCents, unit: i.unit, isActive: i.isActive,
-                      source: i.source, notes: i.notes, calcInputs: i.calcInputs.flatMap(JSONValue.from), sortOrder: i.sortOrder)
+                      source: i.source, notes: i.notes, calcInputs: i.calcInputs.flatMap(JSONValue.from), sortOrder: i.sortOrder,
+                      category: i.category, link: i.link)
             },
             projects: projects.map { p in
                 .init(name: p.name, client: p.client, date: p.date, hours: p.hours, multiplier: p.multiplier,
@@ -168,7 +171,8 @@ enum Transfer {
 
         let items = doc.items.map { i in
             BucketItem(bucket: i.bucket, name: i.name, rateCents: i.rateCents, unit: i.unit, isActive: i.isActive,
-                       source: i.source, notes: i.notes, calcInputs: i.calcInputs?.data, sortOrder: i.sortOrder)
+                       source: i.source, notes: i.notes, category: i.category, link: i.link,
+                       calcInputs: i.calcInputs?.data, sortOrder: i.sortOrder)
         }
         items.forEach(context.insert)
         for p in doc.projects {
@@ -215,19 +219,23 @@ enum Transfer {
                 let calc = i.calcInputs?.data
                 let sameCalc = i.calcInputs == nil || match.calcInputs.flatMap(JSONValue.from) == i.calcInputs
                 let same = match.rateCents == i.rateCents && match.unit == unit && match.source == (i.source ?? match.source)
-                    && match.notes == (i.notes ?? match.notes) && sameCalc
+                    && match.notes == (i.notes ?? match.notes) && match.category == (i.category ?? match.category)
+                    && match.link == (i.link ?? match.link) && sameCalc
                 if same { result.unchanged += 1; continue }
                 match.rateCents = i.rateCents
                 match.unit = unit
                 if let source = i.source { match.source = source }
                 if let notes = i.notes { match.notes = notes }
+                if let category = i.category { match.category = category }
+                if let link = i.link { match.link = link }
                 if let calc { match.calcInputs = calc }
                 result.updated += 1
                 continue
             }
             let order = (existing.filter { $0.bucket == i.bucket }.map(\.sortOrder).max() ?? -1) + 1
             let item = BucketItem(bucket: i.bucket, name: i.name, rateCents: i.rateCents, unit: i.unit, isActive: i.isActive,
-                                  source: i.source, notes: i.notes, calcInputs: i.calcInputs?.data, sortOrder: order)
+                                  source: i.source, notes: i.notes, category: i.category, link: i.link,
+                                  calcInputs: i.calcInputs?.data, sortOrder: order)
             context.insert(item)
             existing.append(item)
             result.added += 1
