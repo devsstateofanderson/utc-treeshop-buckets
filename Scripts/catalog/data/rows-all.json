@@ -1,0 +1,968 @@
+[
+ {
+  "bucket": "equipment",
+  "name": "Stihl 500i",
+  "unit": "hr",
+  "price": 1759.99,
+  "salvage": 176,
+  "life_h": 2000,
+  "annual_h": 300,
+  "fuel_oil_per_h": 4.5,
+  "repair_factor": 2.5,
+  "insurance_per_yr": 0,
+  "cost_of_money_pct": 0,
+  "source": "STIHL dealer",
+  "notes": "Unit 1 \u00b7 S/N ________ \u00b7 MS 500i, 79.2cc EFI, 18in bar, 33 RS chain. Price $1,759.99 stihlusa.com 2026-09-15. Life 2,000 h, repair factor 2.50 (BRIEF \u00a72.2 saws), ~300 h/yr per saw, fuel+oil ~$4.50/hr (pump gas + HP Ultra + bar oil at mixed duty; MotoMix would be ~$10/hr). Adjust and press Calculate\u2026"
+ },
+ {
+  "bucket": "equipment",
+  "name": "Stihl 500i #2",
+  "unit": "hr",
+  "price": 1759.99,
+  "salvage": 176,
+  "life_h": 2000,
+  "annual_h": 300,
+  "fuel_oil_per_h": 4.5,
+  "repair_factor": 2.5,
+  "insurance_per_yr": 0,
+  "cost_of_money_pct": 0,
+  "source": "STIHL dealer",
+  "notes": "Unit 2 \u00b7 S/N ________ \u00b7 same inputs as Unit 1."
+ },
+ {
+  "bucket": "equipment",
+  "name": "Stihl 500i #3",
+  "unit": "hr",
+  "price": 1759.99,
+  "salvage": 176,
+  "life_h": 2000,
+  "annual_h": 300,
+  "fuel_oil_per_h": 4.5,
+  "repair_factor": 2.5,
+  "insurance_per_yr": 0,
+  "cost_of_money_pct": 0,
+  "source": "STIHL dealer",
+  "notes": "Unit 3 \u00b7 S/N ________ \u00b7 same inputs as Unit 1."
+ },
+ {
+  "bucket": "equipment",
+  "name": "Stihl 201T",
+  "unit": "hr",
+  "price": 984.99,
+  "salvage": 98,
+  "life_h": 2000,
+  "annual_h": 300,
+  "fuel_oil_per_h": 2.0,
+  "repair_factor": 2.5,
+  "insurance_per_yr": 0,
+  "cost_of_money_pct": 0,
+  "source": "STIHL dealer",
+  "notes": "Unit __ \u00b7 S/N ________ \u00b7 MS 201 T C-M, 35.2cc M-Tronic, 12-16in bar, 3/8 PICCO PM3. Dealer price $969.99-$999.99, 2026-09-15. Top-handle fuel+oil ~$2/hr (0.15-0.25 gal/hr at load)."
+ },
+ {
+  "bucket": "equipment",
+  "name": "Stihl 193",
+  "unit": "hr",
+  "price": 399.95,
+  "salvage": 40,
+  "life_h": 2000,
+  "annual_h": 300,
+  "fuel_oil_per_h": 2.0,
+  "repair_factor": 2.5,
+  "insurance_per_yr": 0,
+  "cost_of_money_pct": 0,
+  "source": "STIHL dealer",
+  "notes": "Unit __ \u00b7 S/N ________ \u00b7 MS 193 T, 30.1cc, 14in bar, 3/8 PICCO. Dealer price $399.95, 2026-09-15 (being superseded by MS 194 T). Under $1,000: BRIEF \u00a72.2 would put it in overhead as a small-tools budget; kept here because you listed it."
+ },
+ {
+  "bucket": "equipment",
+  "name": "Stihl 194T",
+  "unit": "hr",
+  "price": 499.99,
+  "salvage": 50,
+  "life_h": 2000,
+  "annual_h": 300,
+  "fuel_oil_per_h": 2.0,
+  "repair_factor": 2.5,
+  "insurance_per_yr": 0,
+  "cost_of_money_pct": 0,
+  "source": "STIHL dealer",
+  "notes": "Unit __ \u00b7 S/N ________ \u00b7 MS 194 T, 31.8cc, 14-16in bar, 3/8 PICCO. Dealer price $499.99, 2026-09-15. Archive this row if you don't own one."
+ },
+ {
+  "bucket": "equipment",
+  "name": "Milwaukee Pole Saw",
+  "unit": "hr",
+  "price": 429.0,
+  "salvage": 40,
+  "life_h": 1500,
+  "annual_h": 200,
+  "fuel_oil_per_h": 0.4,
+  "repair_factor": 1.0,
+  "insurance_per_yr": 0,
+  "cost_of_money_pct": 0,
+  "source": "Milwaukee",
+  "notes": "Unit __ \u00b7 S/N ________ \u00b7 M18 FUEL 10in pole saw kit 3016-21PS (replaces 2825-21PS): XC8.0 battery, rapid charger, 3ft extension, ~13ft reach. $429 retail 2026-09-15. Bar oil only (~$0.40/hr); repair factor 1.00 covers chains, bars and a battery over its life."
+ },
+ {
+  "bucket": "equipment",
+  "name": "Milwaukee Telescoping Pole Saw",
+  "unit": "hr",
+  "price": 799.0,
+  "salvage": 80,
+  "life_h": 1500,
+  "annual_h": 200,
+  "fuel_oil_per_h": 0.4,
+  "repair_factor": 1.0,
+  "insurance_per_yr": 0,
+  "cost_of_money_pct": 0,
+  "source": "Milwaukee",
+  "notes": "Unit __ \u00b7 S/N ________ \u00b7 M18 FUEL telescoping pole saw kit 3013-21, 9-13ft, 9in cut. $799 retail 2026-09-15. Archive if you don't own one."
+ },
+ {
+  "bucket": "equipment",
+  "name": "Toro Mini Skid",
+  "unit": "hr",
+  "price": 32400.5,
+  "salvage": 8100,
+  "life_h": 7500,
+  "annual_h": 500,
+  "fuel_oil_per_h": 3.75,
+  "repair_factor": 0.8,
+  "insurance_per_yr": 600,
+  "cost_of_money_pct": 0,
+  "source": "Toro dealer",
+  "notes": "Unit __ \u00b7 S/N ________ \u00b7 Toro Dingo TX 427 (Kohler gas, $31,825) / TX 525 (Kubota diesel, $32,976), midpoint 2026-09-15. Life 7,500 h and repair 0.80 per BRIEF \u00a72.2; ~500 h/yr; fuel ~1 gal/hr; insurance $600/yr estimate. Replace price with what you paid."
+ },
+ {
+  "bucket": "equipment",
+  "name": "Dump Trailer",
+  "unit": "hr",
+  "price": 11050.0,
+  "salvage": 3300,
+  "life_h": 10000,
+  "annual_h": 800,
+  "fuel_oil_per_h": 0,
+  "repair_factor": 0.5,
+  "insurance_per_yr": 300,
+  "cost_of_money_pct": 0,
+  "source": "Trailer dealer",
+  "notes": "Unit __ \u00b7 VIN ________ \u00b7 7x14 tandem 14K dump trailer, $8,400-$15,750 new, mid $11,050 2026-09-15. Trailer repair factor 0.50 per BRIEF \u00a72.2; ~800 h/yr; insurance $300/yr estimate."
+ },
+ {
+  "bucket": "consumables",
+  "name": "Chain loop \u2013 3/8 PICCO PM3 (193/194/201)",
+  "unit": "each",
+  "price": 30.49,
+  "source": "STIHL dealer",
+  "notes": "STIHL 63PM3 14-16in loop, $28.99-$31.99 2026-09-15. Routine wear is inside the saw's repair factor; add here only when a chain is ruined on the job."
+ },
+ {
+  "bucket": "consumables",
+  "name": "Chain loop \u2013 3/8 RS3 (500i)",
+  "unit": "each",
+  "price": 49.99,
+  "source": "STIHL dealer",
+  "notes": "STIHL 33 RS3, .063, 84 DL for 24-25in bar, $49.99 2026-09-15."
+ },
+ {
+  "bucket": "consumables",
+  "name": "Pole saw chain (Oregon 90PX)",
+  "unit": "each",
+  "price": 23.75,
+  "source": "Oregon / Milwaukee",
+  "notes": "3/8 low-profile .050; 10in Milwaukee loop likely $12-18. $23.75 derived from a 16in 2-pack, 2026-09-15."
+ },
+ {
+  "bucket": "consumables",
+  "name": "Bar & chain oil",
+  "unit": "gal",
+  "price": 27.99,
+  "source": "STIHL dealer",
+  "notes": "STIHL Platinum, $27.99/gal 2026-09-15."
+ },
+ {
+  "bucket": "consumables",
+  "name": "HP Ultra 2-stroke oil (2.6 oz, mixes 1 gal)",
+  "unit": "each",
+  "price": 4.08,
+  "source": "STIHL dealer",
+  "notes": "6-pack $24.50 \u2192 $4.08 per bottle, 2026-09-15."
+ },
+ {
+  "bucket": "consumables",
+  "name": "MotoMix premixed fuel",
+  "unit": "gal",
+  "price": 27.47,
+  "source": "STIHL dealer",
+  "notes": "$25.97-$28.97/gal 2026-09-15."
+ },
+ {
+  "bucket": "consumables",
+  "name": "Chain sharpening kit (2-in-1 file guide)",
+  "unit": "each",
+  "price": 15.99,
+  "source": "STIHL dealer",
+  "notes": "Estimate; dealer showed from $10.99. 2026-09-15."
+ },
+ {
+  "bucket": "consumables",
+  "name": "M18 battery XC 8.0 (48-11-1880)",
+  "unit": "each",
+  "price": 199.0,
+  "source": "Home Depot / Milwaukee",
+  "notes": "Estimate 2026-09-15 (FORGE XC 8.0 lists $229). Batteries last years; put replacement here only when one dies on a job."
+ },
+ {
+  "bucket": "consumables",
+  "name": "M18 battery HD 12.0 (48-11-1812)",
+  "unit": "each",
+  "price": 279.0,
+  "source": "Home Depot / Milwaukee",
+  "notes": "Estimate 2026-09-15; verify at Home Depot."
+ },
+ {
+  "bucket": "consumables",
+  "name": "M18/M12 rapid charger (48-59-1808)",
+  "unit": "each",
+  "price": 119.0,
+  "source": "Milwaukee",
+  "notes": "MSRP $119, promos $50-$75. 2026-09-15."
+ },
+ {
+  "bucket": "materials",
+  "name": "Hardwood Mulch \u2013 per yard",
+  "unit": "yard",
+  "price": 28.75,
+  "source": "SiteOne (Apopka)",
+  "notes": "public price 2026-09-15 \u00b7 Price appears on SiteOne's product listing (site blocked direct automated page fetches, so this reflects search-index/listing data); no 'log in to see price' message associated with this SKU, unlike soil/sod/irrigation items below. Confirm at Apopka/Orlando/Sanford branch as bulk pricing can vary by branch. \u00b7 You've quoted pine bark mulch at ~$100/yard and chocolate mulch at ~$116/yard installed."
+ },
+ {
+  "bucket": "materials",
+  "name": "Dyed Black Mulch \u2013 per yard",
+  "unit": "yard",
+  "price": 35.63,
+  "source": "SiteOne (Apopka)",
+  "notes": "public price 2026-09-15 \u00b7 Public listing price; same sourcing caveat as Hardwood Mulch row. Branch pricing may vary. \u00b7 You've quoted pine bark mulch at ~$100/yard and chocolate mulch at ~$116/yard installed."
+ },
+ {
+  "bucket": "materials",
+  "name": "Dyed Red Mulch \u2013 per yard",
+  "unit": "yard",
+  "price": 41.75,
+  "source": "SiteOne (Apopka)",
+  "notes": "public price 2026-09-15 \u00b7 Public listing price; same sourcing caveat as Hardwood Mulch row. Branch pricing may vary. \u00b7 You've quoted pine bark mulch at ~$100/yard and chocolate mulch at ~$116/yard installed."
+ },
+ {
+  "bucket": "materials",
+  "name": "Shredded Pine Mulch \u2013 per yard",
+  "unit": "yard",
+  "price": 49.31,
+  "source": "SiteOne (Apopka)",
+  "notes": "public price 2026-09-15 \u00b7 Public listing price; same sourcing caveat as Hardwood Mulch row. This is the 'shredded' mulch type requested. \u00b7 You've quoted pine bark mulch at ~$100/yard and chocolate mulch at ~$116/yard installed."
+ },
+ {
+  "bucket": "materials",
+  "name": "Playground Certified Wood Chips Mulch \u2013 per yard",
+  "unit": "yard",
+  "price": 58.75,
+  "source": "SiteOne (Apopka)",
+  "notes": "public price 2026-09-15 \u00b7 Not specifically requested but included to show the full public mulch price tier ($28.75-$58.75/yd) found at SiteOne. \u00b7 You've quoted pine bark mulch at ~$100/yard and chocolate mulch at ~$116/yard installed."
+ },
+ {
+  "bucket": "materials",
+  "name": "St. Augustine Sod (Floratam)",
+  "unit": "pallet",
+  "price": 300.0,
+  "source": "SiteOne (Apopka)",
+  "notes": "ESTIMATE 2026-09-15 \u00b7 SiteOne product pages (SKUs aug0066, aug0070) show 'log in to see your price' per sq ft. Estimate is a Central FL market midpoint; public ranges cited were $200-405/pallet (homeadvisor.com, homeguide.com), roughly $0.45-0.90/sq ft before installation. \u00b7 You've quoted St. Augustine pallets at $400-$1,500 installed."
+ },
+ {
+  "bucket": "materials",
+  "name": "St. Augustine Sod, single piece/slab",
+  "unit": "piece",
+  "price": 2.0,
+  "source": "SiteOne (Apopka)",
+  "notes": "ESTIMATE 2026-09-15 \u00b7 Derived from the $0.45-0.90/sq ft market range times a ~2.5 sf standard slab. SiteOne per-piece price is not public (login required). \u00b7 You've quoted St. Augustine pallets at $400-$1,500 installed."
+ },
+ {
+  "bucket": "materials",
+  "name": "Bahia Sod",
+  "unit": "pallet",
+  "price": 145.0,
+  "source": "SiteOne (Apopka)",
+  "notes": "ESTIMATE 2026-09-15 \u00b7 SiteOne Bahia-specific SKU/price was not surfaced in search results (category page: siteone.com/en/nursery-sod/c/sh1617111). Estimate from a Central Florida sod supplier's 2026 price guide: Bahia roughly $135-150/pallet. \u00b7 You've quoted St. Augustine pallets at $400-$1,500 installed."
+ },
+ {
+  "bucket": "materials",
+  "name": "Zoysia Sod",
+  "unit": "pallet",
+  "price": 290.0,
+  "source": "SiteOne (Apopka)",
+  "notes": "ESTIMATE 2026-09-15 \u00b7 SiteOne carries Zenith and Prizm Zoysia varieties (login required for price; one SiteOne search snippet suggested ~$1.86/sq ft for Zenith Zoysia but this could not be independently confirmed by a direct page fetch, so it is not used as the headline figure). Market range is $225-585/pallet depending on variety. \u00b7 You've quoted St. Augustine pallets at $400-$1,500 installed."
+ },
+ {
+  "bucket": "materials",
+  "name": "Rain Bird 1804 pop-up spray body, 4 in",
+  "unit": "each",
+  "price": 3.99,
+  "source": "SiteOne (Apopka)",
+  "notes": "ESTIMATE 2026-09-15 \u00b7 SiteOne page (siteone.com/en/1804r-...) requires login. Estimate from Sprinkler Warehouse public retail price ($1.75 flash-sale / $3.99 regular 'Our Price'); a contractor trade account at SiteOne would typically be at or below this."
+ },
+ {
+  "bucket": "materials",
+  "name": "Hunter PGP rotor (PGP-ADJ), 4 in",
+  "unit": "each",
+  "price": 24.18,
+  "source": "SiteOne (Apopka)",
+  "notes": "ESTIMATE 2026-09-15 \u00b7 SiteOne's irrigation catalog is login-gated. Estimate is Sprinkler Warehouse list price ($24.18; sale price seen at $10.98). A case of 20 was $178.99 on sale (~$8.95/unit) - contractor volume pricing is likely closer to that."
+ },
+ {
+  "bucket": "materials",
+  "name": "Hunter MP Rotator nozzle (MP1000)",
+  "unit": "each",
+  "price": 7.8,
+  "source": "SiteOne (Apopka)",
+  "notes": "ESTIMATE 2026-09-15 \u00b7 SiteOne page (siteone.com/en/mp100090-...) requires login. Estimate derived from a 5-pack MP3000-90 retail price of $38.99 (~$7.80/nozzle) seen in search results; single-unit pricing was not independently confirmed."
+ },
+ {
+  "bucket": "materials",
+  "name": "PVC Schedule 40 fittings (ell/tee/coupling), 1 in",
+  "unit": "each",
+  "price": 2.0,
+  "source": "SiteOne (Apopka)",
+  "notes": "ESTIMATE 2026-09-15 \u00b7 SiteOne fittings are login-gated. General market data (SupplyHouse.com) puts individual Sch 40 PVC fittings at roughly $0.50-$5 each depending on fitting type; $2 is a rough midpoint, not fitting-type-specific."
+ },
+ {
+  "bucket": "materials",
+  "name": "Drip tubing, 1/2 in poly",
+  "unit": "ft",
+  "price": 0.15,
+  "source": "SiteOne (Apopka)",
+  "notes": "ESTIMATE 2026-09-15 \u00b7 Specific SiteOne drip-tubing SKU/price not individually verified this session (irrigation catalog pattern is login-gated). Market estimate: a 500 ft roll commonly runs $50-100, i.e. roughly $0.10-0.20/ft."
+ },
+ {
+  "bucket": "materials",
+  "name": "LESCO 15-0-15 Turfgrass Fertilizer, 50 lb",
+  "unit": "bag",
+  "price": 47.0,
+  "source": "SiteOne (Apopka)",
+  "notes": "ESTIMATE 2026-09-15 \u00b7 Login required on siteone.com (SKU 511453). Estimate triangulated from a 2013 Home Depot price of $31.78 (lawnsite.com forum, inflation-adjusted) and a current Home Depot listing of a different LESCO 50lb turf formula (16-4-8) at $49.95 used as a same-brand/same-bag-size proxy. Treat as rough."
+ },
+ {
+  "bucket": "materials",
+  "name": "Roundup PRO Concentrate Herbicide, 2.5 gal",
+  "unit": "each",
+  "price": 58.0,
+  "source": "SiteOne (Apopka)",
+  "notes": "ESTIMATE 2026-09-15 \u00b7 Login required on siteone.com (SKU 86755033; restricted-use/licensed-applicator product). Public retail range seen: $57.95 (Keystone Pest Solutions), $57.99 (Gebo's), up to $84.95 (Walmart). $58 reflects the lower, more typical cluster."
+ },
+ {
+  "bucket": "materials",
+  "name": "Live Oak \u2013 30 gal",
+  "unit": "each",
+  "price": 225.0,
+  "source": "Cherry Lake / wholesale nursery",
+  "notes": "ESTIMATE 2026-09-09 \u00b7 Cherrylake does not publish pricing. Figure is from Creek Nursery's wholesale availability list (Stuart, FL - Treasure Coast, not Central FL, but a current statewide wholesale-grower reference), price-list dated 9/9/26. \u00b7 You've quoted Cathedral Live Oak at ~$676 (30 gal), ~$1,674 (45 gal), ~$1,349 (65 gal) installed."
+ },
+ {
+  "bucket": "materials",
+  "name": "Live Oak \u2013 45 gal",
+  "unit": "each",
+  "price": 325.0,
+  "source": "Cherry Lake / wholesale nursery",
+  "notes": "ESTIMATE 2026-09-09 \u00b7 Cherrylake pricing not public. Creek Nursery (Stuart, FL) wholesale list, dated 9/9/26. \u00b7 You've quoted Cathedral Live Oak at ~$676 (30 gal), ~$1,674 (45 gal), ~$1,349 (65 gal) installed."
+ },
+ {
+  "bucket": "materials",
+  "name": "Little Gem Magnolia \u2013 25 gal",
+  "unit": "each",
+  "price": 150.0,
+  "source": "Cherry Lake / wholesale nursery",
+  "notes": "ESTIMATE 2026-09-09 \u00b7 Closest available size to the requested 30gal in current public price lists. Creek Nursery (Stuart, FL), price list dated 9/9/26. \u00b7 You've quoted 30-gal Magnolia at ~$600 plus ~$400 planting."
+ },
+ {
+  "bucket": "materials",
+  "name": "Sylvester Palm \u2013 6 ft clear trunk",
+  "unit": "each",
+  "price": 650.0,
+  "source": "Cherry Lake / wholesale nursery",
+  "notes": "ESTIMATE 2026-09-15 \u00b7 A Quality Plant (self-described wholesale palm nursery serving Central FL, incl. Orlando) public price for a 6ft clear-trunk Sylvester palm. Cherrylake itself does not publish pricing. \u00b7 You've quoted Sylvester palm planting at ~$250 per foot of trunk (12 ft minimum) and ~$3,250 for a 10-12 ft install."
+ },
+ {
+  "bucket": "materials",
+  "name": "Sabal Palm \u2013 10-18 ft trunk, B&B",
+  "unit": "each",
+  "price": 160.0,
+  "source": "Cherry Lake / wholesale nursery",
+  "notes": "ESTIMATE 2026-09-09 \u00b7 Creek Nursery (Stuart, FL) wholesale list, dated 9/9/26, flat price across the full 10-18ft trunk range. Sabal (cabbage) palm is FL's state tree, very commonly available, and price tends to be fairly stable statewide. \u00b7 You've quoted Sabal palm delivery + planting at $395-$1,000 depending on trunk height."
+ },
+ {
+  "bucket": "materials",
+  "name": "Queen Palm \u2013 25 gal",
+  "unit": "each",
+  "price": 115.0,
+  "source": "Cherry Lake / wholesale nursery",
+  "notes": "ESTIMATE 2026-09-09 \u00b7 Creek Nursery (Stuart, FL), price list dated 9/9/26. \u00b7 You've quoted 12-16 ft B&B Queen palm at ~$600 plus ~$1,000 planting."
+ },
+ {
+  "bucket": "materials",
+  "name": "Crape Myrtle, multi-trunk \u2013 30 gal",
+  "unit": "each",
+  "price": 195.0,
+  "source": "Cherry Lake / wholesale nursery",
+  "notes": "ESTIMATE 2026-09-09 \u00b7 Creek Nursery (Stuart, FL), price list dated 9/9/26. \u00b7 You've quoted 30-gal Crape Myrtle at $250-$400 plus ~$300 planting."
+ },
+ {
+  "bucket": "materials",
+  "name": "Crape Myrtle, multi-trunk \u2013 45 gal",
+  "unit": "each",
+  "price": 250.0,
+  "source": "Cherry Lake / wholesale nursery",
+  "notes": "ESTIMATE 2026-09-09 \u00b7 Bonus size beyond the requested 15/30gal, included since it was on the current price list. Creek Nursery, dated 9/9/26. \u00b7 You've quoted 30-gal Crape Myrtle at $250-$400 plus ~$300 planting."
+ },
+ {
+  "bucket": "materials",
+  "name": "Bald Cypress \u2013 30 gal",
+  "unit": "each",
+  "price": 185.0,
+  "source": "Cherry Lake / wholesale nursery",
+  "notes": "ESTIMATE 2026-09-09 \u00b7 Creek Nursery (Stuart, FL), price list dated 9/9/26. \u00b7 You've quoted 45-gal Bald Cypress at ~$385."
+ },
+ {
+  "bucket": "materials",
+  "name": "Red Maple \u2013 45 gal",
+  "unit": "each",
+  "price": 300.0,
+  "source": "Cherry Lake / wholesale nursery",
+  "notes": "ESTIMATE 2026-09-09 \u00b7 Creek Nursery (Stuart, FL), price list dated 9/9/26; closest available size to the requested 15/30gal (their list starts at 45gal). \u00b7 You've quoted 30-gal Red Flame Maple at ~$300."
+ },
+ {
+  "bucket": "materials",
+  "name": "Eagleston Holly \u2013 30 gal",
+  "unit": "each",
+  "price": 230.0,
+  "source": "Cherry Lake / wholesale nursery",
+  "notes": "ESTIMATE 2026-09-09 \u00b7 Creek Nursery (Stuart, FL), price list dated 9/9/26 (listed as 'Holy Eagleston,' apparently a typo for Holly). \u00b7 You've quoted 30-gal Dahoon Holly at ~$300 plus ~$350 planting."
+ },
+ {
+  "bucket": "materials",
+  "name": "Sylvester Date Palm \u2013 3 gal",
+  "unit": "each",
+  "price": 143.72,
+  "source": "Home Depot (Apopka)",
+  "notes": "Home Depot online price 2026-09-15 \u00b7 Wekiva Foliage 64-Z3N7-QNC6 \u00b7 Ship-to-home online price. Also seen at $118.72 with a $25 Home Depot credit-card instant-savings promo applied; regular price used here. \u00b7 You've quoted Sylvester palm planting at ~$250 per foot of trunk (12 ft minimum) and ~$3,250 for a 10-12 ft install."
+ },
+ {
+  "bucket": "materials",
+  "name": "Queen Palm \u2013 10 in pot (~3 gal equiv)",
+  "unit": "each",
+  "price": 218.14,
+  "source": "Home Depot (Apopka)",
+  "notes": "Home Depot online price 2026-09-15 \u00b7 Wekiva Foliage QueenPalm10x1 \u00b7 Larger 7-gal and 15-gal Queen Palm listings (The Plant Stand of Arizona) exist on homedepot.com but showed as unavailable with no price during this search. \u00b7 You've quoted 12-16 ft B&B Queen palm at ~$600 plus ~$1,000 planting."
+ },
+ {
+  "bucket": "materials",
+  "name": "Pygmy Date (Robellini) Palm \u2013 2 gal",
+  "unit": "each",
+  "price": 43.65,
+  "source": "Home Depot (Apopka)",
+  "notes": "Home Depot online price 2026-09-15 \u00b7 national PLANT NETWORK HD7473 \u00b7 You've quoted tri-planted Robellini at ~$175 (15 gal) and ~$250 (30 gal)."
+ },
+ {
+  "bucket": "materials",
+  "name": "Pygmy Date (Robellini) Palm \u2013 25 gal",
+  "unit": "each",
+  "price": 299.0,
+  "source": "Home Depot (Apopka)",
+  "notes": "Home Depot online price 2026-09-15 \u00b7 The Plant Stand of Arizona 899497 \u00b7 Search results showed ~$274 as a promo/sale price and ~$299 as regular price; regular price used, treat as approximate. \u00b7 You've quoted tri-planted Robellini at ~$175 (15 gal) and ~$250 (30 gal)."
+ },
+ {
+  "bucket": "materials",
+  "name": "Foxtail Palm \u2013 3 gal",
+  "unit": "each",
+  "price": 190.53,
+  "source": "Home Depot (Apopka)",
+  "notes": "Home Depot online price 2026-09-15 \u00b7 Wekiva Foliage FoxPalm3gx1 \u00b7 Ship-to-home price. \u00b7 You've quoted tri-planted Foxtail 30 gal at $225-$600."
+ },
+ {
+  "bucket": "materials",
+  "name": "Sabal Minor (Dwarf Palmetto) - related species, not true cabbage palm \u2013 10 in pot",
+  "unit": "each",
+  "price": 163.49,
+  "source": "Home Depot (Apopka)",
+  "notes": "Home Depot online price 2026-09-15 \u00b7 Wekiva Foliage SabaMi10x1 \u00b7 This is Sabal minor (dwarf palmetto), a smaller native relative -- NOT the large Sabal palmetto 'cabbage palm.' Listed for reference only. \u00b7 You've quoted Sabal palm delivery + planting at $395-$1,000 depending on trunk height."
+ },
+ {
+  "bucket": "materials",
+  "name": "Cabbage Tree Palm (Livistona australis, Australian species) - not FL cabbage palm \u2013 3 gal",
+  "unit": "each",
+  "price": 180.79,
+  "source": "Home Depot (Apopka)",
+  "notes": "Home Depot online price 2026-09-15 \u00b7 Wekiva Foliage CabTree3gx1 \u00b7 Despite the name, this is Livistona australis, an Australian species in a different genus from Florida's true Sabal palmetto. Do not confuse with the state tree."
+ },
+ {
+  "bucket": "materials",
+  "name": "Windmill Palm \u2013 3 gal",
+  "unit": "each",
+  "price": 89.98,
+  "source": "Home Depot (Apopka)",
+  "notes": "Home Depot online price 2026-09-15 \u00b7 Brighter Blooms PAL-WIN3"
+ },
+ {
+  "bucket": "materials",
+  "name": "Windmill Palm \u2013 14 in (boxed, ship-to-home)",
+  "unit": "each",
+  "price": 129.98,
+  "source": "Home Depot (Apopka)",
+  "notes": "Home Depot online price 2026-09-15 \u00b7 15530 \u00b7 Sold as a boxed ship-to-home plant sized by height (14 in) rather than gallon container."
+ },
+ {
+  "bucket": "materials",
+  "name": "European Fan Palm \u2013 10 in pot",
+  "unit": "each",
+  "price": 92.72,
+  "source": "Home Depot (Apopka)",
+  "notes": "Home Depot online price 2026-09-15 \u00b7 Wekiva Foliage EupFan10x1"
+ },
+ {
+  "bucket": "materials",
+  "name": "Bismarck Palm (Silver Bismarck, Bismarckia nobilis) \u2013 5 gal",
+  "unit": "each",
+  "price": 251.55,
+  "source": "Home Depot (Apopka)",
+  "notes": "Home Depot online price 2026-09-15 \u00b7 Wekiva Foliage SilBis5gx1"
+ },
+ {
+  "bucket": "materials",
+  "name": "Majesty Palm (outdoor/patio size) \u2013 10 in decor pot",
+  "unit": "each",
+  "price": 44.98,
+  "source": "Home Depot (Apopka)",
+  "notes": "Home Depot online price 2026-09-15 \u00b7 United Nursery MAJESTYP10GRAY \u00b7 Sold as an indoor/outdoor decor-pot plant (~2-3 ft tall), not a standard nursery gallon size. Other 10-in-pot color options seen discounted to ~$19.98-$34.99 with a promotional new-credit-card $25 instant savings applied; regular-price listing used here."
+ },
+ {
+  "bucket": "materials",
+  "name": "Southern Magnolia (Teddy Bear) \u2013 7 gal",
+  "unit": "each",
+  "price": 101.35,
+  "source": "Home Depot (Apopka)",
+  "notes": "Home Depot online price 2026-09-15 \u00b7 MAGTED07G \u00b7 'Kay Parris' 7-gal cultivar (MAGKAY07G) also seen at $95.98. \u00b7 You've quoted 30-gal Magnolia at ~$600 plus ~$400 planting."
+ },
+ {
+  "bucket": "materials",
+  "name": "Little Gem Magnolia \u2013 3 gal",
+  "unit": "each",
+  "price": 50.49,
+  "source": "Home Depot (Apopka)",
+  "notes": "Home Depot online price 2026-09-15 \u00b7 MAGLIT03G \u00b7 You've quoted 30-gal Magnolia at ~$600 plus ~$400 planting."
+ },
+ {
+  "bucket": "materials",
+  "name": "Little Gem Magnolia \u2013 7 gal (5-6 ft)",
+  "unit": "each",
+  "price": 195.62,
+  "source": "Home Depot (Apopka)",
+  "notes": "Home Depot online price 2026-09-15 \u00b7 Brighter Blooms MAG-LIT-56-7 \u00b7 You've quoted 30-gal Magnolia at ~$600 plus ~$400 planting."
+ },
+ {
+  "bucket": "materials",
+  "name": "Live Oak \u2013 1 gal",
+  "unit": "each",
+  "price": 44.98,
+  "source": "Home Depot (Apopka)",
+  "notes": "Home Depot online price 2026-09-15 \u00b7 OAKLIV01G \u00b7 You've quoted Cathedral Live Oak at ~$676 (30 gal), ~$1,674 (45 gal), ~$1,349 (65 gal) installed."
+ },
+ {
+  "bucket": "materials",
+  "name": "Live Oak \u2013 7 gal",
+  "unit": "each",
+  "price": 93.97,
+  "source": "Home Depot (Apopka)",
+  "notes": "Home Depot online price 2026-09-15 \u00b7 OAKLIV07G \u00b7 You've quoted Cathedral Live Oak at ~$676 (30 gal), ~$1,674 (45 gal), ~$1,349 (65 gal) installed."
+ },
+ {
+  "bucket": "materials",
+  "name": "Crape Myrtle (Tuscarora - dark pink) \u2013 3 gal",
+  "unit": "each",
+  "price": 65.46,
+  "source": "Home Depot (Apopka)",
+  "notes": "Home Depot online price 2026-09-15 \u00b7 CRMTUS03G \u00b7 Other 3-gal cultivars (Natchez, Muskogee) seen $51-$65. \u00b7 You've quoted 30-gal Crape Myrtle at $250-$400 plus ~$300 planting."
+ },
+ {
+  "bucket": "materials",
+  "name": "Crape Myrtle (Muskogee) \u2013 7 gal",
+  "unit": "each",
+  "price": 94.48,
+  "source": "Home Depot (Apopka)",
+  "notes": "Home Depot online price 2026-09-15 \u00b7 CRMMSA07G \u00b7 Price seen via site search results; exact product-page URL not isolated -- verify on category page. Other 7-gal cultivars (Tonto) similarly priced ~$83-$96. \u00b7 You've quoted 30-gal Crape Myrtle at $250-$400 plus ~$300 planting."
+ },
+ {
+  "bucket": "materials",
+  "name": "Red Maple \u2013 5 gal",
+  "unit": "each",
+  "price": 69.98,
+  "source": "Home Depot (Apopka)",
+  "notes": "Home Depot online price 2026-09-15 \u00b7 MAPRED05G \u00b7 You've quoted 30-gal Red Flame Maple at ~$300."
+ },
+ {
+  "bucket": "materials",
+  "name": "Bald Cypress \u2013 5 gal",
+  "unit": "each",
+  "price": 47.7,
+  "source": "Home Depot (Apopka)",
+  "notes": "Home Depot online price 2026-09-15 \u00b7 CYPBAL05G \u00b7 You've quoted 45-gal Bald Cypress at ~$385."
+ },
+ {
+  "bucket": "materials",
+  "name": "Drake Elm \u2013 5 gal",
+  "unit": "each",
+  "price": 73.94,
+  "source": "Home Depot (Apopka)",
+  "notes": "Home Depot online price 2026-09-15 \u00b7 ELMDRA05G"
+ },
+ {
+  "bucket": "materials",
+  "name": "Drake Elm \u2013 7 gal",
+  "unit": "each",
+  "price": 95.98,
+  "source": "Home Depot (Apopka)",
+  "notes": "Home Depot online price 2026-09-15 \u00b7 ELMDRA07G"
+ },
+ {
+  "bucket": "materials",
+  "name": "Ligustrum (tree form / standard) \u2013 2.5 gal",
+  "unit": "each",
+  "price": 36.98,
+  "source": "Home Depot (Apopka)",
+  "notes": "Home Depot online price 2026-09-15 \u00b7 Vigoro 11375 \u00b7 Sold as a shrub/privet, not a clipped single-trunk 'tree form' standard -- homedepot.com did not show a distinct tree-form SKU in this search."
+ },
+ {
+  "bucket": "materials",
+  "name": "Ligustrum (Wax Leaf Japanese Privet) \u2013 3 gal",
+  "unit": "each",
+  "price": 36.35,
+  "source": "Home Depot (Apopka)",
+  "notes": "Home Depot online price 2026-09-15 \u00b7 Perfect Plants THD00053 \u00b7 Sold as a 2-pack for $72.69 total ($36.35/plant); shrub form."
+ },
+ {
+  "bucket": "materials",
+  "name": "Loquat (Bronze Loquat) \u2013 6 in pot (starter)",
+  "unit": "each",
+  "price": 70.7,
+  "source": "Home Depot (Apopka)",
+  "notes": "Home Depot online price 2026-09-15 \u00b7 BronLo6x1 \u00b7 Small starter plant, not a standard nursery gallon size; no 3/7-gal loquat found on homedepot.com in this search."
+ },
+ {
+  "bucket": "materials",
+  "name": "Tabebuia (Pink Trumpet Tree) \u2013 3 gal",
+  "unit": "each",
+  "price": 204.37,
+  "source": "Home Depot (Apopka)",
+  "notes": "Home Depot online price 2026-09-15 \u00b7 Wekiva Foliage PinkTab3gx1"
+ },
+ {
+  "bucket": "materials",
+  "name": "Tabebuia (Yellow Trumpet Tree) \u2013 3 gal",
+  "unit": "each",
+  "price": 196.51,
+  "source": "Home Depot (Apopka)",
+  "notes": "Home Depot online price 2026-09-15 \u00b7 Wekiva Foliage YellTabTr3gx1"
+ },
+ {
+  "bucket": "materials",
+  "name": "Bottlebrush (Red Flowering) \u2013 1 gal",
+  "unit": "each",
+  "price": 38.46,
+  "source": "Home Depot (Apopka)",
+  "notes": "Home Depot online price 2026-09-15 \u00b7 BOTRED01G"
+ },
+ {
+  "bucket": "materials",
+  "name": "River Birch (multi-trunk) \u2013 1 gal",
+  "unit": "each",
+  "price": 44.98,
+  "source": "Home Depot (Apopka)",
+  "notes": "Home Depot online price 2026-09-15 \u00b7 BIRDUR01G"
+ },
+ {
+  "bucket": "materials",
+  "name": "River Birch \u2013 2.5 gal",
+  "unit": "each",
+  "price": 38.76,
+  "source": "Home Depot (Apopka)",
+  "notes": "Home Depot online price 2026-09-15 \u00b7 FLOWERWOOD 04503FL"
+ },
+ {
+  "bucket": "materials",
+  "name": "River Birch (multi-stem) \u2013 5 gal",
+  "unit": "each",
+  "price": 82.99,
+  "source": "Home Depot (Apopka)",
+  "notes": "Home Depot online price 2026-09-15 \u00b7 BIRDHT05G"
+ },
+ {
+  "bucket": "materials",
+  "name": "Eagleston Holly \u2013 7 gal",
+  "unit": "each",
+  "price": 84.62,
+  "source": "Home Depot (Apopka)",
+  "notes": "Home Depot online price 2026-09-15 \u00b7 HOLEAG07G \u00b7 3-gal size (HOLEAG03G) also sold on homedepot.com; price not returned in this search. \u00b7 You've quoted 30-gal Dahoon Holly at ~$300 plus ~$350 planting."
+ },
+ {
+  "bucket": "materials",
+  "name": "Dahoon Holly \u2013 1 gal",
+  "unit": "each",
+  "price": 44.98,
+  "source": "Home Depot (Apopka)",
+  "notes": "Home Depot online price 2026-09-15 \u00b7 HOLDAH01G \u00b7 5-gal size (HOLDAH05G, Ilex cassine) also listed on homedepot.com; price not returned in search results."
+ },
+ {
+  "bucket": "materials",
+  "name": "Weeping Willow \u2013 5 gal",
+  "unit": "each",
+  "price": 87.29,
+  "source": "Home Depot (Apopka)",
+  "notes": "Home Depot online price 2026-09-15 \u00b7 WILWEE05G"
+ },
+ {
+  "bucket": "materials",
+  "name": "Lemon Tree (Improved Meyer) \u2013 1 gal",
+  "unit": "each",
+  "price": 32.97,
+  "source": "Home Depot (Apopka)",
+  "notes": "Home Depot online price 2026-09-15 \u00b7 BELL NURSERY LEMON1MEY1PK \u00b7 3-gal Meyer Lemon (CIIM03, semi-dwarf) also listed on homedepot.com but price not returned in search."
+ },
+ {
+  "bucket": "materials",
+  "name": "Orange Tree (Calamondin) \u2013 1 gal (3-plant bundle)",
+  "unit": "each",
+  "price": 220.06,
+  "source": "Home Depot (Apopka)",
+  "notes": "Home Depot online price 2026-09-15 \u00b7 Wekiva Foliage CalaOra3x1g \u00b7 Price is for a bundle of 3 plants (~$73.35/plant); Florida-only item, cannot ship out of state."
+ },
+ {
+  "bucket": "materials",
+  "name": "Vigoro Premium Mulch \u2013 2 cu ft",
+  "unit": "bag",
+  "price": 3.33,
+  "source": "Home Depot (Apopka)",
+  "notes": "Home Depot online price 2026-09-15 \u00b7 Vigoro 52050196 \u00b7 Brown; sale price (reg. ~$3.67). Also sold in Black (52050197) and Red (480978/52050195) -- per-bag price not directly confirmed for those colors; a pallet of 70 bags runs $609.98-$799.00 depending on color (~$8.71-$11.41/bag equivalent). \u00b7 You've quoted pine bark mulch at ~$100/yard and chocolate mulch at ~$116/yard installed."
+ },
+ {
+  "bucket": "materials",
+  "name": "Pine Straw Bale (Long Leaf) \u2013 bale",
+  "unit": "bale",
+  "price": 39.99,
+  "source": "Home Depot (Apopka)",
+  "notes": "Home Depot online price 2026-09-15 \u00b7 FLOWERWOOD Fert-008"
+ },
+ {
+  "bucket": "materials",
+  "name": "Pine Straw Bale (Long Leaf) \u2013 bale (national PLANT NETWORK)",
+  "unit": "bale",
+  "price": 44.16,
+  "source": "Home Depot (Apopka)",
+  "notes": "Home Depot online price 2026-09-15 \u00b7 national PLANT NETWORK HD1379"
+ },
+ {
+  "bucket": "materials",
+  "name": "Organic Garden Soil \u2013 1.5 cu ft",
+  "unit": "bag",
+  "price": 31.48,
+  "source": "Home Depot (Apopka)",
+  "notes": "Home Depot online price 2026-09-15 \u00b7 Head River Organics HRGS-1.5"
+ },
+ {
+  "bucket": "materials",
+  "name": "Potting Soil Mix \u2013 32 qt (0.85 cu ft)",
+  "unit": "bag",
+  "price": 7.97,
+  "source": "Home Depot (Apopka)",
+  "notes": "Home Depot online price 2026-09-15 \u00b7 Vigoro 74177925 \u00b7 Closest confirmed price; requested 2 cu ft size (Miracle-Gro 75552304 / 76253300) listings exist on homedepot.com but price was not returned in search."
+ },
+ {
+  "bucket": "materials",
+  "name": "St. Augustine Sod \u2013 400 sq ft",
+  "unit": "pallet",
+  "price": 519.99,
+  "source": "Home Depot (Apopka)",
+  "notes": "Home Depot online price 2026-09-15 \u00b7 Harmony HH400SA1 \u00b7 Per-piece (2.66 sq ft slab) pricing also sold on homedepot.com (Harmony STAUG2.6SF) but price not returned in search. \u00b7 You've quoted St. Augustine pallets at $400-$1,500 installed."
+ },
+ {
+  "bucket": "materials",
+  "name": "Milorganite Slow-Release Fertilizer \u2013 32 lb",
+  "unit": "bag",
+  "price": 24.57,
+  "source": "Home Depot (Apopka)",
+  "notes": "Home Depot online price 2026-09-15 \u00b7 Milorganite 100539618 \u00b7 6-4-0 analysis; covers 2,500 sq ft. Pallet of 63 bags also available, seen ~$1,506-$1,537."
+ },
+ {
+  "bucket": "materials",
+  "name": "Palm, Ixora and Ornamental Plant Food (8-4-8) \u2013 3.5 lb",
+  "unit": "bag",
+  "price": 10.97,
+  "source": "Home Depot (Apopka)",
+  "notes": "Home Depot online price 2026-09-15 \u00b7 Vigoro 134242"
+ },
+ {
+  "bucket": "materials",
+  "name": "Tree Watering Bag \u2013 15 gal",
+  "unit": "each",
+  "price": 27.69,
+  "source": "Home Depot (Apopka)",
+  "notes": "Home Depot online price 2026-09-15 \u00b7 King Innovation 44020E"
+ },
+ {
+  "bucket": "materials",
+  "name": "Landscape Fabric (Weed Barrier) \u2013 3 ft x 100 ft",
+  "unit": "roll",
+  "price": 55.28,
+  "source": "Home Depot (Apopka)",
+  "notes": "Home Depot online price 2026-09-15 \u00b7 AG-03100H50 \u00b7 Heavy-duty grade; lighter-duty/smaller rolls also sold starting around $19.97-$29.97."
+ },
+ {
+  "bucket": "materials",
+  "name": "Root Barrier (Root Shield Water Barrier) \u2013 2 ft x 25 ft (60 mil)",
+  "unit": "roll",
+  "price": 75.99,
+  "source": "Home Depot (Apopka)",
+  "notes": "Home Depot online price 2026-09-15 \u00b7 Century Products RS24-25 \u00b7 Other widths/lengths available (1 ft x 25 ft $48.39; 1.5 ft x 50 ft $99.45; 2.5 ft x 25 ft $106.27). \u00b7 You've quoted root barrier installs at $75-$1,538."
+ },
+ {
+  "bucket": "materials",
+  "name": "River Rock / Pea Gravel \u2013 0.5 cu ft",
+  "unit": "bag",
+  "price": 5.97,
+  "source": "Home Depot (Apopka)",
+  "notes": "Home Depot online price 2026-09-15 \u00b7 Bulk discount to $5.37/bag at 64+ units."
+ },
+ {
+  "bucket": "materials",
+  "name": "Paver Base \u2013 0.5 cu ft (52.86 lb)",
+  "unit": "bag",
+  "price": 5.97,
+  "source": "Home Depot (Apopka)",
+  "notes": "Home Depot online price 2026-09-15 \u00b7 Pavestone 98001 \u00b7 Bulk discount to $5.37/bag at 56+ units. Matching Paver Sand (Pavestone 98000) also sold; price not confirmed in this search."
+ },
+ {
+  "bucket": "materials",
+  "name": "Concrete Mix \u2013 80 lb",
+  "unit": "bag",
+  "price": 6.47,
+  "source": "Home Depot (Apopka)",
+  "notes": "Home Depot online price 2026-09-15 \u00b7 Quikrete 110180"
+ },
+ {
+  "bucket": "materials",
+  "name": "Landscape Timber (Recycled Plastic, Brown) \u2013 4 in x 4 in x 8 ft (sold 2-pack)",
+  "unit": "each",
+  "price": 68.0,
+  "source": "Home Depot (Apopka)",
+  "notes": "Home Depot online price 2026-09-15 \u00b7 BestPLUS 040408BN \u00b7 Sold 2-per-box for $136.00 total; price shown here is per-timber. Traditional pressure-treated wood 4x6x8 landscape timber also sold on homedepot.com but price not returned in search."
+ },
+ {
+  "bucket": "materials",
+  "name": "Crushed Limestone / Lime Rock (bagged) \u2013 bag (size unconfirmed, likely ~0.5 cu ft)",
+  "unit": "bag",
+  "price": 2.37,
+  "source": "Home Depot (Apopka)",
+  "notes": "Home Depot online price 2026-09-15 \u00b7 Starting price cited by search ('starts at $2.37/bag,' bulk to $2.13 at 126+); exact bag size and SKU not confirmed -- verify on category page."
+ },
+ {
+  "bucket": "materials",
+  "name": "Rain Bird 1804 4-in Pop-Up Spray Head \u2013 4 in pop-up",
+  "unit": "each",
+  "price": 5.47,
+  "source": "Home Depot (Apopka)",
+  "notes": "Home Depot online price 2026-09-15 \u00b7 Rain Bird 1804AP8 \u00b7 Body-only spray head; similar model 1804APPR25 seen at $8.97."
+ },
+ {
+  "bucket": "materials",
+  "name": "Rain Bird 5000 Series 4-in Pop-Up Gear-Drive Rotor (5004) \u2013 4 in pop-up rotor",
+  "unit": "each",
+  "price": 16.47,
+  "source": "Home Depot (Apopka)",
+  "notes": "Home Depot online price 2026-09-15 \u00b7 Rain Bird CP 5000 NP \u00b7 Current HD lineup shows this as '5000 Series' (CP 5000 NP); a 12-pack of classic 5004-nozzle-tree rotors is also sold, unit price not isolated."
+ },
+ {
+  "bucket": "materials",
+  "name": "Orbit Professional Pop-Up Spray Head \u2013 4 in pop-up",
+  "unit": "each",
+  "price": 3.58,
+  "source": "Home Depot (Apopka)",
+  "notes": "Home Depot online price 2026-09-15 \u00b7 Orbit 54520 \u00b7 Brass half-pattern twin-spray nozzle version; 2-in short-pop version (54524) seen at $2.99, pressure-regulated 12-in version (80310) at $11.15."
+ },
+ {
+  "bucket": "materials",
+  "name": "Hunter PGP-ADJ Gear-Drive Rotor \u2013 4 in pop-up rotor",
+  "unit": "each",
+  "price": 13.47,
+  "source": "Home Depot (Apopka)",
+  "notes": "Home Depot online price 2026-09-15 \u00b7 Hunter Industries PGP-ADJ \u00b7 3 GPM nozzle version; some search results showed ~$10.98 for what may be the same or a similar SKU -- price can vary."
+ },
+ {
+  "bucket": "materials",
+  "name": "Rain Bird Adjustable Spray Nozzle \u2013 12-15 ft radius",
+  "unit": "each",
+  "price": 2.98,
+  "source": "Home Depot (Apopka)",
+  "notes": "Home Depot online price 2026-09-15 \u00b7 Rain Bird 15AP \u00b7 High-efficiency HE-VAN nozzles (6-8 ft radius) also sold, seen at $4.28 each."
+ },
+ {
+  "bucket": "materials",
+  "name": "PVC Schedule 40 Pipe \u2013 1 in x 10 ft",
+  "unit": "each",
+  "price": 9.82,
+  "source": "Home Depot (Apopka)",
+  "notes": "Home Depot online price 2026-09-15 \u00b7 Charlotte Pipe PVC040100600RS \u00b7 ~98 cents/ft; bulk discount at 10+ sticks. Source is the 10-ft PVC pipe category listing -- specific product-page URL for this exact SKU not isolated during search."
+ },
+ {
+  "bucket": "materials",
+  "name": "PVC Schedule 40 Pipe \u2013 3/4 in x 10 ft",
+  "unit": "each",
+  "price": 6.54,
+  "source": "Home Depot (Apopka)",
+  "notes": "Home Depot online price 2026-09-15 \u00b7 Charlotte Pipe PVC 04007 0600 \u00b7 ~65 cents/ft; bulk discount to $5.23 at 10+ sticks."
+ },
+ {
+  "bucket": "materials",
+  "name": "PVC Schedule 40 Elbow (90-degree, slip x slip) \u2013 1 in",
+  "unit": "each",
+  "price": 0.83,
+  "source": "Home Depot (Apopka)",
+  "notes": "Home Depot online price 2026-09-15 \u00b7 406-010-50-P \u00b7 Sold as a 50-pack for $41.38 total; unit price shown here is per-fitting. Individual single-unit elbows (e.g. Charlotte Pipe PVC023001000HD) also sold but price not confirmed."
+ },
+ {
+  "bucket": "materials",
+  "name": "PVC Cement and Primer Combo Pack \u2013 8 oz each",
+  "unit": "each",
+  "price": 14.55,
+  "source": "Home Depot (Apopka)",
+  "notes": "Home Depot online price 2026-09-15 \u00b7 Oatey 302312 \u00b7 Purple primer + medium blue Rain-R-Shine cement combo pack."
+ },
+ {
+  "bucket": "materials",
+  "name": "Rain Bird Anti-Siphon Irrigation Valve \u2013 1 in FPT",
+  "unit": "each",
+  "price": 31.72,
+  "source": "Home Depot (Apopka)",
+  "notes": "Home Depot online price 2026-09-15 \u00b7 Rain Bird DASASVF100 \u00b7 With flow control."
+ },
+ {
+  "bucket": "materials",
+  "name": "Backflow Preventer (Pressure Vacuum Breaker) \u2013 1 in",
+  "unit": "each",
+  "price": 161.95,
+  "source": "Home Depot (Apopka)",
+  "notes": "Home Depot online price 2026-09-15 \u00b7 Febco 765EBV-FZ 1 R \u00b7 Bronze, with freeze sensor and quarter-turn shutoff/tee handles. Smaller 3/4-in Febco models seen $120-$269; a basic Toro 1-in PVB (53300) also sold, price not returned."
+ },
+ {
+  "bucket": "materials",
+  "name": "Distribution/Drip Tubing \u2013 1/2 in x 100 ft",
+  "unit": "roll",
+  "price": 14.62,
+  "source": "Home Depot (Apopka)",
+  "notes": "Home Depot online price 2026-09-15 \u00b7 Rain Bird T63-100S \u00b7 Comparable options: DIG poly tubing ~$12.53, Orbit ~$16.64, Toro Blue Stripe ~$26.99 (100 ft each)."
+ }
+]
