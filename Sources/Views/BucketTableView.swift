@@ -164,11 +164,7 @@ extension BucketItem {
     var displayName: String { name.isEmpty ? "Untitled" : name }
 
     /// The stored figure as currency with its unit: "$54.08/hr", "$6,000.00/yr", "$85.00 each", "$75.00/load".
-    var rateLabel: String {
-        let money = Money.format(rateCents)
-        if unit.isEmpty { return money }
-        return unit == "each" ? "\(money) each" : "\(money)/\(unit)"
-    }
+    var rateLabel: String { Buckets.rateLabel(cents: rateCents, unit: unit) }
 }
 
 extension Bucket {

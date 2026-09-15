@@ -5,10 +5,14 @@
 #           (buckets | labor | equipment | materials | consumables | overhead | laborcalc | equipmentcalc |
 #           projects | project | settings); default is the app's normal start.
 #   --render: instead of screencapture, have the app render its windows offscreen (BUCKETS_SNAPSHOT_DIR)
-#           and write the sheet if one is open, else the main window's content. Works with the screen locked.
+#           and write the sheet if one is open, else the main window (toolbar included). Works with the
+#           screen locked. BUCKETS_WINDOW_SIZE=1180x1500 in the environment renders a taller window so a
+#           long screen shows past the fold.
 #   --fixture: run the app against a throwaway store holding the BRIEF §3.3 rows, written by the
 #           FixtureStoreWriter test (test target only; the app never seeds data). Reused if present;
-#           set BUCKETS_FIXTURE=fresh to rewrite it.
+#           set BUCKETS_FIXTURE=fresh to rewrite it. Lives in build/fixture/ unless BUCKETS_FIXTURE_STORE
+#           names another path — use one outside ~/Desktop when iCloud holds the folder (SQLite's
+#           directory fsync then blocks in open(2), as DerivedData did; DECISIONS 47).
 # Requires Screen Recording permission for the terminal host.
 set -euo pipefail
 ROOT="$(cd "$(dirname "${(%):-%x}")/.." && pwd)"
@@ -35,7 +39,7 @@ if [[ ! -x "$WIDTOOL" || "$ROOT/Scripts/window-id.swift" -nt "$WIDTOOL" ]]; then
 fi
 STORE_ENV=()
 if [[ $FIXTURE -eq 1 ]]; then
-  FIXTURE_STORE="$ROOT/build/fixture/Buckets.store"
+  FIXTURE_STORE="${BUCKETS_FIXTURE_STORE:-$ROOT/build/fixture/Buckets.store}"
   if [[ ! -f "$FIXTURE_STORE" || "${BUCKETS_FIXTURE:-}" == "fresh" ]]; then
     mkdir -p "$(dirname "$FIXTURE_STORE")"
     ( cd "$ROOT" && TEST_RUNNER_BUCKETS_FIXTURE_STORE="$FIXTURE_STORE" xcodebuild -project Buckets.xcodeproj -scheme Buckets \

@@ -32,8 +32,9 @@ final class AppState {
         switch screen {
         case "projects": sidebar = .projects
         case "project":
+            // Opens the oldest project by date (the fixture's "Oak removal", the BRIEF §3.3 worked example).
             sidebar = .projects
-            let projects = (try? context.fetch(FetchDescriptor<Project>(sortBy: [SortDescriptor(\.date, order: .reverse)]))) ?? []
+            let projects = (try? context.fetch(FetchDescriptor<Project>(sortBy: [SortDescriptor(\.date, order: .forward)]))) ?? []
             selectedProject = projects.first?.persistentModelID
         case "buckets": selectFirstRow(in: .labor)
         case "laborcalc":

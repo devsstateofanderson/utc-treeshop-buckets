@@ -17,21 +17,32 @@ final class AppDelegate: NSObject, NSApplicationDelegate {
         // settled, then quits. Unlike screencapture it works while the screen is locked and it captures an open sheet.
         if let dir = ProcessInfo.processInfo.environment["BUCKETS_SNAPSHOT_DIR"], !dir.isEmpty {
             Task { @MainActor in
-                try? await Task.sleep(for: .seconds(3))
+                try? await Task.sleep(for: .seconds(1))
+                // BUCKETS_WINDOW_SIZE=1180x1500 makes the main window that tall first, so a long screen
+                // renders past the fold (the window may exceed the display; the render is offscreen).
+                if let spec = ProcessInfo.processInfo.environment["BUCKETS_WINDOW_SIZE"] {
+                    let size = spec.split(separator: "x").compactMap { Double($0) }
+                    if size.count == 2, let window = NSApp.windows.first(where: { !$0.title.isEmpty }) {
+                        window.setContentSize(NSSize(width: size[0], height: size[1]))
+                    }
+                }
+                try? await Task.sleep(for: .seconds(2))
                 Self.renderWindows(to: URL(fileURLWithPath: dir, isDirectory: true))
                 NSApp.terminate(nil)
             }
         }
     }
 
-    /// Writes `main.png` for the titled window and `sheet.png` for a sheet attached to it.
+    /// Writes `main.png` for the titled window and `sheet.png` for a sheet attached to it. The main window is
+    /// drawn from its frame view (title bar and toolbar included); a sheet from its content view.
     @MainActor
     static func renderWindows(to dir: URL) {
         try? FileManager.default.createDirectory(at: dir, withIntermediateDirectories: true)
         for window in NSApp.windows where window.isVisible {
             let name: String
             if window.sheetParent != nil { name = "sheet" } else if !window.title.isEmpty { name = "main" } else { continue }
-            guard let view = window.contentView, !view.bounds.isEmpty,
+            let frameView = name == "main" ? window.contentView?.superview : nil
+            guard let view = frameView ?? window.contentView, !view.bounds.isEmpty,
                   let rep = view.bitmapImageRepForCachingDisplay(in: view.bounds) else { continue }
             view.cacheDisplay(in: view.bounds, to: rep)
             // The window paints its own background behind the content view; composite it underneath.
