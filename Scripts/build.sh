@@ -11,7 +11,9 @@ CONFIG="${1:-Debug}"
 # Finder xattrs inside the bundle and codesign refuses "detritus"). Override with BUCKETS_DERIVED_DATA.
 DD="${BUCKETS_DERIVED_DATA:-$HOME/Library/Developer/Xcode/DerivedData/Buckets-cli}"
 cd "$ROOT"
-if [[ ! -d Buckets.xcodeproj || project.yml -nt Buckets.xcodeproj/project.pbxproj ]]; then
+# Regenerate the project when project.yml or any file/folder under Sources or Tests changed.
+if [[ ! -d Buckets.xcodeproj ]] || \
+   [[ -n "$(find project.yml Sources Tests -newer Buckets.xcodeproj/project.pbxproj -print -quit)" ]]; then
   xcodegen generate --quiet
 fi
 mkdir -p "$ROOT/build"

@@ -6,7 +6,9 @@ if [[ -z "${DEVELOPER_DIR:-}" && -d /Applications/Xcode.app/Contents/Developer ]
   export DEVELOPER_DIR=/Applications/Xcode.app/Contents/Developer
 fi
 cd "$ROOT"
-if [[ ! -d Buckets.xcodeproj || project.yml -nt Buckets.xcodeproj/project.pbxproj ]]; then
+# Regenerate the project when project.yml or any file/folder under Sources or Tests changed.
+if [[ ! -d Buckets.xcodeproj ]] || \
+   [[ -n "$(find project.yml Sources Tests -newer Buckets.xcodeproj/project.pbxproj -print -quit)" ]]; then
   xcodegen generate --quiet
 fi
 set +e
