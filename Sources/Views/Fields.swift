@@ -96,13 +96,20 @@ struct OptionalTextField: View {
     let label: String
     @Binding var value: String?
     var prompt: String = ""
+    /// `.vertical` grows with its text (notes); `.horizontal` is a one-line field.
+    var axis: Axis = .horizontal
 
     var body: some View {
-        TextField(label, text: Binding(get: { value ?? "" }, set: { value = $0.isEmpty ? nil : $0 }), prompt: Text(prompt))
+        TextField(label, text: Binding(get: { value ?? "" }, set: { value = $0.isEmpty ? nil : $0 }), prompt: Text(prompt), axis: axis)
     }
 }
 
 /// Formats a whole-percent Decimal with one decimal, e.g. 25.926 → "25.9%".
 func percentString(_ pct: Decimal) -> String {
     pct.formatted(.number.precision(.fractionLength(1)).locale(Locale(identifier: "en_US"))) + "%"
+}
+
+/// Formats hours with grouping and up to two decimals, e.g. 2080 → "2,080", 1500 → "1,500", 6.5 → "6.5".
+func hoursString(_ value: Decimal) -> String {
+    value.formatted(.number.precision(.fractionLength(0...2)).grouping(.automatic).locale(Locale(identifier: "en_US")))
 }

@@ -10,6 +10,45 @@ final class AppDelegate: NSObject, NSApplicationDelegate {
         }
     }
 
+    func applicationDidFinishLaunching(_ notification: Notification) {
+        // Screenshot hook: come to the front so captures show the key-window appearance (selection, switches).
+        if ProcessInfo.processInfo.environment["BUCKETS_APPEARANCE"] != nil { NSApp.activate() }
+        // Screenshot hook: BUCKETS_SNAPSHOT_DIR=<dir> renders each window's content offscreen once the UI has
+        // settled, then quits. Unlike screencapture it works while the screen is locked and it captures an open sheet.
+        if let dir = ProcessInfo.processInfo.environment["BUCKETS_SNAPSHOT_DIR"], !dir.isEmpty {
+            Task { @MainActor in
+                try? await Task.sleep(for: .seconds(3))
+                Self.renderWindows(to: URL(fileURLWithPath: dir, isDirectory: true))
+                NSApp.terminate(nil)
+            }
+        }
+    }
+
+    /// Writes `main.png` for the titled window and `sheet.png` for a sheet attached to it.
+    @MainActor
+    static func renderWindows(to dir: URL) {
+        try? FileManager.default.createDirectory(at: dir, withIntermediateDirectories: true)
+        for window in NSApp.windows where window.isVisible {
+            let name: String
+            if window.sheetParent != nil { name = "sheet" } else if !window.title.isEmpty { name = "main" } else { continue }
+            guard let view = window.contentView, !view.bounds.isEmpty,
+                  let rep = view.bitmapImageRepForCachingDisplay(in: view.bounds) else { continue }
+            view.cacheDisplay(in: view.bounds, to: rep)
+            // The window paints its own background behind the content view; composite it underneath.
+            if let context = NSGraphicsContext(bitmapImageRep: rep) {
+                NSGraphicsContext.saveGraphicsState()
+                NSGraphicsContext.current = context
+                window.effectiveAppearance.performAsCurrentDrawingAppearance {
+                    window.backgroundColor.setFill()
+                    NSRect(x: 0, y: 0, width: rep.pixelsWide, height: rep.pixelsHigh).fill(using: .destinationOver)
+                }
+                NSGraphicsContext.restoreGraphicsState()
+            }
+            guard let png = rep.representation(using: .png, properties: [:]) else { continue }
+            try? png.write(to: dir.appending(path: "\(name).png"))
+        }
+    }
+
     func applicationShouldTerminateAfterLastWindowClosed(_ sender: NSApplication) -> Bool { true }
 }
 

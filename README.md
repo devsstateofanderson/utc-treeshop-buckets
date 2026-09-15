@@ -15,7 +15,7 @@ The spec of record is [docs/BRIEF.md](docs/BRIEF.md). Every resolution of an amb
 Scripts/build.sh        # generates Buckets.xcodeproj from project.yml, builds Debug, prints build/Buckets.app
 Scripts/run.sh          # builds if needed, then opens the app
 Scripts/test.sh         # runs the BucketsTests XCTest bundle from the CLI; exit status is xcodebuild's
-Scripts/screenshot.sh light|dark [buckets|projects|project|settings] [out.png] [--fixture]
+Scripts/screenshot.sh light|dark [screen] [out.png] [--fixture] [--render]   # screen: buckets, labor, equipment, materials, consumables, overhead, laborcalc, equipmentcalc, projects, project, settings
 ```
 
 The scripts regenerate the Xcode project whenever `project.yml` or anything under `Sources/` or `Tests/` changes, so add files freely and never edit the `.xcodeproj` by hand (it is not committed).
@@ -23,6 +23,8 @@ The scripts regenerate the Xcode project whenever `project.yml` or anything unde
 DerivedData lives in `~/Library/Developer/Xcode/DerivedData/Buckets-cli` (override with `BUCKETS_DERIVED_DATA`). It cannot live under `~/Desktop`: that folder is iCloud-synced on this Mac and the file provider adds Finder attributes to bundles mid-build, which makes codesign refuse them.
 
 `Scripts/screenshot.sh --fixture` runs the app against a throwaway store under `build/fixture/` holding the brief's worked-example rows. That data is written by a test in the test target; the app itself never seeds anything.
+
+`--render` asks the app itself to draw its windows offscreen (`BUCKETS_SNAPSHOT_DIR`) instead of using `screencapture`; it works while the screen is locked and it captures an open "Calculate…" sheet (`laborcalc`, `equipmentcalc`).
 
 ## Where the data is
 

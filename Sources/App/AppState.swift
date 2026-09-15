@@ -17,24 +17,43 @@ final class AppState {
     var sidebar: SidebarItem? = .bucket(.labor)
     var selectedItem: PersistentIdentifier?
     var selectedProject: PersistentIdentifier?
+    /// Screenshot hook: the detail Form opens its "Calculate…" sheet once, then clears this.
+    var wantsCalcSheet = false
+    let wantsSettingsWindow: Bool
 
     private let container: ModelContainer
     private var context: ModelContext { container.mainContext }
 
-    init(container: ModelContainer) {
+    /// `screen` is the BUCKETS_SCREEN screenshot hook (DECISIONS 48): buckets | labor | equipment | materials |
+    /// consumables | overhead | laborcalc | equipmentcalc | projects | project | settings. It only selects; it never creates data.
+    init(container: ModelContainer, screen: String? = ProcessInfo.processInfo.environment["BUCKETS_SCREEN"]) {
         self.container = container
-        // Screenshot hook (DECISIONS 48): BUCKETS_SCREEN=buckets|projects|project|settings.
-        switch ProcessInfo.processInfo.environment["BUCKETS_SCREEN"] {
+        wantsSettingsWindow = screen == "settings"
+        switch screen {
         case "projects": sidebar = .projects
         case "project":
             sidebar = .projects
             let projects = (try? context.fetch(FetchDescriptor<Project>(sortBy: [SortDescriptor(\.date, order: .reverse)]))) ?? []
             selectedProject = projects.first?.persistentModelID
+        case "buckets": selectFirstRow(in: .labor)
+        case "laborcalc":
+            selectFirstRow(in: .labor)
+            wantsCalcSheet = selectedItem != nil
+        case "equipmentcalc":
+            selectFirstRow(in: .equipment)
+            wantsCalcSheet = selectedItem != nil
+        case let name?:
+            if let bucket = Bucket(rawValue: name) { selectFirstRow(in: bucket) }
         default: break
         }
     }
 
-    var wantsSettingsWindow: Bool { ProcessInfo.processInfo.environment["BUCKETS_SCREEN"] == "settings" }
+    /// Shows `bucket` with its first row (by `sortOrder`, then name) selected so the Form is visible.
+    func selectFirstRow(in bucket: Bucket) {
+        sidebar = .bucket(bucket)
+        let items = (try? context.fetch(FetchDescriptor<BucketItem>())) ?? []
+        selectedItem = items.rows(in: bucket).first?.persistentModelID
+    }
 
     var selectedBucket: Bucket? {
         if case .bucket(let b) = sidebar { return b }

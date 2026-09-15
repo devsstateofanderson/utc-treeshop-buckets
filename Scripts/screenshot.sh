@@ -1,8 +1,11 @@
 #!/bin/zsh
 # Launch the built app with a forced appearance, capture its window, quit.
-# Usage: Scripts/screenshot.sh light|dark [screen] [output.png] [--fixture]
+# Usage: Scripts/screenshot.sh light|dark [screen] [output.png] [--fixture] [--render]
 #   screen: optional name passed to the app as BUCKETS_SCREEN so it opens on that screen
-#           (buckets | projects | project | settings); default is the app's normal start.
+#           (buckets | labor | equipment | materials | consumables | overhead | laborcalc | equipmentcalc |
+#           projects | project | settings); default is the app's normal start.
+#   --render: instead of screencapture, have the app render its windows offscreen (BUCKETS_SNAPSHOT_DIR)
+#           and write the sheet if one is open, else the main window's content. Works with the screen locked.
 #   --fixture: run the app against a throwaway store holding the BRIEF §3.3 rows, written by the
 #           FixtureStoreWriter test (test target only; the app never seeds data). Reused if present;
 #           set BUCKETS_FIXTURE=fresh to rewrite it.
@@ -13,9 +16,12 @@ if [[ -z "${DEVELOPER_DIR:-}" && -d /Applications/Xcode.app/Contents/Developer ]
   export DEVELOPER_DIR=/Applications/Xcode.app/Contents/Developer
 fi
 FIXTURE=0
+RENDER=0
 ARGS=()
 for a in "$@"; do
-  if [[ "$a" == "--fixture" ]]; then FIXTURE=1; else ARGS+=("$a"); fi
+  if [[ "$a" == "--fixture" ]]; then FIXTURE=1
+  elif [[ "$a" == "--render" ]]; then RENDER=1
+  else ARGS+=("$a"); fi
 done
 MODE="${ARGS[1]:-light}"
 SCREEN="${ARGS[2]:-}"
@@ -39,6 +45,20 @@ if [[ $FIXTURE -eq 1 ]]; then
     [[ -f "$FIXTURE_STORE" ]] || { echo "fixture store was not written" >&2; exit 1; }
   fi
   STORE_ENV=(BUCKETS_STORE="$FIXTURE_STORE")
+fi
+if [[ $RENDER -eq 1 ]]; then
+  SNAP="$ROOT/build/snapshot"
+  rm -rf "$SNAP"; mkdir -p "$SNAP"
+  env BUCKETS_APPEARANCE="$MODE" ${SCREEN:+BUCKETS_SCREEN="$SCREEN"} "${STORE_ENV[@]}" BUCKETS_SNAPSHOT_DIR="$SNAP" \
+    "$APP/Contents/MacOS/Buckets" &
+  PID=$!
+  for _ in {1..80}; do kill -0 "$PID" 2>/dev/null || break; sleep 0.25; done
+  kill "$PID" 2>/dev/null || true; wait "$PID" 2>/dev/null || true
+  if [[ -f "$SNAP/sheet.png" ]]; then mv "$SNAP/sheet.png" "$OUT"
+  elif [[ -f "$SNAP/main.png" ]]; then mv "$SNAP/main.png" "$OUT"
+  else echo "the app wrote no snapshot" >&2; exit 1; fi
+  echo "$OUT"
+  exit 0
 fi
 env BUCKETS_APPEARANCE="$MODE" ${SCREEN:+BUCKETS_SCREEN="$SCREEN"} "${STORE_ENV[@]}" "$APP/Contents/MacOS/Buckets" &
 PID=$!
