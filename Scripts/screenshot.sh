@@ -5,7 +5,8 @@
 #           (buckets | labor | equipment | materials | consumables | overhead | laborcalc | equipmentcalc |
 #           projects | project | settings); default is the app's normal start.
 #   --render: instead of screencapture, have the app render its windows offscreen (BUCKETS_SNAPSHOT_DIR)
-#           and write the sheet if one is open, else the main window (toolbar included). Works with the
+#           and write the sheet if one is open, else the Settings window if open, else the main window
+#           (toolbar included). Works with the
 #           screen locked. BUCKETS_WINDOW_SIZE=1180x1500 in the environment renders a taller window so a
 #           long screen shows past the fold.
 #   --fixture: run the app against a throwaway store holding the BRIEF §3.3 rows, written by the
@@ -59,6 +60,7 @@ if [[ $RENDER -eq 1 ]]; then
   for _ in {1..80}; do kill -0 "$PID" 2>/dev/null || break; sleep 0.25; done
   kill "$PID" 2>/dev/null || true; wait "$PID" 2>/dev/null || true
   if [[ -f "$SNAP/sheet.png" ]]; then mv "$SNAP/sheet.png" "$OUT"
+  elif [[ -f "$SNAP/settings.png" ]]; then mv "$SNAP/settings.png" "$OUT"
   elif [[ -f "$SNAP/main.png" ]]; then mv "$SNAP/main.png" "$OUT"
   else echo "the app wrote no snapshot" >&2; exit 1; fi
   echo "$OUT"

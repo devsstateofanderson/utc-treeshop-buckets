@@ -33,34 +33,66 @@ final class AppDelegate: NSObject, NSApplicationDelegate {
         }
     }
 
-    /// Writes `main.png` for the titled window and `sheet.png` for a sheet attached to it. The main window is
-    /// drawn from its frame view (title bar and toolbar included); a sheet from its content view.
+    /// Screenshot hook: builds the Settings screen for `renderWindows` (set by `BucketsApp` in a snapshot run).
+    @MainActor static var settingsSnapshot: (() -> AnyView)?
+
+    /// Writes `main.png` for the titled window, `settings.png` when the Settings window (⌘,) is open, and
+    /// `sheet.png` for a sheet attached to the main window. Windows are drawn from their frame view (title bar
+    /// and toolbar included); a sheet from its content view. The Settings scene's window is hosted by SwiftUI's
+    /// own container on macOS 26, which has no drawable layer contents while the app is in the background, so
+    /// that screen is drawn through a classic `NSHostingView` in a stand-in window of the same size and appearance.
     @MainActor
     static func renderWindows(to dir: URL) {
         try? FileManager.default.createDirectory(at: dir, withIntermediateDirectories: true)
         for window in NSApp.windows where window.isVisible {
-            let name: String
-            if window.sheetParent != nil { name = "sheet" } else if !window.title.isEmpty { name = "main" } else { continue }
-            let frameView = name == "main" ? window.contentView?.superview : nil
-            guard let view = frameView ?? window.contentView, !view.bounds.isEmpty,
-                  let rep = view.bitmapImageRepForCachingDisplay(in: view.bounds) else { continue }
-            view.cacheDisplay(in: view.bounds, to: rep)
-            // The window paints its own background behind the content view; composite it underneath.
-            if let context = NSGraphicsContext(bitmapImageRep: rep) {
-                NSGraphicsContext.saveGraphicsState()
-                NSGraphicsContext.current = context
-                window.effectiveAppearance.performAsCurrentDrawingAppearance {
-                    window.backgroundColor.setFill()
-                    NSRect(x: 0, y: 0, width: rep.pixelsWide, height: rep.pixelsHigh).fill(using: .destinationOver)
-                }
-                NSGraphicsContext.restoreGraphicsState()
+            if window.sheetParent != nil {
+                render(window.contentView, background: window, to: dir.appending(path: "sheet.png"))
+            } else if window.isSettingsWindow {
+                guard let make = settingsSnapshot else { continue }
+                let size = window.contentLayoutRect.size
+                let standIn = NSWindow(contentRect: NSRect(origin: .zero, size: size),
+                                       styleMask: [.titled, .closable, .miniaturizable], backing: .buffered, defer: false)
+                standIn.title = window.title
+                standIn.appearance = window.effectiveAppearance
+                standIn.contentView = NSHostingView(rootView: make())
+                standIn.setContentSize(size)
+                standIn.layoutIfNeeded()
+                render(standIn.contentView?.superview, background: standIn, to: dir.appending(path: "settings.png"))
+            } else if !window.title.isEmpty {
+                render(window.contentView?.superview, background: window, to: dir.appending(path: "main.png"))
             }
-            guard let png = rep.representation(using: .png, properties: [:]) else { continue }
-            try? png.write(to: dir.appending(path: "\(name).png"))
         }
     }
 
+    @MainActor
+    private static func render(_ view: NSView?, background window: NSWindow, to url: URL) {
+        guard let view else { return }
+        view.layoutSubtreeIfNeeded()
+        guard !view.bounds.isEmpty, let rep = view.bitmapImageRepForCachingDisplay(in: view.bounds) else { return }
+        view.cacheDisplay(in: view.bounds, to: rep)
+        // The window paints its own background behind the content view; composite it underneath.
+        if let context = NSGraphicsContext(bitmapImageRep: rep) {
+            NSGraphicsContext.saveGraphicsState()
+            NSGraphicsContext.current = context
+            window.effectiveAppearance.performAsCurrentDrawingAppearance {
+                window.backgroundColor.setFill()
+                NSRect(x: 0, y: 0, width: rep.pixelsWide, height: rep.pixelsHigh).fill(using: .destinationOver)
+            }
+            NSGraphicsContext.restoreGraphicsState()
+        }
+        guard let png = rep.representation(using: .png, properties: [:]) else { return }
+        try? png.write(to: url)
+    }
+
     func applicationShouldTerminateAfterLastWindowClosed(_ sender: NSApplication) -> Bool { true }
+}
+
+extension NSWindow {
+    /// The SwiftUI `Settings` scene's window (⌘,), by its identifier, or by title as a fallback.
+    var isSettingsWindow: Bool {
+        if let id = identifier?.rawValue, id.localizedCaseInsensitiveContains("settings") { return true }
+        return title == "Settings" || title.hasSuffix(" Settings")
+    }
 }
 
 @main
@@ -76,7 +108,13 @@ struct BucketsApp: App {
         } catch {
             fatalError("Buckets could not open its store at \(Store.url.path): \(error)")
         }
-        _appState = State(initialValue: AppState(container: container))
+        let state = AppState(container: container)
+        _appState = State(initialValue: state)
+        // Screenshot hook: the offscreen render draws the Settings screen itself (see AppDelegate.renderWindows).
+        if ProcessInfo.processInfo.environment["BUCKETS_SNAPSHOT_DIR"] != nil {
+            let container = container
+            AppDelegate.settingsSnapshot = { AnyView(SettingsScreen().environment(state).modelContainer(container)) }
+        }
     }
 
     var body: some Scene {
