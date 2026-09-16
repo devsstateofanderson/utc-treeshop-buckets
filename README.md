@@ -33,6 +33,18 @@ DerivedData lives in `~/Library/Developer/Xcode/DerivedData/Buckets-cli` (overri
 - **Projects**: the pricing screen. **Packages** are saved projects to start jobs from; **Loadouts** are crew formations applied from the project's Crew menu.
 - **Settings**: billable hours, labor burden and cost of money, plus Export JSON, Import JSON (replace) and Add or Update Rows (merge). The target margin (default 50%) and the minimum job (default $750) are company defaults, set under Company → Pricing defaults; every new project and every Re-price copies them (DECISIONS 70).
 
+## Installing on another Mac
+
+`Scripts/package.sh` builds the Release app and writes `Dist/Buckets-<version>.dmg` (the app plus an Applications shortcut). On the other Mac, open the image and drag Buckets to Applications.
+
+The app is ad-hoc signed (no Apple Developer ID, so it is not notarized). The first launch on a Mac that did not build it is blocked by Gatekeeper: either open System Settings → Privacy & Security and click **Open Anyway** under the Buckets message, or clear the quarantine flag once from Terminal:
+
+```bash
+xattr -cr /Applications/Buckets.app
+```
+
+Data lives outside the app, in `~/Library/Application Support/Buckets/` (the store and the Documents folder). To carry the company's data over, copy that folder, or Export JSON here and Import JSON there (documents must be copied alongside; see DECISIONS 65).
+
 ## Editions and backups
 
 - `Scripts/catalog/data/Buckets-default-catalog.json`: the blank commercial starting point (no labor or equipment, overhead as a $0 checklist, 116 materials and 57 consumables for professional tree work with links). Load it with Add or Update Rows, or run the app once with `BUCKETS_MERGE_FILE` pointing at it.
