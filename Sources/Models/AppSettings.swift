@@ -7,8 +7,8 @@ struct AppSettings: Equatable, Sendable {
     var billableHoursPerYear: Int = 1500
     /// Payroll tax + workers comp + benefits, as a whole percent of wage.
     var laborBurdenPct: Double = 30
-    /// Applied once to the whole project, whole percent.
-    var markupPct: Double = 35
+    /// The company's target profit margin (Profit ÷ Price), whole percent (DECISIONS 70). Markup is derived from it.
+    var targetMarginPct: Double = 50
     /// Hard floor, cents.
     var minimumJobCents: Int = 75000
     /// Loan rate for financed equipment, whole percent; 0 if cash.
@@ -17,7 +17,7 @@ struct AppSettings: Equatable, Sendable {
     enum Key {
         static let billableHoursPerYear = "billableHoursPerYear"
         static let laborBurdenPct = "laborBurdenPct"
-        static let markupPct = "markupPct"
+        static let targetMarginPct = "targetMarginPct"
         static let minimumJobCents = "minimumJobCents"
         static let costOfMoneyPct = "costOfMoneyPct"
     }
@@ -29,7 +29,7 @@ struct AppSettings: Equatable, Sendable {
         defaults.register(defaults: [
             Key.billableHoursPerYear: AppSettings.defaults.billableHoursPerYear,
             Key.laborBurdenPct: AppSettings.defaults.laborBurdenPct,
-            Key.markupPct: AppSettings.defaults.markupPct,
+            Key.targetMarginPct: AppSettings.defaults.targetMarginPct,
             Key.minimumJobCents: AppSettings.defaults.minimumJobCents,
             Key.costOfMoneyPct: AppSettings.defaults.costOfMoneyPct,
         ])
@@ -39,7 +39,7 @@ struct AppSettings: Equatable, Sendable {
         var s = AppSettings.defaults
         if defaults.object(forKey: Key.billableHoursPerYear) != nil { s.billableHoursPerYear = defaults.integer(forKey: Key.billableHoursPerYear) }
         if defaults.object(forKey: Key.laborBurdenPct) != nil { s.laborBurdenPct = defaults.double(forKey: Key.laborBurdenPct) }
-        if defaults.object(forKey: Key.markupPct) != nil { s.markupPct = defaults.double(forKey: Key.markupPct) }
+        if defaults.object(forKey: Key.targetMarginPct) != nil { s.targetMarginPct = defaults.double(forKey: Key.targetMarginPct) }
         if defaults.object(forKey: Key.minimumJobCents) != nil { s.minimumJobCents = defaults.integer(forKey: Key.minimumJobCents) }
         if defaults.object(forKey: Key.costOfMoneyPct) != nil { s.costOfMoneyPct = defaults.double(forKey: Key.costOfMoneyPct) }
         return s
@@ -48,7 +48,7 @@ struct AppSettings: Equatable, Sendable {
     func save(to defaults: UserDefaults = .standard) {
         defaults.set(billableHoursPerYear, forKey: Key.billableHoursPerYear)
         defaults.set(laborBurdenPct, forKey: Key.laborBurdenPct)
-        defaults.set(markupPct, forKey: Key.markupPct)
+        defaults.set(targetMarginPct, forKey: Key.targetMarginPct)
         defaults.set(minimumJobCents, forKey: Key.minimumJobCents)
         defaults.set(costOfMoneyPct, forKey: Key.costOfMoneyPct)
     }
@@ -57,9 +57,9 @@ struct AppSettings: Equatable, Sendable {
     // so 32.5 becomes exactly 32.5, never 32.49999….
     var billableHours: Decimal { Decimal(billableHoursPerYear) }
     var laborBurdenPctDecimal: Decimal { Money.decimal(from: laborBurdenPct) }
-    var markupPctDecimal: Decimal { Money.decimal(from: markupPct) }
+    var targetMarginPctDecimal: Decimal { Money.decimal(from: targetMarginPct) }
     var costOfMoneyPctDecimal: Decimal { Money.decimal(from: costOfMoneyPct) }
     var laborBurden: Decimal { laborBurdenPctDecimal / 100 }
-    var markup: Decimal { markupPctDecimal / 100 }
+    var pricingRule: PriceRule { .targetMargin(targetMarginPctDecimal) }
     var costOfMoney: Decimal { costOfMoneyPctDecimal / 100 }
 }

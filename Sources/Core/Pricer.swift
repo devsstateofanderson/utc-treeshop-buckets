@@ -18,6 +18,29 @@ struct PriceLine: Equatable, Sendable {
     }
 }
 
+/// How Price is derived from Cost (DECISIONS 70): the brief's markup, or the owner's target margin.
+///   .markup(0.35)       Price = Cost × 1.35
+///   .targetMargin(50)   Price = Cost ÷ (1 − 0.50) = Cost × 100 ÷ (100 − 50), computed as ONE division so a
+///                       terminating result (50% → exactly ×2) is exact and no half-cent tie can drift.
+enum PriceRule: Equatable, Sendable {
+    case markup(Decimal)
+    case targetMargin(Decimal)
+
+    /// The equivalent markup as a whole percent, for display: 50% margin = 100% markup.
+    var markupPercent: Decimal {
+        switch self {
+        case .markup(let f):
+            return f * 100
+        case .targetMargin(let m):
+            let m = m.isNaN ? 0 : max(0, min(m, PriceRule.maximumMarginPct))
+            return m / (100 - m) * 100
+        }
+    }
+
+    /// Margins are held below this so the division never explodes (a 95% margin is already ×20).
+    static let maximumMarginPct: Decimal = 95
+}
+
 /// Every figure the Project header shows, in cents, each rounded exactly once (DECISIONS 3).
 /// `marginPct` is the one figure left unrounded; the view formats it to one decimal.
 struct Breakdown: Equatable, Sendable {
@@ -70,8 +93,15 @@ enum Pricer {
         lines: [PriceLine], hours: Decimal, multiplier: Int, markup: Decimal,
         minimumJobCents: Int, billableHours: Decimal
     ) -> Breakdown {
+        price(lines: lines, hours: hours, multiplier: multiplier, rule: .markup(markup),
+              minimumJobCents: minimumJobCents, billableHours: billableHours)
+    }
+
+    static func price(
+        lines: [PriceLine], hours: Decimal, multiplier: Int, rule: PriceRule,
+        minimumJobCents: Int, billableHours: Decimal
+    ) -> Breakdown {
         let hours = nonNegative(hours)
-        let markup = nonNegative(markup)
         let multiplier = min(max(multiplier, 1), 3)
         let minimumJobCents = max(minimumJobCents, 0)
         let billableHours = nonNegative(billableHours)
@@ -103,7 +133,14 @@ enum Pricer {
         let exactCost = Decimal(labor) + Decimal(equipment) + Decimal(materials) + Decimal(consumables)
             + Decimal(subcontractors) + Decimal(overhead)
         let cost = Money.cents(exactCost)
-        let marked = Money.cents(Decimal(cost) * (1 + markup) * Decimal(multiplier))
+        let marked: Int
+        switch rule {
+        case .markup(let markup):
+            marked = Money.cents(Decimal(cost) * (1 + nonNegative(markup)) * Decimal(multiplier))
+        case .targetMargin(let pct):
+            let margin = min(nonNegative(pct), PriceRule.maximumMarginPct)
+            marked = Money.cents(Decimal(cost) * 100 * Decimal(multiplier) / (100 - margin))
+        }
         let price = max(minimumJobCents, marked)
         let profit = Money.cents(Decimal(price) - Decimal(cost))
         let marginPct: Decimal = price > 0 ? Decimal(profit) / Decimal(price) * 100 : 0

@@ -80,11 +80,21 @@ final class ProjectsListTests: XCTestCase {
         XCTAssertEqual(AppSettings.current(from: defaults).laborBurden, Decimal(string: "0.275")!)
     }
 
-    func testMarginNextToMarkup() {
-        XCTAssertEqual(SettingsText.marginString(markupPct: 35), "25.9%")
-        XCTAssertEqual(SettingsText.marginString(markupPct: 100), "50.0%")
-        XCTAssertEqual(SettingsText.marginString(markupPct: 0), "0.0%")
-        XCTAssertEqual(SettingsText.marginString(markupPct: Decimal(string: "32.5")!), "24.5%")
+    func testMarkupNextToMargin() {
+        XCTAssertEqual(SettingsText.markupString(marginPct: 50), "100.0%")
+        XCTAssertEqual(SettingsText.markupString(marginPct: 40), "66.7%")
+        XCTAssertEqual(SettingsText.markupString(marginPct: 0), "0.0%")
+        XCTAssertEqual(SettingsText.markupString(marginPct: Decimal(string: "32.5")!), "48.1%")
+        XCTAssertEqual(SettingsText.markupString(marginPct: 200), "1,900.0%", "held at the 95% ceiling")
+    }
+
+    func testMarginFieldRefusesImpossibleMargins() {
+        XCTAssertEqual(SettingsField.marginPercent(50), 50)
+        XCTAssertEqual(SettingsField.marginPercent(0), 0)
+        XCTAssertEqual(SettingsField.marginPercent(95), 95)
+        XCTAssertNil(SettingsField.marginPercent(100), "a 100% margin has no price")
+        XCTAssertNil(SettingsField.marginPercent(-1))
+        XCTAssertNil(SettingsField.marginPercent(.nan))
     }
 
     // MARK: Export / Import texts (DECISIONS 43)

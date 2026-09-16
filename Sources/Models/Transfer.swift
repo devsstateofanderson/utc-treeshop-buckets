@@ -102,14 +102,17 @@ struct TransferDocument: Codable, Equatable {
         var lines: [Line]
         var isTemplate: Bool?
         var crewName: String?
+        var targetMarginPct: Decimal?
     }
 
     struct SettingsRecord: Codable, Equatable {
         var billableHoursPerYear: Int
         var laborBurdenPct: Double
-        var markupPct: Double
+        /// Written for older readers; ignored on import when `targetMarginPct` is present.
+        var markupPct: Double?
         var minimumJobCents: Int
         var costOfMoneyPct: Double
+        var targetMarginPct: Double?
     }
 
     var formatVersion: Int
@@ -198,8 +201,9 @@ enum Transfer {
             formatVersion: TransferDocument.currentFormatVersion,
             exportedAt: exportedAt,
             settings: .init(billableHoursPerYear: settings.billableHoursPerYear, laborBurdenPct: settings.laborBurdenPct,
-                            markupPct: settings.markupPct, minimumJobCents: settings.minimumJobCents,
-                            costOfMoneyPct: settings.costOfMoneyPct),
+                            markupPct: NSDecimalNumber(decimal: Project.rounded2(settings.pricingRule.markupPercent)).doubleValue,
+                            minimumJobCents: settings.minimumJobCents, costOfMoneyPct: settings.costOfMoneyPct,
+                            targetMarginPct: settings.targetMarginPct),
             items: items.map { i in
                 .init(bucket: i.bucket, name: i.name, rateCents: i.rateCents, unit: i.unit, isActive: i.isActive,
                       source: i.source, notes: i.notes, calcInputs: i.calcInputs.flatMap(JSONValue.from), sortOrder: i.sortOrder,
@@ -212,7 +216,7 @@ enum Transfer {
                       lines: p.sortedLines.map { l in
                           .init(itemIndex: l.item.flatMap { index[$0.persistentModelID] }, bucket: l.bucket, name: l.name,
                                 unit: l.unit, rateCents: l.rateCents, isOn: l.isOn, qty: l.qty, actualQty: l.actualQty)
-                      }, isTemplate: p.isTemplate, crewName: p.crewName)
+                      }, isTemplate: p.isTemplate, crewName: p.crewName, targetMarginPct: p.targetMarginPct)
             },
             subcontractors: subs.map { s in
                 .init(name: s.name, contact: s.contact, phone: s.phone, email: s.email, notes: s.notes, isActive: s.isActive, sortOrder: s.sortOrder)
@@ -307,6 +311,7 @@ enum Transfer {
                                   notes: p.notes)
             project.isTemplate = p.isTemplate ?? false
             project.crewName = p.crewName
+            project.targetMarginPct = p.targetMarginPct
             context.insert(project)
             project.lines = p.lines.map { l in
                 ProjectLine(item: l.itemIndex.map { items[$0] }, bucket: l.bucket, name: l.name, unit: l.unit,
@@ -314,8 +319,12 @@ enum Transfer {
             }
         }
         try context.save()
+        // Older files carry only a markup: margin = markup ÷ (100 + markup).
+        let margin = doc.settings.targetMarginPct
+            ?? doc.settings.markupPct.map { $0 / (100 + $0) * 100 }
+            ?? AppSettings.defaults.targetMarginPct
         return AppSettings(billableHoursPerYear: doc.settings.billableHoursPerYear, laborBurdenPct: doc.settings.laborBurdenPct,
-                        markupPct: doc.settings.markupPct, minimumJobCents: doc.settings.minimumJobCents,
+                        targetMarginPct: margin, minimumJobCents: doc.settings.minimumJobCents,
                         costOfMoneyPct: doc.settings.costOfMoneyPct)
     }
 

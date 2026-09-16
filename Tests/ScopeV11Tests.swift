@@ -99,7 +99,7 @@ final class ScopeV11Tests: XCTestCase {
         package.crewName = "Full crew"
         let marcus = try StoreFixture.items(in: context).first { $0.name == "Marcus" }!
         marcus.rateCents = 6000
-        var settings = AppSettings(); settings.markupPct = 40
+        var settings = AppSettings(); settings.targetMarginPct = 40
         let job = package.instantiate(date: Date(timeIntervalSince1970: 1_800_000_000), items: try StoreFixture.items(in: context), settings: settings)
         context.insert(job)
         try context.save()
@@ -110,7 +110,8 @@ final class ScopeV11Tests: XCTestCase {
         XCTAssertEqual(job.hours, 8)
         XCTAssertEqual(job.line("Marcus").rateCents, 6000, "today's rates")
         XCTAssertEqual(package.line("Marcus").rateCents, 5408, "the package keeps its snapshot until re-priced")
-        XCTAssertEqual(job.markupPct, 40)
+        XCTAssertEqual(job.targetMarginPct, 40, "instantiated at today's target margin")
+        XCTAssertEqual(job.markupPct, Decimal(string: "66.67")!)
         XCTAssertEqual(job.line("Dump fee").qty, 2)
         let saved = job.asPackage(date: .now)
         XCTAssertTrue(saved.isTemplate)

@@ -10,8 +10,6 @@ struct SettingsScreen: View {
     @Environment(\.modelContext) private var modelContext
     @AppStorage(AppSettings.Key.billableHoursPerYear) private var billableHoursPerYear = AppSettings.defaults.billableHoursPerYear
     @AppStorage(AppSettings.Key.laborBurdenPct) private var laborBurdenPct = AppSettings.defaults.laborBurdenPct
-    @AppStorage(AppSettings.Key.markupPct) private var markupPct = AppSettings.defaults.markupPct
-    @AppStorage(AppSettings.Key.minimumJobCents) private var minimumJobCents = AppSettings.defaults.minimumJobCents
     @AppStorage(AppSettings.Key.costOfMoneyPct) private var costOfMoneyPct = AppSettings.defaults.costOfMoneyPct
     @State private var pendingImport: PendingImport?
     @State private var confirmingImport = false
@@ -21,7 +19,7 @@ struct SettingsScreen: View {
 
     var body: some View {
         Form {
-            Section("Pricing") {
+            Section {
                 field("Billable hours per year", SettingsText.billableHoursCaption) {
                     DecimalField(label: "Billable hours per year", value: SettingsField.billableHours($billableHoursPerYear),
                                  placeholder: "1500")
@@ -35,28 +33,17 @@ struct SettingsScreen: View {
                         .frame(width: 100)
                     Text("%").foregroundStyle(.secondary)
                 }
-                field("Markup", SettingsText.markupCaption) {
-                    DecimalField(label: "Markup", value: SettingsField.percent($markupPct), placeholder: "35")
-                        .labelsHidden()
-                        .frame(width: 100)
-                    Text("%").foregroundStyle(.secondary)
-                    // BRIEF §1: the input is markup; margin is always visible next to it.
-                    Text("= \(SettingsText.marginString(markupPct: Money.decimal(from: markupPct))) margin")
-                        .foregroundStyle(.secondary)
-                        .monospacedDigit()
-                }
-                field("Minimum job", SettingsText.minimumJobCaption) {
-                    CentsField(label: "Minimum job", cents: $minimumJobCents, placeholder: "750.00")
-                        .labelsHidden()
-                        .frame(width: 100)
-                    Text("dollars").foregroundStyle(.secondary)
-                }
                 field("Cost of money", SettingsText.costOfMoneyCaption) {
                     DecimalField(label: "Cost of money", value: SettingsField.percent($costOfMoneyPct), placeholder: "0")
                         .labelsHidden()
                         .frame(width: 100)
                     Text("%").foregroundStyle(.secondary)
                 }
+            } header: {
+                Text("Rates")
+            } footer: {
+                Text("The target margin and the minimum job are company defaults: set them in the Company profile.")
+                    .font(.caption).foregroundStyle(.secondary)
             }
             Section {
                 LabeledContent {
@@ -225,6 +212,18 @@ enum SettingsField {
                 set: { stored.wrappedValue = double($0) })
     }
 
+    /// The target margin: a whole percent from 0 up to `PriceRule.maximumMarginPct`; anything else is ignored so
+    /// the last good value stays (a 100% margin has no price).
+    static func margin(_ stored: Binding<Double>) -> Binding<Decimal> {
+        Binding(get: { Money.decimal(from: stored.wrappedValue) },
+                set: { if let pct = marginPercent($0) { stored.wrappedValue = double(pct) } })
+    }
+
+    static func marginPercent(_ value: Decimal) -> Decimal? {
+        guard value.isFinite, value >= 0, value <= PriceRule.maximumMarginPct else { return nil }
+        return value
+    }
+
     static func double(_ value: Decimal) -> Double {
         guard value.isFinite, value > 0 else { return 0 }
         return NSDecimalNumber(decimal: value).doubleValue
@@ -235,14 +234,13 @@ enum SettingsField {
 enum SettingsText {
     static let billableHoursCaption = "Crew project-hours per year; divides labor and overhead. Changing it re-prices overhead on existing projects."
     static let laborBurdenCaption = "Payroll tax, workers comp and benefits, as a % of wage. The default for the labor calculator."
-    static let markupCaption = "Applied once to the whole project, never per row. Copied onto new projects; Re-price refreshes it."
+    static let marginCaption = "Profit as a share of the price. Price = Cost ÷ (1 − margin); 50% margin doubles the cost (a 100% markup). Copied onto new projects; Re-price refreshes it."
     static let minimumJobCaption = "Hard floor on every price. Copied onto new projects; Re-price refreshes it."
     static let costOfMoneyCaption = "Loan rate for financed equipment; 0 if paid cash. Used by the equipment calculator."
 
-    /// "25.9%" for a 35% markup: margin = markup ÷ (1 + markup).
-    static func marginString(markupPct: Decimal) -> String {
-        guard markupPct.isFinite, markupPct > 0 else { return percentString(0) }
-        return percentString(markupPct / (100 + markupPct) * 100)
+    /// "100%" markup for a 50% margin: markup = margin ÷ (100 − margin).
+    static func markupString(marginPct: Decimal) -> String {
+        percentString(PriceRule.targetMargin(marginPct).markupPercent)
     }
 
     /// "Buckets-export-2026-09-14.json", the day in the local calendar.

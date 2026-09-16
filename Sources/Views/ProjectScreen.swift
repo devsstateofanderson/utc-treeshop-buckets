@@ -138,7 +138,7 @@ private struct ProjectEditor: View {
         }
         Button { reprice() } label: { Label("Re-price", systemImage: "arrow.clockwise") }
             .labelStyle(.titleAndIcon)
-            .help("Copy today's rates, markup and minimum onto this project (toggles, quantities and hours stay)")
+            .help("Copy today's rates, target margin and minimum onto this project (toggles, quantities and hours stay)")
         Button { copy(ProjectText.price(name: project.displayName, priceCents: breakdown.price)) } label: {
             Label("Copy price", systemImage: "doc.on.doc")
         }
@@ -148,7 +148,7 @@ private struct ProjectEditor: View {
             Label("Copy breakdown", systemImage: "list.bullet.clipboard")
         }
         .labelStyle(.titleAndIcon)
-        .help("Copy the bucket subtotals, cost, markup, price and profit — internal, no rows")
+        .help("Copy the bucket subtotals, cost, margin, price and profit — internal, no rows")
     }
 
     /// Category groups inside a bucket section, collapsed until opened (DECISIONS 69).
@@ -224,7 +224,7 @@ private struct ProjectHeader: View {
 
             HStack(alignment: .top, spacing: 8) {
                 figure("Cost", Money.format(breakdown.cost))
-                figure("Markup", ProjectText.markupString(project.markupPct))
+                figure(project.targetMarginPct == nil ? "Markup" : "Target margin", ProjectText.pricingString(project))
                 VStack(alignment: .leading, spacing: 2) {
                     Text("Price").font(.caption).foregroundStyle(.secondary)
                     Text(Money.format(breakdown.price)).font(.largeTitle).bold().monospacedDigit()
@@ -403,14 +403,19 @@ enum ProjectText {
         lines += Bucket.allCases.map { "\($0.title): \(Money.format(b[$0]))" }
         lines += [
             "Cost: \(Money.format(b.cost))",
-            "Markup: \(markupString(project.markupPct))",
+            "\(project.targetMarginPct == nil ? "Markup" : "Target margin"): \(pricingString(project))",
             "Price: \(Money.format(b.price))",
             "Profit: \(Money.format(b.profit)) (\(percentString(b.marginPct)) margin)",
         ]
         return lines.joined(separator: "\n")
     }
 
-    /// "35%", "32.5%" — the snapshot markup, read-only in the header (DECISIONS 24).
+    /// "50%" target margin, or the legacy "35%" markup (DECISIONS 70).
+    static func pricingString(_ project: Project) -> String {
+        markupString(project.targetMarginPct ?? project.markupPct)
+    }
+
+    /// "35%", "32.5%" — a whole-percent figure without trailing zeros.
     static func markupString(_ pct: Decimal) -> String {
         pct.formatted(.number.precision(.fractionLength(0...2)).locale(Locale(identifier: "en_US"))) + "%"
     }

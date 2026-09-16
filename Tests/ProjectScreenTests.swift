@@ -65,6 +65,13 @@ final class ProjectScreenTests: XCTestCase {
         XCTAssertTrue(text.contains("\nMultiplier: 2× After-hours\n"))
         XCTAssertTrue(text.contains("\nMarkup: 32.5%\n"))
         XCTAssertEqual(text.components(separatedBy: "\n").count, 14)
+        project.targetMarginPct = 50
+        let margin = ProjectText.breakdown(project, breakdown: project.breakdown(billableHours: 1500))
+        XCTAssertTrue(margin.contains("\nTarget margin: 50%\n"), margin)
+        XCTAssertFalse(margin.contains("Markup"))
+        XCTAssertEqual(ProjectText.pricingString(project), "50%")
+        project.targetMarginPct = nil
+        XCTAssertEqual(ProjectText.pricingString(project), "32.5%")
     }
 
     func testMultiplierTitlesAndMarkupString() {

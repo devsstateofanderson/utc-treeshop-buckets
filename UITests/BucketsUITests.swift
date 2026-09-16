@@ -96,16 +96,16 @@ final class BucketsUITests: XCTestCase {
         type(into: app.textFields["Hours"].firstMatch, "8")
         toggle("Mini skid steer")                 // §3.3: no skid steer
         toggle("Dump fee"); qty("Dump fee", "2")  // 2 dump loads
-        expectPrice("$2,501.50")
+        expectPrice("$3,705.92")                  // 50% target margin: twice the $1,852.96 cost (DECISIONS 70)
 
         toggle("Miguel")
-        expectPrice("$2,170.48")
+        expectPrice("$3,215.52")
 
         toggle("Miguel"); toggle("Mini skid steer")
-        expectPrice("$2,674.62")
+        expectPrice("$3,962.40")
 
         toggle("Stump grinding (sub)"); qty("Stump grinding (sub)", "3")
-        expectPrice("$3,039.12")
+        expectPrice("$4,502.40")
 
         // After the job: actual hours → variance appears (BRIEF §3.5).
         type(into: app.textFields["Actual hours"].firstMatch, "10")
@@ -114,10 +114,10 @@ final class BucketsUITests: XCTestCase {
         // Customer-safe copy: name + price only.
         app.buttons["Copy price"].firstMatch.click()
         let pasted = NSPasteboard.general.string(forType: .string) ?? ""
-        XCTAssertTrue(pasted.hasSuffix("$3,039.12"), pasted)
+        XCTAssertTrue(pasted.hasSuffix("$4,502.40"), pasted)
         XCTAssertFalse(pasted.contains("Stump"), "line items must never be copied")
 
         // The list shows the project and its variance.
-        XCTAssertTrue(app.staticTexts["$3,039.12"].firstMatch.exists)
+        XCTAssertTrue(app.staticTexts["$4,502.40"].firstMatch.exists)
     }
 }

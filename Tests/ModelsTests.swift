@@ -46,6 +46,9 @@ enum StoreFixture {
     /// The §3.3 base project: 8 hours, skid steer off, dump fee on × 2.
     static func baseProject(in context: ModelContext) throws -> Project {
         let project = Project.make(date: Date(timeIntervalSince1970: 1_700_000_000), items: try items(in: context), settings: settings)
+        // The brief's worked example prices at its 35% markup; margin projects are covered by MarginPricingTests (DECISIONS 70).
+        project.targetMarginPct = nil
+        project.markupPct = 35
         context.insert(project)
         project.hours = 8
         project.line("Mini skid steer").isOn = false
@@ -111,9 +114,10 @@ final class ModelsTests: XCTestCase {
         try context.save()
         XCTAssertNil(project.line("Dump fee").item)
         XCTAssertEqual(project.priceCents, 250_150)
-        // Re-price leaves the orphan alone and does not resurrect the row.
+        // Re-price leaves the orphan alone and does not resurrect the row; it now prices at the company's 50% target
+        // margin (DECISIONS 70), so the same $1,852.96 cost doubles.
         project.reprice(items: try StoreFixture.items(in: context), settings: StoreFixture.settings)
-        XCTAssertEqual(project.priceCents, 250_150)
+        XCTAssertEqual(project.priceCents, 370_592)
         XCTAssertEqual(project.lines.count, 25)
     }
 
@@ -128,11 +132,12 @@ final class ModelsTests: XCTestCase {
         context.insert(newMaterial)
         try context.save()
         var settings = StoreFixture.settings
-        settings.markupPct = 40; settings.minimumJobCents = 100_000
+        settings.targetMarginPct = 40; settings.minimumJobCents = 100_000
         project.reprice(items: try StoreFixture.items(in: context), settings: settings)
         XCTAssertEqual(project.line("Marcus").rateCents, 6000)
         XCTAssertTrue(project.line("Miguel").isOn)
-        XCTAssertEqual(project.markupPct, 40)
+        XCTAssertEqual(project.targetMarginPct, 40, "Re-price copies the company's target margin (DECISIONS 70)")
+        XCTAssertEqual(project.markupPct, Decimal(string: "66.67")!, "and its markup equivalent, for display")
         XCTAssertEqual(project.minimumJobCents, 100_000)
         XCTAssertEqual(project.lines.count, 27)
         XCTAssertTrue(project.line("Ana").isOn)
@@ -140,8 +145,9 @@ final class ModelsTests: XCTestCase {
         XCTAssertEqual(project.line("Sod").qty, 1)
         XCTAssertFalse(project.line("Mini skid steer").isOn, "toggles survive re-price")
         XCTAssertEqual(project.line("Dump fee").qty, 2, "quantities survive re-price")
-        // (212.87 + 5.92 + 40.00) × 8 + 150 = 2220.32 × 1.40
-        XCTAssertEqual(project.priceCents, Money.cents(Decimal(222_032) * Decimal(string: "1.40")!))
+        // (212.87 + 5.92 + 40.00) × 8 + 150 = 2220.32 cost, ÷ (1 − 0.40) at the 40% target margin = 3700.53
+        XCTAssertEqual(project.priceCents, Money.cents(Decimal(222_032) * 100 / 60))
+        XCTAssertEqual(project.priceCents, 370_053)
     }
 
     func testDuplicateCopiesEverythingAndClearsActuals() throws {
@@ -270,9 +276,9 @@ final class ModelsTests: XCTestCase {
 
     func testSettingsAreExactDecimals() {
         var s = AppSettings()
-        s.laborBurdenPct = 32.5; s.markupPct = 35; s.costOfMoneyPct = 7
+        s.laborBurdenPct = 32.5; s.targetMarginPct = 42.5; s.costOfMoneyPct = 7
         XCTAssertEqual(s.laborBurden, Decimal(string: "0.325")!)
-        XCTAssertEqual(s.markup, Decimal(string: "0.35")!)
+        XCTAssertEqual(s.pricingRule, .targetMargin(Decimal(string: "42.5")!))
         XCTAssertEqual(s.costOfMoney, Decimal(string: "0.07")!)
         XCTAssertEqual(s.billableHours, 1500)
         XCTAssertEqual(Money.decimal(from: 0.1 + 0.2), Decimal(string: "0.30000000000000004")!)

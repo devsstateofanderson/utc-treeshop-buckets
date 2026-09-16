@@ -9,8 +9,11 @@ import SwiftData
     var hours: Decimal
     /// 1 normal · 2 after-hours · 3 emergency
     var multiplier: Int
-    /// Whole percent, snapshot from Settings at creation (refreshed by Re-price).
+    /// Whole percent. Before DECISIONS 70 this was the input; now it is the markup equivalent of the target margin,
+    /// kept for display and for projects created before margins existed (`targetMarginPct == nil`).
     var markupPct: Decimal
+    /// The target profit margin this project prices at, whole percent, snapshot from the company defaults (DECISIONS 70).
+    var targetMarginPct: Decimal?
     /// Snapshot from Settings at creation (refreshed by Re-price).
     var minimumJobCents: Int
     var actualHours: Decimal?
@@ -91,9 +94,25 @@ import SwiftData
 extension Project {
     var markup: Decimal { markupPct / 100 }
 
+    /// Target margin when the project has one, else the legacy markup (DECISIONS 70).
+    var pricingRule: PriceRule { targetMarginPct.map { .targetMargin($0) } ?? .markup(markup) }
+
+    /// Snapshots the company's pricing defaults: the target margin and, for display, its markup equivalent.
+    func setPricing(from settings: AppSettings) {
+        targetMarginPct = settings.targetMarginPctDecimal
+        markupPct = Project.rounded2(settings.pricingRule.markupPercent)
+        minimumJobCents = settings.minimumJobCents
+    }
+
+    static func rounded2(_ x: Decimal) -> Decimal {
+        var value = x, out = Decimal()
+        NSDecimalRound(&out, &value, 2, .plain)
+        return out
+    }
+
     /// The figures the header shows. Pure Core math on the line snapshots (DECISIONS 1).
     func breakdown(billableHours: Decimal) -> Breakdown {
-        Pricer.price(lines: lines.map(\.priceLine), hours: hours, multiplier: multiplier, markup: markup,
+        Pricer.price(lines: lines.map(\.priceLine), hours: hours, multiplier: multiplier, rule: pricingRule,
                      minimumJobCents: minimumJobCents, billableHours: billableHours)
     }
 
@@ -102,7 +121,7 @@ extension Project {
         guard let actualHours else { return nil }
         let estimate = breakdown(billableHours: billableHours)
         let actual = Pricer.price(lines: lines.map(\.actualPriceLine), hours: actualHours, multiplier: multiplier,
-                                  markup: markup, minimumJobCents: minimumJobCents, billableHours: billableHours)
+                                  rule: pricingRule, minimumJobCents: minimumJobCents, billableHours: billableHours)
         return Actuals(estimate: estimate, actual: actual)
     }
 
@@ -145,7 +164,8 @@ extension Project {
     /// A new project: one line per active row, hourly on, quantity off with qty 1; markup and minimum from Settings.
     static func make(name: String = "New project", date: Date, items: [BucketItem], settings: AppSettings) -> Project {
         let project = Project(name: name, date: date, hours: 0, multiplier: 1,
-                              markupPct: settings.markupPctDecimal, minimumJobCents: settings.minimumJobCents)
+                              markupPct: 0, minimumJobCents: settings.minimumJobCents)
+        project.setPricing(from: settings)
         project.lines = items.filter(\.isActive).map { ProjectLine(snapshotOf: $0) }
         return project
     }
@@ -157,6 +177,7 @@ extension Project {
                            markupPct: markupPct, minimumJobCents: minimumJobCents, actualHours: nil, notes: notes)
         copy.isTemplate = isTemplate
         copy.crewName = crewName
+        copy.targetMarginPct = targetMarginPct
         copy.lines = lines.map { line in
             ProjectLine(item: line.item, bucket: line.bucket, name: line.name, unit: line.unit,
                         rateCents: line.rateCents, isOn: line.isOn, qty: line.qty, actualQty: nil)
@@ -203,8 +224,7 @@ extension Project {
     /// and append a line for every active row the project lacks.
     func reprice(items: [BucketItem], settings: AppSettings) {
         for line in lines { line.refreshSnapshot() }
-        markupPct = settings.markupPctDecimal
-        minimumJobCents = settings.minimumJobCents
+        setPricing(from: settings)
         let linked = Set(lines.compactMap { $0.item?.persistentModelID })
         for item in items where item.isActive && !linked.contains(item.persistentModelID) {
             lines.append(ProjectLine(snapshotOf: item))

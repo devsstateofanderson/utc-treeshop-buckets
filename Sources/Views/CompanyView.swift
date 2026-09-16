@@ -22,6 +22,7 @@ private struct CompanyForm: View {
     var body: some View {
         Form {
             CompanyIdentitySection(company: company)
+            CompanyPricingSection()
             CompanyLicensesSection(company: company)
             Section("Insurance") {
                 PolicyRow(title: "General liability", carrier: $company.glCarrier, number: $company.glPolicy, expires: $company.glExpires)
@@ -72,6 +73,29 @@ private struct CompanyLicensesSection: View {
                               prompt: "Business tax receipt, ISA certifications, DOT number, pesticide license…", axis: .vertical)
         }
         .onChange(of: company.licenses) { _, _ in try? modelContext.save() }
+    }
+}
+
+/// The company's pricing defaults (DECISIONS 70): every new project and every Re-price copies these two figures.
+/// They live in UserDefaults like the other settings so the Core math and the launch hooks see one source.
+private struct CompanyPricingSection: View {
+    @AppStorage(AppSettings.Key.targetMarginPct) private var targetMarginPct = AppSettings.defaults.targetMarginPct
+    @AppStorage(AppSettings.Key.minimumJobCents) private var minimumJobCents = AppSettings.defaults.minimumJobCents
+
+    var body: some View {
+        Section {
+            VStack(alignment: .leading, spacing: 4) {
+                DecimalField(label: "Target margin", value: SettingsField.margin($targetMarginPct), placeholder: "50")
+                Text("\(SettingsText.marginCaption) Equivalent markup: \(SettingsText.markupString(marginPct: Money.decimal(from: targetMarginPct))).")
+                    .font(.caption).foregroundStyle(.secondary)
+            }
+            VStack(alignment: .leading, spacing: 4) {
+                CentsField(label: "Minimum job", cents: $minimumJobCents, placeholder: "750.00")
+                Text(SettingsText.minimumJobCaption).font(.caption).foregroundStyle(.secondary)
+            }
+        } header: {
+            Text("Pricing defaults")
+        }
     }
 }
 

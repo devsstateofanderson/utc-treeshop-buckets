@@ -28,10 +28,10 @@ DerivedData lives in `~/Library/Developer/Xcode/DerivedData/Buckets-cli` (overri
 
 ## What is in it (v1.1)
 
-- **Company**: profile (name, address, licenses, three insurance policies with expirations) and a documents shelf for COIs, policies and certifications with expiry warnings.
+- **Company**: profile (name, address, licenses, three insurance policies with expirations), the pricing defaults (target margin, minimum job) and a documents shelf for COIs, policies and certifications with expiry warnings.
 - **Buckets**: Labor, Equipment (with unit codes, make, model, year, serial), Materials, Consumables, Subcontractors (each sub with its own priced services), Overhead. Every row has a category and a product link; tables are searchable and sortable.
 - **Projects**: the pricing screen. **Packages** are saved projects to start jobs from; **Loadouts** are crew formations applied from the project's Crew menu.
-- **Settings**: the five numbers, Export JSON, Import JSON (replace) and Add or Update Rows (merge).
+- **Settings**: billable hours, labor burden and cost of money, plus Export JSON, Import JSON (replace) and Add or Update Rows (merge). The target margin (default 50%) and the minimum job (default $750) are company defaults, set under Company → Pricing defaults; every new project and every Re-price copies them (DECISIONS 70).
 
 ## Editions and backups
 
@@ -54,7 +54,7 @@ Set `BUCKETS_STORE=/some/path.store` in the environment to run against a differe
 
 ## Export / Import JSON
 
-Settings → **Export JSON** writes one file: format version, the five settings, every row in every bucket, and every project with its lines. Lines point at rows by their position in the file's row list, so the models carry no ids. Calculator inputs are embedded as readable JSON.
+Settings → **Export JSON** writes one file: format version, the settings (including the target margin), every row in every bucket, and every project with its lines. Lines point at rows by their position in the file's row list, so the models carry no ids. Calculator inputs are embedded as readable JSON.
 
 Settings → **Import JSON** replaces everything: after one confirmation, every row and project is deleted, the file's rows and projects are loaded, and the file's settings are applied. There is no merge. Export before importing if the current data matters.
 
