@@ -61,15 +61,15 @@ final class CompanyAndUnitCodeTests: XCTestCase {
         let container = try Store.inMemoryContainer()
         let context = container.mainContext
         let saw = BucketItem(bucket: .equipment, name: "Stihl 500i", rateCents: 749, sortOrder: 0)
-        saw.unitCode = "SAW-01"; saw.make = "STIHL"; saw.model = "MS 500i"; saw.year = 2023; saw.serial = "5001"
+        saw.make = "STIHL"; saw.model = "MS 500i"; saw.year = 2023; saw.serial = "5001"
         context.insert(saw); try context.save()
         let data = try Transfer.exportJSON(from: context, settings: AppSettings(), exportedAt: .now)
         let second = try Store.inMemoryContainer()
         try Transfer.importJSON(data, into: second.mainContext)
         let back = try second.mainContext.fetch(FetchDescriptor<BucketItem>())[0]
-        XCTAssertEqual([back.unitCode, back.make, back.model, back.serial], ["SAW-01", "STIHL", "MS 500i", "5001"])
+        XCTAssertEqual([back.unitCode, back.make, back.model, back.serial], [nil, "STIHL", "MS 500i", "5001"])
         XCTAssertEqual(back.year, 2023)
-        // Merge fills identification on a matching row and leaves it alone when the file has none.
+        // A coded file row claims the uncoded row of that name and gives it the code; other fields it omits stay.
         let file = """
         {"formatVersion": 1, "exportedAt": "2026-09-16T00:00:00Z",
          "settings": {"billableHoursPerYear": 1500, "laborBurdenPct": 30, "markupPct": 35, "minimumJobCents": 75000, "costOfMoneyPct": 0},
@@ -79,5 +79,42 @@ final class CompanyAndUnitCodeTests: XCTestCase {
         XCTAssertEqual(try Transfer.mergeItems(Data(file.utf8), into: context).updated, 1)
         XCTAssertEqual(saw.unitCode, "SAW-09")
         XCTAssertEqual(saw.serial, "5001")
+    }
+
+    func testMergeTellsIdenticalUnitsApartByCode() throws {
+        let container = try Store.inMemoryContainer()
+        let context = container.mainContext
+        func row(_ code: String, serial: String) -> String {
+            #"{"bucket": "equipment", "name": "Stihl 500i", "rateCents": 749, "unit": "hr", "isActive": true, "source": null, "notes": null, "calcInputs": null, "sortOrder": 0, "unitCode": "\#(code)", "serial": "\#(serial)"}"#
+        }
+        let file = """
+        {"formatVersion": 1, "exportedAt": "2026-09-16T00:00:00Z",
+         "settings": {"billableHoursPerYear": 1500, "laborBurdenPct": 30, "markupPct": 35, "minimumJobCents": 75000, "costOfMoneyPct": 0},
+         "items": [\(row("SAW-01", serial: "A")), \(row("SAW-02", serial: "B"))], "projects": []}
+        """
+        XCTAssertEqual(try Transfer.mergeItems(Data(file.utf8), into: context).added, 2)
+        let saws = try context.fetch(FetchDescriptor<BucketItem>()).sorted { ($0.unitCode ?? "") < ($1.unitCode ?? "") }
+        XCTAssertEqual(saws.map(\.serial), ["A", "B"])
+        // Re-merging updates each unit by its own code.
+        let again = file.replacingOccurrences(of: "\"serial\": \"B\"", with: "\"serial\": \"B2\"")
+        let result = try Transfer.mergeItems(Data(again.utf8), into: context)
+        XCTAssertEqual(result.added, 0); XCTAssertEqual(result.updated, 1)
+        XCTAssertEqual(saws[1].serial, "B2")
+        // An uncoded file row cannot pick between two coded units of that name: it is skipped, nothing is added.
+        let uncodedRow = #"{"bucket": "equipment", "name": "Stihl 500i", "rateCents": 749, "unit": "hr", "isActive": true, "source": null, "notes": null, "calcInputs": null, "sortOrder": 0, "serial": "Z"}"#
+        let uncoded = """
+        {"formatVersion": 1, "exportedAt": "2026-09-16T00:00:00Z",
+         "settings": {"billableHoursPerYear": 1500, "laborBurdenPct": 30, "markupPct": 35, "minimumJobCents": 75000, "costOfMoneyPct": 0},
+         "items": [\(uncodedRow)], "projects": []}
+        """
+        let skipped = try Transfer.mergeItems(Data(uncoded.utf8), into: context)
+        XCTAssertEqual(skipped.added, 0); XCTAssertEqual(skipped.updated, 0); XCTAssertEqual(skipped.unchanged, 1)
+        XCTAssertEqual(try context.fetch(FetchDescriptor<BucketItem>()).count, 2)
+        XCTAssertEqual(saws.map(\.serial), ["A", "B2"])
+        // With one coded unit of that name left, an uncoded file row updates it and keeps its code.
+        context.delete(saws[1]); try context.save()
+        XCTAssertEqual(try Transfer.mergeItems(Data(uncoded.utf8), into: context).updated, 1)
+        XCTAssertEqual(saws[0].unitCode, "SAW-01")
+        XCTAssertEqual(saws[0].serial, "Z")
     }
 }

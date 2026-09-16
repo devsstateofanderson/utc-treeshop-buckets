@@ -365,7 +365,25 @@ enum Transfer {
         for i in doc.items {
             let key = normalized(i.name)
             let sub = i.subcontractorIndex.flatMap { $0 < fileSubs.count ? fileSubs[$0] : nil }
-            if let match = existing.first(where: { $0.bucket == i.bucket && normalized($0.name) == key }) {
+            // Identical units (two "Stihl 500i") are told apart by unit code (DECISIONS 66): a coded file row matches the
+            // row with that code, else an uncoded row of that name (which then gets the code). An uncoded file row matches
+            // an uncoded row of that name, else the one coded row of that name; with several coded units it is skipped.
+            let code = i.unitCode.map(normalized).flatMap { $0.isEmpty ? nil : $0 }
+            let sameName = existing.filter { $0.bucket == i.bucket && normalized($0.name) == key }
+            let uncoded = sameName.first { ($0.unitCode ?? "").isEmpty }
+            let coded = sameName.filter { !($0.unitCode ?? "").isEmpty }
+            let match: BucketItem?
+            if let code {
+                match = existing.first { $0.bucket == i.bucket && $0.unitCode.map(normalized) == code } ?? uncoded
+            } else if let uncoded {
+                match = uncoded
+            } else if coded.count > 1 {
+                result.unchanged += 1
+                continue
+            } else {
+                match = coded.first
+            }
+            if let match {
                 merged.append(match)
                 if let sub { match.subcontractor = sub }
                 // A file may archive a row it names; it never un-archives one (DECISIONS 55).
