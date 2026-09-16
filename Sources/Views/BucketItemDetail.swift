@@ -117,7 +117,7 @@ private struct ItemForm: View {
                 Text("Cost per year")
                 Text(overheadCaption).foregroundStyle(.secondary)
             }
-        case .materials, .consumables:
+        case .materials, .consumables, .subcontractors:
             LabeledContent("Unit cost") {
                 HStack {
                     CentsField(label: "Unit cost", cents: $item.rateCents)
@@ -176,7 +176,8 @@ extension Bucket {
         case .labor: "Employee name"
         case .equipment: "Unit name"
         case .materials: "Item name"
-        case .consumables: "Item or subcontractor"
+        case .consumables: "Item name"
+        case .subcontractors: "Service name"
         case .overhead: "Cost name"
         }
     }

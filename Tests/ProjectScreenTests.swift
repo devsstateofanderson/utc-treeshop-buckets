@@ -38,18 +38,19 @@ final class ProjectScreenTests: XCTestCase {
         Equipment: $563.84
         Materials: $0.00
         Consumables: $150.00
+        Subcontractors: $0.00
         Overhead: $144.00
         Cost: $1,852.96
         Markup: 35%
         Price: $2,501.50
         Profit: $648.54 (25.9% margin)
         """)
-        // Never a row name, a rate, or a subcontractor.
+        // Never a row name, a rate, or a subcontractor's name or service (only the bucket subtotal, DECISIONS 41/60).
         for line in project.lines {
             XCTAssertFalse(text.contains(line.name), line.name)
             XCTAssertFalse(text.contains(Money.format(line.rateCents)), Money.format(line.rateCents))
         }
-        XCTAssertFalse(text.lowercased().contains("sub"))
+        XCTAssertFalse(text.contains("(sub)"))
         XCTAssertTrue(ProjectText.dateString(project.date).hasPrefix("Sep 1"), "Sep 13 or 14, 2025 by time zone")
         XCTAssertTrue(ProjectText.dateString(project.date).hasSuffix(", 2025"))
     }
@@ -63,7 +64,7 @@ final class ProjectScreenTests: XCTestCase {
         XCTAssertTrue(text.contains("\nHours: 6.5\n"))
         XCTAssertTrue(text.contains("\nMultiplier: 2× After-hours\n"))
         XCTAssertTrue(text.contains("\nMarkup: 32.5%\n"))
-        XCTAssertEqual(text.components(separatedBy: "\n").count, 13)
+        XCTAssertEqual(text.components(separatedBy: "\n").count, 14)
     }
 
     func testMultiplierTitlesAndMarkupString() {

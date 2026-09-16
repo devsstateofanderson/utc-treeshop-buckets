@@ -197,6 +197,7 @@ extension Bucket {
         case .equipment: "Anything you own worth $1,000 or more that goes to a jobsite."
         case .materials: "Installed and left on the customer's property, priced per unit."
         case .consumables: "Used up on the job: disposal by the load, subs flat all-in, treatments, permits."
+        case .subcontractors: "Each sub keeps its own priced services on the Subcontractors screen."
         case .overhead: "One annual cost per row: insurance, rent, phones, software, licenses."
         }
     }
@@ -215,6 +216,7 @@ extension Bucket {
         case .equipment: "Chainsaws, Pole saws, Trucks, Trailers, Machines, Rigging…"
         case .materials: "Palms, Trees, Mulch & pine straw, Soil & amendments, Sod, Irrigation…"
         case .consumables: "Chains & bars, Fuel & oil, Batteries & chargers, Disposal, Subcontractors…"
+        case .subcontractors: "Stump grinding, Crane, Grapple truck, Hauling…"
         case .overhead: "Insurance, Facilities, Marketing, Software, Taxes & licenses…"
         }
     }

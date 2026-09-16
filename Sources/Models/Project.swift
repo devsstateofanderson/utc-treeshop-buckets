@@ -15,6 +15,10 @@ import SwiftData
     var minimumJobCents: Int
     var actualHours: Decimal?
     var notes: String?
+    /// A package: a pre-built project used as a starting point, listed under Packages (DECISIONS 61).
+    var isTemplate: Bool = false
+    /// Name of the loadout last applied, cleared when a labor or equipment toggle is changed by hand (DECISIONS 62).
+    var crewName: String?
     @Relationship(deleteRule: .cascade) var lines: [ProjectLine]
 
     init(name: String, client: String? = nil, date: Date, hours: Decimal = 0, multiplier: Int = 1,
@@ -151,11 +155,47 @@ extension Project {
     func duplicate(date: Date) -> Project {
         let copy = Project(name: name + " copy", client: client, date: date, hours: hours, multiplier: multiplier,
                            markupPct: markupPct, minimumJobCents: minimumJobCents, actualHours: nil, notes: notes)
+        copy.isTemplate = isTemplate
+        copy.crewName = crewName
         copy.lines = lines.map { line in
             ProjectLine(item: line.item, bucket: line.bucket, name: line.name, unit: line.unit,
                         rateCents: line.rateCents, isOn: line.isOn, qty: line.qty, actualQty: nil)
         }
         return copy
+    }
+
+    /// A new project from this package: everything copied, today's date, today's rates, markup and minimum
+    /// (DECISIONS 61). The package itself is untouched.
+    func instantiate(date: Date, items: [BucketItem], settings: AppSettings) -> Project {
+        let project = duplicate(date: date)
+        project.name = name
+        project.isTemplate = false
+        project.reprice(items: items, settings: settings)
+        return project
+    }
+
+    /// This project saved as a package under the same name (DECISIONS 61).
+    func asPackage(date: Date) -> Project {
+        let package = duplicate(date: date)
+        package.name = name
+        package.isTemplate = true
+        return package
+    }
+
+    /// Applies a crew formation (DECISIONS 62): every labor and equipment line is turned on when its row is in the
+    /// loadout and off otherwise; active member rows the project lacks are appended (on). Other buckets are untouched.
+    func apply(_ loadout: Loadout) {
+        let members = Set(loadout.members.map(\.persistentModelID))
+        for line in lines where line.bucket == .labor || line.bucket == .equipment {
+            line.isOn = line.item.map { members.contains($0.persistentModelID) } ?? false
+        }
+        let linked = Set(lines.compactMap { $0.item?.persistentModelID })
+        for item in loadout.sortedMembers where item.isActive && !linked.contains(item.persistentModelID) {
+            let line = ProjectLine(snapshotOf: item)
+            line.isOn = true
+            lines.append(line)
+        }
+        crewName = loadout.name
     }
 
     /// As if the project were created today, keeping toggles, quantities, hours and actuals:

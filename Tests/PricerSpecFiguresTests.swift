@@ -16,7 +16,7 @@ final class Probe_pricer_spec_numbers: XCTestCase {
         XCTAssertEqual(b.price, price, "\(label) price", file: file, line: line)
         XCTAssertEqual(b.profit, profit, "\(label) profit", file: file, line: line)
         XCTAssertEqual(Money.cents(b.marginPct * 10), marginTenths, "\(label) margin one decimal", file: file, line: line)
-        XCTAssertEqual(b.cost, b.labor + b.equipment + b.materials + b.consumables + b.overhead, "\(label) Cost = Σ subtotals", file: file, line: line)
+        XCTAssertEqual(b.cost, b.labor + b.equipment + b.materials + b.consumables + b.subcontractors + b.overhead, "\(label) Cost = Σ subtotals", file: file, line: line)
         XCTAssertEqual(b.profit, b.price - b.cost, "\(label) Profit = Price − Cost", file: file, line: line)
     }
 
@@ -65,14 +65,14 @@ final class Probe_pricer_spec_numbers: XCTestCase {
     }
 
     func testBreakdownSubscriptMatchesFields() {
-        let b = Breakdown(labor: 1, equipment: 2, materials: 3, consumables: 4, overhead: 5, cost: 15, price: 20, profit: 5, marginPct: 25)
+        let b = Breakdown(labor: 1, equipment: 2, materials: 3, consumables: 4, subcontractors: 0, overhead: 5, cost: 15, price: 20, profit: 5, marginPct: 25)
         XCTAssertEqual(b[.labor], 1)
         XCTAssertEqual(b[.equipment], 2)
         XCTAssertEqual(b[.materials], 3)
         XCTAssertEqual(b[.consumables], 4)
         XCTAssertEqual(b[.overhead], 5)
         XCTAssertEqual(Bucket.allCases.map { b[$0] }.reduce(0, +), b.cost)
-        XCTAssertEqual(Breakdown.zero, Breakdown(labor: 0, equipment: 0, materials: 0, consumables: 0, overhead: 0, cost: 0, price: 0, profit: 0, marginPct: 0))
+        XCTAssertEqual(Breakdown.zero, Breakdown(labor: 0, equipment: 0, materials: 0, consumables: 0, subcontractors: 0, overhead: 0, cost: 0, price: 0, profit: 0, marginPct: 0))
     }
 
     func testHourlyRowsIgnoreQtyAndQuantityRowsIgnoreHours() {

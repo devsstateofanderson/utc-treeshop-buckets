@@ -25,6 +25,7 @@ struct Breakdown: Equatable, Sendable {
     var equipment: Int
     var materials: Int
     var consumables: Int
+    var subcontractors: Int
     var overhead: Int
     var cost: Int
     var price: Int
@@ -38,11 +39,12 @@ struct Breakdown: Equatable, Sendable {
         case .equipment: equipment
         case .materials: materials
         case .consumables: consumables
+        case .subcontractors: subcontractors
         case .overhead: overhead
         }
     }
 
-    static let zero = Breakdown(labor: 0, equipment: 0, materials: 0, consumables: 0, overhead: 0,
+    static let zero = Breakdown(labor: 0, equipment: 0, materials: 0, consumables: 0, subcontractors: 0, overhead: 0,
                                 cost: 0, price: 0, profit: 0, marginPct: 0)
 }
 
@@ -95,9 +97,11 @@ enum Pricer {
         let equipment = subtotal(.equipment)
         let materials = subtotal(.materials)
         let consumables = subtotal(.consumables)
+        let subcontractors = subtotal(.subcontractors)
         let overhead = subtotal(.overhead)
 
-        let exactCost = Decimal(labor) + Decimal(equipment) + Decimal(materials) + Decimal(consumables) + Decimal(overhead)
+        let exactCost = Decimal(labor) + Decimal(equipment) + Decimal(materials) + Decimal(consumables)
+            + Decimal(subcontractors) + Decimal(overhead)
         let cost = Money.cents(exactCost)
         let marked = Money.cents(Decimal(cost) * (1 + markup) * Decimal(multiplier))
         let price = max(minimumJobCents, marked)
@@ -105,7 +109,7 @@ enum Pricer {
         let marginPct: Decimal = price > 0 ? Decimal(profit) / Decimal(price) * 100 : 0
 
         return Breakdown(labor: labor, equipment: equipment, materials: materials,
-                         consumables: consumables, overhead: overhead,
+                         consumables: consumables, subcontractors: subcontractors, overhead: overhead,
                          cost: cost, price: price, profit: profit, marginPct: marginPct)
     }
 

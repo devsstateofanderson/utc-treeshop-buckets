@@ -1,8 +1,10 @@
 import Foundation
 
-/// The five fixed lists. Order here is the display order everywhere (DECISIONS 32).
+/// The six fixed lists. Order here is the display order everywhere (DECISIONS 32).
+/// Subcontractors joined as the sixth bucket on 2026-09-16 (DECISIONS 60): quantity rows, flat and all-in,
+/// each belonging to a `Subcontractor` record.
 enum Bucket: String, Codable, CaseIterable, Sendable {
-    case labor, equipment, materials, consumables, overhead
+    case labor, equipment, materials, consumables, subcontractors, overhead
 
     enum RowKind: Sendable { case hourly, quantity }
 
@@ -10,7 +12,7 @@ enum Bucket: String, Codable, CaseIterable, Sendable {
     var rowKind: RowKind {
         switch self {
         case .labor, .equipment, .overhead: .hourly
-        case .materials, .consumables: .quantity
+        case .materials, .consumables, .subcontractors: .quantity
         }
     }
 
@@ -20,6 +22,7 @@ enum Bucket: String, Codable, CaseIterable, Sendable {
         case .equipment: "Equipment"
         case .materials: "Materials"
         case .consumables: "Consumables"
+        case .subcontractors: "Subcontractors"
         case .overhead: "Overhead"
         }
     }
@@ -29,7 +32,7 @@ enum Bucket: String, Codable, CaseIterable, Sendable {
         switch self {
         case .labor, .equipment: "hr"
         case .overhead: "yr"
-        case .materials, .consumables: nil
+        case .materials, .consumables, .subcontractors: nil
         }
     }
 

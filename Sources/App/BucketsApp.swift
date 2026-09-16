@@ -147,11 +147,11 @@ struct BucketsApp: App {
         .defaultSize(width: 1180, height: 760)
         .commands {
             CommandGroup(replacing: .newItem) {
-                Button(appState.sidebar == .projects ? "New Project" : "New Row") { appState.createNew() }
+                Button(appState.newItemTitle) { appState.createNew() }
                     .keyboardShortcut("n", modifiers: .command)
-                Button("Duplicate Project") { appState.duplicateSelectedProject() }
+                Button("Duplicate") { appState.duplicateSelection() }
                     .keyboardShortcut("d", modifiers: .command)
-                    .disabled(appState.sidebar != .projects || appState.selectedProject == nil)
+                    .disabled(!appState.canDuplicate)
             }
         }
 

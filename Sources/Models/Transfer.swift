@@ -18,6 +18,26 @@ struct TransferDocument: Codable, Equatable {
         var sortOrder: Int
         var category: String?
         var link: String?
+        /// Position in `subcontractors` for rows in the Subcontractors bucket.
+        var subcontractorIndex: Int?
+    }
+
+    struct SubcontractorRecord: Codable, Equatable {
+        var name: String
+        var contact: String?
+        var phone: String?
+        var email: String?
+        var notes: String?
+        var isActive: Bool
+        var sortOrder: Int
+    }
+
+    struct LoadoutRecord: Codable, Equatable {
+        var name: String
+        var notes: String?
+        var sortOrder: Int
+        /// Positions in `items`.
+        var memberIndexes: [Int]
     }
 
     struct Line: Codable, Equatable {
@@ -42,6 +62,8 @@ struct TransferDocument: Codable, Equatable {
         var actualHours: Decimal?
         var notes: String?
         var lines: [Line]
+        var isTemplate: Bool?
+        var crewName: String?
     }
 
     struct SettingsRecord: Codable, Equatable {
@@ -57,6 +79,9 @@ struct TransferDocument: Codable, Equatable {
     var settings: SettingsRecord
     var items: [Item]
     var projects: [ProjectRecord]
+    /// Optional so files from before DECISIONS 60/62 still read.
+    var subcontractors: [SubcontractorRecord]?
+    var loadouts: [LoadoutRecord]?
 }
 
 /// A JSON fragment kept verbatim (the calculator inputs), so the export shows them as readable JSON, not base64.
@@ -126,6 +151,9 @@ enum Transfer {
         let index = Dictionary(uniqueKeysWithValues: items.enumerated().map { ($1.persistentModelID, $0) })
         let projects = try context.fetch(FetchDescriptor<Project>())
             .sorted { ($0.date, $0.name) < ($1.date, $1.name) }
+        let subs = try context.fetch(FetchDescriptor<Subcontractor>()).sorted { ($0.sortOrder, $0.name) < ($1.sortOrder, $1.name) }
+        let subIndex = Dictionary(uniqueKeysWithValues: subs.enumerated().map { ($1.persistentModelID, $0) })
+        let loadouts = try context.fetch(FetchDescriptor<Loadout>()).sorted { ($0.sortOrder, $0.name) < ($1.sortOrder, $1.name) }
         return TransferDocument(
             formatVersion: TransferDocument.currentFormatVersion,
             exportedAt: exportedAt,
@@ -135,7 +163,7 @@ enum Transfer {
             items: items.map { i in
                 .init(bucket: i.bucket, name: i.name, rateCents: i.rateCents, unit: i.unit, isActive: i.isActive,
                       source: i.source, notes: i.notes, calcInputs: i.calcInputs.flatMap(JSONValue.from), sortOrder: i.sortOrder,
-                      category: i.category, link: i.link)
+                      category: i.category, link: i.link, subcontractorIndex: i.subcontractor.flatMap { subIndex[$0.persistentModelID] })
             },
             projects: projects.map { p in
                 .init(name: p.name, client: p.client, date: p.date, hours: p.hours, multiplier: p.multiplier,
@@ -143,7 +171,14 @@ enum Transfer {
                       lines: p.sortedLines.map { l in
                           .init(itemIndex: l.item.flatMap { index[$0.persistentModelID] }, bucket: l.bucket, name: l.name,
                                 unit: l.unit, rateCents: l.rateCents, isOn: l.isOn, qty: l.qty, actualQty: l.actualQty)
-                      })
+                      }, isTemplate: p.isTemplate, crewName: p.crewName)
+            },
+            subcontractors: subs.map { s in
+                .init(name: s.name, contact: s.contact, phone: s.phone, email: s.email, notes: s.notes, isActive: s.isActive, sortOrder: s.sortOrder)
+            },
+            loadouts: loadouts.map { l in
+                .init(name: l.name, notes: l.notes, sortOrder: l.sortOrder,
+                      memberIndexes: l.sortedMembers.compactMap { index[$0.persistentModelID] })
             })
     }
 
@@ -163,22 +198,46 @@ enum Transfer {
         for line in doc.projects.flatMap(\.lines) {
             if let i = line.itemIndex, !(0..<doc.items.count).contains(i) { throw TransferError.badItemIndex(i) }
         }
+        let subRecords = doc.subcontractors ?? []
+        for i in doc.items {
+            if let s = i.subcontractorIndex, !(0..<subRecords.count).contains(s) { throw TransferError.badItemIndex(s) }
+        }
+        for l in doc.loadouts ?? [] {
+            for m in l.memberIndexes where !(0..<doc.items.count).contains(m) { throw TransferError.badItemIndex(m) }
+        }
         // Per-object deletes: a batch delete cannot honor the nullify inverse on ProjectLine.item.
+        for loadout in try context.fetch(FetchDescriptor<Loadout>()) { context.delete(loadout) }
         for project in try context.fetch(FetchDescriptor<Project>()) { context.delete(project) }
         for line in try context.fetch(FetchDescriptor<ProjectLine>()) { context.delete(line) }
         for item in try context.fetch(FetchDescriptor<BucketItem>()) { context.delete(item) }
+        for sub in try context.fetch(FetchDescriptor<Subcontractor>()) { context.delete(sub) }
         try context.save()
 
+        let subs = subRecords.map { s in
+            Subcontractor(name: s.name, contact: s.contact, phone: s.phone, email: s.email, notes: s.notes,
+                          isActive: s.isActive, sortOrder: s.sortOrder)
+        }
+        subs.forEach(context.insert)
         let items = doc.items.map { i in
             BucketItem(bucket: i.bucket, name: i.name, rateCents: i.rateCents, unit: i.unit, isActive: i.isActive,
                        source: i.source, notes: i.notes, category: i.category, link: i.link,
                        calcInputs: i.calcInputs?.data, sortOrder: i.sortOrder)
         }
         items.forEach(context.insert)
+        for (i, record) in doc.items.enumerated() {
+            if let s = record.subcontractorIndex { items[i].subcontractor = subs[s] }
+        }
+        for l in doc.loadouts ?? [] {
+            let loadout = Loadout(name: l.name, notes: l.notes, sortOrder: l.sortOrder)
+            context.insert(loadout)
+            loadout.members = l.memberIndexes.map { items[$0] }
+        }
         for p in doc.projects {
             let project = Project(name: p.name, client: p.client, date: p.date, hours: p.hours, multiplier: p.multiplier,
                                   markupPct: p.markupPct, minimumJobCents: p.minimumJobCents, actualHours: p.actualHours,
                                   notes: p.notes)
+            project.isTemplate = p.isTemplate ?? false
+            project.crewName = p.crewName
             context.insert(project)
             project.lines = p.lines.map { l in
                 ProjectLine(item: l.itemIndex.map { items[$0] }, bucket: l.bucket, name: l.name, unit: l.unit,
@@ -197,6 +256,8 @@ enum Transfer {
         var added = 0
         var updated = 0
         var unchanged = 0
+        var subcontractors = 0
+        var loadouts = 0
     }
 
     /// Adds or updates rows from a file without deleting anything (DECISIONS 55): a row whose bucket and
@@ -212,9 +273,34 @@ enum Transfer {
         }
         var existing = try context.fetch(FetchDescriptor<BucketItem>())
         var result = MergeResult()
+        // Subcontractors by name: update contact details the file provides, add the rest (DECISIONS 60).
+        var subs = try context.fetch(FetchDescriptor<Subcontractor>())
+        var fileSubs: [Subcontractor] = []
+        for s in doc.subcontractors ?? [] {
+            if let match = subs.first(where: { normalized($0.name) == normalized(s.name) }) {
+                if let v = s.contact { match.contact = v }
+                if let v = s.phone { match.phone = v }
+                if let v = s.email { match.email = v }
+                if let v = s.notes { match.notes = v }
+                fileSubs.append(match)
+            } else {
+                let sub = Subcontractor(name: s.name, contact: s.contact, phone: s.phone, email: s.email, notes: s.notes,
+                                        isActive: s.isActive, sortOrder: Subcontractor.nextSortOrder(context: context) + subs.count)
+                context.insert(sub)
+                subs.append(sub)
+                fileSubs.append(sub)
+                result.subcontractors += 1
+            }
+        }
+        var merged: [BucketItem] = []
         for i in doc.items {
             let key = normalized(i.name)
+            let sub = i.subcontractorIndex.flatMap { $0 < fileSubs.count ? fileSubs[$0] : nil }
             if let match = existing.first(where: { $0.bucket == i.bucket && normalized($0.name) == key }) {
+                merged.append(match)
+                if let sub { match.subcontractor = sub }
+                // A file may archive a row it names; it never un-archives one (DECISIONS 55).
+                if !i.isActive && match.isActive { match.isActive = false; result.updated += 1; continue }
                 let unit = i.bucket.fixedUnit ?? (i.unit.isEmpty ? match.unit : i.unit)
                 let calc = i.calcInputs?.data
                 let sameCalc = i.calcInputs == nil || match.calcInputs.flatMap(JSONValue.from) == i.calcInputs
@@ -236,9 +322,26 @@ enum Transfer {
             let item = BucketItem(bucket: i.bucket, name: i.name, rateCents: i.rateCents, unit: i.unit, isActive: i.isActive,
                                   source: i.source, notes: i.notes, category: i.category, link: i.link,
                                   calcInputs: i.calcInputs?.data, sortOrder: order)
+            item.subcontractor = sub
             context.insert(item)
             existing.append(item)
+            merged.append(item)
             result.added += 1
+        }
+        // Loadouts by name: members resolved through the file's item positions (DECISIONS 62).
+        var loadouts = try context.fetch(FetchDescriptor<Loadout>())
+        for l in doc.loadouts ?? [] {
+            let members = l.memberIndexes.compactMap { $0 < merged.count ? merged[$0] : nil }
+            if let match = loadouts.first(where: { normalized($0.name) == normalized(l.name) }) {
+                match.members = members
+                if let v = l.notes { match.notes = v }
+            } else {
+                let loadout = Loadout(name: l.name, notes: l.notes, sortOrder: Loadout.nextSortOrder(context: context) + loadouts.count)
+                context.insert(loadout)
+                loadout.members = members
+                loadouts.append(loadout)
+                result.loadouts += 1
+            }
         }
         try context.save()
         return result

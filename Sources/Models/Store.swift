@@ -4,7 +4,7 @@ import SwiftData
 /// The one store file (DECISIONS 44): ~/Library/Application Support/Buckets/Buckets.store.
 /// `BUCKETS_STORE=<path>` overrides it (used by the screenshot script), and it never carries data of its own.
 enum Store {
-    static let schema = Schema([BucketItem.self, Project.self, ProjectLine.self])
+    static let schema = Schema([BucketItem.self, Project.self, ProjectLine.self, Subcontractor.self, Loadout.self])
 
     static var defaultURL: URL {
         let base = FileManager.default.urls(for: .applicationSupportDirectory, in: .userDomainMask)[0]

@@ -21,6 +21,10 @@ import SwiftData
     var category: String?
     /// Product or supplier page, opened from the Form (DECISIONS 57).
     var link: String?
+    /// The sub this service belongs to; set on every row in the Subcontractors bucket (DECISIONS 60).
+    var subcontractor: Subcontractor?
+    /// Crew formations this labor or equipment row is part of (DECISIONS 62).
+    var loadouts: [Loadout] = []
     /// Inverse of `ProjectLine.item`. Declared so that deleting a row sets every referencing line's
     /// `item` to nil instead of leaving a dangling reference (DECISIONS 21); also the delete guard (22).
     @Relationship(deleteRule: .nullify, inverse: \ProjectLine.item) var lines: [ProjectLine] = []

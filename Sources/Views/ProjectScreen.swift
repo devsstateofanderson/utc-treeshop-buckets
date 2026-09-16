@@ -18,16 +18,19 @@ struct ProjectScreen: View {
         }
     }
 
+    /// The selection, only while it belongs to the screen the sidebar shows (a package under Packages, a project under Projects).
     private var selectedProject: Project? {
         guard let id = appState.selectedProject, let project = modelContext.model(for: id) as? Project,
-              !project.isDeleted else { return nil }
+              !project.isDeleted, project.isTemplate == (appState.sidebar == .packages) else { return nil }
         return project
     }
 }
 
 private struct ProjectEditor: View {
     @Bindable var project: Project
+    @Environment(AppState.self) private var appState
     @Environment(\.modelContext) private var modelContext
+    @Query(sort: [SortDescriptor(\Loadout.sortOrder), SortDescriptor(\Loadout.name)]) private var loadouts: [Loadout]
     @AppStorage(AppSettings.Key.billableHoursPerYear) private var billableHoursPerYear = AppSettings.defaults.billableHoursPerYear
     /// Sections start open; collapsing is per project (the editor is re-created per selection).
     @State private var collapsed: Set<Bucket> = []
@@ -39,7 +42,10 @@ private struct ProjectEditor: View {
         // Recomputed from the line snapshots on every render — every keystroke, every toggle. Never cached.
         let breakdown = project.breakdown(billableHours: billableHours)
         VStack(spacing: 0) {
-            ProjectHeader(project: project, breakdown: breakdown)
+            ProjectHeader(project: project, breakdown: breakdown, loadouts: loadouts) { loadout in
+                project.apply(loadout)
+                save()
+            }
             Divider()
             Form {
                 ForEach(Bucket.allCases, id: \.self) { bucket in
@@ -56,7 +62,10 @@ private struct ProjectEditor: View {
                                     Text(group.title).font(.caption).foregroundStyle(.secondary)
                                 }
                                 ForEach(group.lines) { line in
-                                    ProjectLineRow(line: line, billableHours: billableHours)
+                                    ProjectLineRow(line: line, billableHours: billableHours) {
+                                        // A hand-flipped labor or equipment toggle means the crew is custom now (DECISIONS 62).
+                                        if line.bucket == .labor || line.bucket == .equipment { project.crewName = nil }
+                                    }
                                 }
                             }
                         } label: {
@@ -68,6 +77,7 @@ private struct ProjectEditor: View {
                         }
                     }
                 }
+                if !project.isTemplate {
                 Section {
                     DisclosureGroup(isExpanded: $actualsExpanded) {
                         ActualsSection(project: project, billableHours: billableHours, save: save)
@@ -80,6 +90,7 @@ private struct ProjectEditor: View {
                             }
                         }
                     }
+                }
                 }
                 Section {
                     OptionalTextField(label: "Notes", value: $project.notes, prompt: "Optional", axis: .vertical)
@@ -101,6 +112,15 @@ private struct ProjectEditor: View {
     /// Re-price · Copy price · Copy breakdown (BRIEF §5.5; DECISIONS 18, 41).
     @ViewBuilder
     private func toolbarButtons(_ breakdown: Breakdown) -> some View {
+        if project.isTemplate {
+            Button { appState.usePackage(project) } label: { Label("Use Package", systemImage: "arrow.right.doc.on.clipboard") }
+                .labelStyle(.titleAndIcon)
+                .help("Start a new project from this package at today's rates")
+        } else {
+            Button { appState.saveAsPackage(project) } label: { Label("Save as Package", systemImage: "shippingbox.and.arrow.backward") }
+                .labelStyle(.titleAndIcon)
+                .help("Keep this project as a package to start future jobs from")
+        }
         Button { reprice() } label: { Label("Re-price", systemImage: "arrow.clockwise") }
             .labelStyle(.titleAndIcon)
             .help("Copy today's rates, markup and minimum onto this project (toggles, quantities and hours stay)")
@@ -143,6 +163,8 @@ private struct ProjectEditor: View {
 private struct ProjectHeader: View {
     @Bindable var project: Project
     let breakdown: Breakdown
+    let loadouts: [Loadout]
+    let applyLoadout: (Loadout) -> Void
 
     var body: some View {
         VStack(alignment: .leading, spacing: 12) {
@@ -160,11 +182,13 @@ private struct ProjectHeader: View {
                 HStack(spacing: 16) {
                     hoursField
                     multiplierPicker
+                    crewMenu
                     Spacer(minLength: 0)
                 }
                 VStack(alignment: .leading, spacing: 8) {
                     hoursField
                     multiplierPicker
+                    crewMenu
                 }
             }
 
@@ -191,6 +215,21 @@ private struct ProjectHeader: View {
             }
         }
         .padding()
+    }
+
+    /// Crew: apply a loadout to the labor and equipment toggles (DECISIONS 62). Hidden until a loadout exists.
+    @ViewBuilder private var crewMenu: some View {
+        if !loadouts.isEmpty {
+            Menu {
+                ForEach(loadouts) { loadout in
+                    Button(loadout.displayName) { applyLoadout(loadout) }
+                }
+            } label: {
+                Label(project.crewName ?? "Crew", systemImage: "person.3")
+            }
+            .fixedSize()
+            .help("Apply a loadout: turns on its people and equipment, turns the rest off")
+        }
     }
 
     private var hoursField: some View {
@@ -227,6 +266,7 @@ private struct ProjectHeader: View {
 private struct ProjectLineRow: View {
     @Bindable var line: ProjectLine
     let billableHours: Decimal
+    var onToggle: () -> Void = {}
     @Environment(\.modelContext) private var modelContext
 
     private var isQuantity: Bool { line.bucket.rowKind == .quantity }
@@ -234,7 +274,7 @@ private struct ProjectLineRow: View {
     var body: some View {
         HStack(spacing: 12) {
             // Flips isOn only; the snapshot is never touched (DECISIONS 17).
-            Toggle(isOn: $line.isOn) {
+            Toggle(isOn: Binding(get: { line.isOn }, set: { line.isOn = $0; onToggle() })) {
                 VStack(alignment: .leading, spacing: 2) {
                     HStack(spacing: 6) {
                         Text(line.displayName)
@@ -302,9 +342,13 @@ enum ProjectMultiplier: Int, CaseIterable, Identifiable {
 enum ProjectText {
     struct LineGroup { var title: String; var lines: [ProjectLine] }
 
-    /// Lines grouped by their row's category (DECISIONS 57); uncategorised rows last under "Other".
+    /// Lines grouped by their row's category (DECISIONS 57), or by the sub's name for subcontractor services
+    /// (DECISIONS 60); uncategorised rows last under "Other".
     static func grouped(_ lines: [ProjectLine]) -> [LineGroup] {
-        let keyed = Dictionary(grouping: lines) { $0.item?.category?.trimmingCharacters(in: .whitespaces) ?? "" }
+        let keyed = Dictionary(grouping: lines) { line -> String in
+            if line.bucket == .subcontractors { return line.item?.subcontractor?.name.trimmingCharacters(in: .whitespaces) ?? "" }
+            return line.item?.category?.trimmingCharacters(in: .whitespaces) ?? ""
+        }
         let titles = keyed.keys.sorted { a, b in
             if a.isEmpty != b.isEmpty { return b.isEmpty }
             return a.localizedStandardCompare(b) == .orderedAscending

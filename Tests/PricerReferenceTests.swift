@@ -54,7 +54,7 @@ final class Probe_pricer_reference200: XCTestCase {
             XCTAssertEqual([b.labor, b.equipment, b.overhead, b.materials, b.consumables, b.cost, b.price, b.profit],
                            [labor, equipment, overhead, materials, consumables, cost, price, profit], "case \(i)")
             XCTAssertEqual(Money.cents(b.marginPct * 10), margin1, "case \(i) margin one decimal")
-            XCTAssertEqual(b.cost, b.labor + b.equipment + b.materials + b.consumables + b.overhead, "case \(i) Cost = Σ")
+            XCTAssertEqual(b.cost, b.labor + b.equipment + b.materials + b.consumables + b.subcontractors + b.overhead, "case \(i) Cost = Σ")
             XCTAssertEqual(b.profit, b.price - b.cost, "case \(i) Profit = Price − Cost")
             XCTAssertGreaterThanOrEqual(b.price, minimum, "case \(i) floor")
             checksum = (checksum * 31 + price + cost * 7 + margin1) % 1_000_000_007

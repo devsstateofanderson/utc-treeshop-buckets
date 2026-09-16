@@ -3,8 +3,18 @@ import SwiftData
 
 /// Every priced job, newest first: Name · Date · Hours · Price · Actual variance (BRIEF §5.5 item 2; DECISIONS 19, 31, 42).
 struct ProjectsListView: View {
+    /// true = the Packages screen (DECISIONS 61): templates only, no dates or actuals.
+    let templates: Bool
     @Environment(AppState.self) private var appState
-    @Query(sort: [SortDescriptor(\Project.date, order: .reverse), SortDescriptor(\Project.name)]) private var projects: [Project]
+    @Query private var projects: [Project]
+
+    init(templates: Bool) {
+        self.templates = templates
+        let sort: [SortDescriptor<Project>] = templates
+            ? [SortDescriptor(\Project.name)]
+            : [SortDescriptor(\Project.date, order: .reverse), SortDescriptor(\Project.name)]
+        _projects = Query(filter: #Predicate<Project> { $0.isTemplate == templates }, sort: sort)
+    }
     @AppStorage(AppSettings.Key.billableHoursPerYear) private var billableHoursPerYear = AppSettings.defaults.billableHoursPerYear
     @State private var confirmingDelete = false
 
@@ -18,7 +28,15 @@ struct ProjectsListView: View {
     var body: some View {
         @Bindable var appState = appState
         Group {
-            if projects.isEmpty {
+            if projects.isEmpty && templates {
+                ContentUnavailableView {
+                    Label("No packages yet", systemImage: "shippingbox.and.arrow.backward")
+                } description: {
+                    Text("A package is a pre-built project: a common job, a promotion, a standard crew day. Use Package makes a new project from it at today's rates.")
+                } actions: {
+                    Button("New Package") { appState.newPackage() }
+                }
+            } else if projects.isEmpty {
                 ContentUnavailableView {
                     Label("No projects yet", systemImage: "list.clipboard")
                 } description: {
@@ -33,8 +51,8 @@ struct ProjectsListView: View {
                             .foregroundStyle(project.name.isEmpty ? Color.secondary : Color.primary)
                     }
                     .width(min: 90, ideal: 110)
-                    TableColumn("Date") { project in
-                        Text(ProjectText.dateString(project.date)).monospacedDigit()
+                    TableColumn(templates ? "Crew" : "Date") { project in
+                        Text(templates ? (project.crewName ?? "") : ProjectText.dateString(project.date)).monospacedDigit()
                     }
                     .width(min: 86, ideal: 90)
                     TableColumn("Hours") { project in
@@ -47,9 +65,9 @@ struct ProjectsListView: View {
                     }
                     .width(min: 80, ideal: 84)
                     .alignment(.trailing)
-                    TableColumn("Actual variance") { project in
+                    TableColumn(templates ? "Client" : "Actual variance") { project in
                         // Cost variance at the snapshot rates once actual hours are in; "—" until then (DECISIONS 31).
-                        Text(ProjectsText.variance(project.actuals(billableHours: billableHours)?.totalVariance))
+                        Text(templates ? (project.client ?? "") : ProjectsText.variance(project.actuals(billableHours: billableHours)?.totalVariance))
                             .monospacedDigit()
                             .foregroundStyle(project.actualHours == nil ? Color.secondary : Color.primary)
                     }
@@ -62,12 +80,18 @@ struct ProjectsListView: View {
                 .onDeleteCommand { requestDelete() }
             }
         }
-        .navigationTitle("Projects")
+        .navigationTitle(templates ? "Packages" : "Projects")
         .navigationSplitViewColumnWidth(min: 470, ideal: 520)
         .toolbar {
             ToolbarItemGroup {
-                Button { appState.newProject() } label: { Label("New Project", systemImage: "plus") }
-                    .help("New project (⌘N)")
+                Button { templates ? appState.newPackage() : appState.newProject() } label: { Label(templates ? "New Package" : "New Project", systemImage: "plus") }
+                    .help(templates ? "New package (⌘N)" : "New project (⌘N)")
+                if templates {
+                    Button { if let p = selectedProject { appState.usePackage(p) } } label: { Label("Use Package", systemImage: "arrow.right.doc.on.clipboard") }
+                        .labelStyle(.titleAndIcon)
+                        .disabled(selectedProject == nil)
+                        .help("Start a new project from this package at today's rates")
+                }
                 Button { appState.duplicateSelectedProject() } label: { Label("Duplicate", systemImage: "plus.square.on.square") }
                     .disabled(selectedProject == nil)
                     .help("Duplicate the selected project — everything copied, actuals cleared (⌘D)")
@@ -89,8 +113,13 @@ struct ProjectsListView: View {
     /// The same three actions as the toolbar, on the right-clicked row (DECISIONS 42).
     @ViewBuilder
     private func contextMenu(for ids: Set<PersistentIdentifier>) -> some View {
-        Button("New Project") { appState.newProject() }
+        Button(templates ? "New Package" : "New Project") { templates ? appState.newPackage() : appState.newProject() }
         if let id = ids.first, ids.count == 1 {
+            if templates {
+                Button("Use Package") {
+                    if let p = projects.first(where: { $0.persistentModelID == id }) { appState.usePackage(p) }
+                }
+            }
             Button("Duplicate") {
                 appState.selectedProject = id
                 appState.duplicateSelectedProject()

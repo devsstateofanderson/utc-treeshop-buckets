@@ -7,7 +7,7 @@ final class Probe_pricer_negatives: XCTestCase {
                        file: StaticString = #filePath, line: UInt = #line) {
         XCTAssertEqual([b.labor, b.equipment, b.overhead, b.materials, b.consumables, b.cost, b.price, b.profit],
                        [e.0, e.1, e.2, e.3, e.4, e.5, e.6, e.7], label, file: file, line: line)
-        XCTAssertEqual(b.cost, b.labor + b.equipment + b.materials + b.consumables + b.overhead, "\(label): Cost = Σ", file: file, line: line)
+        XCTAssertEqual(b.cost, b.labor + b.equipment + b.materials + b.consumables + b.subcontractors + b.overhead, "\(label): Cost = Σ", file: file, line: line)
         XCTAssertEqual(b.profit, b.price - b.cost, "\(label): Profit = Price − Cost", file: file, line: line)
     }
 

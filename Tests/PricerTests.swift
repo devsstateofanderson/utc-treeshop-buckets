@@ -115,7 +115,7 @@ final class PricerTests: XCTestCase {
         for hours in ["0.25", "1", "6.5", "7.33", "8", "100"] {
             let b = Fixture.price(Fixture.lines(skidSteerOn: true, stumps: Decimal(string: "2.5")!),
                                   hours: Decimal(string: hours)!)
-            XCTAssertEqual(b.cost, b.labor + b.equipment + b.materials + b.consumables + b.overhead, hours)
+            XCTAssertEqual(b.cost, b.labor + b.equipment + b.materials + b.consumables + b.subcontractors + b.overhead, hours)
             XCTAssertEqual(b.profit, b.price - b.cost, hours)
         }
     }
@@ -183,7 +183,7 @@ final class PricerTests: XCTestCase {
 
     func testEmptyProject() {
         let b = Fixture.price([], hours: 8)
-        XCTAssertEqual(b, Breakdown(labor: 0, equipment: 0, materials: 0, consumables: 0, overhead: 0,
+        XCTAssertEqual(b, Breakdown(labor: 0, equipment: 0, materials: 0, consumables: 0, subcontractors: 0, overhead: 0,
                                     cost: 0, price: 75_000, profit: 75_000, marginPct: 100))
     }
 
