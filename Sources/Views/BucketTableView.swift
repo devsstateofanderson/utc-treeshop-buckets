@@ -11,19 +11,25 @@ struct BucketTableView: View {
     @State private var confirmingDelete = false
     @State private var confirmingArchive = false
     @State private var search = ""
-    @State private var sortOrder: [KeyPathComparator<BucketItem>] = []
+    @State private var selection: BucketRow.ID?
 
-    /// Filtered in memory (the enum column does not predicate well), searched, then sorted by the clicked
-    /// column; with no column clicked, quantity buckets sort by category then name, the rest by `sortOrder`.
+    /// Filtered in memory (the enum column does not predicate well) and searched; sorted by `sortOrder`, then name.
     private var rows: [BucketItem] {
-        var result = allItems.rows(in: bucket)
-        if !search.isEmpty { result = result.filter { $0.matches(search) } }
-        if !sortOrder.isEmpty {
-            result.sort(using: sortOrder)
-        } else if bucket.rowKind == .quantity {
-            result.sort { ($0.categoryText, $0.name) < ($1.categoryText, $1.name) }
+        let result = allItems.rows(in: bucket)
+        return search.isEmpty ? result : result.filter { $0.matches(search) }
+    }
+
+    /// Collapsible category groups (DECISIONS 69), collapsed at first; a flat list while searching or when no row
+    /// has a category, so every match and every uncategorised bucket reads as before.
+    private var tree: [BucketRow] {
+        let items = rows
+        guard search.isEmpty, items.contains(where: { !$0.categoryText.isEmpty }) else { return items.map(BucketRow.item) }
+        let keyed = Dictionary(grouping: items) { $0.categoryText }
+        let titles = keyed.keys.sorted { a, b in
+            if a.isEmpty != b.isEmpty { return b.isEmpty }
+            return a.localizedStandardCompare(b) == .orderedAscending
         }
-        return result
+        return titles.map { BucketRow.group($0.isEmpty ? "Other" : $0, (keyed[$0] ?? []).map(BucketRow.item)) }
     }
 
     private var selectedRow: BucketItem? {
@@ -45,39 +51,52 @@ struct BucketTableView: View {
                     Button("New Row") { appState.newItem(in: bucket) }
                 }
             } else {
-                Table(rows, selection: $appState.selectedItem, sortOrder: $sortOrder) {
-                    TableColumn("Category", value: \.categoryText) { item in
-                        Text(item.categoryText).foregroundStyle(.secondary)
-                    }
-                    .width(min: 80, ideal: 120)
-                    TableColumn("Name", value: \.name) { item in
-                        VStack(alignment: .leading, spacing: 1) {
-                            Text(bucket == .equipment ? item.codedName : (item.name.isEmpty ? "Untitled" : item.name))
-                                .foregroundStyle(item.isActive && !item.name.isEmpty ? Color.primary : Color.secondary)
-                            if bucket == .equipment, !item.identification.isEmpty {
-                                Text(item.identification).font(.caption).foregroundStyle(.secondary)
+                Table(tree, children: \.children, selection: $selection) {
+                    TableColumn("Name") { row in
+                        if let item = row.item {
+                            VStack(alignment: .leading, spacing: 1) {
+                                Text(bucket == .equipment ? item.codedName : (item.name.isEmpty ? "Untitled" : item.name))
+                                    .foregroundStyle(item.isActive && !item.name.isEmpty ? Color.primary : Color.secondary)
+                                if bucket == .equipment, !item.identification.isEmpty {
+                                    Text(item.identification).font(.caption).foregroundStyle(.secondary)
+                                }
                             }
+                        } else {
+                            Text(row.title).font(.headline)
                         }
                     }
-                    .width(min: 100, ideal: bucket == .equipment ? 220 : 170)
-                    TableColumn("Rate", value: \.rateCents) { item in
-                        RateCell(item: item, billableHours: Decimal(billableHoursPerYear))
+                    .width(min: 160, ideal: bucket == .equipment ? 260 : 220)
+                    TableColumn("Rate") { row in
+                        if let item = row.item {
+                            RateCell(item: item, billableHours: Decimal(billableHoursPerYear))
+                        } else {
+                            Text("\(row.children?.count ?? 0) rows").foregroundStyle(.secondary)
+                        }
                     }
                     .width(min: 120, ideal: 170)
-                    TableColumn("Unit", value: \.unit) { item in
-                        Text(item.unit).foregroundStyle(item.isActive ? Color.primary : Color.secondary)
+                    TableColumn("Unit") { row in
+                        if let item = row.item {
+                            Text(item.unit).foregroundStyle(item.isActive ? Color.primary : Color.secondary)
+                        }
                     }
                     .width(min: 50, ideal: 84)
-                    TableColumn("Active") { item in
-                        ActiveToggle(item: item)
+                    TableColumn("Active") { row in
+                        if let item = row.item { ActiveToggle(item: item) }
                     }
                     .width(44)
                 }
+                .onChange(of: selection) { _, new in
+                    if case .item(let id)? = new { appState.selectedItem = id } else if new == nil { appState.selectedItem = nil }
+                }
+                .onChange(of: appState.selectedItem) { _, new in
+                    if let new { selection = .item(new) } else if case .item? = selection { selection = nil }
+                }
+                .onAppear { if let id = appState.selectedItem { selection = .item(id) } }
                 .onDeleteCommand { requestRemoval() }
             }
         }
         .navigationTitle(bucket.title)
-        .navigationSplitViewColumnWidth(min: 560, ideal: 640)
+        .navigationSplitViewColumnWidth(min: 520, ideal: 600)
         .searchable(text: $search, placement: .toolbar, prompt: "Search \(bucket.title.lowercased())")
         .toolbar {
             ToolbarItemGroup {
@@ -224,5 +243,22 @@ extension Bucket {
         case .subcontractors: "Stump grinding, Crane, Grapple truck, Hauling…"
         case .overhead: "Insurance, Facilities, Marketing, Software, Taxes & licenses…"
         }
+    }
+}
+
+/// A node of the bucket table: a category group (children) or one row (DECISIONS 69).
+struct BucketRow: Identifiable {
+    enum ID: Hashable { case group(String), item(PersistentIdentifier) }
+    let id: ID
+    let title: String
+    let item: BucketItem?
+    let children: [BucketRow]?
+
+    static func item(_ item: BucketItem) -> BucketRow {
+        BucketRow(id: .item(item.persistentModelID), title: item.name, item: item, children: nil)
+    }
+
+    static func group(_ title: String, _ rows: [BucketRow]) -> BucketRow {
+        BucketRow(id: .group(title), title: title, item: nil, children: rows)
     }
 }

@@ -34,6 +34,7 @@ private struct ProjectEditor: View {
     @AppStorage(AppSettings.Key.billableHoursPerYear) private var billableHoursPerYear = AppSettings.defaults.billableHoursPerYear
     /// Sections start open; collapsing is per project (the editor is re-created per selection).
     @State private var collapsed: Set<Bucket> = []
+    @State private var expandedGroups: Set<String> = []
     @State private var actualsExpanded = ProcessInfo.processInfo.environment["BUCKETS_SCREEN"] == "actuals"
 
     private var billableHours: Decimal { Decimal(billableHoursPerYear) }
@@ -59,12 +60,26 @@ private struct ProjectEditor: View {
                             let groups = ProjectText.grouped(lines)
                             ForEach(groups, id: \.title) { group in
                                 if groups.count > 1 {
-                                    Text(group.title).font(.caption).foregroundStyle(.secondary)
-                                }
-                                ForEach(group.lines) { line in
-                                    ProjectLineRow(line: line, billableHours: billableHours) {
-                                        // A hand-flipped labor or equipment toggle means the crew is custom now (DECISIONS 62).
-                                        if line.bucket == .labor || line.bucket == .equipment { project.crewName = nil }
+                                    // Categories are collapsible and start collapsed (DECISIONS 69); the header says how many are on.
+                                    DisclosureGroup(isExpanded: isGroupExpanded(bucket, group.title)) {
+                                        ForEach(group.lines) { line in
+                                            ProjectLineRow(line: line, billableHours: billableHours) {
+                                                if line.bucket == .labor || line.bucket == .equipment { project.crewName = nil }
+                                            }
+                                        }
+                                    } label: {
+                                        HStack {
+                                            Text(group.title)
+                                            Spacer()
+                                            Text(ProjectText.onCount(group.lines)).font(.caption).foregroundStyle(.secondary).monospacedDigit()
+                                        }
+                                    }
+                                } else {
+                                    ForEach(group.lines) { line in
+                                        ProjectLineRow(line: line, billableHours: billableHours) {
+                                            // A hand-flipped labor or equipment toggle means the crew is custom now (DECISIONS 62).
+                                            if line.bucket == .labor || line.bucket == .equipment { project.crewName = nil }
+                                        }
                                     }
                                 }
                             }
@@ -134,6 +149,13 @@ private struct ProjectEditor: View {
         }
         .labelStyle(.titleAndIcon)
         .help("Copy the bucket subtotals, cost, markup, price and profit — internal, no rows")
+    }
+
+    /// Category groups inside a bucket section, collapsed until opened (DECISIONS 69).
+    private func isGroupExpanded(_ bucket: Bucket, _ title: String) -> Binding<Bool> {
+        let key = "\(bucket.rawValue)/\(title)"
+        return Binding(get: { expandedGroups.contains(key) },
+                       set: { open in if open { expandedGroups.insert(key) } else { expandedGroups.remove(key) } })
     }
 
     private func isExpanded(_ bucket: Bucket) -> Binding<Bool> {
@@ -354,6 +376,11 @@ enum ProjectText {
             return a.localizedStandardCompare(b) == .orderedAscending
         }
         return titles.map { LineGroup(title: $0.isEmpty ? "Other" : $0, lines: keyed[$0] ?? []) }
+    }
+
+    /// "2 of 6 on" for a category group's header.
+    static func onCount(_ lines: [ProjectLine]) -> String {
+        "\(lines.filter(\.isOn).count) of \(lines.count) on"
     }
 
     static let hoursMaximum = Decimal(string: "99999.99")!
