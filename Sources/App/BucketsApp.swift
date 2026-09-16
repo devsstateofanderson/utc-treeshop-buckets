@@ -26,7 +26,8 @@ final class AppDelegate: NSObject, NSApplicationDelegate {
                         window.setContentSize(NSSize(width: size[0], height: size[1]))
                     }
                 }
-                try? await Task.sleep(for: .seconds(2))
+                let settle = Double(ProcessInfo.processInfo.environment["BUCKETS_SNAPSHOT_DELAY"] ?? "") ?? 2
+                try? await Task.sleep(for: .seconds(settle))
                 Self.renderWindows(to: URL(fileURLWithPath: dir, isDirectory: true))
                 NSApp.terminate(nil)
             }

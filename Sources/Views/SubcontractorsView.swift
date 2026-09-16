@@ -94,7 +94,9 @@ struct SubcontractorDetail: View {
 
     var body: some View {
         if let sub = appState.selectedSubcontractorModel {
-            SubcontractorForm(sub: sub).id(sub.persistentModelID)
+            // No .id(): combined with the name field's auto-focus it left the Form blank on macOS 26 (found by render bisect);
+            // the focus is re-evaluated on selection change below instead.
+            SubcontractorForm(sub: sub)
         } else {
             ContentUnavailableView("No subcontractor selected", systemImage: "square.dashed",
                                    description: Text("Pick a sub, or press ⌘N to add one."))
@@ -138,6 +140,7 @@ private struct SubcontractorForm: View {
         }
         .formStyle(.grouped)
         .onAppear { if sub.name.isEmpty { nameFocused = true } }
+        .onChange(of: sub.persistentModelID) { _, _ in if sub.name.isEmpty { nameFocused = true } }
         .onChange(of: sub.name) { _, _ in save() }
         .onChange(of: sub.contact) { _, _ in save() }
         .onChange(of: sub.phone) { _, _ in save() }
@@ -184,3 +187,4 @@ private struct ServiceRow: View {
 
     private func save() { try? modelContext.save() }
 }
+

@@ -194,7 +194,7 @@ private struct ProjectHeader: View {
 
             HStack(alignment: .top, spacing: 8) {
                 ForEach(Bucket.allCases, id: \.self) { bucket in
-                    figure(bucket.title, Money.format(breakdown[bucket]))
+                    figure(bucket == .subcontractors ? "Subs" : bucket.title, Money.format(breakdown[bucket]))
                 }
             }
 

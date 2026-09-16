@@ -1,0 +1,712 @@
+[
+ {
+  "bucket": "consumables",
+  "name": "Chainsaw chain loop, 3/8 .050 20in 72DL full chisel \u2013 20in bar / 72 drive links, single loop",
+  "unit": "loop",
+  "price": 16.99,
+  "source": "Arborist supply",
+  "category": "Chains & bars",
+  "link": "https://www.baileysonline.com/oregon-20-chainsaw-chain-loop-72exl-72-drive-links-72exl072g-orf-72exl072g.html",
+  "notes": "Oregon 72EXL072G. Price 2026-09-16. Bailey's sale price (reg."
+ },
+ {
+  "bucket": "consumables",
+  "name": "Chainsaw chain loop, 3/8 low-profile .050 16in (top-handle) \u2013 16in bar / 56 drive links, single loop",
+  "unit": "loop",
+  "price": 20.99,
+  "source": "Arborist supply",
+  "category": "Chains & bars",
+  "link": "https://www.treestuff.com/oregon-91vxl-chain/",
+  "notes": "Oregon 91VXL VersaCut. Price 2026-09-16. 55DL variant is $26.99;"
+ },
+ {
+  "bucket": "consumables",
+  "name": "25 ft reel of 3/8 chain \u2013 25 ft reel, 3/8in low-profile .050",
+  "unit": "reel",
+  "price": 135.99,
+  "source": "Arborist supply",
+  "category": "Chains & bars",
+  "link": "https://www.baileysonline.com/oregon-25-chainsaw-chain-reel-72lpx-410-drive-links-72lpx025u-orf-72lpx025r.html",
+  "notes": "Oregon 72LPX. Price 2026-09-16. Bailey's sale price (reg $159.99);"
+ },
+ {
+  "bucket": "consumables",
+  "name": "Chainsaw bar, 20in \u2013 20in, 3/8 .050, 72DL, Rollomatic",
+  "unit": "each",
+  "price": 68.99,
+  "source": "Arborist supply",
+  "category": "Chains & bars",
+  "link": "https://russopower.com/products/stihl-3003-000-5221-rollomatic-chainsaw-guide-bar-20-inch",
+  "notes": "STIHL 3003 000 5221. Price 2026-09-16. Genuine STIHL OEM bar"
+ },
+ {
+  "bucket": "consumables",
+  "name": "Top-handle bar, 16in \u2013 16in, 3/8 low-profile .050, 55DL",
+  "unit": "each",
+  "price": 54.99,
+  "source": "Arborist supply",
+  "category": "Chains & bars",
+  "link": "https://www.treestuff.com/oregon-advancecut-guide-bar-16/",
+  "notes": "Oregon AdvanceCut (for STIHL). Price 2026-09-16. Light-commercial bar sized for top-handle/small saws"
+ },
+ {
+  "bucket": "consumables",
+  "name": "Rim sprocket, 3/8 7-tooth \u2013 3/8 pitch, 7 tooth, std spline",
+  "unit": "each",
+  "price": 4.99,
+  "source": "Arborist supply",
+  "category": "Chains & bars",
+  "link": "https://www.cutterschoice.com/en/42327-rim-small-3-8-7-tooth",
+  "notes": "Generic/OEM-spec. Price 2026-09-16"
+ },
+ {
+  "bucket": "consumables",
+  "name": "Round chainsaw file, 5/32in \u2013 12-pack (dozen)",
+  "unit": "pack",
+  "price": 2.67,
+  "source": "Arborist supply",
+  "category": "Sharpening",
+  "link": "https://www.treestuff.com/pferd-dozen-round-chainsaw-files/",
+  "notes": "Pferd. Price 2026-09-16. Fits 1/4 pitch and 3/8 low-profile chain"
+ },
+ {
+  "bucket": "consumables",
+  "name": "Round chainsaw file, 13/64in \u2013 12-pack (dozen)",
+  "unit": "pack",
+  "price": 2.67,
+  "source": "Arborist supply",
+  "category": "Sharpening",
+  "link": "https://www.treestuff.com/pferd-dozen-round-chainsaw-files/",
+  "notes": "Pferd. Price 2026-09-16. Fits standard 3/8 pitch chain"
+ },
+ {
+  "bucket": "consumables",
+  "name": "Flat/raker file \u2013 8in, 12-pack",
+  "unit": "pack",
+  "price": 40.0,
+  "source": "Arborist supply",
+  "category": "Sharpening",
+  "link": "https://www.sawsalvage.co/products/forester-12-pack-chainsaw-sharpening-raker-flat-file-8",
+  "notes": "Forester. Price 2026-09-16. Per-file price ~$3.33;"
+ },
+ {
+  "bucket": "consumables",
+  "name": "Felling wedge, 8in plastic \u2013 8in",
+  "unit": "each",
+  "price": 16.99,
+  "source": "Arborist supply",
+  "category": "Chains & bars",
+  "link": "https://www.baileysonline.com/oregon-8-plastic-felling-wedge-23561-orf-23561.html",
+  "notes": "Oregon ORF 23561. Price 2026-09-16"
+ },
+ {
+  "bucket": "consumables",
+  "name": "Bar and chain oil \u2013 1 gallon",
+  "unit": "gal",
+  "price": 21.99,
+  "source": "Arborist supply",
+  "category": "Fuel & oil",
+  "link": "https://www.treestuff.com/husqvarna-b-c-oil-1-gallon/",
+  "notes": "Husqvarna. Price 2026-09-16"
+ },
+ {
+  "bucket": "consumables",
+  "name": "Bar and chain oil \u2013 5 gallon pail",
+  "unit": "gal",
+  "price": 141.99,
+  "source": "Arborist supply",
+  "category": "Fuel & oil",
+  "link": "https://www.shforestrysupplies.com/451a-0781-516-5006-stihl-platinum-bar-and-chain-oil-5-gallon-pail.html",
+  "notes": "STIHL Platinum. Price 2026-09-16"
+ },
+ {
+  "bucket": "consumables",
+  "name": "2-stroke oil, 50:1 mix bottles \u2013 2.6 oz bottles, 6-pack (each mixes 1 gal)",
+  "unit": "pack",
+  "price": 17.99,
+  "source": "Arborist supply",
+  "category": "Fuel & oil",
+  "link": "https://shoptruevalueamerica.com/p/stihl-high-performance-ultra-cycle-engine-oil-pack-795711346300",
+  "notes": "STIHL HP Ultra. Price 2026-09-16"
+ },
+ {
+  "bucket": "consumables",
+  "name": "Premixed fuel (TruFuel/MotoMix) \u2013 110 oz can (~0.86 gal; largest single size sold)",
+  "unit": "each",
+  "price": 25.99,
+  "source": "Arborist supply",
+  "category": "Fuel & oil",
+  "link": "https://www.truevalue.com/product/small-engine-pre-mixed-fuel-oil-50-1-110-oz/",
+  "notes": "TruFuel 50:1. Price 2026-09-16. TruFuel not sold in a true 1 gal container;"
+ },
+ {
+  "bucket": "consumables",
+  "name": "Pump gas, regular \u2013 per gallon, FL average",
+  "unit": "gal",
+  "price": 4.2,
+  "source": "Arborist supply",
+  "category": "Fuel & oil",
+  "link": "https://gasprices.aaa.com/?state=FL",
+  "notes": "AAA Florida average. Price 2026-09-16. AAA shows $4.1987"
+ },
+ {
+  "bucket": "consumables",
+  "name": "Diesel \u2013 per gallon, FL average",
+  "unit": "gal",
+  "price": 6.33,
+  "source": "Arborist supply",
+  "category": "Fuel & oil",
+  "link": "https://gasprices.aaa.com/?state=FL",
+  "notes": "AAA Florida average. Price 2026-09-16. AAA shows $6.3272;"
+ },
+ {
+  "bucket": "consumables",
+  "name": "Climbing line, 11.7mm \u2013 150 ft, no eye splice",
+  "unit": "each",
+  "price": 151.99,
+  "source": "Arborist supply",
+  "category": "Climbing",
+  "link": "https://www.treestuff.com/yale-blue-moon-11-7mm-climbing-rope/",
+  "notes": "Yale Blue Moon. Price 2026-09-16. Tight-eye termination option is $179.99;"
+ },
+ {
+  "bucket": "consumables",
+  "name": "Rigging line, 1/2in \u2013 150 ft, cut from spool",
+  "unit": "each",
+  "price": 180.0,
+  "source": "Arborist supply",
+  "category": "Rigging",
+  "link": "https://www.wesspur.com/double-esterlon-13mm-bulk-rigging-rope",
+  "notes": "Yale Double Esterlon 13mm. Price 2026-09-16. Calculated: WesSpur sells by the foot at $1.20/ft x150"
+ },
+ {
+  "bucket": "consumables",
+  "name": "Rigging line, 5/8in \u2013 150 ft, cut from spool",
+  "unit": "each",
+  "price": 270.0,
+  "source": "Arborist supply",
+  "category": "Rigging",
+  "link": "https://www.wesspur.com/double-esterlon-16mm-tree-rigging-rope",
+  "notes": "Yale Double Esterlon 16mm. Price 2026-09-16. Calculated: WesSpur sells by the foot at $1.80/ft x150"
+ },
+ {
+  "bucket": "consumables",
+  "name": "Throw line \u2013 180 ft, 1.75mm",
+  "unit": "each",
+  "price": 30.0,
+  "source": "Arborist supply",
+  "category": "Rigging",
+  "link": "https://www.wesspur.com/THR101-zing-it-arborist-throw-line",
+  "notes": "Samson Zing-It. Price 2026-09-16. 2.20mm heavier version is $35.00"
+ },
+ {
+  "bucket": "consumables",
+  "name": "Throw weight \u2013 12 oz, with loop",
+  "unit": "each",
+  "price": 12.0,
+  "source": "Arborist supply",
+  "category": "Rigging",
+  "link": "https://www.wesspur.com/THR234-arborist-throw-weight",
+  "notes": "Climb Right. Price 2026-09-16. Weaver-brand 12oz alternative is $15.99"
+ },
+ {
+  "bucket": "consumables",
+  "name": "Friction saver \u2013 standard ring-style",
+  "unit": "each",
+  "price": 82.0,
+  "source": "Arborist supply",
+  "category": "Rigging",
+  "link": "https://www.wesspur.com/ring-friction-saver",
+  "notes": "R.I.N.G. Friction Saver. Price 2026-09-16"
+ },
+ {
+  "bucket": "consumables",
+  "name": "Loopie sling \u2013 3/4in, adjusts 2-8 ft",
+  "unit": "each",
+  "price": 68.0,
+  "source": "Arborist supply",
+  "category": "Rigging",
+  "link": "https://www.wesspur.com/yalex-loopie-sling",
+  "notes": "Tenex-Tec Loopie Sling. Price 2026-09-16. 2,232 lb WLL choked"
+ },
+ {
+  "bucket": "consumables",
+  "name": "Whoopie sling \u2013 1/2in, ~2.5-4 ft",
+  "unit": "each",
+  "price": 52.0,
+  "source": "Arborist supply",
+  "category": "Rigging",
+  "link": "https://www.wesspur.com/yalex-whoopie-sling",
+  "notes": "Yalex Whoopie Sling. Price 2026-09-16. ESTIMATE: page shows $52-$100 range by length, used low end;"
+ },
+ {
+  "bucket": "consumables",
+  "name": "Rigging block/pulley, mid-range \u2013 compact, 9/16in max rope",
+  "unit": "each",
+  "price": 299.95,
+  "source": "Arborist supply",
+  "category": "Rigging",
+  "link": "https://www.wesspur.com/isc-200-series-rigging-pulley-compact",
+  "notes": "ISC RP200 Series Compact. Price 2026-09-16. Currently out of stock at WesSpur;"
+ },
+ {
+  "bucket": "consumables",
+  "name": "Port-a-Wrap, medium \u2013 Port-A-Wrap III / 601N",
+  "unit": "each",
+  "price": 229.95,
+  "source": "Arborist supply",
+  "category": "Rigging",
+  "link": "https://www.wesspur.com/port-a-wrap-large",
+  "notes": "Buckingham. Price 2026-09-16. Line jumps Mini($198.99)/III-Small($229.95, used here as medium)/Large($262.99)/XL($395)"
+ },
+ {
+  "bucket": "consumables",
+  "name": "Arborist steel carabiner",
+  "unit": "each",
+  "price": 44.95,
+  "source": "Arborist supply",
+  "category": "Climbing",
+  "link": "https://www.treestuff.com/isc-iron-wizard-steel-carabiner-70kn/",
+  "notes": "ISC Iron Wizard Twistlock. Price 2026-09-16. 70kN steel rigging carabiner"
+ },
+ {
+  "bucket": "consumables",
+  "name": "1in tubular webbing \u2013 per ft",
+  "unit": "ft",
+  "price": 0.65,
+  "source": "Arborist supply",
+  "category": "Climbing",
+  "link": "https://www.wesspur.com/climb-spec-tubular-nylon-webbing",
+  "notes": "BlueWater Climb-Spec. Price 2026-09-16. Sold by the foot, cut to order"
+ },
+ {
+  "bucket": "consumables",
+  "name": "1in tubular webbing \u2013 30 ft, cut to order",
+  "unit": "each",
+  "price": 19.5,
+  "source": "Arborist supply",
+  "category": "Climbing",
+  "link": "https://www.wesspur.com/climb-spec-tubular-nylon-webbing",
+  "notes": "BlueWater Climb-Spec. Price 2026-09-16. Calculated: $0.65/ft x 30;"
+ },
+ {
+  "bucket": "consumables",
+  "name": "Tree gaff pads \u2013 pair, T-pad style",
+  "unit": "each",
+  "price": 63.5,
+  "source": "Arborist supply",
+  "category": "Climbing",
+  "link": "https://www.wesspur.com/t-pads-for-climbing-spurs",
+  "notes": "T Pads. Price 2026-09-16. Buckingham Big Buck pads run $139.95"
+ },
+ {
+  "bucket": "consumables",
+  "name": "Spur straps \u2013 lower straps, pair",
+  "unit": "each",
+  "price": 39.95,
+  "source": "Arborist supply",
+  "category": "Climbing",
+  "link": "https://www.wesspur.com/universal-lower-spur-straps",
+  "notes": "Buckingham Universal Lower Spur Straps. Price 2026-09-16. XL upper straps are $36.99"
+ },
+ {
+  "bucket": "consumables",
+  "name": "Saddle replacement leg straps \u2013 coated, extra-wide back saddle",
+  "unit": "each",
+  "price": 278.79,
+  "source": "Arborist supply",
+  "category": "Climbing",
+  "link": "https://www.treestuff.com/weaver-4-d-extra-wide-back-saddle-coated-leg-straps/",
+  "notes": "Weaver 4-D. Price 2026-09-16. CAUTION: product title/price suggests this may be a full saddle assembly, not standalone replacement straps - verify bef\u2026"
+ },
+ {
+  "bucket": "consumables",
+  "name": "Helmet \u2013 standard colors",
+  "unit": "each",
+  "price": 114.95,
+  "source": "Arborist supply",
+  "category": "PPE & safety",
+  "link": "https://www.bartlettman.com/products/petzl-vertex-helmet",
+  "notes": "Petzl Vertex. Price 2026-09-16. Hi-vis yellow/orange colorway is $124.95;"
+ },
+ {
+  "bucket": "consumables",
+  "name": "Chainsaw chaps \u2013 36in, 6-layer apron style",
+  "unit": "each",
+  "price": 129.99,
+  "source": "Arborist supply",
+  "category": "PPE & safety",
+  "link": "https://www.ohiopowertool.com/stihl-stl-0000-886-3202",
+  "notes": "STIHL Dynamic. Price 2026-09-16. Husqvarna apron chaps run $49.99-$69.95 on secondary market per search"
+ },
+ {
+  "bucket": "consumables",
+  "name": "Safety glasses \u2013 12-pack",
+  "unit": "pack",
+  "price": 64.97,
+  "source": "Arborist supply",
+  "category": "PPE & safety",
+  "link": "https://www.homedepot.com/p/Milwaukee-Safety-Glasses-with-Gray-Anti-Scratch-Lenses-12-Pack-48-73-2105X12/314974923",
+  "notes": "Milwaukee. Price 2026-09-16. Price reflects a $25 store-card promo discount;"
+ },
+ {
+  "bucket": "consumables",
+  "name": "Ear plugs \u2013 200-pack (pairs)",
+  "unit": "pack",
+  "price": 22.37,
+  "source": "Arborist supply",
+  "category": "PPE & safety",
+  "link": "https://homedepot.com/p/Cordova-Encore-Disposable-Ear-Plugs-200-per-Box-EPFU01/202593530",
+  "notes": "Cordova Encore. Price 2026-09-16. ULTRX 200-pack alternative is $29.19"
+ },
+ {
+  "bucket": "consumables",
+  "name": "Work gloves \u2013 12-pack, large",
+  "unit": "pack",
+  "price": 52.97,
+  "source": "Arborist supply",
+  "category": "PPE & safety",
+  "link": "https://www.homedepot.com/p/Milwaukee-Large-Red-Nitrile-Level-1-Cut-Resistant-Dipped-Work-Gloves-12-Pack-48-22-8902B/307720354",
+  "notes": "Milwaukee Nitrile Level 1. Price 2026-09-16. Budget multipurpose gloves run ~$1/pair in bulk"
+ },
+ {
+  "bucket": "consumables",
+  "name": "Flagging tape \u2013 1-3/16in x 300ft roll (sold as 12-pack)",
+  "unit": "roll",
+  "price": 2.56,
+  "source": "Arborist supply",
+  "category": "Site supplies",
+  "link": "https://www.homedepot.com/b/Tools-Hand-Tools-Marking-Tools-Layout-Tools-Flagging-Tape/N-5yc1vZc97p",
+  "notes": "Generic (Home Depot). Price 2026-09-16. Derived from 12-pack at $30.77;"
+ },
+ {
+  "bucket": "consumables",
+  "name": "Marking paint \u2013 15-17 oz inverted spray can",
+  "unit": "each",
+  "price": 9.69,
+  "source": "Arborist supply",
+  "category": "Site supplies",
+  "link": "https://homedepot.com/p/Rust-Oleum-Industrial-Choice-17-oz-M1600-White-Inverted-Marking-Spray-Paint-Case-of-12-203030V/322819662",
+  "notes": "Rust-Oleum Industrial Choice/Professional. Price 2026-09-16. Derived from 12-can case at $116.28;"
+ },
+ {
+  "bucket": "consumables",
+  "name": "Contractor trash bags, 42 gal \u2013 50-count",
+  "unit": "pack",
+  "price": 29.97,
+  "source": "Arborist supply",
+  "category": "Site supplies",
+  "link": "https://www.homedepot.com/p/Husky-42-Gal-Contractor-Bags-50-Count-HK42WC050B/202973825",
+  "notes": "Husky. Price 2026-09-16"
+ },
+ {
+  "bucket": "consumables",
+  "name": "Tarp, 20x30 \u2013 20 ft x 30 ft, heavy duty",
+  "unit": "each",
+  "price": 139.0,
+  "source": "Arborist supply",
+  "category": "Site supplies",
+  "link": "https://www.homedepot.com/p/Everbilt-20-ft-x-30-ft-Brown-and-Silver-Heavy-Duty-Tarp-PYHD2030/308137821",
+  "notes": "Everbilt. Price 2026-09-16. Other 20x30 heavy-duty tarps range $89.98-$137.00"
+ },
+ {
+  "bucket": "materials",
+  "name": "Imidacloprid soil drench \u2013 27.5 oz bottle (~1 qt; yields 50 gal solution)",
+  "unit": "each",
+  "price": 34.98,
+  "source": "Arborist supply",
+  "category": "Plant health",
+  "link": "https://www.domyown.com/dominion-2l-termiticide-concentrate-p-1223.html",
+  "notes": "Dominion 2L. Price 2026-09-16. 2.15 gal jug is $236.98;"
+ },
+ {
+  "bucket": "materials",
+  "name": "Propiconazole 14.3 \u2013 1 quart",
+  "unit": "qt",
+  "price": 55.53,
+  "source": "Arborist supply",
+  "category": "Plant health",
+  "link": "https://www.domyown.com/propiconazole-143-p-16567.html",
+  "notes": "Generic Propiconazole 14.3. Price 2026-09-16. No pint size sold;"
+ },
+ {
+  "bucket": "materials",
+  "name": "Propiconazole 14.3 \u2013 1 gallon",
+  "unit": "gal",
+  "price": 95.53,
+  "source": "Arborist supply",
+  "category": "Plant health",
+  "link": "https://www.domyown.com/propiconazole-143-p-16567.html",
+  "notes": "Generic Propiconazole 14.3. Price 2026-09-16. 2.5 gal jug is $198.00"
+ },
+ {
+  "bucket": "materials",
+  "name": "Arborjet TREE-age G4 injection \u2013 1 quart bottle",
+  "unit": "kit",
+  "price": 440.0,
+  "source": "Arborist supply",
+  "category": "Plant health",
+  "link": "https://tipco.green/products/arborjet-tree-age-g4",
+  "notes": "Arborjet TREE-age G4. Price 2026-09-16. Case of 4 quarts is $1,760 (same per-unit price)"
+ },
+ {
+  "bucket": "materials",
+  "name": "Hydraulic-spray horticultural oil \u2013 1 gallon",
+  "unit": "gal",
+  "price": 26.98,
+  "source": "Arborist supply",
+  "category": "Plant health",
+  "link": "https://www.domyown.com/monterey-horticultural-oil-p-2835.html",
+  "notes": "Monterey Horticultural Oil. Price 2026-09-16. 10% off promo price shown (reg $29.98)"
+ },
+ {
+  "bucket": "materials",
+  "name": "Palm fertilizer 8-2-12 \u2013 50 lb bag",
+  "unit": "bag",
+  "price": 47.77,
+  "source": "Arborist supply",
+  "category": "Fertilizer",
+  "link": "https://www.seedworldusa.com/products/growers-palm-and-ornamental-8-2-12-fertilizer-50-lbs",
+  "notes": "Growers Palm & Ornamental 8-2-12. Price 2026-09-16. SiteOne carries LESCO 8-2-12 50lb but prices are login-gated (dealer account required)"
+ },
+ {
+  "bucket": "materials",
+  "name": "Milorganite \u2013 32 lb bag",
+  "unit": "bag",
+  "price": 19.97,
+  "source": "Arborist supply",
+  "category": "Fertilizer",
+  "link": "https://www.homedepot.com/p/Milorganite-32-lbs-2-500-sq-ft-Plant-Fertilizer-Slow-Release-Nitrogen-Garden-and-Lawn-Fertilizer-6-4-0-100539618/308888983",
+  "notes": "Milorganite 6-4-0. Price 2026-09-16. Same listing also seen at $24.97 depending on location;"
+ },
+ {
+  "bucket": "materials",
+  "name": "Tree stake kit, heavy duty \u2013 3 stakes + straps + rope",
+  "unit": "kit",
+  "price": 11.99,
+  "source": "Arborist supply",
+  "category": "Planting supplies",
+  "link": "https://www.amazon.com/Stake-Kit-Garden-Including-3sets-Tree/dp/B0D73F3L86",
+  "notes": "Generic steel stake kit. Price 2026-09-16. ESTIMATE proxy: generic kit, not DeepRoot-branded;"
+ },
+ {
+  "bucket": "materials",
+  "name": "Arbor Tie \u2013 250 ft roll",
+  "unit": "roll",
+  "price": 29.0,
+  "source": "Arborist supply",
+  "category": "Planting supplies",
+  "link": "https://masterlandscapesupply.com/products/tree-tie-arbor-tie-250-foot-roll",
+  "notes": "DeepRoot Arbor-Tie. Price 2026-09-16"
+ },
+ {
+  "bucket": "materials",
+  "name": "Cobra dynamic cabling kit \u2013 2-ton, 5-system package",
+  "unit": "kit",
+  "price": 496.99,
+  "source": "Arborist supply",
+  "category": "Cabling & bracing",
+  "link": "https://www.treestuff.com/cobra-dynamic-bracing-system-bundles/",
+  "notes": "Cobra Dynamic Bracing System. Price 2026-09-16. 15-system 2-ton pack is $889.99;"
+ },
+ {
+  "bucket": "materials",
+  "name": "Cobra dynamic cabling kit \u2013 4-ton, 5-system package",
+  "unit": "kit",
+  "price": 577.99,
+  "source": "Arborist supply",
+  "category": "Cabling & bracing",
+  "link": "https://www.treestuff.com/cobra-dynamic-bracing-system-bundles/",
+  "notes": "Cobra Dynamic Bracing System. Price 2026-09-16. 8-ton, 4-system pack is $1,099.99"
+ },
+ {
+  "bucket": "materials",
+  "name": "EHS steel cable, 1/4in \u2013 per ft (sold as 250 ft preset roll)",
+  "unit": "ft",
+  "price": 0.4,
+  "source": "Arborist supply",
+  "category": "Cabling & bracing",
+  "link": "https://www.wesspur.com/ehs-cable-quarter-inch",
+  "notes": "Generic EHS 1x7 galvanized. Price 2026-09-16. 250 ft roll priced at flat $100.00;"
+ },
+ {
+  "bucket": "materials",
+  "name": "Amon-eye bolt / lag hook \u2013 1/2in, 6in long",
+  "unit": "each",
+  "price": 3.13,
+  "source": "Arborist supply",
+  "category": "Cabling & bracing",
+  "link": "https://www.bartlettman.com/products/lag-hook-left-hand-and-right-hand-thread",
+  "notes": "Chicago Hardware (Bartlett). Price 2026-09-16. 1/4in and 1/2in both $3.13;"
+ },
+ {
+  "bucket": "materials",
+  "name": "Threaded rod, 1/2in bracing \u2013 1/2in-13, 10 ft, hot-dip galvanized",
+  "unit": "each",
+  "price": 71.46,
+  "source": "Arborist supply",
+  "category": "Cabling & bracing",
+  "link": "https://www.homedepot.com/p/Everbilt-1-2-in-x-10-ft-Hot-Dip-Galvanized-Steel-Coarse-Threaded-Rod-85117/332734035",
+  "notes": "Everbilt. Price 2026-09-16. CAUTION: this price seems high vs."
+ },
+ {
+  "bucket": "materials",
+  "name": "Root barrier \u2013 24in x 100 ft roll, 40 mil",
+  "unit": "roll",
+  "price": 401.75,
+  "source": "Arborist supply",
+  "category": "Planting supplies",
+  "link": "https://www.landscapediscount.com/product-p/wb-24-40-100.htm",
+  "notes": "DeepRoot Water/Root Barrier. Price 2026-09-16. SiteOne also carries this (login-gated pricing);"
+ },
+ {
+  "bucket": "materials",
+  "name": "DeepRoot/Bio-Barrier \u2013 per ft (24in wide, 40 mil)",
+  "unit": "ft",
+  "price": 4.02,
+  "source": "Arborist supply",
+  "category": "Planting supplies",
+  "link": "https://www.landscapediscount.com/product-p/wb-24-40-100.htm",
+  "notes": "DeepRoot. Price 2026-09-16. Calculated: $401.75 / 100 ft roll"
+ },
+ {
+  "bucket": "materials",
+  "name": "Biochar \u2013 1 cu ft bag",
+  "unit": "bag",
+  "price": 39.99,
+  "source": "Arborist supply",
+  "category": "Soil & amendments",
+  "link": "https://homedepot.com/p/WAKEFIELD-Biochar-with-CarbonBoost-Soil-Amendment-1-cu-ft-Bag-4213/335271401",
+  "notes": "Wakefield Biochar with CarbonBoost. Price 2026-09-16. Budget options as low as $14.95-$16/bag (BioChar6, wholesale pallet pricing)"
+ },
+ {
+  "bucket": "materials",
+  "name": "Mycorrhizal inoculant \u2013 1 lb, granular",
+  "unit": "each",
+  "price": 19.12,
+  "source": "Arborist supply",
+  "category": "Soil & amendments",
+  "link": "https://www.amazon.com/Myco-Bliss-Mycorrhizal-Concentrated-Fertilizer/dp/B0BQB18TLK",
+  "notes": "Myco Bliss. Price 2026-09-16. 23% off promo price;"
+ },
+ {
+  "bucket": "materials",
+  "name": "Compost tea / soil amendment \u2013 1 gallon, liquid concentrate",
+  "unit": "gal",
+  "price": 47.99,
+  "source": "Arborist supply",
+  "category": "Soil & amendments",
+  "link": "https://www.walmart.com/c/kp/worm-compost-tea",
+  "notes": "Wiggle Worm Pure Worm Castings Tea. Price 2026-09-16. ESTIMATE-adjacent: exact product URL not directly confirmed via fetch, price from search listing only"
+ },
+ {
+  "bucket": "materials",
+  "name": "Tree watering bag \u2013 20 gallon",
+  "unit": "each",
+  "price": 19.98,
+  "source": "Arborist supply",
+  "category": "Planting supplies",
+  "link": "https://homedepot.com/p/Vigoro-20-Gal-Tree-Watering-Bag-410-878-0111/330509941",
+  "notes": "Vigoro. Price 2026-09-16. Multi-packs of off-brand PVC bags run $38-$104 for 3-10 packs"
+ },
+ {
+  "bucket": "materials",
+  "name": "Mulch, bulk \u2013 per cubic yard",
+  "unit": "yard",
+  "price": 31.25,
+  "source": "Arborist supply",
+  "category": "Mulch & pine straw",
+  "link": "https://www.mulchforyou.com/products-and-pricing",
+  "notes": "Mulch For You (Classic Red). Price 2026-09-16. Central FL (Longwood/Oviedo) supplier;"
+ },
+ {
+  "bucket": "materials",
+  "name": "Pine straw \u2013 per bale",
+  "unit": "bale",
+  "price": 8.5,
+  "source": "Arborist supply",
+  "category": "Mulch & pine straw",
+  "link": "https://www.mulchforyou.com/products-and-pricing",
+  "notes": "Mulch For You. Price 2026-09-16. Central FL supplier;"
+ },
+ {
+  "bucket": "materials",
+  "name": "St. Augustine sod \u2013 pallet, 400 sq ft (Floratam)",
+  "unit": "pallet",
+  "price": 196.0,
+  "source": "Arborist supply",
+  "category": "Sod",
+  "link": "https://www.floridafarmsod.com/product-page/pallet-st-augustine-floratam-400-sqft-12-00-pallet",
+  "notes": "Florida Farm Sod. Price 2026-09-16. Plus $12 wooden pallet deposit;"
+ },
+ {
+  "bucket": "materials",
+  "name": "Topsoil, bulk \u2013 per cubic yard",
+  "unit": "yard",
+  "price": 37.5,
+  "source": "Arborist supply",
+  "category": "Soil & amendments",
+  "link": "https://www.mulchforyou.com/products-and-pricing",
+  "notes": "Mulch For You. Price 2026-09-16. Central FL supplier;"
+ },
+ {
+  "bucket": "consumables",
+  "name": "Landfill yard-waste disposal fee \u2013 per ton, at landfill scale",
+  "unit": "ton",
+  "price": 46.8,
+  "source": "Arborist supply",
+  "category": "Disposal",
+  "link": "https://www.orangecountyfl.net/watergarbagerecycling/landfillandtransferstations.aspx",
+  "notes": "Orange County FL Solid Waste Division. Price 2026-09-16. Rate effective 10/1/2025;"
+ },
+ {
+  "bucket": "consumables",
+  "name": "Porta-potty rental \u2013 standard unit, monthly",
+  "unit": "month",
+  "price": 100.0,
+  "source": "Arborist supply",
+  "category": "Site supplies",
+  "link": "https://orlandoportapotties.com/what-is-the-monthly-cost-of-a-porta-potty-in-orlando-fl/",
+  "notes": "Orlando-area market rate. Price 2026-09-16. ESTIMATE: standard units run $75-$100/mo, deluxe $120-$150, premium $150-$200;"
+ },
+ {
+  "bucket": "consumables",
+  "name": "Traffic cone \u2013 28in, weighted base",
+  "unit": "each",
+  "price": 22.5,
+  "source": "Arborist supply",
+  "category": "Site supplies",
+  "link": "https://www.homedepot.com/p/PLASTICADE-28-in-Orange-Traffic-Cone-with-Black-Base-10-lbs-6-Pack-528-10-1-6PKB/331451758",
+  "notes": "PLASTICADE. Price 2026-09-16. Derived from 6-pack at $134.99;"
+ },
+ {
+  "bucket": "consumables",
+  "name": "Road Work Ahead sign \u2013 36in, roll-up",
+  "unit": "each",
+  "price": 52.97,
+  "source": "Arborist supply",
+  "category": "Site supplies",
+  "link": "https://www.trafficsafetystore.com/traffic-signs/roll-up-road-work-ahead-sign",
+  "notes": "Generic roll-up work zone sign. Price 2026-09-16. Rigid 36in aluminum version starts ~$139.56;"
+ },
+ {
+  "bucket": "consumables",
+  "name": "Tree removal permit fee \u2013 residential property",
+  "unit": "each",
+  "price": 25.0,
+  "source": "Arborist supply",
+  "category": "Permits & site",
+  "link": "https://www.orlando.gov/Parks-the-Environment/Trees/Apply-for-a-Tree-Removal-or-Encroachment-Permit",
+  "notes": "City of Orlando. Price 2026-09-16. Commercial rate is $50/acre."
+ },
+ {
+  "bucket": "consumables",
+  "name": "Tree removal permit fee \u2013 developed property, base fee",
+  "unit": "each",
+  "price": 247.98,
+  "source": "Arborist supply",
+  "category": "Permits & site",
+  "link": "https://www.orangecountyfl.net/PermitsLicenses/Permits/TreeRemovalPermit-DevelopedProperty.aspx",
+  "notes": "Orange County FL. Price 2026-09-16. Plus inspection fee: $131 base, $262 (5-10 acres), or $363 (10+ acres);"
+ }
+]

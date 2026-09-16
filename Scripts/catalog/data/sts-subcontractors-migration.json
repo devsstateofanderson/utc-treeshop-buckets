@@ -1,0 +1,20 @@
+{
+  "formatVersion": 1,
+  "exportedAt": "2026-09-16T09:00:00Z",
+  "settings": {"billableHoursPerYear": 1500, "laborBurdenPct": 30, "markupPct": 35, "minimumJobCents": 75000, "costOfMoneyPct": 0},
+  "subcontractors": [
+    {"name": "Gaston – grapple truck (Mike)", "contact": "Mike", "phone": null, "email": null, "notes": "Grapple truck sub. Rate as typed in Buckets; confirm per-load vs per-day.", "isActive": true, "sortOrder": 0},
+    {"name": "Stump grinding sub", "contact": null, "phone": null, "email": null, "notes": "ESTIMATE rate. 2025 P&L: $14,595 paid for stump grinding. Enter the sub's real per-stump price and name.", "isActive": true, "sortOrder": 1},
+    {"name": "Crane company", "contact": null, "phone": null, "email": null, "notes": "ESTIMATE rate (brief's example). 2025 P&L: crane rental $7,562. Flat all-in per day as the crane company charges it.", "isActive": true, "sortOrder": 2}
+  ],
+  "items": [
+    {"bucket": "subcontractors", "name": "Grapple truck", "rateCents": 40000, "unit": "each", "isActive": true, "source": "Gaston", "notes": null, "calcInputs": null, "sortOrder": 0, "category": null, "link": null, "subcontractorIndex": 0},
+    {"bucket": "subcontractors", "name": "Stump grinding", "rateCents": 24000, "unit": "stump", "isActive": true, "source": null, "notes": "ESTIMATE", "calcInputs": null, "sortOrder": 0, "category": null, "link": null, "subcontractorIndex": 1},
+    {"bucket": "subcontractors", "name": "Crane", "rateCents": 180000, "unit": "day", "isActive": true, "source": null, "notes": "ESTIMATE", "calcInputs": null, "sortOrder": 0, "category": null, "link": null, "subcontractorIndex": 2},
+    {"bucket": "consumables", "name": "Grapple Truck - Mike", "rateCents": 40000, "unit": "each", "isActive": false, "source": null, "notes": null, "calcInputs": null, "sortOrder": 0},
+    {"bucket": "consumables", "name": "Stump grinding (sub)", "rateCents": 24000, "unit": "stump", "isActive": false, "source": null, "notes": null, "calcInputs": null, "sortOrder": 0},
+    {"bucket": "consumables", "name": "Crane rental (sub)", "rateCents": 180000, "unit": "day", "isActive": false, "source": null, "notes": null, "calcInputs": null, "sortOrder": 0}
+  ],
+  "loadouts": [],
+  "projects": []
+}

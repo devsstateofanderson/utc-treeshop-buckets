@@ -6,14 +6,19 @@ struct ProjectsListView: View {
     /// true = the Packages screen (DECISIONS 61): templates only, no dates or actuals.
     let templates: Bool
     @Environment(AppState.self) private var appState
-    @Query private var projects: [Project]
+    @Query private var allProjects: [Project]
+
+    /// Filtered in memory rather than by predicate: a store migrated from before the flag existed can hold
+    /// NULL for `isTemplate`, which a SQL predicate would not match (DECISIONS 61).
+    private var projects: [Project] {
+        let rows = allProjects.filter { $0.isTemplate == templates }
+        return templates
+            ? rows.sorted { $0.name.localizedStandardCompare($1.name) == .orderedAscending }
+            : rows.sorted { ($0.date, $0.name) > ($1.date, $1.name) }
+    }
 
     init(templates: Bool) {
         self.templates = templates
-        let sort: [SortDescriptor<Project>] = templates
-            ? [SortDescriptor(\Project.name)]
-            : [SortDescriptor(\Project.date, order: .reverse), SortDescriptor(\Project.name)]
-        _projects = Query(filter: #Predicate<Project> { $0.isTemplate == templates }, sort: sort)
     }
     @AppStorage(AppSettings.Key.billableHoursPerYear) private var billableHoursPerYear = AppSettings.defaults.billableHoursPerYear
     @State private var confirmingDelete = false
