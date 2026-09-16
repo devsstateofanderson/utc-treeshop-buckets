@@ -10,6 +10,9 @@ struct RootView: View {
         @Bindable var appState = appState
         NavigationSplitView {
             List(selection: $appState.sidebar) {
+                Section("Company") {
+                    Label("Company", systemImage: "building.columns").tag(SidebarItem.company)
+                }
                 Section("Buckets") {
                     ForEach(Bucket.allCases, id: \.self) { bucket in
                         if bucket == .subcontractors {
@@ -28,6 +31,7 @@ struct RootView: View {
             .navigationSplitViewColumnWidth(min: 170, ideal: 190, max: 240)
         } content: {
             switch appState.sidebar {
+            case .company: CompanyProfileView()
             case .bucket(let bucket): BucketTableView(bucket: bucket)
             case .subcontractors: SubcontractorsListView()
             case .projects: ProjectsListView(templates: false)
@@ -37,6 +41,7 @@ struct RootView: View {
             }
         } detail: {
             switch appState.sidebar {
+            case .company: CompanyDocumentsView()
             case .bucket: BucketItemDetail()
             case .subcontractors: SubcontractorDetail()
             case .projects, .packages: ProjectScreen()

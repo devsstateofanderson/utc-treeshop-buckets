@@ -51,10 +51,15 @@ struct BucketTableView: View {
                     }
                     .width(min: 80, ideal: 120)
                     TableColumn("Name", value: \.name) { item in
-                        Text(item.name.isEmpty ? "Untitled" : item.name)
-                            .foregroundStyle(item.isActive && !item.name.isEmpty ? Color.primary : Color.secondary)
+                        VStack(alignment: .leading, spacing: 1) {
+                            Text(bucket == .equipment ? item.codedName : (item.name.isEmpty ? "Untitled" : item.name))
+                                .foregroundStyle(item.isActive && !item.name.isEmpty ? Color.primary : Color.secondary)
+                            if bucket == .equipment, !item.identification.isEmpty {
+                                Text(item.identification).font(.caption).foregroundStyle(.secondary)
+                            }
+                        }
                     }
-                    .width(min: 100, ideal: 170)
+                    .width(min: 100, ideal: bucket == .equipment ? 220 : 170)
                     TableColumn("Rate", value: \.rateCents) { item in
                         RateCell(item: item, billableHours: Decimal(billableHoursPerYear))
                     }

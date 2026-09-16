@@ -25,6 +25,13 @@ import SwiftData
     var subcontractor: Subcontractor?
     /// Crew formations this labor or equipment row is part of (DECISIONS 62).
     var loadouts: [Loadout] = []
+    /// Equipment identification (DECISIONS 66): the short code the crew uses ("SAW-01", "TRK-02"), and the
+    /// make / model / year / serial or VIN that tell two identical units apart.
+    var unitCode: String?
+    var make: String?
+    var model: String?
+    var year: Int?
+    var serial: String?
     /// Inverse of `ProjectLine.item`. Declared so that deleting a row sets every referencing line's
     /// `item` to nil instead of leaving a dangling reference (DECISIONS 21); also the delete guard (22).
     @Relationship(deleteRule: .nullify, inverse: \ProjectLine.item) var lines: [ProjectLine] = []
@@ -58,11 +65,47 @@ extension BucketItem {
         return url
     }
 
-    /// Search across name, category, unit, source and notes (case- and diacritic-insensitive).
+    /// Search across name, category, unit, source, notes and the equipment identification (case- and diacritic-insensitive).
     func matches(_ query: String) -> Bool {
         let q = query.trimmingCharacters(in: .whitespaces)
         guard !q.isEmpty else { return true }
-        return [name, category ?? "", unit, source ?? "", notes ?? ""].contains { $0.localizedStandardContains(q) }
+        return [name, category ?? "", unit, source ?? "", notes ?? "", unitCode ?? "", make ?? "", model ?? "", serial ?? "",
+                year.map(String.init) ?? ""].contains { $0.localizedStandardContains(q) }
+    }
+
+    /// "TRK-02 · Ford F250" when the row has a unit code, else the name.
+    var codedName: String {
+        let base = name.isEmpty ? "Untitled" : name
+        guard let code = unitCode?.trimmingCharacters(in: .whitespaces), !code.isEmpty else { return base }
+        return "\(code) · \(base)"
+    }
+
+    /// "2013 Chevrolet Silverado 1500 · VIN 3GCP…" for the tables; empty when nothing is filled in.
+    var identification: String {
+        let ymm = [year.map(String.init), make, model].compactMap { $0 }.filter { !$0.isEmpty }.joined(separator: " ")
+        let sn = serial?.trimmingCharacters(in: .whitespaces) ?? ""
+        return [ymm, sn.isEmpty ? "" : "S/N \(sn)"].filter { !$0.isEmpty }.joined(separator: " · ")
+    }
+
+    /// Next free code with this prefix among `items`: "SAW-01", "SAW-02"… (DECISIONS 66).
+    static func nextUnitCode(prefix: String, among items: [BucketItem]) -> String {
+        let p = prefix.uppercased()
+        let taken = items.compactMap { $0.unitCode?.uppercased() }
+            .filter { $0.hasPrefix(p + "-") }
+            .compactMap { Int($0.dropFirst(p.count + 1)) }
+        return String(format: "%@-%02d", p, (taken.max() ?? 0) + 1)
+    }
+
+    static func nextUnitCodePrefixFallback(_ item: BucketItem) -> String { unitCodePrefix(for: item.category) }
+
+    /// Code prefix suggested by the row's category: Chainsaws → SAW, Trucks → TRK…; otherwise the category's first letters.
+    static func unitCodePrefix(for category: String?) -> String {
+        let known: [String: String] = ["chainsaws": "SAW", "pole saws": "PSW", "trucks": "TRK", "trailers": "TRL", "machines": "MCH",
+                                       "rigging": "RIG", "fuel cans": "CAN", "small tools": "TL", "chippers": "CHP", "climbing": "CLM"]
+        let key = (category ?? "").trimmingCharacters(in: .whitespaces).lowercased()
+        if let code = known[key] { return code }
+        let letters = key.filter(\.isLetter)
+        return letters.isEmpty ? "EQ" : String(letters.prefix(3)).uppercased()
     }
 
     /// The figure a project prices with, in $/hr cents, for hourly rows (overhead: $/yr ÷ billable hours, display only).

@@ -26,6 +26,18 @@ DerivedData lives in `~/Library/Developer/Xcode/DerivedData/Buckets-cli` (overri
 
 `--render` asks the app itself to draw its windows offscreen (`BUCKETS_SNAPSHOT_DIR`) instead of using `screencapture`; it works while the screen is locked and it captures the window with its toolbar, an open "Calculate…" sheet (`laborcalc`, `equipmentcalc`), or the Settings window (`settings`; drawn through a classic `NSHostingView` in a stand-in window, because the Settings scene's own window has nothing to draw offscreen while the app is in the background). `BUCKETS_WINDOW_SIZE=1180x1560` makes the window taller first so a long screen (the Project screen) renders past the fold; the display still caps the height. The sidebar's translucent material does not draw offscreen, so it comes out solid in these renders.
 
+## What is in it (v1.1)
+
+- **Company**: profile (name, address, licenses, three insurance policies with expirations) and a documents shelf for COIs, policies and certifications with expiry warnings.
+- **Buckets**: Labor, Equipment (with unit codes, make, model, year, serial), Materials, Consumables, Subcontractors (each sub with its own priced services), Overhead. Every row has a category and a product link; tables are searchable and sortable.
+- **Projects**: the pricing screen. **Packages** are saved projects to start jobs from; **Loadouts** are crew formations applied from the project's Crew menu.
+- **Settings**: the five numbers, Export JSON, Import JSON (replace) and Add or Update Rows (merge).
+
+## Editions and backups
+
+- `Scripts/catalog/data/Buckets-default-catalog.json`: the blank commercial starting point (no labor or equipment, overhead as a $0 checklist, 116 materials and 57 consumables for professional tree work with links). Load it with Add or Update Rows, or run the app once with `BUCKETS_MERGE_FILE` pointing at it.
+- `Backups/`: dated folders with an Export JSON and the raw store files; see `Backups/README.txt`.
+
 ## Where the data is
 
 One SwiftData store file:
@@ -34,7 +46,9 @@ One SwiftData store file:
 ~/Library/Application Support/Buckets/Buckets.store
 ```
 
-SQLite keeps two sidecar files next to it, `Buckets.store-wal` and `Buckets.store-shm`. "Delete the store" means all three. The five settings live in the app's UserDefaults (`com.sacredtreeservice.buckets`). The app launches empty; there is no sample data anywhere in it.
+SQLite keeps two sidecar files next to it, `Buckets.store-wal` and `Buckets.store-shm`. "Delete the store" means all three. Company documents are copied into `Documents/` next to the store. The five settings live in the app's UserDefaults (`com.sacredtreeservice.buckets`). The app launches empty; there is no sample data anywhere in it.
+
+Launch hooks for scripting (the app never seeds data on its own): `BUCKETS_STORE=<path>` uses another store file, `BUCKETS_MERGE_FILE=<json>` runs Add or Update Rows on launch, `BUCKETS_EXPORT_FILE=<json>` writes an export on launch.
 
 Set `BUCKETS_STORE=/some/path.store` in the environment to run against a different file (the screenshot script does this).
 

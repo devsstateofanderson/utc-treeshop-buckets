@@ -145,7 +145,7 @@ private struct MemberToggle: View {
     var body: some View {
         Toggle(isOn: Binding(get: { loadout.contains(item) }, set: { on in loadout.setMember(item, on); try? modelContext.save() })) {
             HStack {
-                Text(item.name.isEmpty ? "Untitled" : item.name)
+                Text(item.bucket == .equipment ? item.codedName : (item.name.isEmpty ? "Untitled" : item.name))
                 Spacer()
                 Text(Money.format(item.rateCents) + "/hr").foregroundStyle(.secondary).monospacedDigit()
             }

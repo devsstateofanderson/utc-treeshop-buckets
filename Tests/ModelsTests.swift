@@ -19,6 +19,15 @@ enum StoreFixture {
         add(.labor, "Marcus", 5408); add(.labor, "David", 3966); add(.labor, "Miguel", 3065)
         add(.equipment, "Bucket truck (50 ft)", 2372); add(.equipment, "Chip truck (F-550)", 2215)
         add(.equipment, "Chipper (12\")", 1711); add(.equipment, "Chainsaws (3)", 750); add(.equipment, "Mini skid steer", 1603)
+        for (name, code, make, model, year, serial) in [("Bucket truck (50 ft)", "TRK-01", "Ford", "F-750 / Altec LRV-56", 2016, "1FDXF7DC0GDA12345"),
+                                                          ("Chip truck (F-550)", "TRK-02", "Ford", "F-550", 2019, "1FDUF5HT9KDA67890"),
+                                                          ("Chipper (12\")", "CHP-01", "Bandit", "Intimidator 12XP", 2018, "12XP-004231"),
+                                                          ("Chainsaws (3)", "SAW-01", "STIHL", "MS 500i", 2023, nil),
+                                                          ("Mini skid steer", "MCH-01", "Toro", "Dingo TX 427", 2021, "TX427-31877")] {
+            let row = rows[name]!
+            row.unitCode = code; row.make = make; row.model = model; row.year = year; row.serial = serial
+            row.category = code.hasPrefix("TRK") ? "Trucks" : code.hasPrefix("SAW") ? "Chainsaws" : code.hasPrefix("CHP") ? "Chippers" : "Machines"
+        }
         add(.overhead, "General liability", 600_000); add(.overhead, "Shop rent", 960_000); add(.overhead, "Website + marketing", 360_000)
         add(.overhead, "Phones + internet", 240_000); add(.overhead, "Accounting + legal", 240_000); add(.overhead, "Software", 180_000)
         add(.overhead, "Licenses + misc", 120_000)

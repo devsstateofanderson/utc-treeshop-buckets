@@ -20,6 +20,44 @@ struct TransferDocument: Codable, Equatable {
         var link: String?
         /// Position in `subcontractors` for rows in the Subcontractors bucket.
         var subcontractorIndex: Int?
+        var unitCode: String?
+        var make: String?
+        var model: String?
+        var year: Int?
+        var serial: String?
+    }
+
+    struct CompanyRecord: Codable, Equatable {
+        var name: String
+        var dba: String?
+        var owner: String?
+        var address: String?
+        var phone: String?
+        var email: String?
+        var website: String?
+        var ein: String?
+        var licenses: String?
+        var glCarrier: String?
+        var glPolicy: String?
+        var glExpires: Date?
+        var autoCarrier: String?
+        var autoPolicy: String?
+        var autoExpires: Date?
+        var wcCarrier: String?
+        var wcPolicy: String?
+        var wcExpires: Date?
+        var notes: String?
+        var documents: [DocumentRecord]
+    }
+
+    struct DocumentRecord: Codable, Equatable {
+        var title: String
+        var category: String
+        var fileName: String
+        var originalName: String
+        var addedAt: Date
+        var expiresAt: Date?
+        var notes: String?
     }
 
     struct SubcontractorRecord: Codable, Equatable {
@@ -79,9 +117,10 @@ struct TransferDocument: Codable, Equatable {
     var settings: SettingsRecord
     var items: [Item]
     var projects: [ProjectRecord]
-    /// Optional so files from before DECISIONS 60/62 still read.
+    /// Optional so files from before DECISIONS 60/62/65 still read.
     var subcontractors: [SubcontractorRecord]?
     var loadouts: [LoadoutRecord]?
+    var company: CompanyRecord?
 }
 
 /// A JSON fragment kept verbatim (the calculator inputs), so the export shows them as readable JSON, not base64.
@@ -154,6 +193,7 @@ enum Transfer {
         let subs = try context.fetch(FetchDescriptor<Subcontractor>()).sorted { ($0.sortOrder, $0.name) < ($1.sortOrder, $1.name) }
         let subIndex = Dictionary(uniqueKeysWithValues: subs.enumerated().map { ($1.persistentModelID, $0) })
         let loadouts = try context.fetch(FetchDescriptor<Loadout>()).sorted { ($0.sortOrder, $0.name) < ($1.sortOrder, $1.name) }
+        let company = try context.fetch(FetchDescriptor<Company>()).first
         return TransferDocument(
             formatVersion: TransferDocument.currentFormatVersion,
             exportedAt: exportedAt,
@@ -163,7 +203,8 @@ enum Transfer {
             items: items.map { i in
                 .init(bucket: i.bucket, name: i.name, rateCents: i.rateCents, unit: i.unit, isActive: i.isActive,
                       source: i.source, notes: i.notes, calcInputs: i.calcInputs.flatMap(JSONValue.from), sortOrder: i.sortOrder,
-                      category: i.category, link: i.link, subcontractorIndex: i.subcontractor.flatMap { subIndex[$0.persistentModelID] })
+                      category: i.category, link: i.link, subcontractorIndex: i.subcontractor.flatMap { subIndex[$0.persistentModelID] },
+                      unitCode: i.unitCode, make: i.make, model: i.model, year: i.year, serial: i.serial)
             },
             projects: projects.map { p in
                 .init(name: p.name, client: p.client, date: p.date, hours: p.hours, multiplier: p.multiplier,
@@ -179,6 +220,16 @@ enum Transfer {
             loadouts: loadouts.map { l in
                 .init(name: l.name, notes: l.notes, sortOrder: l.sortOrder,
                       memberIndexes: l.sortedMembers.compactMap { index[$0.persistentModelID] })
+            },
+            company: company.map { c in
+                .init(name: c.name, dba: c.dba, owner: c.owner, address: c.address, phone: c.phone, email: c.email, website: c.website,
+                      ein: c.ein, licenses: c.licenses, glCarrier: c.glCarrier, glPolicy: c.glPolicy, glExpires: c.glExpires,
+                      autoCarrier: c.autoCarrier, autoPolicy: c.autoPolicy, autoExpires: c.autoExpires,
+                      wcCarrier: c.wcCarrier, wcPolicy: c.wcPolicy, wcExpires: c.wcExpires, notes: c.notes,
+                      documents: c.sortedDocuments.map { d in
+                          .init(title: d.title, category: d.category, fileName: d.fileName, originalName: d.originalName,
+                                addedAt: d.addedAt, expiresAt: d.expiresAt, notes: d.notes)
+                      })
             })
     }
 
@@ -211,7 +262,23 @@ enum Transfer {
         for line in try context.fetch(FetchDescriptor<ProjectLine>()) { context.delete(line) }
         for item in try context.fetch(FetchDescriptor<BucketItem>()) { context.delete(item) }
         for sub in try context.fetch(FetchDescriptor<Subcontractor>()) { context.delete(sub) }
+        for company in try context.fetch(FetchDescriptor<Company>()) { context.delete(company) }
         try context.save()
+
+        if let c = doc.company {
+            let company = Company(name: c.name)
+            company.dba = c.dba; company.owner = c.owner; company.address = c.address; company.phone = c.phone
+            company.email = c.email; company.website = c.website; company.ein = c.ein; company.licenses = c.licenses
+            company.glCarrier = c.glCarrier; company.glPolicy = c.glPolicy; company.glExpires = c.glExpires
+            company.autoCarrier = c.autoCarrier; company.autoPolicy = c.autoPolicy; company.autoExpires = c.autoExpires
+            company.wcCarrier = c.wcCarrier; company.wcPolicy = c.wcPolicy; company.wcExpires = c.wcExpires
+            company.notes = c.notes
+            context.insert(company)
+            company.documents = c.documents.map { d in
+                CompanyDocument(title: d.title, category: d.category, fileName: d.fileName, originalName: d.originalName,
+                                addedAt: d.addedAt, expiresAt: d.expiresAt, notes: d.notes)
+            }
+        }
 
         let subs = subRecords.map { s in
             Subcontractor(name: s.name, contact: s.contact, phone: s.phone, email: s.email, notes: s.notes,
@@ -226,6 +293,8 @@ enum Transfer {
         items.forEach(context.insert)
         for (i, record) in doc.items.enumerated() {
             if let s = record.subcontractorIndex { items[i].subcontractor = subs[s] }
+            items[i].unitCode = record.unitCode; items[i].make = record.make; items[i].model = record.model
+            items[i].year = record.year; items[i].serial = record.serial
         }
         for l in doc.loadouts ?? [] {
             let loadout = Loadout(name: l.name, notes: l.notes, sortOrder: l.sortOrder)
@@ -307,6 +376,8 @@ enum Transfer {
                 let same = match.rateCents == i.rateCents && match.unit == unit && match.source == (i.source ?? match.source)
                     && match.notes == (i.notes ?? match.notes) && match.category == (i.category ?? match.category)
                     && match.link == (i.link ?? match.link) && sameCalc
+                    && match.unitCode == (i.unitCode ?? match.unitCode) && match.make == (i.make ?? match.make)
+                    && match.model == (i.model ?? match.model) && match.year == (i.year ?? match.year) && match.serial == (i.serial ?? match.serial)
                 if same { result.unchanged += 1; continue }
                 match.rateCents = i.rateCents
                 match.unit = unit
@@ -315,6 +386,11 @@ enum Transfer {
                 if let category = i.category { match.category = category }
                 if let link = i.link { match.link = link }
                 if let calc { match.calcInputs = calc }
+                if let v = i.unitCode { match.unitCode = v }
+                if let v = i.make { match.make = v }
+                if let v = i.model { match.model = v }
+                if let v = i.year { match.year = v }
+                if let v = i.serial { match.serial = v }
                 result.updated += 1
                 continue
             }
@@ -323,6 +399,7 @@ enum Transfer {
                                   source: i.source, notes: i.notes, category: i.category, link: i.link,
                                   calcInputs: i.calcInputs?.data, sortOrder: order)
             item.subcontractor = sub
+            item.unitCode = i.unitCode; item.make = i.make; item.model = i.model; item.year = i.year; item.serial = i.serial
             context.insert(item)
             existing.append(item)
             merged.append(item)

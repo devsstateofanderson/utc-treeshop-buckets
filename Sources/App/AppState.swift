@@ -4,6 +4,7 @@ import Observation
 
 /// Which list the sidebar shows (DECISIONS 33, 60–62).
 enum SidebarItem: Hashable {
+    case company
     case bucket(Bucket)
     case subcontractors
     case projects
@@ -51,6 +52,7 @@ final class AppState {
         case "loadouts":
             sidebar = .loadouts
             selectedLoadout = ((try? context.fetch(FetchDescriptor<Loadout>(sortBy: [SortDescriptor(\.sortOrder)]))) ?? []).first?.persistentModelID
+        case "company": sidebar = .company
         case "subcontractors":
             sidebar = .subcontractors
             selectedSubcontractor = ((try? context.fetch(FetchDescriptor<Subcontractor>(sortBy: [SortDescriptor(\.sortOrder)]))) ?? []).first?.persistentModelID
@@ -88,6 +90,7 @@ final class AppState {
         case .projects: "New Project"
         case .packages: "New Package"
         case .loadouts: "New Loadout"
+        case .company: "Add Document…"
         case nil: "New"
         }
     }
@@ -108,9 +111,13 @@ final class AppState {
         case .projects: newProject()
         case .packages: newPackage()
         case .loadouts: newLoadout()
+        case .company: wantsDocumentPicker = true
         case nil: break
         }
     }
+
+    /// ⌘N on the Company screen asks the documents view to open its file picker.
+    var wantsDocumentPicker = false
 
     /// ⌘D on whatever the current screen selects.
     func duplicateSelection() {
@@ -138,6 +145,14 @@ final class AppState {
                               link: item.link, calcInputs: item.calcInputs,
                               sortOrder: BucketItem.nextSortOrder(in: item.bucket, context: context))
         copy.subcontractor = item.subcontractor
+        // Another unit of the same thing: same make/model/year, its own code, no serial yet (DECISIONS 66).
+        copy.make = item.make; copy.model = item.model; copy.year = item.year; copy.serial = nil
+        if item.bucket == .equipment {
+            let prefix = item.unitCode.flatMap { code -> String? in
+                let parts = code.split(separator: "-"); return parts.count == 2 ? String(parts[0]) : nil
+            } ?? BucketItem.nextUnitCodePrefixFallback(item)
+            copy.unitCode = BucketItem.nextUnitCode(prefix: prefix, among: allItems)
+        }
         context.insert(copy)
         save()
         selectedItem = copy.persistentModelID

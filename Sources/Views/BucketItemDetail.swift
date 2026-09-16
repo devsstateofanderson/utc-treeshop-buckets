@@ -56,6 +56,30 @@ private struct ItemForm: View {
                     Text("Product or supplier page").foregroundStyle(.secondary)
                 }
             }
+            if item.bucket == .equipment {
+                Section {
+                    LabeledContent {
+                        HStack {
+                            OptionalTextField(label: "Unit code", value: $item.unitCode, prompt: suggestedCode).labelsHidden().frame(width: 110)
+                            if item.unitCode?.isEmpty ?? true {
+                                Button("Use \(suggestedCode)") { item.unitCode = suggestedCode }
+                            }
+                        }
+                    } label: {
+                        Text("Unit code")
+                        Text("The short name the crew uses; shown before the name everywhere").foregroundStyle(.secondary)
+                    }
+                    OptionalTextField(label: "Make", value: $item.make, prompt: "STIHL, Ford, Toro…")
+                    OptionalTextField(label: "Model", value: $item.model, prompt: "MS 500i, F-250, TX 427…")
+                    LabeledContent("Year") {
+                        TextField("Year", value: $item.year, format: .number.grouping(.never), prompt: Text("2019"))
+                            .labelsHidden().frame(width: 80).multilineTextAlignment(.trailing)
+                    }
+                    OptionalTextField(label: "Serial / VIN", value: $item.serial, prompt: "Tells two identical units apart")
+                } header: {
+                    Text("Identification")
+                }
+            }
             Section {
                 Toggle("Active", isOn: $item.isActive)
                     .help("Archived rows stay on the projects that use them and are hidden from new projects.")
@@ -63,7 +87,7 @@ private struct ItemForm: View {
                     OptionalTextField(label: "Source", value: $item.source, prompt: "Vendor, supplier or sub")
                 }
                 OptionalTextField(label: "Notes", value: $item.notes,
-                                  prompt: item.bucket == .equipment ? "Unit number, serial number, plate, year…" : "Optional",
+                                  prompt: item.bucket == .equipment ? "Plate, hour meter, attachments, where it lives…" : "Optional",
                                   axis: .vertical)
             } footer: {
                 Text(usage)
@@ -87,6 +111,17 @@ private struct ItemForm: View {
         .onChange(of: item.notes) { _, _ in save() }
         .onChange(of: item.category) { _, _ in save() }
         .onChange(of: item.link) { _, _ in save() }
+        .onChange(of: item.unitCode) { _, _ in save() }
+        .onChange(of: item.make) { _, _ in save() }
+        .onChange(of: item.model) { _, _ in save() }
+        .onChange(of: item.year) { _, _ in save() }
+        .onChange(of: item.serial) { _, _ in save() }
+    }
+
+    /// "SAW-03": the next free code for this row's category (DECISIONS 66).
+    private var suggestedCode: String {
+        let all = (try? modelContext.fetch(FetchDescriptor<BucketItem>())) ?? []
+        return BucketItem.nextUnitCode(prefix: BucketItem.unitCodePrefix(for: item.category), among: all)
     }
 
     // MARK: Rows

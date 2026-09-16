@@ -399,7 +399,12 @@ extension Project {
 }
 
 extension ProjectLine {
-    var displayName: String { name.isEmpty ? "Untitled" : name }
+    /// "TRK-02 · Ford F250" for equipment with a unit code (DECISIONS 66), else the snapshot name.
+    var displayName: String {
+        let base = name.isEmpty ? "Untitled" : name
+        if bucket == .equipment, let code = item?.unitCode, !code.isEmpty { return "\(code) · \(base)" }
+        return base
+    }
 
     /// "$54.08/hr"; overhead "$6,000.00/yr = $4.00/hr"; quantity rows "$75.00/load", "$85.00 each".
     func rateLabel(billableHours: Decimal) -> String {
