@@ -33,6 +33,7 @@ final class FixtureStoreWriter: XCTestCase {
         removal.notes = "Gate on the left; dump run at lunch."
         removal.actualHours = 10
         removal.line("Dump fee").actualQty = 3
+        removal.setPricing(from: AppSettings())   // priced at the company's 50% target margin (DECISIONS 70)
 
         let palms = Project.make(name: "Palm install", date: Date(timeIntervalSince1970: 1_757_900_000),
                                  items: try StoreFixture.items(in: context), settings: AppSettings())
