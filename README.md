@@ -33,6 +33,10 @@ DerivedData lives in `~/Library/Developer/Xcode/DerivedData/Buckets-cli` (overri
 - **Projects**: the pricing screen. **Packages** are saved projects to start jobs from; **Loadouts** are crew formations applied from the project's Crew menu.
 - **Settings**: billable hours, labor burden and cost of money, plus Export JSON, Import JSON (replace) and Add or Update Rows (merge). The target margin (default 50%) and the minimum job (default $750) are company defaults, set under Company → Pricing defaults; every new project and every Re-price copies them (DECISIONS 70).
 
+## TreeShop operating package
+
+The current Buckets repository also contains the working launch package for the UTC / TreeShop operating model: [docs/treeshop/README.md](docs/treeshop/README.md). It covers the organization model, service packages, first-client launch, company MacBook setup, first-client Buckets configuration, and an access-register template. These documents are operational drafts for the first live installation and should be updated from evidence as the client is onboarded.
+
 ## Installing on another Mac
 
 `Scripts/package.sh` builds the Release app and writes `Dist/Buckets-<version>.dmg` (the app plus an Applications shortcut). On the other Mac, open the image and drag Buckets to Applications.

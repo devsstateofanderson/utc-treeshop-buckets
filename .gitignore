@@ -6,3 +6,17 @@ xcuserdata/
 .claude/
 *.profraw
 Dist/
+
+# Customer data and local credentials stay on the controlled company Mac.
+# Keep the repository useful for code, templates, and operating documentation
+# without accidentally publishing raw stores or exported client records.
+Backups/
+*.store
+*.store-shm
+*.store-wal
+.env
+.env.*
+
+# Local agent/tool state
+.codex/
+.agents/
