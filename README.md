@@ -55,6 +55,17 @@ xattr -cr /Applications/Buckets.app
 
 Data lives outside the app, in `~/Library/Application Support/Buckets/` (the store and the Documents folder). To carry the company's data over, copy that folder, or Export JSON here and Import JSON there (documents must be copied alongside; see DECISIONS 65).
 
+## Onboarding a company
+
+One pass, no typing into the app (DECISIONS 79):
+
+```bash
+cp Scripts/catalog/data/company-profile-template.json ~/Desktop/acme-profile.json   # fill it in
+Scripts/onboard.sh ~/Desktop/acme-profile.json Scripts/catalog/data/Buckets-default-catalog.json
+```
+
+The script quits Buckets, backs up the live store to the local vault, applies the profile and each catalog through the app's own merge hook, writes an export, prints the readiness picture (identity, rows per bucket, rows still unresolved, the setup gates) and relaunches. The profile carries the company's identity, service area with its mileage radius and USDA growing zone; a null leaves a field alone and nothing is ever blanked. Labor, equipment and overhead are the company's own numbers and are entered in the app at replacement cost, then marked owner confirmed; the Company screen's Setup & readiness section shows what is left.
+
 ## Editions and backups
 
 - `Scripts/catalog/data/Buckets-default-catalog.json`: the blank commercial starting point (no labor or equipment, overhead as a $0 checklist, 112 materials and 57 consumables for professional tree work with links, and no company settings — DECISIONS 76–77). Load it with Add or Update Rows, or run the app once with `BUCKETS_MERGE_FILE` pointing at it.
