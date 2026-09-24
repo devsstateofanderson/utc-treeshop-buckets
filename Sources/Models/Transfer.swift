@@ -130,7 +130,8 @@ struct TransferDocument: Codable, Equatable {
 
     var formatVersion: Int
     var exportedAt: Date
-    var settings: SettingsRecord
+    /// Absent in a catalog file (DECISIONS 76): importing one keeps the company's settings. Exports always write it.
+    var settings: SettingsRecord?
     var items: [Item]
     var projects: [ProjectRecord]
     /// Optional so files from before DECISIONS 60/62/65 still read.
@@ -339,13 +340,14 @@ enum Transfer {
             }
         }
         try context.save()
+        // A catalog file carries no settings (DECISIONS 76): the company's stay exactly as they are.
+        guard let s = doc.settings else { return AppSettings.current() }
         // Older files carry only a markup: margin = markup ÷ (100 + markup).
-        let margin = doc.settings.targetMarginPct
-            ?? doc.settings.markupPct.map { $0 / (100 + $0) * 100 }
+        let margin = s.targetMarginPct
+            ?? s.markupPct.map { $0 / (100 + $0) * 100 }
             ?? AppSettings.defaults.targetMarginPct
-        return AppSettings(billableHoursPerYear: doc.settings.billableHoursPerYear, laborBurdenPct: doc.settings.laborBurdenPct,
-                        targetMarginPct: margin, minimumJobCents: doc.settings.minimumJobCents,
-                        costOfMoneyPct: doc.settings.costOfMoneyPct)
+        return AppSettings(billableHoursPerYear: s.billableHoursPerYear, laborBurdenPct: s.laborBurdenPct,
+                        targetMarginPct: margin, minimumJobCents: s.minimumJobCents, costOfMoneyPct: s.costOfMoneyPct)
     }
 
     // MARK: - Add rows (merge)

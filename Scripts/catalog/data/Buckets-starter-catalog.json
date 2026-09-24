@@ -1138,32 +1138,6 @@
       "calcInputs": null,
       "category": "Palms",
       "isActive": true,
-      "link": "https://www.homedepot.com/p/Brighter-Blooms-3-Gal-Windmill-Palm-Tree-in-Pot-PAL-WIN3/316112775",
-      "name": "Windmill Palm \u2013 3 gal",
-      "notes": "Brighter Blooms PAL-WIN3. Home Depot online price, Sep 15 2026.",
-      "rateCents": 8998,
-      "sortOrder": 34,
-      "source": "Home Depot (Apopka)",
-      "unit": "each"
-    },
-    {
-      "bucket": "materials",
-      "calcInputs": null,
-      "category": "Palms",
-      "isActive": true,
-      "link": "https://www.homedepot.com/p/14-Windmill-Palm-Tree-with-Beautiful-Green-Fronds-15530/315743286",
-      "name": "Windmill Palm \u2013 14 in (boxed, ship-to-home)",
-      "notes": "15530. Home Depot online price, Sep 15 2026. Sold as a boxed ship-to-home plant sized by height (14 in) rather than gallon container.",
-      "rateCents": 12998,
-      "sortOrder": 35,
-      "source": "Home Depot (Apopka)",
-      "unit": "each"
-    },
-    {
-      "bucket": "materials",
-      "calcInputs": null,
-      "category": "Palms",
-      "isActive": true,
       "link": "https://www.homedepot.com/p/Wekiva-Foliage-European-Fan-Palm-Live-Plant-in-a-10-in-Growers-Pot-Chamaerops-Humilis-Rare-Palm-Trees-from-Florida-EupFan10x1/334192900",
       "name": "European Fan Palm \u2013 10 in pot",
       "notes": "Wekiva Foliage EupFan10x1. Home Depot online price, Sep 15 2026.",
@@ -1182,19 +1156,6 @@
       "notes": "Wekiva Foliage SilBis5gx1. Home Depot online price, Sep 15 2026.",
       "rateCents": 25155,
       "sortOrder": 37,
-      "source": "Home Depot (Apopka)",
-      "unit": "each"
-    },
-    {
-      "bucket": "materials",
-      "calcInputs": null,
-      "category": "Palms",
-      "isActive": true,
-      "link": "https://www.homedepot.com/p/Majesty-Palm-Live-Indoor-Outdoor-Plant-in-10-inch-Premium-Sustainable-Ecopots-Grey-Pot-with-Removeable-Drainage-Plug-MAJESTYP10GRAY/323302462",
-      "name": "Majesty Palm (outdoor/patio size) \u2013 10 in decor pot",
-      "notes": "United Nursery MAJESTYP10GRAY. Home Depot online price, Sep 15 2026. Sold as an indoor/outdoor decor-pot plant (~2-3 ft tall), not a standard nursery gallon size.",
-      "rateCents": 4498,
-      "sortOrder": 38,
       "source": "Home Depot (Apopka)",
       "unit": "each"
     },
@@ -1481,19 +1442,6 @@
       "notes": "HOLDAH01G. Home Depot online price, Sep 15 2026. 5-gal size (HOLDAH05G, Ilex cassine) also listed on homedepot.com;. You quote 30-gal Dahoon Holly at ~$300 plus ~$350 planting.",
       "rateCents": 4498,
       "sortOrder": 60,
-      "source": "Home Depot (Apopka)",
-      "unit": "each"
-    },
-    {
-      "bucket": "materials",
-      "calcInputs": null,
-      "category": "Trees",
-      "isActive": true,
-      "link": "https://www.homedepot.com/p/5-Gal-Weeping-Willow-Shade-Tree-WILWEE05G/313397447",
-      "name": "Weeping Willow \u2013 5 gal",
-      "notes": "WILWEE05G. Home Depot online price, Sep 15 2026.",
-      "rateCents": 8729,
-      "sortOrder": 61,
       "source": "Home Depot (Apopka)",
       "unit": "each"
     },
@@ -1979,12 +1927,5 @@
       "unit": "each"
     }
   ],
-  "projects": [],
-  "settings": {
-    "billableHoursPerYear": 1500,
-    "costOfMoneyPct": 0,
-    "laborBurdenPct": 30,
-    "markupPct": 35,
-    "minimumJobCents": 75000
-  }
+  "projects": []
 }

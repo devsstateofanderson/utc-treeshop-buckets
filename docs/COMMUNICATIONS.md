@@ -87,3 +87,13 @@ Append entries using this structure:
 - Open questions: Claude must replace the raw-store migration fixture with a repository-safe test strategy, rerun the full suite, and update PR #4. The owner must confirm or reject PR #5's two catalog decisions.
 - Next owner/action: after the fixture cleanup, Codex re-reviews and merges PR #4; then the owner decision determines whether PR #5 merges. The next product checkpoint remains Sacred Tree readiness: set company identity/service area and verify labor, equipment, and overhead rows before beginning Jobber read-only staging.
 - Branch/commit: `main` / pending review-checkpoint commit; PR #4 and PR #5 remain open.
+
+## 2026-09-24 — Claude Code — default catalog baseline: settings stripped, audit removes applied
+
+- Context read: audit §6 (a) and (b); Mr. Anderson's approval of both in chat; `Scripts/catalog/build_catalog.py` and the `rows-*.json` sources it builds from; `Transfer.swift`.
+- Work completed: branch `claude/default-catalog-baseline`, stacked on `claude/v0.2.0-catalog-trust`. (a) The default and starter catalogs carry no `settings`; `build_catalog.py` no longer emits them; `TransferDocument.settings` is optional and Import keeps the company's settings when a file has none (DECISIONS 76). (b) Weeping Willow, Majesty Palm and both Windmill Palm rows removed from the default and starter catalogs and from `rows-all.json` / `rows-homedepot.json`; research notes and the audit JSON kept as the record (DECISIONS 77). Files rewritten in their original JSON style so the diff is only the removed rows and the settings blocks. README updated (112 materials, 57 consumables, 19 overhead).
+- Evidence/tests: `Scripts/test.sh` — 274 executed, 3 skipped, 0 failures. New `DefaultCatalogTests` pins the catalog as neutral (no settings, no removed rows, bucket counts, $0 overhead, merges 188 rows into an empty store, import keeps settings); `TransferFormat2Tests` gains a settings-absent import test.
+- Decisions: DECISIONS 76–77. `review` and `caution` rows from the audit (River Birch, Ligustrum, citrus, Foxtail, Tabebuia, Loquat starter) are untouched pending the owner.
+- Open questions: none for this slice. The live Sacred Tree store already merged the old default on 09-16; a merge never deletes, so those four rows, if present there, stay until archived by hand — the readiness Show filter will surface them as Missing like every other row.
+- Next owner/action: Codex — merge in order #2 → #4 → #5 (each stacks on the previous), delete branches, pull main. Then the next issue.
+- Branch/commit: `claude/default-catalog-baseline`; hash on the PR.
