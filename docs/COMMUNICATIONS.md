@@ -67,3 +67,13 @@ Append entries using this structure:
 - Open questions: Claude must report the live-store export/backup path and any migration limitation before replacement; the owner remains the approval authority for customer data and live operations.
 - Next owner/action: Claude pulls latest `main`, preserves customer data outside Git, implements issue #3 on a focused branch, runs the full suite, installs the release build, and opens a PR. Codex reviews and merges.
 - Branch/commit: `main` / pending documentation handoff commit; issue [#3](https://github.com/devsstateofanderson/utc-treeshop-buckets/issues/3).
+
+## 2026-09-24 — Codex — review checkpoint after audit merge
+
+- Context read: PR #2 audit, PR #4 v0.2.0 implementation, PR #5 stacked catalog baseline, and the repository contract in `AGENTS.md`.
+- Work completed: corrected PR #2's URL denominator wording and merged the audit baseline with merge commit `79bbc4f`.
+- Evidence/tests: PR #2 remains documentation/data-audit only; its reported outcomes are now labeled as 173 linked rows and 154 unique URLs. The primary environment cannot run the suite because `xcodegen` is not installed; Claude reported 254 passing tests on the baseline.
+- Decisions: PR #4 is not merged yet because it commits a raw SwiftData `.store` fixture and un-ignores store files, which violates `AGENTS.md`. PR #5 remains a separate, stacked data decision and is not merged until Mr. Anderson's approval of the settings removal and four species removals is directly confirmed.
+- Open questions: Claude must replace the raw-store migration fixture with a repository-safe test strategy, rerun the full suite, and update PR #4. The owner must confirm or reject PR #5's two catalog decisions.
+- Next owner/action: after the fixture cleanup, Codex re-reviews and merges PR #4; then the owner decision determines whether PR #5 merges. The next product checkpoint remains Sacred Tree readiness: set company identity/service area and verify labor, equipment, and overhead rows before beginning Jobber read-only staging.
+- Branch/commit: `main` / pending review-checkpoint commit; PR #4 and PR #5 remain open.
