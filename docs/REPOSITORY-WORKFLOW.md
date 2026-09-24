@@ -34,6 +34,8 @@ The repository contains the product and the operating contract. It is not the cu
 
 The normal loop is: pull latest `main` → implement one bounded change → run tests → push a branch → review the diff → merge → pull latest `main`.
 
+Use `~/Developer/utc-treeshop-buckets` for the checkout on company Macs. Keep the customer data vault and built application in separate local paths.
+
 One track may provide evidence to another, but a customer record is not automatically a product default and a proposed feature is not automatically a live operating procedure.
 
 ## Pull-request checklist
