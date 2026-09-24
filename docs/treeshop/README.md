@@ -12,6 +12,7 @@ Working documents for the September 2026 launch. Mr. J. Anderson is the sole own
 8. [Claude Code build brief](08-claude-code-build-brief.md) — the implementation handoff format for the company Mac.
 9. [Buckets Pro functional roadmap](09-buckets-pro-functional-roadmap.md) — the user-facing product upgrades from estimating through operating review and AI assistance.
 10. [Jobber + tree-industry integration specification](10-jobber-tree-industry-spec.md) — precise Jobber object mapping, sync/write rules, tree-service workflow, and ANSI/ISA-backed catalog design.
+11. [Sacred Tree Claude kickoff](11-sacred-tree-claude-kickoff.md) — the first-session prompt for the customer Mac and Claude Code implementation branch.
 
 The first working assumption is that the launch company is Sacred Tree Service. Confirm its current legal name, domain, account owners, and live records during onboarding. Historical repository backups are reference material, not an automatic replacement for current company data.
 

@@ -37,6 +37,10 @@ DerivedData lives in `~/Library/Developer/Xcode/DerivedData/Buckets-cli` (overri
 
 The current Buckets repository also contains the working launch package for the UTC / TreeShop operating model: [docs/treeshop/README.md](docs/treeshop/README.md). It covers the organization model, service packages, first-client launch, company MacBook setup, first-client Buckets configuration, and an access-register template. These documents are operational drafts for the first live installation and should be updated from evidence as the client is onboarded.
 
+## Shared collaboration repository
+
+The public repository is [devsstateofanderson/utc-treeshop-buckets](https://github.com/devsstateofanderson/utc-treeshop-buckets). Mr. J. Anderson owns UTC, TreeShop, and Buckets. Sacred Tree Service, owned by Alexander Satoski, is the first client installation. Codex handles planning and review; Claude Code handles customer-side implementation on the Sacred Tree Mac. Pull the latest `main` before work, use a focused branch, push the branch, and report the commit for review.
+
 ## Installing on another Mac
 
 `Scripts/package.sh` builds the Release app and writes `Dist/Buckets-<version>.dmg` (the app plus an Applications shortcut). On the other Mac, open the image and drag Buckets to Applications.
