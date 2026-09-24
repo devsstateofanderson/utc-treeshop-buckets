@@ -1,0 +1,2970 @@
+{
+ "generatedAt": "2026-09-24",
+ "catalog": "Buckets-default-catalog.json",
+ "itemCount": 192,
+ "rows": [
+  {
+   "bucket": "overhead",
+   "category": "Insurance",
+   "name": "General liability insurance",
+   "unit": "yr",
+   "rateCents": 0,
+   "source": null,
+   "link": null,
+   "http": "none",
+   "final_url": null,
+   "verdict": "keep",
+   "flags": [],
+   "why": ""
+  },
+  {
+   "bucket": "overhead",
+   "category": "Insurance",
+   "name": "Umbrella / excess liability",
+   "unit": "yr",
+   "rateCents": 0,
+   "source": null,
+   "link": null,
+   "http": "none",
+   "final_url": null,
+   "verdict": "keep",
+   "flags": [],
+   "why": ""
+  },
+  {
+   "bucket": "overhead",
+   "category": "Insurance",
+   "name": "Vehicle insurance (if not on the truck rows)",
+   "unit": "yr",
+   "rateCents": 0,
+   "source": null,
+   "link": null,
+   "http": "none",
+   "final_url": null,
+   "verdict": "keep",
+   "flags": [],
+   "why": ""
+  },
+  {
+   "bucket": "overhead",
+   "category": "Insurance",
+   "name": "Workers comp (only if not in labor burden)",
+   "unit": "yr",
+   "rateCents": 0,
+   "source": null,
+   "link": null,
+   "http": "none",
+   "final_url": null,
+   "verdict": "keep",
+   "flags": [],
+   "why": ""
+  },
+  {
+   "bucket": "overhead",
+   "category": "Facilities",
+   "name": "Shop / office rent",
+   "unit": "yr",
+   "rateCents": 0,
+   "source": null,
+   "link": null,
+   "http": "none",
+   "final_url": null,
+   "verdict": "keep",
+   "flags": [],
+   "why": ""
+  },
+  {
+   "bucket": "overhead",
+   "category": "Facilities",
+   "name": "Utilities",
+   "unit": "yr",
+   "rateCents": 0,
+   "source": null,
+   "link": null,
+   "http": "none",
+   "final_url": null,
+   "verdict": "keep",
+   "flags": [],
+   "why": ""
+  },
+  {
+   "bucket": "overhead",
+   "category": "Communications",
+   "name": "Phones",
+   "unit": "yr",
+   "rateCents": 0,
+   "source": null,
+   "link": null,
+   "http": "none",
+   "final_url": null,
+   "verdict": "keep",
+   "flags": [],
+   "why": ""
+  },
+  {
+   "bucket": "overhead",
+   "category": "Communications",
+   "name": "Internet",
+   "unit": "yr",
+   "rateCents": 0,
+   "source": null,
+   "link": null,
+   "http": "none",
+   "final_url": null,
+   "verdict": "keep",
+   "flags": [],
+   "why": ""
+  },
+  {
+   "bucket": "overhead",
+   "category": "Marketing",
+   "name": "Website & hosting",
+   "unit": "yr",
+   "rateCents": 0,
+   "source": null,
+   "link": null,
+   "http": "none",
+   "final_url": null,
+   "verdict": "keep",
+   "flags": [],
+   "why": ""
+  },
+  {
+   "bucket": "overhead",
+   "category": "Marketing",
+   "name": "Advertising & lead services",
+   "unit": "yr",
+   "rateCents": 0,
+   "source": null,
+   "link": null,
+   "http": "none",
+   "final_url": null,
+   "verdict": "keep",
+   "flags": [],
+   "why": ""
+  },
+  {
+   "bucket": "overhead",
+   "category": "Professional services",
+   "name": "Accounting & legal",
+   "unit": "yr",
+   "rateCents": 0,
+   "source": null,
+   "link": null,
+   "http": "none",
+   "final_url": null,
+   "verdict": "keep",
+   "flags": [],
+   "why": ""
+  },
+  {
+   "bucket": "overhead",
+   "category": "Software",
+   "name": "Software (CRM, payroll, Buckets)",
+   "unit": "yr",
+   "rateCents": 0,
+   "source": null,
+   "link": null,
+   "http": "none",
+   "final_url": null,
+   "verdict": "keep",
+   "flags": [],
+   "why": ""
+  },
+  {
+   "bucket": "overhead",
+   "category": "Taxes & licenses",
+   "name": "Licenses, permits & certifications (ISA, DOT)",
+   "unit": "yr",
+   "rateCents": 0,
+   "source": null,
+   "link": null,
+   "http": "none",
+   "final_url": null,
+   "verdict": "keep",
+   "flags": [],
+   "why": ""
+  },
+  {
+   "bucket": "overhead",
+   "category": "Taxes & licenses",
+   "name": "Business taxes & fees",
+   "unit": "yr",
+   "rateCents": 0,
+   "source": null,
+   "link": null,
+   "http": "none",
+   "final_url": null,
+   "verdict": "keep",
+   "flags": [],
+   "why": ""
+  },
+  {
+   "bucket": "overhead",
+   "category": "Tools",
+   "name": "Small tools & equipment under $1,000",
+   "unit": "yr",
+   "rateCents": 0,
+   "source": null,
+   "link": null,
+   "http": "none",
+   "final_url": null,
+   "verdict": "keep",
+   "flags": [],
+   "why": ""
+  },
+  {
+   "bucket": "overhead",
+   "category": "Crew",
+   "name": "PPE & uniforms",
+   "unit": "yr",
+   "rateCents": 0,
+   "source": null,
+   "link": null,
+   "http": "none",
+   "final_url": null,
+   "verdict": "keep",
+   "flags": [],
+   "why": ""
+  },
+  {
+   "bucket": "overhead",
+   "category": "Crew",
+   "name": "Training & safety meetings",
+   "unit": "yr",
+   "rateCents": 0,
+   "source": null,
+   "link": null,
+   "http": "none",
+   "final_url": null,
+   "verdict": "keep",
+   "flags": [],
+   "why": ""
+  },
+  {
+   "bucket": "overhead",
+   "category": "Finance",
+   "name": "Bank & card processing fees",
+   "unit": "yr",
+   "rateCents": 0,
+   "source": null,
+   "link": null,
+   "http": "none",
+   "final_url": null,
+   "verdict": "keep",
+   "flags": [],
+   "why": ""
+  },
+  {
+   "bucket": "overhead",
+   "category": "Taxes & licenses",
+   "name": "Vehicle registrations",
+   "unit": "yr",
+   "rateCents": 0,
+   "source": null,
+   "link": null,
+   "http": "none",
+   "final_url": null,
+   "verdict": "keep",
+   "flags": [],
+   "why": ""
+  },
+  {
+   "bucket": "consumables",
+   "category": "Chains & bars",
+   "name": "Chain loop \u2013 3/8 PICCO PM3, 14-16in (top-handle saws)",
+   "unit": "each",
+   "rateCents": 3049,
+   "source": "STIHL / Milwaukee dealer",
+   "link": "https://www.arcolawn.com/products/16-loop-3-8-050-picco-63pm3-55",
+   "http": "200",
+   "final_url": null,
+   "verdict": "keep",
+   "flags": [],
+   "why": ""
+  },
+  {
+   "bucket": "consumables",
+   "category": "Chains & bars",
+   "name": "Chain loop \u2013 3/8 RS3 .063, 24-25in (large saw)",
+   "unit": "each",
+   "rateCents": 4999,
+   "source": "STIHL / Milwaukee dealer",
+   "link": "https://www.amazon.com/Stihl-33RS3-Rapid-Super-Chainsaw/dp/B07R6TZ1JB",
+   "http": "200",
+   "final_url": null,
+   "verdict": "keep",
+   "flags": [],
+   "why": ""
+  },
+  {
+   "bucket": "consumables",
+   "category": "Chains & bars",
+   "name": "Pole saw chain loop (Oregon 90PX)",
+   "unit": "each",
+   "rateCents": 2375,
+   "source": "STIHL / Milwaukee dealer",
+   "link": "https://www.oregonproducts.com/en/oregon-90px-polesaw-chain-for-8-in-bar---34-drive-links---fits-poulan,-remington,-craftsman,-black-+-decker,-ryobi,-dewalt-and-more/p/90px034g",
+   "http": "200",
+   "final_url": null,
+   "verdict": "keep",
+   "flags": [],
+   "why": ""
+  },
+  {
+   "bucket": "consumables",
+   "category": "Fuel & oil",
+   "name": "Bar & chain oil \u2013 STIHL Platinum",
+   "unit": "gal",
+   "rateCents": 2799,
+   "source": "STIHL / Milwaukee dealer",
+   "link": "https://www.farmandhomesupply.com/stihl-platinum-bar-and-chain-oil-1-gallon.html",
+   "http": "200",
+   "final_url": null,
+   "verdict": "keep",
+   "flags": [],
+   "why": ""
+  },
+  {
+   "bucket": "consumables",
+   "category": "Fuel & oil",
+   "name": "2-stroke oil \u2013 STIHL HP Ultra 2.6 oz (mixes 1 gal)",
+   "unit": "each",
+   "rateCents": 408,
+   "source": "STIHL / Milwaukee dealer",
+   "link": "https://www.walmart.com/ip/STIHL-HP-Ultra-Full-Synthetic-Motor-Oil-2-6-fl-oz-6-Pack/548763610",
+   "http": "200",
+   "final_url": null,
+   "verdict": "keep",
+   "flags": [],
+   "why": ""
+  },
+  {
+   "bucket": "consumables",
+   "category": "Fuel & oil",
+   "name": "Premixed fuel \u2013 STIHL MotoMix",
+   "unit": "gal",
+   "rateCents": 2747,
+   "source": "STIHL / Milwaukee dealer",
+   "link": "https://www.walmart.com/ip/STIHL-MotoMix-Pre-Mixed-Full-Synthetic-Motor-Oil-4-qt/492421160",
+   "http": "404",
+   "final_url": null,
+   "verdict": "keep",
+   "flags": [
+    "http-404"
+   ],
+   "why": ""
+  },
+  {
+   "bucket": "consumables",
+   "category": "Sharpening",
+   "name": "Chain sharpening kit \u2013 STIHL 2-in-1 file guide",
+   "unit": "each",
+   "rateCents": 1599,
+   "source": "STIHL / Milwaukee dealer",
+   "link": "https://bmproturf.com/shop/2-in-1-filing-guide/",
+   "http": "200",
+   "final_url": null,
+   "verdict": "keep",
+   "flags": [],
+   "why": ""
+  },
+  {
+   "bucket": "consumables",
+   "category": "Batteries & chargers",
+   "name": "M18 battery \u2013 HIGH OUTPUT XC 8.0 (48-11-1880)",
+   "unit": "each",
+   "rateCents": 19900,
+   "source": "STIHL / Milwaukee dealer",
+   "link": "https://www.homedepot.com/p/Milwaukee-M18-18-Volt-Lithium-Ion-HIGH-OUTPUT-XC-8-0-Ah-Battery-48-11-1880/307848596",
+   "http": "403",
+   "final_url": null,
+   "verdict": "keep",
+   "flags": [
+    "http-403"
+   ],
+   "why": ""
+  },
+  {
+   "bucket": "consumables",
+   "category": "Batteries & chargers",
+   "name": "M18 battery \u2013 HIGH OUTPUT HD 12.0 (48-11-1812)",
+   "unit": "each",
+   "rateCents": 27900,
+   "source": "STIHL / Milwaukee dealer",
+   "link": "https://www.homedepot.com/p/Milwaukee-M18-18-Volt-Lithium-Ion-High-Output-12-0Ah-Battery-Pack-48-11-1812/305058854",
+   "http": "403",
+   "final_url": null,
+   "verdict": "keep",
+   "flags": [
+    "http-403"
+   ],
+   "why": ""
+  },
+  {
+   "bucket": "consumables",
+   "category": "Batteries & chargers",
+   "name": "M18/M12 rapid charger (48-59-1808)",
+   "unit": "each",
+   "rateCents": 11900,
+   "source": "STIHL / Milwaukee dealer",
+   "link": "https://www.crawfordelectricsupply.com/product/detail/541086/milwaukee-electric-48-59-1808",
+   "http": "200",
+   "final_url": null,
+   "verdict": "keep",
+   "flags": [],
+   "why": ""
+  },
+  {
+   "bucket": "consumables",
+   "category": "Chains & bars",
+   "name": "Chainsaw chain loop, 3/8 .050 20in 72DL full chisel \u2013 20in bar / 72 drive links, single loop",
+   "unit": "loop",
+   "rateCents": 1699,
+   "source": "Arborist supply",
+   "link": "https://www.baileysonline.com/oregon-20-chainsaw-chain-loop-72exl-72-drive-links-72exl072g-orf-72exl072g.html",
+   "http": "200",
+   "final_url": null,
+   "verdict": "keep",
+   "flags": [],
+   "why": ""
+  },
+  {
+   "bucket": "consumables",
+   "category": "Chains & bars",
+   "name": "Chainsaw chain loop, 3/8 low-profile .050 16in (top-handle) \u2013 16in bar / 56 drive links, single loop",
+   "unit": "loop",
+   "rateCents": 2099,
+   "source": "Arborist supply",
+   "link": "https://www.treestuff.com/oregon-91vxl-chain/",
+   "http": "200",
+   "final_url": null,
+   "verdict": "keep",
+   "flags": [],
+   "why": ""
+  },
+  {
+   "bucket": "consumables",
+   "category": "Chains & bars",
+   "name": "25 ft reel of 3/8 chain \u2013 25 ft reel, 3/8in low-profile .050",
+   "unit": "reel",
+   "rateCents": 13599,
+   "source": "Arborist supply",
+   "link": "https://www.baileysonline.com/oregon-25-chainsaw-chain-reel-72lpx-410-drive-links-72lpx025u-orf-72lpx025r.html",
+   "http": "200",
+   "final_url": null,
+   "verdict": "keep",
+   "flags": [],
+   "why": ""
+  },
+  {
+   "bucket": "consumables",
+   "category": "Chains & bars",
+   "name": "Chainsaw bar, 20in \u2013 20in, 3/8 .050, 72DL, Rollomatic",
+   "unit": "each",
+   "rateCents": 6899,
+   "source": "Arborist supply",
+   "link": "https://russopower.com/products/stihl-3003-000-5221-rollomatic-chainsaw-guide-bar-20-inch",
+   "http": "200",
+   "final_url": null,
+   "verdict": "keep",
+   "flags": [],
+   "why": ""
+  },
+  {
+   "bucket": "consumables",
+   "category": "Chains & bars",
+   "name": "Top-handle bar, 16in \u2013 16in, 3/8 low-profile .050, 55DL",
+   "unit": "each",
+   "rateCents": 5499,
+   "source": "Arborist supply",
+   "link": "https://www.treestuff.com/oregon-advancecut-guide-bar-16/",
+   "http": "200",
+   "final_url": null,
+   "verdict": "keep",
+   "flags": [],
+   "why": ""
+  },
+  {
+   "bucket": "consumables",
+   "category": "Chains & bars",
+   "name": "Rim sprocket, 3/8 7-tooth \u2013 3/8 pitch, 7 tooth, std spline",
+   "unit": "each",
+   "rateCents": 499,
+   "source": "Arborist supply",
+   "link": "https://www.cutterschoice.com/en/42327-rim-small-3-8-7-tooth",
+   "http": "200",
+   "final_url": null,
+   "verdict": "keep",
+   "flags": [],
+   "why": ""
+  },
+  {
+   "bucket": "consumables",
+   "category": "Sharpening",
+   "name": "Round chainsaw file, 5/32in \u2013 12-pack (dozen)",
+   "unit": "pack",
+   "rateCents": 267,
+   "source": "Arborist supply",
+   "link": "https://www.treestuff.com/pferd-dozen-round-chainsaw-files/",
+   "http": "200",
+   "final_url": null,
+   "verdict": "keep",
+   "flags": [],
+   "why": ""
+  },
+  {
+   "bucket": "consumables",
+   "category": "Sharpening",
+   "name": "Round chainsaw file, 13/64in \u2013 12-pack (dozen)",
+   "unit": "pack",
+   "rateCents": 267,
+   "source": "Arborist supply",
+   "link": "https://www.treestuff.com/pferd-dozen-round-chainsaw-files/",
+   "http": "200",
+   "final_url": null,
+   "verdict": "keep",
+   "flags": [],
+   "why": ""
+  },
+  {
+   "bucket": "consumables",
+   "category": "Sharpening",
+   "name": "Flat/raker file \u2013 8in, 12-pack",
+   "unit": "pack",
+   "rateCents": 4000,
+   "source": "Arborist supply",
+   "link": "https://www.sawsalvage.co/products/forester-12-pack-chainsaw-sharpening-raker-flat-file-8",
+   "http": "200",
+   "final_url": null,
+   "verdict": "keep",
+   "flags": [],
+   "why": ""
+  },
+  {
+   "bucket": "consumables",
+   "category": "Chains & bars",
+   "name": "Felling wedge, 8in plastic \u2013 8in",
+   "unit": "each",
+   "rateCents": 1699,
+   "source": "Arborist supply",
+   "link": "https://www.baileysonline.com/oregon-8-plastic-felling-wedge-23561-orf-23561.html",
+   "http": "200",
+   "final_url": null,
+   "verdict": "keep",
+   "flags": [],
+   "why": ""
+  },
+  {
+   "bucket": "consumables",
+   "category": "Fuel & oil",
+   "name": "Bar and chain oil \u2013 1 gallon",
+   "unit": "gal",
+   "rateCents": 2199,
+   "source": "Arborist supply",
+   "link": "https://www.treestuff.com/husqvarna-b-c-oil-1-gallon/",
+   "http": "200",
+   "final_url": null,
+   "verdict": "keep",
+   "flags": [],
+   "why": ""
+  },
+  {
+   "bucket": "consumables",
+   "category": "Fuel & oil",
+   "name": "Bar and chain oil \u2013 5 gallon pail",
+   "unit": "gal",
+   "rateCents": 14199,
+   "source": "Arborist supply",
+   "link": "https://www.shforestrysupplies.com/451a-0781-516-5006-stihl-platinum-bar-and-chain-oil-5-gallon-pail.html",
+   "http": "200",
+   "final_url": null,
+   "verdict": "keep",
+   "flags": [],
+   "why": ""
+  },
+  {
+   "bucket": "consumables",
+   "category": "Fuel & oil",
+   "name": "2-stroke oil, 50:1 mix bottles \u2013 2.6 oz bottles, 6-pack (each mixes 1 gal)",
+   "unit": "pack",
+   "rateCents": 1799,
+   "source": "Arborist supply",
+   "link": "https://shoptruevalueamerica.com/p/stihl-high-performance-ultra-cycle-engine-oil-pack-795711346300",
+   "http": "200",
+   "final_url": null,
+   "verdict": "keep",
+   "flags": [],
+   "why": ""
+  },
+  {
+   "bucket": "consumables",
+   "category": "Fuel & oil",
+   "name": "Premixed fuel (TruFuel/MotoMix) \u2013 110 oz can (~0.86 gal; largest single size sold)",
+   "unit": "each",
+   "rateCents": 2599,
+   "source": "Arborist supply",
+   "link": "https://www.truevalue.com/product/small-engine-pre-mixed-fuel-oil-50-1-110-oz/",
+   "http": "200",
+   "final_url": "https://www.truevalue.com/product/702708/trufuel-110-oz-50-1-ethanol-free-small-engine-fuel-oil-pre-mix-702708/",
+   "verdict": "keep",
+   "flags": [],
+   "why": ""
+  },
+  {
+   "bucket": "consumables",
+   "category": "Fuel & oil",
+   "name": "Pump gas, regular \u2013 per gallon, FL average",
+   "unit": "gal",
+   "rateCents": 420,
+   "source": "Arborist supply",
+   "link": "https://gasprices.aaa.com/?state=FL",
+   "http": "200",
+   "final_url": null,
+   "verdict": "keep",
+   "flags": [
+    "non-vendor-source"
+   ],
+   "why": "Link is a price guide, article, or category page, not a product page. Price cannot be re-verified from it."
+  },
+  {
+   "bucket": "consumables",
+   "category": "Fuel & oil",
+   "name": "Diesel \u2013 per gallon, FL average",
+   "unit": "gal",
+   "rateCents": 633,
+   "source": "Arborist supply",
+   "link": "https://gasprices.aaa.com/?state=FL",
+   "http": "200",
+   "final_url": null,
+   "verdict": "keep",
+   "flags": [
+    "non-vendor-source"
+   ],
+   "why": "Link is a price guide, article, or category page, not a product page. Price cannot be re-verified from it."
+  },
+  {
+   "bucket": "consumables",
+   "category": "Climbing",
+   "name": "Climbing line, 11.7mm \u2013 150 ft, no eye splice",
+   "unit": "each",
+   "rateCents": 15199,
+   "source": "Arborist supply",
+   "link": "https://www.treestuff.com/yale-blue-moon-11-7mm-climbing-rope/",
+   "http": "200",
+   "final_url": null,
+   "verdict": "keep",
+   "flags": [],
+   "why": ""
+  },
+  {
+   "bucket": "consumables",
+   "category": "Rigging",
+   "name": "Rigging line, 1/2in \u2013 150 ft, cut from spool",
+   "unit": "each",
+   "rateCents": 18000,
+   "source": "Arborist supply",
+   "link": "https://www.wesspur.com/double-esterlon-13mm-bulk-rigging-rope",
+   "http": "200",
+   "final_url": "https://www.wesspur.com/double-esterlon-13mm-tree-rigging-rope",
+   "verdict": "keep",
+   "flags": [],
+   "why": ""
+  },
+  {
+   "bucket": "consumables",
+   "category": "Rigging",
+   "name": "Rigging line, 5/8in \u2013 150 ft, cut from spool",
+   "unit": "each",
+   "rateCents": 27000,
+   "source": "Arborist supply",
+   "link": "https://www.wesspur.com/double-esterlon-16mm-tree-rigging-rope",
+   "http": "200",
+   "final_url": null,
+   "verdict": "keep",
+   "flags": [],
+   "why": ""
+  },
+  {
+   "bucket": "consumables",
+   "category": "Rigging",
+   "name": "Throw line \u2013 180 ft, 1.75mm",
+   "unit": "each",
+   "rateCents": 3000,
+   "source": "Arborist supply",
+   "link": "https://www.wesspur.com/THR101-zing-it-arborist-throw-line",
+   "http": "200",
+   "final_url": null,
+   "verdict": "keep",
+   "flags": [],
+   "why": ""
+  },
+  {
+   "bucket": "consumables",
+   "category": "Rigging",
+   "name": "Throw weight \u2013 12 oz, with loop",
+   "unit": "each",
+   "rateCents": 1200,
+   "source": "Arborist supply",
+   "link": "https://www.wesspur.com/THR234-arborist-throw-weight",
+   "http": "200",
+   "final_url": null,
+   "verdict": "keep",
+   "flags": [],
+   "why": ""
+  },
+  {
+   "bucket": "consumables",
+   "category": "Rigging",
+   "name": "Friction saver \u2013 standard ring-style",
+   "unit": "each",
+   "rateCents": 8200,
+   "source": "Arborist supply",
+   "link": "https://www.wesspur.com/ring-friction-saver",
+   "http": "200",
+   "final_url": null,
+   "verdict": "keep",
+   "flags": [],
+   "why": ""
+  },
+  {
+   "bucket": "consumables",
+   "category": "Rigging",
+   "name": "Loopie sling \u2013 3/4in, adjusts 2-8 ft",
+   "unit": "each",
+   "rateCents": 6800,
+   "source": "Arborist supply",
+   "link": "https://www.wesspur.com/yalex-loopie-sling",
+   "http": "200",
+   "final_url": null,
+   "verdict": "keep",
+   "flags": [],
+   "why": ""
+  },
+  {
+   "bucket": "consumables",
+   "category": "Rigging",
+   "name": "Whoopie sling \u2013 1/2in, ~2.5-4 ft",
+   "unit": "each",
+   "rateCents": 5200,
+   "source": "Arborist supply",
+   "link": "https://www.wesspur.com/yalex-whoopie-sling",
+   "http": "200",
+   "final_url": null,
+   "verdict": "keep",
+   "flags": [],
+   "why": ""
+  },
+  {
+   "bucket": "consumables",
+   "category": "Rigging",
+   "name": "Rigging block/pulley, mid-range \u2013 compact, 9/16in max rope",
+   "unit": "each",
+   "rateCents": 29995,
+   "source": "Arborist supply",
+   "link": "https://www.wesspur.com/isc-200-series-rigging-pulley-compact",
+   "http": "200",
+   "final_url": null,
+   "verdict": "keep",
+   "flags": [],
+   "why": ""
+  },
+  {
+   "bucket": "consumables",
+   "category": "Rigging",
+   "name": "Port-a-Wrap, medium \u2013 Port-A-Wrap III / 601N",
+   "unit": "each",
+   "rateCents": 22995,
+   "source": "Arborist supply",
+   "link": "https://www.wesspur.com/port-a-wrap-large",
+   "http": "200",
+   "final_url": null,
+   "verdict": "keep",
+   "flags": [],
+   "why": ""
+  },
+  {
+   "bucket": "consumables",
+   "category": "Climbing",
+   "name": "Arborist steel carabiner",
+   "unit": "each",
+   "rateCents": 4495,
+   "source": "Arborist supply",
+   "link": "https://www.treestuff.com/isc-iron-wizard-steel-carabiner-70kn/",
+   "http": "200",
+   "final_url": null,
+   "verdict": "keep",
+   "flags": [],
+   "why": ""
+  },
+  {
+   "bucket": "consumables",
+   "category": "Climbing",
+   "name": "1in tubular webbing \u2013 per ft",
+   "unit": "ft",
+   "rateCents": 65,
+   "source": "Arborist supply",
+   "link": "https://www.wesspur.com/climb-spec-tubular-nylon-webbing",
+   "http": "200",
+   "final_url": null,
+   "verdict": "keep",
+   "flags": [],
+   "why": ""
+  },
+  {
+   "bucket": "consumables",
+   "category": "Climbing",
+   "name": "1in tubular webbing \u2013 30 ft, cut to order",
+   "unit": "each",
+   "rateCents": 1950,
+   "source": "Arborist supply",
+   "link": "https://www.wesspur.com/climb-spec-tubular-nylon-webbing",
+   "http": "200",
+   "final_url": null,
+   "verdict": "keep",
+   "flags": [],
+   "why": ""
+  },
+  {
+   "bucket": "consumables",
+   "category": "Climbing",
+   "name": "Tree gaff pads \u2013 pair, T-pad style",
+   "unit": "each",
+   "rateCents": 6350,
+   "source": "Arborist supply",
+   "link": "https://www.wesspur.com/t-pads-for-climbing-spurs",
+   "http": "200",
+   "final_url": null,
+   "verdict": "keep",
+   "flags": [],
+   "why": ""
+  },
+  {
+   "bucket": "consumables",
+   "category": "Climbing",
+   "name": "Spur straps \u2013 lower straps, pair",
+   "unit": "each",
+   "rateCents": 3995,
+   "source": "Arborist supply",
+   "link": "https://www.wesspur.com/universal-lower-spur-straps",
+   "http": "200",
+   "final_url": null,
+   "verdict": "keep",
+   "flags": [],
+   "why": ""
+  },
+  {
+   "bucket": "consumables",
+   "category": "Climbing",
+   "name": "Saddle replacement leg straps \u2013 coated, extra-wide back saddle",
+   "unit": "each",
+   "rateCents": 27879,
+   "source": "Arborist supply",
+   "link": "https://www.treestuff.com/weaver-4-d-extra-wide-back-saddle-coated-leg-straps/",
+   "http": "200",
+   "final_url": null,
+   "verdict": "keep",
+   "flags": [],
+   "why": ""
+  },
+  {
+   "bucket": "consumables",
+   "category": "PPE & safety",
+   "name": "Helmet \u2013 standard colors",
+   "unit": "each",
+   "rateCents": 11495,
+   "source": "Arborist supply",
+   "link": "https://www.bartlettman.com/products/petzl-vertex-helmet",
+   "http": "200",
+   "final_url": null,
+   "verdict": "keep",
+   "flags": [],
+   "why": ""
+  },
+  {
+   "bucket": "consumables",
+   "category": "PPE & safety",
+   "name": "Chainsaw chaps \u2013 36in, 6-layer apron style",
+   "unit": "each",
+   "rateCents": 12999,
+   "source": "Arborist supply",
+   "link": "https://www.ohiopowertool.com/stihl-stl-0000-886-3202",
+   "http": "200",
+   "final_url": null,
+   "verdict": "keep",
+   "flags": [],
+   "why": ""
+  },
+  {
+   "bucket": "consumables",
+   "category": "PPE & safety",
+   "name": "Safety glasses \u2013 12-pack",
+   "unit": "pack",
+   "rateCents": 6497,
+   "source": "Arborist supply",
+   "link": "https://www.homedepot.com/p/Milwaukee-Safety-Glasses-with-Gray-Anti-Scratch-Lenses-12-Pack-48-73-2105X12/314974923",
+   "http": "403",
+   "final_url": null,
+   "verdict": "keep",
+   "flags": [
+    "http-403"
+   ],
+   "why": ""
+  },
+  {
+   "bucket": "consumables",
+   "category": "PPE & safety",
+   "name": "Ear plugs \u2013 200-pack (pairs)",
+   "unit": "pack",
+   "rateCents": 2237,
+   "source": "Arborist supply",
+   "link": "https://homedepot.com/p/Cordova-Encore-Disposable-Ear-Plugs-200-per-Box-EPFU01/202593530",
+   "http": "403",
+   "final_url": "https://www.homedepot.com/p/Cordova-Encore-Disposable-Ear-Plugs-200-per-Box-EPFU01/202593530",
+   "verdict": "keep",
+   "flags": [
+    "http-403"
+   ],
+   "why": ""
+  },
+  {
+   "bucket": "consumables",
+   "category": "PPE & safety",
+   "name": "Work gloves \u2013 12-pack, large",
+   "unit": "pack",
+   "rateCents": 5297,
+   "source": "Arborist supply",
+   "link": "https://www.homedepot.com/p/Milwaukee-Large-Red-Nitrile-Level-1-Cut-Resistant-Dipped-Work-Gloves-12-Pack-48-22-8902B/307720354",
+   "http": "403",
+   "final_url": null,
+   "verdict": "keep",
+   "flags": [
+    "http-403"
+   ],
+   "why": ""
+  },
+  {
+   "bucket": "consumables",
+   "category": "Site supplies",
+   "name": "Flagging tape \u2013 1-3/16in x 300ft roll (sold as 12-pack)",
+   "unit": "roll",
+   "rateCents": 256,
+   "source": "Arborist supply",
+   "link": "https://www.homedepot.com/b/Tools-Hand-Tools-Marking-Tools-Layout-Tools-Flagging-Tape/N-5yc1vZc97p",
+   "http": "403",
+   "final_url": null,
+   "verdict": "keep",
+   "flags": [
+    "non-vendor-source",
+    "http-403"
+   ],
+   "why": "Link is a price guide, article, or category page, not a product page. Price cannot be re-verified from it."
+  },
+  {
+   "bucket": "consumables",
+   "category": "Site supplies",
+   "name": "Marking paint \u2013 15-17 oz inverted spray can",
+   "unit": "each",
+   "rateCents": 969,
+   "source": "Arborist supply",
+   "link": "https://homedepot.com/p/Rust-Oleum-Industrial-Choice-17-oz-M1600-White-Inverted-Marking-Spray-Paint-Case-of-12-203030V/322819662",
+   "http": "403",
+   "final_url": "https://www.homedepot.com/p/Rust-Oleum-Industrial-Choice-17-oz-M1600-White-Inverted-Marking-Spray-Paint-Case-of-12-203030V/322819662",
+   "verdict": "keep",
+   "flags": [
+    "http-403"
+   ],
+   "why": ""
+  },
+  {
+   "bucket": "consumables",
+   "category": "Site supplies",
+   "name": "Contractor trash bags, 42 gal \u2013 50-count",
+   "unit": "pack",
+   "rateCents": 2997,
+   "source": "Arborist supply",
+   "link": "https://www.homedepot.com/p/Husky-42-Gal-Contractor-Bags-50-Count-HK42WC050B/202973825",
+   "http": "403",
+   "final_url": null,
+   "verdict": "keep",
+   "flags": [
+    "http-403"
+   ],
+   "why": ""
+  },
+  {
+   "bucket": "consumables",
+   "category": "Site supplies",
+   "name": "Tarp, 20x30 \u2013 20 ft x 30 ft, heavy duty",
+   "unit": "each",
+   "rateCents": 13900,
+   "source": "Arborist supply",
+   "link": "https://www.homedepot.com/p/Everbilt-20-ft-x-30-ft-Brown-and-Silver-Heavy-Duty-Tarp-PYHD2030/308137821",
+   "http": "403",
+   "final_url": null,
+   "verdict": "keep",
+   "flags": [
+    "http-403"
+   ],
+   "why": ""
+  },
+  {
+   "bucket": "materials",
+   "category": "Plant health",
+   "name": "Imidacloprid soil drench \u2013 27.5 oz bottle (~1 qt; yields 50 gal solution)",
+   "unit": "each",
+   "rateCents": 3498,
+   "source": "Arborist supply",
+   "link": "https://www.domyown.com/dominion-2l-termiticide-concentrate-p-1223.html",
+   "http": "200",
+   "final_url": null,
+   "verdict": "keep",
+   "flags": [],
+   "why": ""
+  },
+  {
+   "bucket": "materials",
+   "category": "Plant health",
+   "name": "Propiconazole 14.3 \u2013 1 quart",
+   "unit": "qt",
+   "rateCents": 5553,
+   "source": "Arborist supply",
+   "link": "https://www.domyown.com/propiconazole-143-p-16567.html",
+   "http": "200",
+   "final_url": null,
+   "verdict": "keep",
+   "flags": [],
+   "why": ""
+  },
+  {
+   "bucket": "materials",
+   "category": "Plant health",
+   "name": "Propiconazole 14.3 \u2013 1 gallon",
+   "unit": "gal",
+   "rateCents": 9553,
+   "source": "Arborist supply",
+   "link": "https://www.domyown.com/propiconazole-143-p-16567.html",
+   "http": "200",
+   "final_url": null,
+   "verdict": "keep",
+   "flags": [],
+   "why": ""
+  },
+  {
+   "bucket": "materials",
+   "category": "Plant health",
+   "name": "Arborjet TREE-age G4 injection \u2013 1 quart bottle",
+   "unit": "kit",
+   "rateCents": 44000,
+   "source": "Arborist supply",
+   "link": "https://tipco.green/products/arborjet-tree-age-g4",
+   "http": "200",
+   "final_url": null,
+   "verdict": "keep",
+   "flags": [],
+   "why": ""
+  },
+  {
+   "bucket": "materials",
+   "category": "Plant health",
+   "name": "Hydraulic-spray horticultural oil \u2013 1 gallon",
+   "unit": "gal",
+   "rateCents": 2698,
+   "source": "Arborist supply",
+   "link": "https://www.domyown.com/monterey-horticultural-oil-p-2835.html",
+   "http": "200",
+   "final_url": null,
+   "verdict": "keep",
+   "flags": [],
+   "why": ""
+  },
+  {
+   "bucket": "materials",
+   "category": "Fertilizer",
+   "name": "Palm fertilizer 8-2-12 \u2013 50 lb bag",
+   "unit": "bag",
+   "rateCents": 4777,
+   "source": "Arborist supply",
+   "link": "https://www.seedworldusa.com/products/growers-palm-and-ornamental-8-2-12-fertilizer-50-lbs",
+   "http": "200",
+   "final_url": null,
+   "verdict": "keep",
+   "flags": [],
+   "why": ""
+  },
+  {
+   "bucket": "materials",
+   "category": "Fertilizer",
+   "name": "Milorganite \u2013 32 lb bag",
+   "unit": "bag",
+   "rateCents": 1997,
+   "source": "Arborist supply",
+   "link": "https://www.homedepot.com/p/Milorganite-32-lbs-2-500-sq-ft-Plant-Fertilizer-Slow-Release-Nitrogen-Garden-and-Lawn-Fertilizer-6-4-0-100539618/308888983",
+   "http": "403",
+   "final_url": null,
+   "verdict": "keep",
+   "flags": [
+    "http-403"
+   ],
+   "why": ""
+  },
+  {
+   "bucket": "materials",
+   "category": "Planting supplies",
+   "name": "Tree stake kit, heavy duty \u2013 3 stakes + straps + rope",
+   "unit": "kit",
+   "rateCents": 1199,
+   "source": "Arborist supply",
+   "link": "https://www.amazon.com/Stake-Kit-Garden-Including-3sets-Tree/dp/B0D73F3L86",
+   "http": "200",
+   "final_url": null,
+   "verdict": "keep",
+   "flags": [],
+   "why": ""
+  },
+  {
+   "bucket": "materials",
+   "category": "Planting supplies",
+   "name": "Arbor Tie \u2013 250 ft roll",
+   "unit": "roll",
+   "rateCents": 2900,
+   "source": "Arborist supply",
+   "link": "https://masterlandscapesupply.com/products/tree-tie-arbor-tie-250-foot-roll",
+   "http": "200",
+   "final_url": null,
+   "verdict": "keep",
+   "flags": [],
+   "why": ""
+  },
+  {
+   "bucket": "materials",
+   "category": "Cabling & bracing",
+   "name": "Cobra dynamic cabling kit \u2013 2-ton, 5-system package",
+   "unit": "kit",
+   "rateCents": 49699,
+   "source": "Arborist supply",
+   "link": "https://www.treestuff.com/cobra-dynamic-bracing-system-bundles/",
+   "http": "200",
+   "final_url": null,
+   "verdict": "keep",
+   "flags": [],
+   "why": ""
+  },
+  {
+   "bucket": "materials",
+   "category": "Cabling & bracing",
+   "name": "Cobra dynamic cabling kit \u2013 4-ton, 5-system package",
+   "unit": "kit",
+   "rateCents": 57799,
+   "source": "Arborist supply",
+   "link": "https://www.treestuff.com/cobra-dynamic-bracing-system-bundles/",
+   "http": "200",
+   "final_url": null,
+   "verdict": "keep",
+   "flags": [],
+   "why": ""
+  },
+  {
+   "bucket": "materials",
+   "category": "Cabling & bracing",
+   "name": "EHS steel cable, 1/4in \u2013 per ft (sold as 250 ft preset roll)",
+   "unit": "ft",
+   "rateCents": 40,
+   "source": "Arborist supply",
+   "link": "https://www.wesspur.com/ehs-cable-quarter-inch",
+   "http": "200",
+   "final_url": null,
+   "verdict": "keep",
+   "flags": [],
+   "why": ""
+  },
+  {
+   "bucket": "materials",
+   "category": "Cabling & bracing",
+   "name": "Amon-eye bolt / lag hook \u2013 1/2in, 6in long",
+   "unit": "each",
+   "rateCents": 313,
+   "source": "Arborist supply",
+   "link": "https://www.bartlettman.com/products/lag-hook-left-hand-and-right-hand-thread",
+   "http": "200",
+   "final_url": null,
+   "verdict": "keep",
+   "flags": [],
+   "why": ""
+  },
+  {
+   "bucket": "materials",
+   "category": "Cabling & bracing",
+   "name": "Threaded rod, 1/2in bracing \u2013 1/2in-13, 10 ft, hot-dip galvanized",
+   "unit": "each",
+   "rateCents": 7146,
+   "source": "Arborist supply",
+   "link": "https://www.homedepot.com/p/Everbilt-1-2-in-x-10-ft-Hot-Dip-Galvanized-Steel-Coarse-Threaded-Rod-85117/332734035",
+   "http": "403",
+   "final_url": null,
+   "verdict": "keep",
+   "flags": [
+    "http-403"
+   ],
+   "why": ""
+  },
+  {
+   "bucket": "materials",
+   "category": "Planting supplies",
+   "name": "Root barrier \u2013 24in x 100 ft roll, 40 mil",
+   "unit": "roll",
+   "rateCents": 40175,
+   "source": "Arborist supply",
+   "link": "https://www.landscapediscount.com/product-p/wb-24-40-100.htm",
+   "http": "200",
+   "final_url": "https://landscapediscount.com/products/water-barrier-24-inch-by-100-foot-roll-40-mil-thickness-deeproot-brand",
+   "verdict": "keep",
+   "flags": [
+    "redirected-away"
+   ],
+   "why": "Redirects to https://landscapediscount.com/products/water-barrier-24-inch-by-100-foot-roll-40 - product page is probably gone."
+  },
+  {
+   "bucket": "materials",
+   "category": "Planting supplies",
+   "name": "DeepRoot/Bio-Barrier \u2013 per ft (24in wide, 40 mil)",
+   "unit": "ft",
+   "rateCents": 402,
+   "source": "Arborist supply",
+   "link": "https://www.landscapediscount.com/product-p/wb-24-40-100.htm",
+   "http": "200",
+   "final_url": "https://landscapediscount.com/products/water-barrier-24-inch-by-100-foot-roll-40-mil-thickness-deeproot-brand",
+   "verdict": "keep",
+   "flags": [
+    "redirected-away"
+   ],
+   "why": "Redirects to https://landscapediscount.com/products/water-barrier-24-inch-by-100-foot-roll-40 - product page is probably gone."
+  },
+  {
+   "bucket": "materials",
+   "category": "Soil & amendments",
+   "name": "Biochar \u2013 1 cu ft bag",
+   "unit": "bag",
+   "rateCents": 3999,
+   "source": "Arborist supply",
+   "link": "https://homedepot.com/p/WAKEFIELD-Biochar-with-CarbonBoost-Soil-Amendment-1-cu-ft-Bag-4213/335271401",
+   "http": "403",
+   "final_url": "https://www.homedepot.com/p/WAKEFIELD-Biochar-with-CarbonBoost-Soil-Amendment-1-cu-ft-Bag-4213/335271401",
+   "verdict": "keep",
+   "flags": [
+    "http-403"
+   ],
+   "why": ""
+  },
+  {
+   "bucket": "materials",
+   "category": "Soil & amendments",
+   "name": "Mycorrhizal inoculant \u2013 1 lb, granular",
+   "unit": "each",
+   "rateCents": 1912,
+   "source": "Arborist supply",
+   "link": "https://www.amazon.com/Myco-Bliss-Mycorrhizal-Concentrated-Fertilizer/dp/B0BQB18TLK",
+   "http": "200",
+   "final_url": null,
+   "verdict": "keep",
+   "flags": [],
+   "why": ""
+  },
+  {
+   "bucket": "materials",
+   "category": "Soil & amendments",
+   "name": "Compost tea / soil amendment \u2013 1 gallon, liquid concentrate",
+   "unit": "gal",
+   "rateCents": 4799,
+   "source": "Arborist supply",
+   "link": "https://www.walmart.com/c/kp/worm-compost-tea",
+   "http": "200",
+   "final_url": null,
+   "verdict": "keep",
+   "flags": [
+    "non-vendor-source"
+   ],
+   "why": "Link is a price guide, article, or category page, not a product page. Price cannot be re-verified from it."
+  },
+  {
+   "bucket": "materials",
+   "category": "Planting supplies",
+   "name": "Tree watering bag \u2013 20 gallon",
+   "unit": "each",
+   "rateCents": 1998,
+   "source": "Arborist supply",
+   "link": "https://homedepot.com/p/Vigoro-20-Gal-Tree-Watering-Bag-410-878-0111/330509941",
+   "http": "403",
+   "final_url": "https://www.homedepot.com/p/Vigoro-20-Gal-Tree-Watering-Bag-410-878-0111/330509941",
+   "verdict": "keep",
+   "flags": [
+    "http-403"
+   ],
+   "why": ""
+  },
+  {
+   "bucket": "materials",
+   "category": "Mulch & pine straw",
+   "name": "Mulch, bulk \u2013 per cubic yard",
+   "unit": "yard",
+   "rateCents": 3125,
+   "source": "Arborist supply",
+   "link": "https://www.mulchforyou.com/products-and-pricing",
+   "http": "200",
+   "final_url": null,
+   "verdict": "keep",
+   "flags": [
+    "non-vendor-source"
+   ],
+   "why": "Link is a price guide, article, or category page, not a product page. Price cannot be re-verified from it."
+  },
+  {
+   "bucket": "materials",
+   "category": "Mulch & pine straw",
+   "name": "Pine straw \u2013 per bale",
+   "unit": "bale",
+   "rateCents": 850,
+   "source": "Arborist supply",
+   "link": "https://www.mulchforyou.com/products-and-pricing",
+   "http": "200",
+   "final_url": null,
+   "verdict": "keep",
+   "flags": [
+    "non-vendor-source"
+   ],
+   "why": "Link is a price guide, article, or category page, not a product page. Price cannot be re-verified from it."
+  },
+  {
+   "bucket": "materials",
+   "category": "Sod",
+   "name": "St. Augustine sod \u2013 pallet, 400 sq ft (Floratam)",
+   "unit": "pallet",
+   "rateCents": 19600,
+   "source": "Arborist supply",
+   "link": "https://www.floridafarmsod.com/product-page/pallet-st-augustine-floratam-400-sqft-12-00-pallet",
+   "http": "200",
+   "final_url": null,
+   "verdict": "keep",
+   "flags": [],
+   "why": ""
+  },
+  {
+   "bucket": "materials",
+   "category": "Soil & amendments",
+   "name": "Topsoil, bulk \u2013 per cubic yard",
+   "unit": "yard",
+   "rateCents": 3750,
+   "source": "Arborist supply",
+   "link": "https://www.mulchforyou.com/products-and-pricing",
+   "http": "200",
+   "final_url": null,
+   "verdict": "keep",
+   "flags": [
+    "non-vendor-source"
+   ],
+   "why": "Link is a price guide, article, or category page, not a product page. Price cannot be re-verified from it."
+  },
+  {
+   "bucket": "consumables",
+   "category": "Disposal",
+   "name": "Landfill yard-waste disposal fee \u2013 per ton, at landfill scale",
+   "unit": "ton",
+   "rateCents": 4680,
+   "source": "Arborist supply",
+   "link": "https://www.orangecountyfl.net/watergarbagerecycling/landfillandtransferstations.aspx",
+   "http": "200",
+   "final_url": null,
+   "verdict": "keep",
+   "flags": [],
+   "why": ""
+  },
+  {
+   "bucket": "consumables",
+   "category": "Site supplies",
+   "name": "Porta-potty rental \u2013 standard unit, monthly",
+   "unit": "month",
+   "rateCents": 10000,
+   "source": "Arborist supply",
+   "link": "https://orlandoportapotties.com/what-is-the-monthly-cost-of-a-porta-potty-in-orlando-fl/",
+   "http": "200",
+   "final_url": null,
+   "verdict": "keep",
+   "flags": [
+    "non-vendor-source"
+   ],
+   "why": "Link is a price guide, article, or category page, not a product page. Price cannot be re-verified from it."
+  },
+  {
+   "bucket": "consumables",
+   "category": "Site supplies",
+   "name": "Traffic cone \u2013 28in, weighted base",
+   "unit": "each",
+   "rateCents": 2250,
+   "source": "Arborist supply",
+   "link": "https://www.homedepot.com/p/PLASTICADE-28-in-Orange-Traffic-Cone-with-Black-Base-10-lbs-6-Pack-528-10-1-6PKB/331451758",
+   "http": "403",
+   "final_url": null,
+   "verdict": "keep",
+   "flags": [
+    "http-403"
+   ],
+   "why": ""
+  },
+  {
+   "bucket": "consumables",
+   "category": "Site supplies",
+   "name": "Road Work Ahead sign \u2013 36in, roll-up",
+   "unit": "each",
+   "rateCents": 5297,
+   "source": "Arborist supply",
+   "link": "https://www.trafficsafetystore.com/traffic-signs/roll-up-road-work-ahead-sign",
+   "http": "200",
+   "final_url": null,
+   "verdict": "keep",
+   "flags": [],
+   "why": ""
+  },
+  {
+   "bucket": "consumables",
+   "category": "Permits & site",
+   "name": "Tree removal permit fee \u2013 residential property",
+   "unit": "each",
+   "rateCents": 2500,
+   "source": "Arborist supply",
+   "link": "https://www.orlando.gov/Parks-the-Environment/Trees/Apply-for-a-Tree-Removal-or-Encroachment-Permit",
+   "http": "200",
+   "final_url": null,
+   "verdict": "keep",
+   "flags": [],
+   "why": ""
+  },
+  {
+   "bucket": "consumables",
+   "category": "Permits & site",
+   "name": "Tree removal permit fee \u2013 developed property, base fee",
+   "unit": "each",
+   "rateCents": 24798,
+   "source": "Arborist supply",
+   "link": "https://www.orangecountyfl.net/PermitsLicenses/Permits/TreeRemovalPermit-DevelopedProperty.aspx",
+   "http": "200",
+   "final_url": "https://www.orangecountyfl.net/Home.aspx",
+   "verdict": "keep",
+   "flags": [],
+   "why": ""
+  },
+  {
+   "bucket": "materials",
+   "category": "Mulch & pine straw",
+   "name": "Hardwood Mulch \u2013 per yard",
+   "unit": "yard",
+   "rateCents": 2875,
+   "source": "SiteOne (Apopka)",
+   "link": "https://www.siteone.com/en/bumu-0010-hardwood-mulch-bulk-sold-per-cu-yd/p/658259",
+   "http": "200",
+   "final_url": null,
+   "verdict": "keep",
+   "flags": [],
+   "why": ""
+  },
+  {
+   "bucket": "materials",
+   "category": "Mulch & pine straw",
+   "name": "Dyed Black Mulch \u2013 per yard",
+   "unit": "yard",
+   "rateCents": 3563,
+   "source": "SiteOne (Apopka)",
+   "link": "https://www.siteone.com/en/bumu-0011-cy-dyed-black-mulch-bulk-sold-per-cu-yd/p/658261",
+   "http": "200",
+   "final_url": null,
+   "verdict": "keep",
+   "flags": [],
+   "why": ""
+  },
+  {
+   "bucket": "materials",
+   "category": "Mulch & pine straw",
+   "name": "Dyed Red Mulch \u2013 per yard",
+   "unit": "yard",
+   "rateCents": 4175,
+   "source": "SiteOne (Apopka)",
+   "link": "https://www.siteone.com/en/bumu-0012-dyed-red-mulch-bulk-sold-per-cu-yd/p/658263",
+   "http": "200",
+   "final_url": null,
+   "verdict": "keep",
+   "flags": [],
+   "why": ""
+  },
+  {
+   "bucket": "materials",
+   "category": "Mulch & pine straw",
+   "name": "Shredded Pine Mulch \u2013 per yard",
+   "unit": "yard",
+   "rateCents": 4931,
+   "source": "SiteOne (Apopka)",
+   "link": "https://www.siteone.com/en/bumu-0015-shredded-pine-mulch-bulk-per-cu-yd/p/662310",
+   "http": "200",
+   "final_url": null,
+   "verdict": "keep",
+   "flags": [],
+   "why": ""
+  },
+  {
+   "bucket": "materials",
+   "category": "Mulch & pine straw",
+   "name": "Playground Certified Wood Chips Mulch \u2013 per yard",
+   "unit": "yard",
+   "rateCents": 5875,
+   "source": "SiteOne (Apopka)",
+   "link": "https://www.siteone.com/en/bumu-0080-playground-certified-wood-chips-mulch-bulk-per-cu-yd/p/558313",
+   "http": "200",
+   "final_url": null,
+   "verdict": "keep",
+   "flags": [],
+   "why": ""
+  },
+  {
+   "bucket": "materials",
+   "category": "Sod",
+   "name": "St. Augustine Sod (Floratam)",
+   "unit": "pallet",
+   "rateCents": 30000,
+   "source": "SiteOne (Apopka)",
+   "link": "https://www.homeguide.com/costs/sod-prices",
+   "http": "403",
+   "final_url": null,
+   "verdict": "keep",
+   "flags": [
+    "non-vendor-source",
+    "http-403",
+    "estimate"
+   ],
+   "why": "Link is a price guide, article, or category page, not a product page. Price cannot be re-verified from it."
+  },
+  {
+   "bucket": "materials",
+   "category": "Sod",
+   "name": "St. Augustine Sod, single piece/slab",
+   "unit": "piece",
+   "rateCents": 200,
+   "source": "SiteOne (Apopka)",
+   "link": "https://www.homeguide.com/costs/sod-prices",
+   "http": "403",
+   "final_url": null,
+   "verdict": "keep",
+   "flags": [
+    "non-vendor-source",
+    "http-403",
+    "estimate"
+   ],
+   "why": "Link is a price guide, article, or category page, not a product page. Price cannot be re-verified from it."
+  },
+  {
+   "bucket": "materials",
+   "category": "Sod",
+   "name": "Bahia Sod",
+   "unit": "pallet",
+   "rateCents": 14500,
+   "source": "SiteOne (Apopka)",
+   "link": "https://www.osceolasod.com/blog/how-much-is-a-pallet-of-bahia-or-zoysia-sod-in-florida-2026-price-guide",
+   "http": "200",
+   "final_url": null,
+   "verdict": "keep",
+   "flags": [
+    "non-vendor-source",
+    "estimate"
+   ],
+   "why": "Link is a price guide, article, or category page, not a product page. Price cannot be re-verified from it."
+  },
+  {
+   "bucket": "materials",
+   "category": "Sod",
+   "name": "Zoysia Sod",
+   "unit": "pallet",
+   "rateCents": 29000,
+   "source": "SiteOne (Apopka)",
+   "link": "https://www.homeguide.com/costs/sod-prices",
+   "http": "403",
+   "final_url": null,
+   "verdict": "keep",
+   "flags": [
+    "non-vendor-source",
+    "http-403",
+    "estimate"
+   ],
+   "why": "Link is a price guide, article, or category page, not a product page. Price cannot be re-verified from it."
+  },
+  {
+   "bucket": "materials",
+   "category": "Irrigation",
+   "name": "Rain Bird 1804 pop-up spray body, 4 in",
+   "unit": "each",
+   "rateCents": 399,
+   "source": "SiteOne (Apopka)",
+   "link": "https://www.sprinklerwarehouse.com/rain-bird-1800-spray-head-4-in-1804",
+   "http": "200",
+   "final_url": null,
+   "verdict": "keep",
+   "flags": [
+    "estimate"
+   ],
+   "why": ""
+  },
+  {
+   "bucket": "materials",
+   "category": "Irrigation",
+   "name": "Hunter PGP rotor (PGP-ADJ), 4 in",
+   "unit": "each",
+   "rateCents": 2418,
+   "source": "SiteOne (Apopka)",
+   "link": "https://www.sprinklerwarehouse.com/hunter-rotor-4-in-pgp-adj",
+   "http": "200",
+   "final_url": null,
+   "verdict": "keep",
+   "flags": [
+    "estimate"
+   ],
+   "why": ""
+  },
+  {
+   "bucket": "materials",
+   "category": "Irrigation",
+   "name": "Hunter MP Rotator nozzle (MP1000)",
+   "unit": "each",
+   "rateCents": 780,
+   "source": "SiteOne (Apopka)",
+   "link": "https://www.sprinklersupplystore.com/products/hunter-mp-rotator-nozzle-1",
+   "http": "200",
+   "final_url": null,
+   "verdict": "keep",
+   "flags": [
+    "estimate"
+   ],
+   "why": ""
+  },
+  {
+   "bucket": "materials",
+   "category": "Irrigation",
+   "name": "PVC Schedule 40 fittings (ell/tee/coupling), 1 in",
+   "unit": "each",
+   "rateCents": 200,
+   "source": "SiteOne (Apopka)",
+   "link": "https://www.supplyhouse.com/PVC-Schedule-40-Fittings-14952000",
+   "http": "403",
+   "final_url": null,
+   "verdict": "keep",
+   "flags": [
+    "http-403",
+    "estimate"
+   ],
+   "why": ""
+  },
+  {
+   "bucket": "materials",
+   "category": "Irrigation",
+   "name": "Drip tubing, 1/2 in poly",
+   "unit": "ft",
+   "rateCents": 15,
+   "source": "SiteOne (Apopka)",
+   "link": "https://www.angi.com/articles/drip-irrigation-cuts-down-yard-work-water-usage.htm",
+   "http": "403",
+   "final_url": null,
+   "verdict": "keep",
+   "flags": [
+    "non-vendor-source",
+    "http-403",
+    "estimate"
+   ],
+   "why": "Link is a price guide, article, or category page, not a product page. Price cannot be re-verified from it."
+  },
+  {
+   "bucket": "materials",
+   "category": "Fertilizer",
+   "name": "LESCO 15-0-15 Turfgrass Fertilizer, 50 lb",
+   "unit": "bag",
+   "rateCents": 4700,
+   "source": "SiteOne (Apopka)",
+   "link": "https://www.homedepot.com/b/Outdoors-Garden-Center-Lawn-Care-Lawn-Fertilizers/LESCO/N-5yc1vZbx6bZuv",
+   "http": "403",
+   "final_url": null,
+   "verdict": "keep",
+   "flags": [
+    "non-vendor-source",
+    "http-403",
+    "estimate"
+   ],
+   "why": "Link is a price guide, article, or category page, not a product page. Price cannot be re-verified from it."
+  },
+  {
+   "bucket": "materials",
+   "category": "Tree care supplies",
+   "name": "Roundup PRO Concentrate Herbicide, 2.5 gal",
+   "unit": "each",
+   "rateCents": 5800,
+   "source": "SiteOne (Apopka)",
+   "link": "https://www.keystonepestsolutions.com/index.php?main_page=product_info&products_id=715",
+   "http": "403",
+   "final_url": null,
+   "verdict": "keep",
+   "flags": [
+    "http-403",
+    "estimate"
+   ],
+   "why": ""
+  },
+  {
+   "bucket": "materials",
+   "category": "Trees",
+   "name": "Live Oak \u2013 30 gal",
+   "unit": "each",
+   "rateCents": 22500,
+   "source": "Cherry Lake / wholesale nursery",
+   "link": "https://www.creeknursery.com/creek_nursery_wholesale_availability.pdf",
+   "http": "200",
+   "final_url": null,
+   "verdict": "keep",
+   "flags": [
+    "estimate"
+   ],
+   "why": "Suitable for Central Florida."
+  },
+  {
+   "bucket": "materials",
+   "category": "Trees",
+   "name": "Live Oak \u2013 45 gal",
+   "unit": "each",
+   "rateCents": 32500,
+   "source": "Cherry Lake / wholesale nursery",
+   "link": "https://www.creeknursery.com/creek_nursery_wholesale_availability.pdf",
+   "http": "200",
+   "final_url": null,
+   "verdict": "keep",
+   "flags": [
+    "estimate"
+   ],
+   "why": "Suitable for Central Florida."
+  },
+  {
+   "bucket": "materials",
+   "category": "Trees",
+   "name": "Little Gem Magnolia \u2013 25 gal",
+   "unit": "each",
+   "rateCents": 15000,
+   "source": "Cherry Lake / wholesale nursery",
+   "link": "https://www.creeknursery.com/creek_nursery_wholesale_availability.pdf",
+   "http": "200",
+   "final_url": null,
+   "verdict": "keep",
+   "flags": [
+    "estimate"
+   ],
+   "why": "Suitable for Central Florida."
+  },
+  {
+   "bucket": "materials",
+   "category": "Palms",
+   "name": "Sylvester Palm \u2013 6 ft clear trunk",
+   "unit": "each",
+   "rateCents": 65000,
+   "source": "Cherry Lake / wholesale nursery",
+   "link": "https://www.aqualityplant.com/sylvester-palm-silver-date-tree-phoenix-sylvestris",
+   "http": "200",
+   "final_url": null,
+   "verdict": "keep",
+   "flags": [
+    "estimate"
+   ],
+   "why": "Suitable for Central Florida."
+  },
+  {
+   "bucket": "materials",
+   "category": "Palms",
+   "name": "Sabal Palm \u2013 10-18 ft trunk, B&B",
+   "unit": "each",
+   "rateCents": 16000,
+   "source": "Cherry Lake / wholesale nursery",
+   "link": "https://www.creeknursery.com/creek_nursery_wholesale_availability.pdf",
+   "http": "200",
+   "final_url": null,
+   "verdict": "keep",
+   "flags": [
+    "estimate"
+   ],
+   "why": "Suitable for Central Florida."
+  },
+  {
+   "bucket": "materials",
+   "category": "Palms",
+   "name": "Queen Palm \u2013 25 gal",
+   "unit": "each",
+   "rateCents": 11500,
+   "source": "Cherry Lake / wholesale nursery",
+   "link": "https://www.creeknursery.com/creek_nursery_wholesale_availability.pdf",
+   "http": "200",
+   "final_url": null,
+   "verdict": "keep",
+   "flags": [
+    "estimate"
+   ],
+   "why": "Common in Central Florida; IFAS notes heavy nutrient needs. Keep with a palm-fertilizer note."
+  },
+  {
+   "bucket": "materials",
+   "category": "Trees",
+   "name": "Crape Myrtle, multi-trunk \u2013 30 gal",
+   "unit": "each",
+   "rateCents": 19500,
+   "source": "Cherry Lake / wholesale nursery",
+   "link": "https://www.creeknursery.com/creek_nursery_wholesale_availability.pdf",
+   "http": "200",
+   "final_url": null,
+   "verdict": "keep",
+   "flags": [
+    "estimate"
+   ],
+   "why": "Suitable for Central Florida."
+  },
+  {
+   "bucket": "materials",
+   "category": "Trees",
+   "name": "Crape Myrtle, multi-trunk \u2013 45 gal",
+   "unit": "each",
+   "rateCents": 25000,
+   "source": "Cherry Lake / wholesale nursery",
+   "link": "https://www.creeknursery.com/creek_nursery_wholesale_availability.pdf",
+   "http": "200",
+   "final_url": null,
+   "verdict": "keep",
+   "flags": [
+    "estimate"
+   ],
+   "why": "Suitable for Central Florida."
+  },
+  {
+   "bucket": "materials",
+   "category": "Trees",
+   "name": "Bald Cypress \u2013 30 gal",
+   "unit": "each",
+   "rateCents": 18500,
+   "source": "Cherry Lake / wholesale nursery",
+   "link": "https://www.creeknursery.com/creek_nursery_wholesale_availability.pdf",
+   "http": "200",
+   "final_url": null,
+   "verdict": "keep",
+   "flags": [
+    "estimate"
+   ],
+   "why": "Suitable for Central Florida."
+  },
+  {
+   "bucket": "materials",
+   "category": "Trees",
+   "name": "Red Maple \u2013 45 gal",
+   "unit": "each",
+   "rateCents": 30000,
+   "source": "Cherry Lake / wholesale nursery",
+   "link": "https://www.creeknursery.com/creek_nursery_wholesale_availability.pdf",
+   "http": "200",
+   "final_url": null,
+   "verdict": "keep",
+   "flags": [
+    "estimate"
+   ],
+   "why": "Native; specify a Florida seed source or 'Florida Flame' so northern stock is not installed."
+  },
+  {
+   "bucket": "materials",
+   "category": "Trees",
+   "name": "Eagleston Holly \u2013 30 gal",
+   "unit": "each",
+   "rateCents": 23000,
+   "source": "Cherry Lake / wholesale nursery",
+   "link": "https://www.creeknursery.com/creek_nursery_wholesale_availability.pdf",
+   "http": "200",
+   "final_url": null,
+   "verdict": "keep",
+   "flags": [
+    "estimate"
+   ],
+   "why": "Suitable for Central Florida."
+  },
+  {
+   "bucket": "materials",
+   "category": "Palms",
+   "name": "Sylvester Date Palm \u2013 3 gal",
+   "unit": "each",
+   "rateCents": 14372,
+   "source": "Home Depot (Apopka)",
+   "link": "https://www.homedepot.com/p/Sylvester-Palm-Live-Plant-in-a-3-Gal-Growers-Pot-Phoenix-Sylvestris-Rare-Palm-Tree-from-Florida-Beautiful-Palms-64-Z3N7-QNC6/322834930",
+   "http": "403",
+   "final_url": null,
+   "verdict": "keep",
+   "flags": [
+    "retail-size",
+    "http-403"
+   ],
+   "why": "Suitable for Central Florida. Homeowner container size; tree-service installs are 15/30/45/65 gal or B&B."
+  },
+  {
+   "bucket": "materials",
+   "category": "Palms",
+   "name": "Queen Palm \u2013 10 in pot (~3 gal equiv)",
+   "unit": "each",
+   "rateCents": 21814,
+   "source": "Home Depot (Apopka)",
+   "link": "https://www.homedepot.com/p/Wekiva-Foliage-Queen-Palm-Live-Plant-in-a-10-in-Growers-Pot-Syagrus-Romanzoffiana-Handsome-and-Sturdy-Evergreen-Palm-Tree-QueenPalm10x1/334118616",
+   "http": "403",
+   "final_url": null,
+   "verdict": "keep",
+   "flags": [
+    "retail-size",
+    "http-403"
+   ],
+   "why": "Common in Central Florida; IFAS notes heavy nutrient needs. Keep with a palm-fertilizer note. Homeowner container size; tree-service installs are 15/30/45/65 gal or B&B."
+  },
+  {
+   "bucket": "materials",
+   "category": "Palms",
+   "name": "Pygmy Date (Robellini) Palm \u2013 2 gal",
+   "unit": "each",
+   "rateCents": 4365,
+   "source": "Home Depot (Apopka)",
+   "link": "https://www.homedepot.com/p/national-PLANT-NETWORK-2-Gal-Robellini-Palm-Tree-HD7473/313960170",
+   "http": "403",
+   "final_url": null,
+   "verdict": "keep",
+   "flags": [
+    "retail-size",
+    "http-403"
+   ],
+   "why": "Suitable for Central Florida. Homeowner container size; tree-service installs are 15/30/45/65 gal or B&B."
+  },
+  {
+   "bucket": "materials",
+   "category": "Palms",
+   "name": "Pygmy Date (Robellini) Palm \u2013 25 gal",
+   "unit": "each",
+   "rateCents": 29900,
+   "source": "Home Depot (Apopka)",
+   "link": "https://www.homedepot.com/p/The-Plant-Stand-of-Arizona-25-Gal-Phoenix-Roebelenii-Pygmy-Date-Palm-Tree-Outdoor-Live-Plant-899497/315601880",
+   "http": "403",
+   "final_url": null,
+   "verdict": "keep",
+   "flags": [
+    "http-403"
+   ],
+   "why": "Suitable for Central Florida."
+  },
+  {
+   "bucket": "materials",
+   "category": "Palms",
+   "name": "Foxtail Palm \u2013 3 gal",
+   "unit": "each",
+   "rateCents": 19053,
+   "source": "Home Depot (Apopka)",
+   "link": "https://www.homedepot.com/p/Wekiva-Foliage-Foxtail-Palm-Live-Plant-in-a-3-gal-Growers-Pot-Wodyetia-Bifurcata-Rare-Ornamental-Palms-of-Florida-FoxPalm3gx1/334268424",
+   "http": "403",
+   "final_url": null,
+   "verdict": "caution",
+   "flags": [
+    "retail-size",
+    "http-403"
+   ],
+   "why": "Zone 10a+. Apopka is 9b; expect cold damage in hard freezes. Keep only with a frost note. Homeowner container size; tree-service installs are 15/30/45/65 gal or B&B."
+  },
+  {
+   "bucket": "materials",
+   "category": "Palms",
+   "name": "Sabal Minor (Dwarf Palmetto) \u2013 10 in pot",
+   "unit": "each",
+   "rateCents": 16349,
+   "source": "Home Depot (Apopka)",
+   "link": "https://www.homedepot.com/p/Wekiva-Foliage-Sabal-Minor-Dwarf-Blue-Stem-Palmetto-Palm-Live-Plant-in-a-10-in-Growers-Pot-Native-Ornamental-Palms-from-Florida-SabaMi10x1/334118720",
+   "http": "403",
+   "final_url": null,
+   "verdict": "keep",
+   "flags": [
+    "retail-size",
+    "http-403"
+   ],
+   "why": "Suitable for Central Florida. Homeowner container size; tree-service installs are 15/30/45/65 gal or B&B."
+  },
+  {
+   "bucket": "materials",
+   "category": "Palms",
+   "name": "Cabbage Tree Palm (Livistona australis) \u2013 3 gal",
+   "unit": "each",
+   "rateCents": 18079,
+   "source": "Home Depot (Apopka)",
+   "link": "https://www.homedepot.com/p/Wekiva-Foliage-Cabbage-Tree-Palm-Live-Plant-in-a-3-gal-Growers-Pot-Livistona-Australis-Rare-Ornamental-Palms-of-Florida-CabTree3gx1/334191626",
+   "http": "403",
+   "final_url": null,
+   "verdict": "keep",
+   "flags": [
+    "retail-size",
+    "http-403"
+   ],
+   "why": "Livistona australis is fine in 9b, but the common name collides with Sabal palmetto (the actual cabbage palm and state tree). Rename to 'Australian Cabbage Palm (Livistona australis)'. Homeowner container size; tree-service installs are 15/30/45/65 gal or B&B."
+  },
+  {
+   "bucket": "materials",
+   "category": "Palms",
+   "name": "Windmill Palm \u2013 3 gal",
+   "unit": "each",
+   "rateCents": 8998,
+   "source": "Home Depot (Apopka)",
+   "link": "https://www.homedepot.com/p/Brighter-Blooms-3-Gal-Windmill-Palm-Tree-in-Pot-PAL-WIN3/316112775",
+   "http": "403",
+   "final_url": null,
+   "verdict": "remove",
+   "flags": [
+    "retail-size",
+    "http-403"
+   ],
+   "why": "Cold-hardy palm that declines in Central Florida heat and humidity; IFAS recommends it for North Florida. Both rows. Homeowner container size; tree-service installs are 15/30/45/65 gal or B&B."
+  },
+  {
+   "bucket": "materials",
+   "category": "Palms",
+   "name": "Windmill Palm \u2013 14 in (boxed, ship-to-home)",
+   "unit": "each",
+   "rateCents": 12998,
+   "source": "Home Depot (Apopka)",
+   "link": "https://www.homedepot.com/p/14-Windmill-Palm-Tree-with-Beautiful-Green-Fronds-15530/315743286",
+   "http": "403",
+   "final_url": null,
+   "verdict": "remove",
+   "flags": [
+    "retail-size",
+    "http-403"
+   ],
+   "why": "Cold-hardy palm that declines in Central Florida heat and humidity; IFAS recommends it for North Florida. Both rows. Homeowner container size; tree-service installs are 15/30/45/65 gal or B&B."
+  },
+  {
+   "bucket": "materials",
+   "category": "Palms",
+   "name": "European Fan Palm \u2013 10 in pot",
+   "unit": "each",
+   "rateCents": 9272,
+   "source": "Home Depot (Apopka)",
+   "link": "https://www.homedepot.com/p/Wekiva-Foliage-European-Fan-Palm-Live-Plant-in-a-10-in-Growers-Pot-Chamaerops-Humilis-Rare-Palm-Trees-from-Florida-EupFan10x1/334192900",
+   "http": "403",
+   "final_url": null,
+   "verdict": "keep",
+   "flags": [
+    "retail-size",
+    "http-403"
+   ],
+   "why": "Suitable for Central Florida. Homeowner container size; tree-service installs are 15/30/45/65 gal or B&B."
+  },
+  {
+   "bucket": "materials",
+   "category": "Palms",
+   "name": "Bismarck Palm (Silver Bismarck) \u2013 5 gal",
+   "unit": "each",
+   "rateCents": 25155,
+   "source": "Home Depot (Apopka)",
+   "link": "https://www.homedepot.com/p/Wekiva-Foliage-Silver-Bismarck-Palm-Live-Plant-in-a-5-gal-Growers-Pot-Bismarckia-Nobilis-Rare-Ornamental-Palms-of-Florida-SilBis5gx1/334118672",
+   "http": "403",
+   "final_url": null,
+   "verdict": "keep",
+   "flags": [
+    "retail-size",
+    "http-403"
+   ],
+   "why": "Suitable for Central Florida. Homeowner container size; tree-service installs are 15/30/45/65 gal or B&B."
+  },
+  {
+   "bucket": "materials",
+   "category": "Palms",
+   "name": "Majesty Palm (outdoor/patio size) \u2013 10 in decor pot",
+   "unit": "each",
+   "rateCents": 4498,
+   "source": "Home Depot (Apopka)",
+   "link": "https://www.homedepot.com/p/Majesty-Palm-Live-Indoor-Outdoor-Plant-in-10-inch-Premium-Sustainable-Ecopots-Grey-Pot-with-Removeable-Drainage-Plug-MAJESTYP10GRAY/323302462",
+   "http": "403",
+   "final_url": null,
+   "verdict": "remove",
+   "flags": [
+    "retail-size",
+    "http-403"
+   ],
+   "why": "Sold as an indoor/patio decor-pot plant. Not a landscape install item. Homeowner container size; tree-service installs are 15/30/45/65 gal or B&B."
+  },
+  {
+   "bucket": "materials",
+   "category": "Trees",
+   "name": "Southern Magnolia (Teddy Bear) \u2013 7 gal",
+   "unit": "each",
+   "rateCents": 10135,
+   "source": "Home Depot (Apopka)",
+   "link": "https://www.homedepot.com/p/7-Gal-Teddy-Bear-Southern-Magnolia-Evergreen-Tree-MAGTED07G/329903656",
+   "http": "403",
+   "final_url": null,
+   "verdict": "keep",
+   "flags": [
+    "retail-size",
+    "http-403"
+   ],
+   "why": "Suitable for Central Florida. Homeowner container size; tree-service installs are 15/30/45/65 gal or B&B."
+  },
+  {
+   "bucket": "materials",
+   "category": "Trees",
+   "name": "Little Gem Magnolia \u2013 3 gal",
+   "unit": "each",
+   "rateCents": 5049,
+   "source": "Home Depot (Apopka)",
+   "link": "https://www.homedepot.com/p/3-Gal-Little-Gem-Southern-Magnolia-Tree-MAGLIT03G/313393694",
+   "http": "403",
+   "final_url": null,
+   "verdict": "keep",
+   "flags": [
+    "retail-size",
+    "http-403"
+   ],
+   "why": "Suitable for Central Florida. Homeowner container size; tree-service installs are 15/30/45/65 gal or B&B."
+  },
+  {
+   "bucket": "materials",
+   "category": "Trees",
+   "name": "Little Gem Magnolia \u2013 7 gal (5-6 ft)",
+   "unit": "each",
+   "rateCents": 19562,
+   "source": "Home Depot (Apopka)",
+   "link": "https://www.homedepot.com/p/Brighter-Blooms-7-Gal-5-ft-to-6-ft-Little-Gem-Magnolia-Flowering-Tree-MAG-LIT-56-7/317521847",
+   "http": "403",
+   "final_url": null,
+   "verdict": "keep",
+   "flags": [
+    "retail-size",
+    "http-403"
+   ],
+   "why": "Suitable for Central Florida. Homeowner container size; tree-service installs are 15/30/45/65 gal or B&B."
+  },
+  {
+   "bucket": "materials",
+   "category": "Trees",
+   "name": "Live Oak \u2013 1 gal",
+   "unit": "each",
+   "rateCents": 4498,
+   "source": "Home Depot (Apopka)",
+   "link": "https://www.homedepot.com/p/1-Gal-Live-Oak-Shade-Tree-OAKLIV01G/300109830",
+   "http": "403",
+   "final_url": null,
+   "verdict": "keep",
+   "flags": [
+    "retail-size",
+    "http-403"
+   ],
+   "why": "Suitable for Central Florida. Homeowner container size; tree-service installs are 15/30/45/65 gal or B&B."
+  },
+  {
+   "bucket": "materials",
+   "category": "Trees",
+   "name": "Live Oak \u2013 7 gal",
+   "unit": "each",
+   "rateCents": 9397,
+   "source": "Home Depot (Apopka)",
+   "link": "https://www.homedepot.com/p/7-Gal-Live-Oak-Shade-Tree-OAKLIV07G/330185532",
+   "http": "403",
+   "final_url": null,
+   "verdict": "keep",
+   "flags": [
+    "retail-size",
+    "http-403"
+   ],
+   "why": "Suitable for Central Florida. Homeowner container size; tree-service installs are 15/30/45/65 gal or B&B."
+  },
+  {
+   "bucket": "materials",
+   "category": "Trees",
+   "name": "Crape Myrtle (Tuscarora - dark pink) \u2013 3 gal",
+   "unit": "each",
+   "rateCents": 6546,
+   "source": "Home Depot (Apopka)",
+   "link": "https://www.homedepot.com/p/3-Gal-Tuscarora-Dark-Pink-Crape-Myrtle-Tree-CRMTUS03G/313615584",
+   "http": "403",
+   "final_url": null,
+   "verdict": "keep",
+   "flags": [
+    "retail-size",
+    "http-403"
+   ],
+   "why": "Suitable for Central Florida. Homeowner container size; tree-service installs are 15/30/45/65 gal or B&B."
+  },
+  {
+   "bucket": "materials",
+   "category": "Trees",
+   "name": "Crape Myrtle (Muskogee) \u2013 7 gal",
+   "unit": "each",
+   "rateCents": 9448,
+   "source": "Home Depot (Apopka)",
+   "link": "https://www.homedepot.com/b/Outdoors-Garden-Center-Outdoor-Plants-Trees/Crape-Myrtle/N-5yc1vZc8rqZ1z0x48a",
+   "http": "403",
+   "final_url": null,
+   "verdict": "keep",
+   "flags": [
+    "retail-size",
+    "non-vendor-source",
+    "http-403"
+   ],
+   "why": "Suitable for Central Florida. Homeowner container size; tree-service installs are 15/30/45/65 gal or B&B. Link is a price guide, article, or category page, not a product page. Price cannot be re-verified from it."
+  },
+  {
+   "bucket": "materials",
+   "category": "Trees",
+   "name": "Red Maple \u2013 5 gal",
+   "unit": "each",
+   "rateCents": 6998,
+   "source": "Home Depot (Apopka)",
+   "link": "https://www.homedepot.com/p/Red-Maple-Shade-Tree-MAPRED05G/315948272",
+   "http": "403",
+   "final_url": null,
+   "verdict": "keep",
+   "flags": [
+    "retail-size",
+    "http-403"
+   ],
+   "why": "Native; specify a Florida seed source or 'Florida Flame' so northern stock is not installed. Homeowner container size; tree-service installs are 15/30/45/65 gal or B&B."
+  },
+  {
+   "bucket": "materials",
+   "category": "Trees",
+   "name": "Bald Cypress \u2013 5 gal",
+   "unit": "each",
+   "rateCents": 4770,
+   "source": "Home Depot (Apopka)",
+   "link": "https://www.homedepot.com/p/Bald-Cypress-Shade-Tree-CYPBAL05G/315948264",
+   "http": "403",
+   "final_url": null,
+   "verdict": "keep",
+   "flags": [
+    "retail-size",
+    "http-403"
+   ],
+   "why": "Suitable for Central Florida. Homeowner container size; tree-service installs are 15/30/45/65 gal or B&B."
+  },
+  {
+   "bucket": "materials",
+   "category": "Trees",
+   "name": "Drake Elm \u2013 5 gal",
+   "unit": "each",
+   "rateCents": 7394,
+   "source": "Home Depot (Apopka)",
+   "link": "https://www.homedepot.com/p/5-Gal-Drake-Elm-Deciduous-Shade-Tree-ELMDRA05G/326575374",
+   "http": "403",
+   "final_url": null,
+   "verdict": "keep",
+   "flags": [
+    "retail-size",
+    "http-403"
+   ],
+   "why": "Suitable for Central Florida. Homeowner container size; tree-service installs are 15/30/45/65 gal or B&B."
+  },
+  {
+   "bucket": "materials",
+   "category": "Trees",
+   "name": "Drake Elm \u2013 7 gal",
+   "unit": "each",
+   "rateCents": 9598,
+   "source": "Home Depot (Apopka)",
+   "link": "https://www.homedepot.com/p/7-Gal-Drake-Elm-Shade-Tree-ELMDRA07G/330185521",
+   "http": "403",
+   "final_url": null,
+   "verdict": "keep",
+   "flags": [
+    "retail-size",
+    "http-403"
+   ],
+   "why": "Suitable for Central Florida. Homeowner container size; tree-service installs are 15/30/45/65 gal or B&B."
+  },
+  {
+   "bucket": "materials",
+   "category": "Trees",
+   "name": "Ligustrum (tree form / standard) \u2013 2.5 gal",
+   "unit": "each",
+   "rateCents": 3698,
+   "source": "Home Depot (Apopka)",
+   "link": "https://www.homedepot.com/p/Vigoro-2-5-Gal-Recurve-Ligustrum-Evergreen-Privet-Shrub-Dark-Green-Foliage-11375/330639233",
+   "http": "403",
+   "final_url": null,
+   "verdict": "review",
+   "flags": [
+    "retail-size",
+    "http-403"
+   ],
+   "why": "Same as above; the listed product is a privet shrub, not a standard-form tree. Homeowner container size; tree-service installs are 15/30/45/65 gal or B&B."
+  },
+  {
+   "bucket": "materials",
+   "category": "Trees",
+   "name": "Ligustrum (Wax Leaf Japanese Privet) \u2013 3 gal",
+   "unit": "each",
+   "rateCents": 3635,
+   "source": "Home Depot (Apopka)",
+   "link": "https://www.homedepot.com/p/Perfect-Plants-3-Gal-Wax-Ligustrum-Shrub-with-Wax-Leaf-Japanese-Privet-2-Pack-THD00053/312499589",
+   "http": "403",
+   "final_url": null,
+   "verdict": "review",
+   "flags": [
+    "retail-size",
+    "http-403"
+   ],
+   "why": "Hedge shrub, not a tree-service planting. Ligustrum spp. carry IFAS Assessment cautions and two relatives are FISC Category I. Verify species before keeping. Homeowner container size; tree-service installs are 15/30/45/65 gal or B&B."
+  },
+  {
+   "bucket": "materials",
+   "category": "Trees",
+   "name": "Loquat (Bronze Loquat) \u2013 6 in pot (starter)",
+   "unit": "each",
+   "rateCents": 7070,
+   "source": "Home Depot (Apopka)",
+   "link": "https://www.homedepot.com/p/Bronze-Loquat-Live-6-Inch-Plant-Eriobotrya-Japonica-Edible-Fruit-Bearing-Patio-Tree-BronLo6x1/333991813",
+   "http": "403",
+   "final_url": null,
+   "verdict": "review",
+   "flags": [
+    "retail-size",
+    "http-403"
+   ],
+   "why": "Suitable species, but a 6-inch starter pot is not an installable size. Homeowner container size; tree-service installs are 15/30/45/65 gal or B&B."
+  },
+  {
+   "bucket": "materials",
+   "category": "Trees",
+   "name": "Tabebuia (Pink Trumpet Tree) \u2013 3 gal",
+   "unit": "each",
+   "rateCents": 20437,
+   "source": "Home Depot (Apopka)",
+   "link": "https://www.homedepot.com/p/Wekiva-Foliage-Pink-Tabebuia-Trumpet-Tree-Live-Plant-in-a-3-Gallon-Pot-Tabebuia-Heterophylla-Beautiful-Flowering-Tree-PinkTab3gx1/333992742",
+   "http": "403",
+   "final_url": null,
+   "verdict": "caution",
+   "flags": [
+    "retail-size",
+    "http-403"
+   ],
+   "why": "Zone 10 flowering tree; cold-tender in Apopka. Keep only with a frost note. Both rows. Homeowner container size; tree-service installs are 15/30/45/65 gal or B&B."
+  },
+  {
+   "bucket": "materials",
+   "category": "Trees",
+   "name": "Tabebuia (Yellow Trumpet Tree) \u2013 3 gal",
+   "unit": "each",
+   "rateCents": 19651,
+   "source": "Home Depot (Apopka)",
+   "link": "https://www.homedepot.com/p/Wekiva-Foliage-Yellow-Tabebuia-Trumpet-Tree-Live-Plant-in-a-3-Gallon-Pot-Handroanthus-Chrysanthus-Beautiful-Flowering-Tree-YellTabTr3gx1/333992708",
+   "http": "403",
+   "final_url": null,
+   "verdict": "caution",
+   "flags": [
+    "retail-size",
+    "http-403"
+   ],
+   "why": "Zone 10 flowering tree; cold-tender in Apopka. Keep only with a frost note. Both rows. Homeowner container size; tree-service installs are 15/30/45/65 gal or B&B."
+  },
+  {
+   "bucket": "materials",
+   "category": "Trees",
+   "name": "Bottlebrush (Red Flowering) \u2013 1 gal",
+   "unit": "each",
+   "rateCents": 3846,
+   "source": "Home Depot (Apopka)",
+   "link": "https://www.homedepot.com/p/1-Gal-Red-Flowering-Bottlebrush-Tree-BOTRED01G/329903650",
+   "http": "403",
+   "final_url": null,
+   "verdict": "keep",
+   "flags": [
+    "retail-size",
+    "http-403"
+   ],
+   "why": "Suitable for Central Florida. Homeowner container size; tree-service installs are 15/30/45/65 gal or B&B."
+  },
+  {
+   "bucket": "materials",
+   "category": "Trees",
+   "name": "River Birch (multi-trunk) \u2013 1 gal",
+   "unit": "each",
+   "rateCents": 4498,
+   "source": "Home Depot (Apopka)",
+   "link": "https://www.homedepot.com/p/1-Gal-River-Birch-Multi-Trunk-Shade-Tree-BIRDUR01G/313020338",
+   "http": "403",
+   "final_url": null,
+   "verdict": "review",
+   "flags": [
+    "retail-size",
+    "http-403"
+   ],
+   "why": "Marginal in 9b: IFAS lists it for zones 8-9a; heat-stressed and short-lived in Central Florida. All three rows. Homeowner container size; tree-service installs are 15/30/45/65 gal or B&B."
+  },
+  {
+   "bucket": "materials",
+   "category": "Trees",
+   "name": "River Birch \u2013 2.5 gal",
+   "unit": "each",
+   "rateCents": 3876,
+   "source": "Home Depot (Apopka)",
+   "link": "https://www.homedepot.com/p/FLOWERWOOD-2-5-Gal-River-Birch-Deciduous-Tree-04503FL/318306295",
+   "http": "403",
+   "final_url": null,
+   "verdict": "review",
+   "flags": [
+    "retail-size",
+    "http-403"
+   ],
+   "why": "Marginal in 9b: IFAS lists it for zones 8-9a; heat-stressed and short-lived in Central Florida. All three rows. Homeowner container size; tree-service installs are 15/30/45/65 gal or B&B."
+  },
+  {
+   "bucket": "materials",
+   "category": "Trees",
+   "name": "River Birch (multi-stem) \u2013 5 gal",
+   "unit": "each",
+   "rateCents": 8299,
+   "source": "Home Depot (Apopka)",
+   "link": "https://www.homedepot.com/p/5-Gal-River-Birch-Shade-Tree-Multi-Stem-BIRDHT05G/313396790",
+   "http": "403",
+   "final_url": null,
+   "verdict": "review",
+   "flags": [
+    "retail-size",
+    "http-403"
+   ],
+   "why": "Marginal in 9b: IFAS lists it for zones 8-9a; heat-stressed and short-lived in Central Florida. All three rows. Homeowner container size; tree-service installs are 15/30/45/65 gal or B&B."
+  },
+  {
+   "bucket": "materials",
+   "category": "Trees",
+   "name": "Eagleston Holly \u2013 7 gal",
+   "unit": "each",
+   "rateCents": 8462,
+   "source": "Home Depot (Apopka)",
+   "link": "https://www.homedepot.com/p/7-Gal-Eagleston-Holly-Evergreen-Tree-HOLEAG07G/329903643",
+   "http": "403",
+   "final_url": null,
+   "verdict": "keep",
+   "flags": [
+    "retail-size",
+    "http-403"
+   ],
+   "why": "Suitable for Central Florida. Homeowner container size; tree-service installs are 15/30/45/65 gal or B&B."
+  },
+  {
+   "bucket": "materials",
+   "category": "Trees",
+   "name": "Dahoon Holly \u2013 1 gal",
+   "unit": "each",
+   "rateCents": 4498,
+   "source": "Home Depot (Apopka)",
+   "link": "https://www.homedepot.com/p/1-Gal-Dahoon-Holly-Evergreen-Tree-HOLDAH01G/315948341",
+   "http": "403",
+   "final_url": null,
+   "verdict": "keep",
+   "flags": [
+    "retail-size",
+    "http-403"
+   ],
+   "why": "Suitable for Central Florida. Homeowner container size; tree-service installs are 15/30/45/65 gal or B&B."
+  },
+  {
+   "bucket": "materials",
+   "category": "Trees",
+   "name": "Weeping Willow \u2013 5 gal",
+   "unit": "each",
+   "rateCents": 8729,
+   "source": "Home Depot (Apopka)",
+   "link": "https://www.homedepot.com/p/5-Gal-Weeping-Willow-Shade-Tree-WILWEE05G/313397447",
+   "http": "403",
+   "final_url": null,
+   "verdict": "remove",
+   "flags": [
+    "retail-size",
+    "http-403"
+   ],
+   "why": "Not a Central Florida landscape tree: short-lived in 9b heat/humidity, aggressive water-seeking roots, IFAS treats it as a North Florida species at best. Homeowner container size; tree-service installs are 15/30/45/65 gal or B&B."
+  },
+  {
+   "bucket": "materials",
+   "category": "Trees",
+   "name": "Lemon Tree (Improved Meyer) \u2013 1 gal",
+   "unit": "each",
+   "rateCents": 3297,
+   "source": "Home Depot (Apopka)",
+   "link": "https://www.homedepot.com/p/BELL-NURSERY-1-Gal-Improved-Meyer-Lemon-Tree-Live-Tropical-Tree-with-White-Flower-to-Yellow-Fruit-1-Pack-LEMON1MEY1PK/317131070",
+   "http": "403",
+   "final_url": null,
+   "verdict": "review",
+   "flags": [
+    "retail-size",
+    "http-403"
+   ],
+   "why": "Citrus: HLB/greening pressure and FDACS nursery-stock rules. A 1-gal citrus is not a tree-service install item. Homeowner container size; tree-service installs are 15/30/45/65 gal or B&B."
+  },
+  {
+   "bucket": "materials",
+   "category": "Trees",
+   "name": "Orange Tree (Calamondin) \u2013 1 gal (3-plant bundle)",
+   "unit": "each",
+   "rateCents": 22006,
+   "source": "Home Depot (Apopka)",
+   "link": "https://www.homedepot.com/p/Wekiva-Foliage-Calamondin-Orange-Tree-Calamansi-3-Live-Plants-in-1-Gallon-Pots-Cannot-Ship-Out-of-Florida-Fruit-Tree-CalaOra3x1g/334095932",
+   "http": "403",
+   "final_url": null,
+   "verdict": "review",
+   "flags": [
+    "retail-size",
+    "http-403"
+   ],
+   "why": "Citrus, see above. Also a 3-plant bundle price, not a per-tree price. Homeowner container size; tree-service installs are 15/30/45/65 gal or B&B."
+  },
+  {
+   "bucket": "materials",
+   "category": "Mulch & pine straw",
+   "name": "Vigoro Premium Mulch \u2013 2 cu ft",
+   "unit": "bag",
+   "rateCents": 333,
+   "source": "Home Depot (Apopka)",
+   "link": "https://www.homedepot.com/p/Vigoro-Vigoro-2-cu-ft-Premium-Brown-Wood-Shredded-Bagged-Mulch-52050196/205606287",
+   "http": "403",
+   "final_url": null,
+   "verdict": "keep",
+   "flags": [
+    "http-403"
+   ],
+   "why": ""
+  },
+  {
+   "bucket": "materials",
+   "category": "Mulch & pine straw",
+   "name": "Pine Straw Bale (Long Leaf) \u2013 bale",
+   "unit": "bale",
+   "rateCents": 3999,
+   "source": "Home Depot (Apopka)",
+   "link": "https://www.homedepot.com/p/FLOWERWOOD-Long-Leaf-Pine-Straw-Bale-Fert-008/335540649",
+   "http": "403",
+   "final_url": null,
+   "verdict": "keep",
+   "flags": [
+    "http-403"
+   ],
+   "why": ""
+  },
+  {
+   "bucket": "materials",
+   "category": "Mulch & pine straw",
+   "name": "Pine Straw Bale (Long Leaf) \u2013 bale (national PLANT NETWORK)",
+   "unit": "bale",
+   "rateCents": 4416,
+   "source": "Home Depot (Apopka)",
+   "link": "https://www.homedepot.com/p/national-PLANT-NETWORK-Long-Leaf-Pine-Straw-Bale-HD1379/320898206",
+   "http": "403",
+   "final_url": null,
+   "verdict": "keep",
+   "flags": [
+    "http-403"
+   ],
+   "why": ""
+  },
+  {
+   "bucket": "materials",
+   "category": "Soil & amendments",
+   "name": "Organic Garden Soil \u2013 1.5 cu ft",
+   "unit": "bag",
+   "rateCents": 3148,
+   "source": "Home Depot (Apopka)",
+   "link": "https://www.homedepot.com/p/Head-River-Organics-1-5-cu-ft-38-5-Qts-Organic-Garden-Soil-HRGS-1-5/313327391",
+   "http": "403",
+   "final_url": null,
+   "verdict": "keep",
+   "flags": [
+    "http-403"
+   ],
+   "why": ""
+  },
+  {
+   "bucket": "materials",
+   "category": "Soil & amendments",
+   "name": "Potting Soil Mix \u2013 32 qt (0.85 cu ft)",
+   "unit": "bag",
+   "rateCents": 797,
+   "source": "Home Depot (Apopka)",
+   "link": "https://www.homedepot.com/p/Vigoro-32-qt-Potting-Soil-Mix-74177925/305731376",
+   "http": "403",
+   "final_url": null,
+   "verdict": "keep",
+   "flags": [
+    "http-403"
+   ],
+   "why": ""
+  },
+  {
+   "bucket": "materials",
+   "category": "Sod",
+   "name": "St. Augustine Sod \u2013 400 sq ft",
+   "unit": "pallet",
+   "rateCents": 51999,
+   "source": "Home Depot (Apopka)",
+   "link": "https://www.homedepot.com/p/Harmony-400-sq-ft-St-Augustine-Sod-1-Pallet-HH400SA1/331567534",
+   "http": "403",
+   "final_url": null,
+   "verdict": "keep",
+   "flags": [
+    "http-403"
+   ],
+   "why": ""
+  },
+  {
+   "bucket": "materials",
+   "category": "Fertilizer",
+   "name": "Milorganite Slow-Release Fertilizer \u2013 32 lb",
+   "unit": "bag",
+   "rateCents": 2457,
+   "source": "Home Depot (Apopka)",
+   "link": "https://www.homedepot.com/p/Milorganite-32-lbs-Slow-Release-Nitrogen-Fertilizer-100539618/308888983",
+   "http": "403",
+   "final_url": null,
+   "verdict": "keep",
+   "flags": [
+    "http-403"
+   ],
+   "why": ""
+  },
+  {
+   "bucket": "materials",
+   "category": "Fertilizer",
+   "name": "Palm, Ixora and Ornamental Plant Food (8-4-8) \u2013 3.5 lb",
+   "unit": "bag",
+   "rateCents": 1097,
+   "source": "Home Depot (Apopka)",
+   "link": "https://www.homedepot.com/p/Vigoro-3-5-lb-All-Season-Palm-Ixora-and-Ornamental-Plant-Food-8-4-8-134242/203106249",
+   "http": "403",
+   "final_url": null,
+   "verdict": "keep",
+   "flags": [
+    "http-403"
+   ],
+   "why": ""
+  },
+  {
+   "bucket": "materials",
+   "category": "Tree care supplies",
+   "name": "Tree Watering Bag \u2013 15 gal",
+   "unit": "each",
+   "rateCents": 2769,
+   "source": "Home Depot (Apopka)",
+   "link": "https://www.homedepot.com/p/King-Innovation-15-Gal-Tree-Irrigation-Watering-Bag-1-Pack-44020E/312196744",
+   "http": "403",
+   "final_url": null,
+   "verdict": "keep",
+   "flags": [
+    "http-403"
+   ],
+   "why": ""
+  },
+  {
+   "bucket": "materials",
+   "category": "Tree care supplies",
+   "name": "Landscape Fabric (Weed Barrier) \u2013 3 ft x 100 ft",
+   "unit": "roll",
+   "rateCents": 5528,
+   "source": "Home Depot (Apopka)",
+   "link": "https://www.homedepot.com/p/3-ft-x-100-ft-Heavy-Duty-Weed-Barrier-Landscape-Fabric-for-Outdoor-Garden-Weed-Control-Fabric-in-Rolls-AG-03100H50/318324063",
+   "http": "403",
+   "final_url": null,
+   "verdict": "keep",
+   "flags": [
+    "http-403"
+   ],
+   "why": ""
+  },
+  {
+   "bucket": "materials",
+   "category": "Tree care supplies",
+   "name": "Root Barrier (Root Shield Water Barrier) \u2013 2 ft x 25 ft (60 mil)",
+   "unit": "roll",
+   "rateCents": 7599,
+   "source": "Home Depot (Apopka)",
+   "link": "https://www.homedepot.com/p/Century-Products-2-ft-x-25-ft-Root-Shield-Water-Barrier-60-mil-RS24-25/306900401",
+   "http": "403",
+   "final_url": null,
+   "verdict": "keep",
+   "flags": [
+    "http-403"
+   ],
+   "why": ""
+  },
+  {
+   "bucket": "materials",
+   "category": "Hardscape",
+   "name": "River Rock / Pea Gravel \u2013 0.5 cu ft",
+   "unit": "bag",
+   "rateCents": 597,
+   "source": "Home Depot (Apopka)",
+   "link": "https://www.homedepot.com/p/314096667",
+   "http": "403",
+   "final_url": null,
+   "verdict": "keep",
+   "flags": [
+    "http-403"
+   ],
+   "why": ""
+  },
+  {
+   "bucket": "materials",
+   "category": "Hardscape",
+   "name": "Paver Base \u2013 0.5 cu ft (52.86 lb)",
+   "unit": "bag",
+   "rateCents": 597,
+   "source": "Home Depot (Apopka)",
+   "link": "https://www.homedepot.com/p/Pavestone-52-86-lb-0-5-cu-ft-Paver-Base-98001/100580973",
+   "http": "403",
+   "final_url": null,
+   "verdict": "keep",
+   "flags": [
+    "http-403"
+   ],
+   "why": ""
+  },
+  {
+   "bucket": "materials",
+   "category": "Hardscape",
+   "name": "Concrete Mix \u2013 80 lb",
+   "unit": "bag",
+   "rateCents": 647,
+   "source": "Home Depot (Apopka)",
+   "link": "https://www.homedepot.com/p/Quikrete-80-lb-Concrete-Mix-110180/100318511",
+   "http": "403",
+   "final_url": null,
+   "verdict": "keep",
+   "flags": [
+    "http-403"
+   ],
+   "why": ""
+  },
+  {
+   "bucket": "materials",
+   "category": "Hardscape",
+   "name": "Landscape Timber (Recycled Plastic, Brown) \u2013 4 in x 4 in x 8 ft (sold 2-pack)",
+   "unit": "each",
+   "rateCents": 6800,
+   "source": "Home Depot (Apopka)",
+   "link": "https://www.homedepot.com/p/BestPLUS-4-in-x-4-in-x-8-ft-Brown-Recycled-Plastic-Lumber-Landscape-Timber-Edging-G-Grade-2-Per-Box-040408BN/333651645",
+   "http": "403",
+   "final_url": null,
+   "verdict": "keep",
+   "flags": [
+    "http-403"
+   ],
+   "why": ""
+  },
+  {
+   "bucket": "materials",
+   "category": "Hardscape",
+   "name": "Crushed Limestone / Lime Rock (bagged) \u2013 bag (size unconfirmed, likely ~0.5 cu ft)",
+   "unit": "bag",
+   "rateCents": 237,
+   "source": "Home Depot (Apopka)",
+   "link": "https://www.homedepot.com/b/Outdoors-Garden-Center-Landscaping-Supplies/Limestone/N-5yc1vZbx51Z1z13gsz",
+   "http": "403",
+   "final_url": null,
+   "verdict": "keep",
+   "flags": [
+    "non-vendor-source",
+    "http-403"
+   ],
+   "why": "Link is a price guide, article, or category page, not a product page. Price cannot be re-verified from it."
+  },
+  {
+   "bucket": "materials",
+   "category": "Irrigation",
+   "name": "Rain Bird 1804 4-in Pop-Up Spray Head \u2013 4 in pop-up",
+   "unit": "each",
+   "rateCents": 547,
+   "source": "Home Depot (Apopka)",
+   "link": "https://www.homedepot.com/p/Rain-Bird-Adjustable-Pattern-4-in-Pop-Up-Spray-Head-1804AP-25/100167622",
+   "http": "403",
+   "final_url": null,
+   "verdict": "keep",
+   "flags": [
+    "http-403"
+   ],
+   "why": ""
+  },
+  {
+   "bucket": "materials",
+   "category": "Irrigation",
+   "name": "Rain Bird 5000 Series 4-in Pop-Up Gear-Drive Rotor (5004) \u2013 4 in pop-up rotor",
+   "unit": "each",
+   "rateCents": 1647,
+   "source": "Home Depot (Apopka)",
+   "link": "https://www.homedepot.com/p/Rain-Bird-5000-Series-4-in-Pop-Up-Gear-Drive-Rotor-Non-potable-Sprinkler-with-Purple-Cap-40-360-Degree-Pattern-Adj-26-38-ft-CP-5000-NP/311571006",
+   "http": "403",
+   "final_url": null,
+   "verdict": "keep",
+   "flags": [
+    "http-403"
+   ],
+   "why": ""
+  },
+  {
+   "bucket": "materials",
+   "category": "Irrigation",
+   "name": "Orbit Professional Pop-Up Spray Head \u2013 4 in pop-up",
+   "unit": "each",
+   "rateCents": 358,
+   "source": "Home Depot (Apopka)",
+   "link": "https://www.homedepot.com/p/Orbit-4-in-Professional-Pop-Up-Spray-Head-Sprinkler-with-Brass-Half-Pattern-Twin-Spray-Nozzle-54520/311928609",
+   "http": "403",
+   "final_url": null,
+   "verdict": "keep",
+   "flags": [
+    "http-403"
+   ],
+   "why": ""
+  },
+  {
+   "bucket": "materials",
+   "category": "Irrigation",
+   "name": "Hunter PGP-ADJ Gear-Drive Rotor \u2013 4 in pop-up rotor",
+   "unit": "each",
+   "rateCents": 1347,
+   "source": "Home Depot (Apopka)",
+   "link": "https://www.homedepot.com/p/Hunter-Industries-Pop-Up-Rotary-PGP-Gear-Drive-Rotor-Sprinkler-with-3-Gallon-Per-Minute-Nozzle-PGP-ADJ/202067943",
+   "http": "403",
+   "final_url": null,
+   "verdict": "keep",
+   "flags": [
+    "http-403"
+   ],
+   "why": ""
+  },
+  {
+   "bucket": "materials",
+   "category": "Irrigation",
+   "name": "Rain Bird Adjustable Spray Nozzle \u2013 12-15 ft radius",
+   "unit": "each",
+   "rateCents": 298,
+   "source": "Home Depot (Apopka)",
+   "link": "https://www.homedepot.com/p/Rain-Bird-12-ft-to-15-ft-Adjustable-Spray-Pattern-Nozzle-15AP/100185989",
+   "http": "403",
+   "final_url": null,
+   "verdict": "keep",
+   "flags": [
+    "http-403"
+   ],
+   "why": ""
+  },
+  {
+   "bucket": "materials",
+   "category": "Irrigation",
+   "name": "PVC Schedule 40 Pipe \u2013 1 in x 10 ft",
+   "unit": "each",
+   "rateCents": 982,
+   "source": "Home Depot (Apopka)",
+   "link": "https://www.homedepot.com/b/Plumbing-Pipe-Fittings-Pipe-PVC-Pipe-PVC-Schedule-40-Pipe/10-ft/N-5yc1vZbueoZ1z116t7",
+   "http": "403",
+   "final_url": null,
+   "verdict": "keep",
+   "flags": [
+    "non-vendor-source",
+    "http-403"
+   ],
+   "why": "Link is a price guide, article, or category page, not a product page. Price cannot be re-verified from it."
+  },
+  {
+   "bucket": "materials",
+   "category": "Irrigation",
+   "name": "PVC Schedule 40 Pipe \u2013 3/4 in x 10 ft",
+   "unit": "each",
+   "rateCents": 654,
+   "source": "Home Depot (Apopka)",
+   "link": "https://www.homedepot.com/p/Charlotte-Pipe-3-4-in-x-10-ft-PVC-Schedule-40-Pressure-Plain-End-Pipe-PVC-04007-0600/100348472",
+   "http": "403",
+   "final_url": null,
+   "verdict": "keep",
+   "flags": [
+    "http-403"
+   ],
+   "why": ""
+  },
+  {
+   "bucket": "materials",
+   "category": "Irrigation",
+   "name": "PVC Schedule 40 Elbow (90-degree, slip x slip) \u2013 1 in",
+   "unit": "each",
+   "rateCents": 83,
+   "source": "Home Depot (Apopka)",
+   "link": "https://www.homedepot.com/p/1-in-Schedule-40-PVC-Pipe-90-Degree-Slip-x-Slip-Elbow-Fitting-50-Pack-406-010-50-P/323907760",
+   "http": "403",
+   "final_url": null,
+   "verdict": "keep",
+   "flags": [
+    "http-403"
+   ],
+   "why": ""
+  },
+  {
+   "bucket": "materials",
+   "category": "Irrigation",
+   "name": "PVC Cement and Primer Combo Pack \u2013 8 oz each",
+   "unit": "each",
+   "rateCents": 1455,
+   "source": "Home Depot (Apopka)",
+   "link": "https://www.homedepot.com/p/Oatey-8-oz-Purple-Primer-and-Rain-R-Shine-Medium-Blue-PVC-Cement-Combo-Pack-302312/311021162",
+   "http": "403",
+   "final_url": null,
+   "verdict": "keep",
+   "flags": [
+    "http-403"
+   ],
+   "why": ""
+  },
+  {
+   "bucket": "materials",
+   "category": "Irrigation",
+   "name": "Rain Bird Anti-Siphon Irrigation Valve \u2013 1 in FPT",
+   "unit": "each",
+   "rateCents": 3172,
+   "source": "Home Depot (Apopka)",
+   "link": "https://www.homedepot.com/p/Rain-Bird-1-in-Anti-Siphon-Irrigation-Valve-With-Flow-Control-DASASVF100/100034016",
+   "http": "403",
+   "final_url": null,
+   "verdict": "keep",
+   "flags": [
+    "http-403"
+   ],
+   "why": ""
+  },
+  {
+   "bucket": "materials",
+   "category": "Irrigation",
+   "name": "Backflow Preventer (Pressure Vacuum Breaker) \u2013 1 in",
+   "unit": "each",
+   "rateCents": 16195,
+   "source": "Home Depot (Apopka)",
+   "link": "https://www.homedepot.com/p/Febco-1-in-Bronze-Pressure-Vacuum-Breaker-Backflow-Preventer-with-Quarter-Turn-Shutoff-and-Tee-Handles-Freeze-Sensor-765EBV-FZ-1-R/327914210",
+   "http": "403",
+   "final_url": null,
+   "verdict": "keep",
+   "flags": [
+    "http-403"
+   ],
+   "why": ""
+  },
+  {
+   "bucket": "materials",
+   "category": "Irrigation",
+   "name": "Distribution/Drip Tubing \u2013 1/2 in x 100 ft",
+   "unit": "roll",
+   "rateCents": 1462,
+   "source": "Home Depot (Apopka)",
+   "link": "https://www.homedepot.com/p/Rain-Bird-1-2-in-x-100-ft-Distribution-Tubing-for-Drip-Irrigation-T63-100S/202078376",
+   "http": "403",
+   "final_url": null,
+   "verdict": "keep",
+   "flags": [
+    "http-403"
+   ],
+   "why": ""
+  }
+ ]
+}
