@@ -21,6 +21,8 @@ Before doing anything else:
 4. Confirm the repository is clean, record the current commit, and run the existing relevant test suite before changing code.
 5. Report the baseline, the branch name, the test result, and any missing local tools before implementation.
 
+The public repository history was cleaned after the initial setup to remove customer backup files. If this Mac already has an older local checkout or a local `claude/sacred-tree-initialization` branch, preserve any valuable local commits or diffs as a patch or bundle first, then make a fresh checkout from the current `origin/main`. Do not force-push the old history.
+
 Before implementation, pull the latest `main`. The repository is the collaboration channel: push your focused branch and report the branch and commit so the management side can review and merge it. Do not assume a branch is shared until the push succeeds.
 
 The first objective is to make this a reusable multi-company product while configuring Sacred Tree as the first company. Do not build a separate Sacred Tree fork. Design the company boundary so Company 2 can use the same product and codebase with its own catalog, Jobber account, documents, settings, and local data.
