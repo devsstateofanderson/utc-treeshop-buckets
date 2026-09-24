@@ -1,0 +1,51 @@
+{
+  "formatVersion": 2,
+  "exportedAt": "2026-09-24T00:00:00Z",
+  "projects": [],
+  "items": [
+    {
+      "bucket": "materials",
+      "name": "Weeping Willow \u2013 5 gal",
+      "rateCents": 8729,
+      "unit": "each",
+      "isActive": false,
+      "source": null,
+      "notes": null,
+      "calcInputs": null,
+      "sortOrder": 0
+    },
+    {
+      "bucket": "materials",
+      "name": "Majesty Palm (outdoor/patio size) \u2013 10 in decor pot",
+      "rateCents": 4498,
+      "unit": "each",
+      "isActive": false,
+      "source": null,
+      "notes": null,
+      "calcInputs": null,
+      "sortOrder": 0
+    },
+    {
+      "bucket": "materials",
+      "name": "Windmill Palm \u2013 3 gal",
+      "rateCents": 8998,
+      "unit": "each",
+      "isActive": false,
+      "source": null,
+      "notes": null,
+      "calcInputs": null,
+      "sortOrder": 0
+    },
+    {
+      "bucket": "materials",
+      "name": "Windmill Palm \u2013 14 in (boxed, ship-to-home)",
+      "rateCents": 12998,
+      "unit": "each",
+      "isActive": false,
+      "source": null,
+      "notes": null,
+      "calcInputs": null,
+      "sortOrder": 0
+    }
+  ]
+}

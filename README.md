@@ -28,10 +28,10 @@ DerivedData lives in `~/Library/Developer/Xcode/DerivedData/Buckets-cli` (overri
 
 ## What is in it (v0.2.0)
 
-- **Company**: **Setup & readiness** first — the required setup inputs, catalog completion per bucket, and the unresolved rows grouped by reason with a jump to each (DECISIONS 73); then the profile (name, service area, address, licenses, three insurance policies with expirations), the pricing defaults (target margin, minimum job) and a documents shelf for COIs, policies and certifications with expiry warnings.
+- **Company**: **Setup & readiness** first — the required setup inputs, catalog completion per bucket, and the unresolved rows grouped by reason with a jump to each (DECISIONS 73); then the profile (name, service area with its mileage radius and growing zone, address, licenses, three insurance policies with expirations), the pricing defaults (target margin, minimum job) and a documents shelf for COIs, policies and certifications with expiry warnings.
 - **Buckets**: Labor, Equipment (with unit codes, make, model, year, serial), Materials, Consumables, Subcontractors (each sub with its own priced services), Overhead. Every row has a category, a product link, and a **Review** section — evidence, checked and review-due dates, confidence (missing · estimated · owner confirmed · verified), who approved it, an owner-confirmation flag and an assumption note (DECISIONS 72). Verified needs evidence and a checked date. Tables are searchable, sortable, and filter to the unresolved rows.
 - **Projects**: the pricing screen. An enabled line whose row is unresolved carries a small warning and the header counts them; the price never changes because of it. **Packages** are saved projects to start jobs from; **Loadouts** are crew formations applied from the project's Crew menu.
-- **Settings**: billable hours, labor burden and cost of money, plus Export JSON, Import JSON (replace) and Add or Update Rows (merge). Files are format 2; format-1 files from v1.x still read (DECISIONS 74). The target margin (default 50%) and the minimum job (default $750) are company defaults, set under Company → Pricing defaults; every new project and every Re-price copies them (DECISIONS 70).
+- **Settings**: billable hours, labor burden and cost of money, plus Export JSON, Import JSON (replace) and Add or Update Rows (merge; a file may also carry the company profile, DECISIONS 78). Files are format 2; format-1 files from v1.x still read (DECISIONS 74). The target margin (default 50%) and the minimum job (default $750) are company defaults, set under Company → Pricing defaults; every new project and every Re-price copies them (DECISIONS 70).
 
 Version numbering restarted at 0.2.0 with the first Buckets Pro release, after v1.1 (DECISIONS 75).
 
@@ -54,6 +54,17 @@ xattr -cr /Applications/Buckets.app
 ```
 
 Data lives outside the app, in `~/Library/Application Support/Buckets/` (the store and the Documents folder). To carry the company's data over, copy that folder, or Export JSON here and Import JSON there (documents must be copied alongside; see DECISIONS 65).
+
+## Onboarding a company
+
+One pass, no typing into the app (DECISIONS 79):
+
+```bash
+cp Scripts/catalog/data/company-profile-template.json ~/Desktop/acme-profile.json   # fill it in
+Scripts/onboard.sh ~/Desktop/acme-profile.json Scripts/catalog/data/Buckets-default-catalog.json
+```
+
+The script quits Buckets, backs up the live store to the local vault, applies the profile and each catalog through the app's own merge hook, writes an export, prints the readiness picture (identity, rows per bucket, rows still unresolved, the setup gates) and relaunches. The profile carries the company's identity, service area with its mileage radius and USDA growing zone; a null leaves a field alone and nothing is ever blanked. Labor, equipment and overhead are the company's own numbers and are entered in the app at replacement cost, then marked owner confirmed; the Company screen's Setup & readiness section shows what is left.
 
 ## Editions and backups
 

@@ -60,7 +60,10 @@ struct TransferDocument: Codable, Equatable {
         var wcExpires: Date?
         var notes: String?
         var serviceArea: String?
-        var documents: [DocumentRecord]
+        var serviceRadiusMiles: Int?
+        var growingZone: String?
+        /// Optional so a hand-written merge file can carry a profile without listing documents (DECISIONS 78).
+        var documents: [DocumentRecord]?
     }
 
     struct DocumentRecord: Codable, Equatable {
@@ -248,7 +251,7 @@ enum Transfer {
                       ein: c.ein, licenses: c.licenses, glCarrier: c.glCarrier, glPolicy: c.glPolicy, glExpires: c.glExpires,
                       autoCarrier: c.autoCarrier, autoPolicy: c.autoPolicy, autoExpires: c.autoExpires,
                       wcCarrier: c.wcCarrier, wcPolicy: c.wcPolicy, wcExpires: c.wcExpires, notes: c.notes,
-                      serviceArea: c.serviceArea,
+                      serviceArea: c.serviceArea, serviceRadiusMiles: c.serviceRadiusMiles, growingZone: c.growingZone,
                       documents: c.sortedDocuments.map { d in
                           .init(title: d.title, category: d.category, fileName: d.fileName, originalName: d.originalName,
                                 addedAt: d.addedAt, expiresAt: d.expiresAt, notes: d.notes)
@@ -297,8 +300,10 @@ enum Transfer {
             company.wcCarrier = c.wcCarrier; company.wcPolicy = c.wcPolicy; company.wcExpires = c.wcExpires
             company.notes = c.notes
             company.serviceArea = c.serviceArea
+            company.serviceRadiusMiles = c.serviceRadiusMiles
+            company.growingZone = c.growingZone
             context.insert(company)
-            company.documents = c.documents.map { d in
+            company.documents = (c.documents ?? []).map { d in
                 CompanyDocument(title: d.title, category: d.category, fileName: d.fileName, originalName: d.originalName,
                                 addedAt: d.addedAt, expiresAt: d.expiresAt, notes: d.notes)
             }
@@ -358,6 +363,8 @@ enum Transfer {
         var unchanged = 0
         var subcontractors = 0
         var loadouts = 0
+        /// The file carried a company profile and it was applied (DECISIONS 78).
+        var company = false
     }
 
     /// Adds or updates rows from a file without deleting anything (DECISIONS 55): a row whose bucket and
@@ -471,6 +478,11 @@ enum Transfer {
                 loadouts.append(loadout)
                 result.loadouts += 1
             }
+        }
+        // The company profile (DECISIONS 78): the fields the file carries are applied; nothing is blanked.
+        if let c = doc.company {
+            Company.current(in: context).apply(c)
+            result.company = true
         }
         try context.save()
         return result

@@ -28,7 +28,7 @@ final class TransferFormat2Tests: XCTestCase {
         let chipper = items.first { $0.name == "Chipper (12\")" }!
         chipper.confidence = .estimated; chipper.needsOwnerConfirmation = true
         let company = Company.current(in: context)
-        company.name = "STS"; company.serviceArea = "Orange County"
+        company.name = "STS"; company.serviceArea = "Orange County"; company.serviceRadiusMiles = 30; company.growingZone = "USDA 9b"
         try context.save()
 
         let data = try Transfer.exportJSON(from: context, settings: AppSettings(), exportedAt: stamp)
@@ -38,6 +38,8 @@ final class TransferFormat2Tests: XCTestCase {
         XCTAssertTrue(text.contains("\"checkedAt\" : \"2026-09-16T05:20:00Z\""))
         XCTAssertTrue(text.contains("\"needsOwnerConfirmation\" : true"))
         XCTAssertTrue(text.contains("\"serviceArea\" : \"Orange County\""))
+        XCTAssertTrue(text.contains("\"serviceRadiusMiles\" : 30"))
+        XCTAssertTrue(text.contains("\"growingZone\" : \"USDA 9b\""))
         XCTAssertFalse(text.contains("\"confidence\" : \"missing\""), "missing is the absence of the key")
         XCTAssertFalse(text.contains("\"needsOwnerConfirmation\" : false"), "the flag is written only when set")
 
@@ -56,6 +58,8 @@ final class TransferFormat2Tests: XCTestCase {
         XCTAssertTrue(c.needsOwnerConfirmation)
         XCTAssertEqual(back.first { $0.name == "David" }!.confidence, .missing)
         XCTAssertEqual(Company.current(in: second.mainContext).serviceArea, "Orange County")
+        XCTAssertEqual(Company.current(in: second.mainContext).serviceRadiusMiles, 30)
+        XCTAssertEqual(Company.current(in: second.mainContext).growingZone, "USDA 9b")
         let again = try Transfer.exportJSON(from: second.mainContext, settings: AppSettings(), exportedAt: stamp)
         XCTAssertEqual(String(data: again, encoding: .utf8), text)
     }
@@ -153,5 +157,34 @@ final class TransferFormat2Tests: XCTestCase {
         XCTAssertEqual(try Transfer.mergeItems(Data(catalog.utf8), into: context).unchanged, 1)
         let text = String(data: try Transfer.exportJSON(from: context, settings: AppSettings(), exportedAt: stamp), encoding: .utf8)!
         XCTAssertTrue(text.contains("\"settings\" : {"), "exports always carry the settings")
+    }
+
+    func testMergeAppliesTheCompanyProfileWithoutBlankingAnything() throws {
+        let company = Company.current(in: context)
+        company.name = "Sacred Tree Service LLC"; company.phone = "407-555-0100"
+        let doc = CompanyDocument(title: "COI", category: "Insurance", fileName: "a.pdf", originalName: "COI.pdf", addedAt: stamp)
+        context.insert(doc); doc.company = company
+        try context.save()
+        let file = """
+        {"formatVersion": 2, "exportedAt": "2026-09-24T00:00:00Z", "items": [], "projects": [],
+         "company": {"name": "", "serviceArea": "Apopka and Central Florida", "serviceRadiusMiles": 30, "growingZone": "USDA 9b", "owner": "Alexander Satoski"}}
+        """
+        let result = try Transfer.mergeItems(Data(file.utf8), into: context)
+        XCTAssertTrue(result.company)
+        XCTAssertEqual(result.added + result.updated + result.unchanged, 0)
+        XCTAssertEqual(company.name, "Sacred Tree Service LLC", "a blank name in the file never blanks the store's")
+        XCTAssertEqual(company.serviceArea, "Apopka and Central Florida")
+        XCTAssertEqual(company.serviceRadiusMiles, 30)
+        XCTAssertEqual(company.growingZone, "USDA 9b")
+        XCTAssertEqual(company.owner, "Alexander Satoski")
+        XCTAssertEqual(company.phone, "407-555-0100", "a field the file omits stays")
+        XCTAssertEqual(company.sortedDocuments.map(\.title), ["COI"], "documents are never merged")
+        XCTAssertEqual(try context.fetch(FetchDescriptor<Company>()).count, 1)
+        // A file without a company record leaves the profile alone and reports so.
+        let rowsOnly = """
+        {"formatVersion": 2, "exportedAt": "2026-09-24T00:00:00Z", "items": [], "projects": []}
+        """
+        XCTAssertFalse(try Transfer.mergeItems(Data(rowsOnly.utf8), into: context).company)
+        XCTAssertEqual(company.serviceRadiusMiles, 30)
     }
 }

@@ -1,0 +1,20 @@
+{
+  "formatVersion": 2,
+  "exportedAt": "2026-09-24T00:00:00Z",
+  "items": [],
+  "projects": [],
+  "company": {
+    "name": "Company legal name LLC",
+    "dba": null,
+    "owner": "Owner / principal",
+    "address": "Street, City, ST 00000",
+    "phone": "(000) 000-0000",
+    "email": "office@example.com",
+    "website": "https://example.com",
+    "serviceArea": "City and the counties around it",
+    "serviceRadiusMiles": 30,
+    "growingZone": "USDA 9b",
+    "licenses": null,
+    "notes": null
+  }
+}
