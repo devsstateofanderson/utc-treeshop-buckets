@@ -42,8 +42,9 @@ private struct ProjectEditor: View {
     var body: some View {
         // Recomputed from the line snapshots on every render — every keystroke, every toggle. Never cached.
         let breakdown = project.breakdown(billableHours: billableHours)
+        let unresolved = project.unresolvedEnabledLines()
         VStack(spacing: 0) {
-            ProjectHeader(project: project, breakdown: breakdown, loadouts: loadouts) { loadout in
+            ProjectHeader(project: project, breakdown: breakdown, loadouts: loadouts, unresolvedCount: unresolved.count) { loadout in
                 project.apply(loadout)
                 save()
             }
@@ -186,6 +187,8 @@ private struct ProjectHeader: View {
     @Bindable var project: Project
     let breakdown: Breakdown
     let loadouts: [Loadout]
+    /// Enabled lines whose row is unresolved (DECISIONS 72): shown as a caption, never priced differently.
+    let unresolvedCount: Int
     let applyLoadout: (Loadout) -> Void
 
     var body: some View {
@@ -234,6 +237,14 @@ private struct ProjectHeader: View {
                 .layoutPriority(1)
                 .frame(maxWidth: .infinity, alignment: .leading)
                 figure("Profit", Money.format(breakdown.profit), caption: "\(percentString(breakdown.marginPct)) margin")
+            }
+
+            if unresolvedCount > 0 {
+                Label(ProjectText.unresolvedWarning(count: unresolvedCount), systemImage: "exclamationmark.triangle")
+                    .font(.caption)
+                    .foregroundStyle(.orange)
+                    .help("These rows still need review on the Buckets screen. The price uses the snapshot rates as always.")
+                    .accessibilityIdentifier("unresolvedWarning")
             }
         }
         .padding()
@@ -302,6 +313,11 @@ private struct ProjectLineRow: View {
                         Text(line.displayName)
                         if let status = line.statusCaption {
                             Text(status).font(.caption).foregroundStyle(.secondary)
+                        }
+                        if let warning = line.reviewCaption() {
+                            Label(warning, systemImage: "exclamationmark.triangle")
+                                .font(.caption).foregroundStyle(.orange)
+                                .help("This row's figure is unresolved on the Buckets screen; the line still prices from its snapshot")
                         }
                     }
                     // Quantity rows carry the rate under the name so the qty and total have the trailing edge.
@@ -381,6 +397,12 @@ enum ProjectText {
     /// "2 of 6 on" for a category group's header.
     static func onCount(_ lines: [ProjectLine]) -> String {
         "\(lines.filter(\.isOn).count) of \(lines.count) on"
+    }
+
+    /// The header's non-blocking warning (DECISIONS 72): "3 enabled rows use unresolved catalog inputs — price unchanged".
+    static func unresolvedWarning(count: Int) -> String {
+        count == 1 ? "1 enabled row uses an unresolved catalog input — price unchanged"
+                   : "\(count) enabled rows use unresolved catalog inputs — price unchanged"
     }
 
     static let hoursMaximum = Decimal(string: "99999.99")!

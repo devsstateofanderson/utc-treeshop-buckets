@@ -32,6 +32,18 @@ import SwiftData
     var model: String?
     var year: Int?
     var serial: String?
+    /// Row trust and review (DECISIONS 72; issue #3): where the figure came from, when it was checked, when to
+    /// look again, how far to trust it, who signed off, and what it assumes. All optional (or defaulted) so a
+    /// store from v1.1 migrates in place with every row reading as `missing`.
+    var evidence: String?
+    var checkedAt: Date?
+    var reviewDueAt: Date?
+    /// `Confidence.rawValue`; nil is `missing`. Read and written through `confidence` (CatalogReview.swift).
+    var confidenceRaw: String?
+    var approvedBy: String?
+    var assumption: String?
+    /// Set by whoever entered the figure when the owner should look at it before it is trusted.
+    var needsOwnerConfirmation: Bool = false
     /// Inverse of `ProjectLine.item`. Declared so that deleting a row sets every referencing line's
     /// `item` to nil instead of leaving a dangling reference (DECISIONS 21); also the delete guard (22).
     @Relationship(deleteRule: .nullify, inverse: \ProjectLine.item) var lines: [ProjectLine] = []
@@ -65,12 +77,13 @@ extension BucketItem {
         return url
     }
 
-    /// Search across name, category, unit, source, notes and the equipment identification (case- and diacritic-insensitive).
+    /// Search across name, category, unit, source, notes, the equipment identification and the review fields
+    /// (case- and diacritic-insensitive).
     func matches(_ query: String) -> Bool {
         let q = query.trimmingCharacters(in: .whitespaces)
         guard !q.isEmpty else { return true }
         return [name, category ?? "", unit, source ?? "", notes ?? "", unitCode ?? "", make ?? "", model ?? "", serial ?? "",
-                year.map(String.init) ?? ""].contains { $0.localizedStandardContains(q) }
+                year.map(String.init) ?? "", evidence ?? "", approvedBy ?? "", assumption ?? ""].contains { $0.localizedStandardContains(q) }
     }
 
     /// "TRK-02 · Ford F250" when the row has a unit code, else the name.

@@ -27,6 +27,8 @@ final class AppState {
     /// Screenshot hook: the detail Form opens its "Calculate…" sheet once, then clears this.
     var wantsCalcSheet = false
     let wantsSettingsWindow: Bool
+    /// The Buckets table's "Show" menu (DECISIONS 72); window-level so the readiness view can set it.
+    var reviewFilter: ReviewFilter = .all
 
     private let container: ModelContainer
     private var context: ModelContext { container.mainContext }
@@ -80,6 +82,18 @@ final class AppState {
     var selectedBucket: Bucket? {
         if case .bucket(let b) = sidebar { return b }
         return nil
+    }
+
+    /// Readiness → "Show": the Buckets screen filtered to one unresolved group, opened on the first bucket
+    /// that has such a row (DECISIONS 73).
+    func showUnresolved(_ reason: UnresolvedReason, in bucket: Bucket?) {
+        reviewFilter = .reason(reason)
+        selectedItem = nil
+        switch bucket {
+        case .subcontractors?: sidebar = .subcontractors
+        case let b?: sidebar = .bucket(b)
+        case nil: sidebar = .bucket(.labor)
+        }
     }
 
     /// What ⌘N creates on the current screen (DECISIONS 42).

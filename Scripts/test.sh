@@ -11,6 +11,7 @@ if [[ ! -d Buckets.xcodeproj ]] || \
    [[ -n "$(find project.yml Sources Tests UITests -newer Buckets.xcodeproj/project.pbxproj -print -quit)" ]]; then
   xcodegen generate --quiet
 fi
+mkdir -p "$ROOT/build"
 set +e
 xcodebuild -project Buckets.xcodeproj -scheme Buckets -configuration Debug \
   -derivedDataPath "${BUCKETS_DERIVED_DATA:-$HOME/Library/Developer/Xcode/DerivedData/Buckets-cli}" -destination 'platform=macOS' test -skip-testing:BucketsUITests 2>&1 \

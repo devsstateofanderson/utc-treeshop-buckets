@@ -24,6 +24,8 @@ import SwiftData
     var wcPolicy: String?
     var wcExpires: Date?
     var notes: String?
+    /// Where the company works ("Orange, Seminole and Lake counties"); a required setup input (DECISIONS 73).
+    var serviceArea: String?
     @Relationship(deleteRule: .cascade, inverse: \CompanyDocument.company) var documents: [CompanyDocument] = []
 
     init(name: String = "") {

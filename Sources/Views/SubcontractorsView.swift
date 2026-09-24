@@ -152,12 +152,13 @@ private struct SubcontractorForm: View {
     private func save() { try? modelContext.save() }
 }
 
-/// Name · unit cost · per unit · delete (or archived marker) — one line per service.
+/// Name · unit cost · per unit · review · delete (or archived marker) — one line per service.
 private struct ServiceRow: View {
     @Bindable var service: BucketItem
     let sub: Subcontractor
     @Environment(AppState.self) private var appState
     @Environment(\.modelContext) private var modelContext
+    @State private var showingReview = false
 
     var body: some View {
         HStack(spacing: 10) {
@@ -169,6 +170,23 @@ private struct ServiceRow: View {
             Text("per").foregroundStyle(.secondary)
             TextField("Unit", text: $service.unit, prompt: Text("stump, day, load"))
                 .frame(width: 96)
+            // The review fields live in a sheet here because a service has no detail Form of its own (DECISIONS 72).
+            Button { showingReview = true } label: {
+                Label(service.reviewLabel(), systemImage: service.reviewSeverity() == .ok ? "checkmark.seal" : "exclamationmark.triangle")
+                    .font(.caption)
+                    .foregroundStyle(service.reviewSeverity().style)
+            }
+            .buttonStyle(.borderless)
+            .help("Review this service's price: evidence, confidence, checked and due dates")
+            .sheet(isPresented: $showingReview) {
+                NavigationStack {
+                    Form { ReviewFields(item: service) }
+                        .formStyle(.grouped)
+                        .navigationTitle(service.displayName)
+                        .toolbar { Button("Done") { showingReview = false } }
+                }
+                .frame(minWidth: 560, minHeight: 440)
+            }
             if service.referenceCount > 0 {
                 Toggle("Active", isOn: $service.isActive).labelsHidden()
                     .help("Used in \(service.referenceCount) project(s); archive instead of deleting")
