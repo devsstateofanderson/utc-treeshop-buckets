@@ -141,4 +141,17 @@ final class TransferFormat2Tests: XCTestCase {
                        "Mulch stays 'updated': the file keeps asking for verified and the app keeps refusing")
         XCTAssertEqual(marcus.confidence, .estimated)
     }
+
+    func testAFileWithoutSettingsKeepsTheCompanysSettings() throws {
+        let catalog = """
+        {"formatVersion": 2, "exportedAt": "2026-09-24T00:00:00Z",
+         "items": [{"bucket": "materials", "name": "Mulch", "rateCents": 3200, "unit": "yard", "isActive": true, "source": null, "notes": null, "calcInputs": null, "sortOrder": 0}],
+         "projects": []}
+        """
+        XCTAssertEqual(try Transfer.importJSON(Data(catalog.utf8), into: context), AppSettings.current(), "no settings in the file: the company's stay (DECISIONS 76)")
+        XCTAssertEqual(try StoreFixture.items(in: context).map(\.name), ["Mulch"])
+        XCTAssertEqual(try Transfer.mergeItems(Data(catalog.utf8), into: context).unchanged, 1)
+        let text = String(data: try Transfer.exportJSON(from: context, settings: AppSettings(), exportedAt: stamp), encoding: .utf8)!
+        XCTAssertTrue(text.contains("\"settings\" : {"), "exports always carry the settings")
+    }
 }

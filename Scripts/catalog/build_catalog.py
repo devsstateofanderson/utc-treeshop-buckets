@@ -44,9 +44,9 @@ def build(rows):
         else:
             item["rateCents"] = cents(r["price"])
         items.append(item)
-    return {"formatVersion": 1, "exportedAt": "2026-09-15T12:00:00Z",
-            "settings": {"billableHoursPerYear": 1500, "laborBurdenPct": 30, "markupPct": 35, "minimumJobCents": 75000, "costOfMoneyPct": 0},
-            "items": items, "projects": []}
+    # A catalog carries rows only (DECISIONS 76): no company settings, so importing it never overwrites the
+    # company's margin, minimum, burden or billable hours.
+    return {"formatVersion": 1, "exportedAt": "2026-09-15T12:00:00Z", "items": items, "projects": []}
 
 if __name__ == "__main__":
     rows = json.load(open(sys.argv[1]))

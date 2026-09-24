@@ -716,22 +716,6 @@
  },
  {
   "bucket": "materials",
-  "name": "Windmill Palm \u2013 3 gal",
-  "unit": "each",
-  "price": 89.98,
-  "source": "Home Depot (Apopka)",
-  "notes": "Home Depot online price 2026-09-15 \u00b7 Brighter Blooms PAL-WIN3"
- },
- {
-  "bucket": "materials",
-  "name": "Windmill Palm \u2013 14 in (boxed, ship-to-home)",
-  "unit": "each",
-  "price": 129.98,
-  "source": "Home Depot (Apopka)",
-  "notes": "Home Depot online price 2026-09-15 \u00b7 15530 \u00b7 Sold as a boxed ship-to-home plant sized by height (14 in) rather than gallon container."
- },
- {
-  "bucket": "materials",
   "name": "European Fan Palm \u2013 10 in pot",
   "unit": "each",
   "price": 92.72,
@@ -745,14 +729,6 @@
   "price": 251.55,
   "source": "Home Depot (Apopka)",
   "notes": "Home Depot online price 2026-09-15 \u00b7 Wekiva Foliage SilBis5gx1"
- },
- {
-  "bucket": "materials",
-  "name": "Majesty Palm (outdoor/patio size) \u2013 10 in decor pot",
-  "unit": "each",
-  "price": 44.98,
-  "source": "Home Depot (Apopka)",
-  "notes": "Home Depot online price 2026-09-15 \u00b7 United Nursery MAJESTYP10GRAY \u00b7 Sold as an indoor/outdoor decor-pot plant (~2-3 ft tall), not a standard nursery gallon size. Other 10-in-pot color options seen discounted to ~$19.98-$34.99 with a promotional new-credit-card $25 instant savings applied; regular-price listing used here."
  },
  {
   "bucket": "materials",
@@ -929,14 +905,6 @@
   "price": 44.98,
   "source": "Home Depot (Apopka)",
   "notes": "Home Depot online price 2026-09-15 \u00b7 HOLDAH01G \u00b7 5-gal size (HOLDAH05G, Ilex cassine) also listed on homedepot.com; price not returned in search results."
- },
- {
-  "bucket": "materials",
-  "name": "Weeping Willow \u2013 5 gal",
-  "unit": "each",
-  "price": 87.29,
-  "source": "Home Depot (Apopka)",
-  "notes": "Home Depot online price 2026-09-15 \u00b7 WILWEE05G"
  },
  {
   "bucket": "materials",

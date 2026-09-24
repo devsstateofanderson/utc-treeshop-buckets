@@ -57,7 +57,7 @@ Data lives outside the app, in `~/Library/Application Support/Buckets/` (the sto
 
 ## Editions and backups
 
-- `Scripts/catalog/data/Buckets-default-catalog.json`: the blank commercial starting point (no labor or equipment, overhead as a $0 checklist, 116 materials and 57 consumables for professional tree work with links). Load it with Add or Update Rows, or run the app once with `BUCKETS_MERGE_FILE` pointing at it.
+- `Scripts/catalog/data/Buckets-default-catalog.json`: the blank commercial starting point (no labor or equipment, overhead as a $0 checklist, 112 materials and 57 consumables for professional tree work with links, and no company settings — DECISIONS 76–77). Load it with Add or Update Rows, or run the app once with `BUCKETS_MERGE_FILE` pointing at it.
 - `Backups/`: dated folders with an Export JSON and the raw store files; see `Backups/README.txt`.
 
 ## Where the data is
