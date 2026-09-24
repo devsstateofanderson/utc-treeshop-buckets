@@ -80,6 +80,7 @@ private struct ItemForm: View {
                     Text("Identification")
                 }
             }
+            ReviewFields(item: item)
             Section {
                 Toggle("Active", isOn: $item.isActive)
                     .help("Archived rows stay on the projects that use them and are hidden from new projects.")
@@ -198,6 +199,79 @@ private struct ItemForm: View {
         case .equipment: EquipmentCalcSheet(item: item)
         default: EmptyView()
         }
+    }
+
+    private func save() {
+        try? modelContext.save()
+    }
+}
+
+/// The review section of a row's Form (DECISIONS 72): confidence, evidence, the two dates, who approved, the
+/// owner-confirmation flag and the assumption note. Shared by the bucket detail and the subcontractor service sheet.
+/// "Verified" is offered only once the row has evidence and a checked date; picking it goes through `markVerified`.
+struct ReviewFields: View {
+    @Bindable var item: BucketItem
+    @Environment(\.modelContext) private var modelContext
+
+    private var choices: [Confidence] {
+        Confidence.allCases.filter { $0 != .verified || item.canMarkVerified || item.confidence == .verified }
+    }
+
+    private var confidence: Binding<Confidence> {
+        Binding(get: { item.confidence }, set: { new in
+            switch new {
+            case .verified: item.markVerified()
+            case .ownerConfirmed: item.markOwnerConfirmed()
+            default: item.confidence = new
+            }
+        })
+    }
+
+    var body: some View {
+        Section {
+            LabeledContent {
+                Picker("Confidence", selection: confidence) {
+                    ForEach(choices, id: \.self) { Text($0.title).tag($0) }
+                }
+                .labelsHidden().fixedSize()
+            } label: {
+                Text("Confidence")
+                if item.confidence != .verified && !item.canMarkVerified {
+                    Text("Verified needs a source, evidence or link, and a checked date").foregroundStyle(.secondary)
+                }
+            }
+            OptionalTextField(label: "Evidence", value: $item.evidence,
+                              prompt: "Quote, invoice, price list, web page, who said so…", axis: .vertical)
+            LabeledContent("Checked") {
+                HStack {
+                    OptionalDatePicker(label: "Checked", date: $item.checkedAt, setTitle: "Set date…", makeDefault: { .now })
+                    Button("Today") { item.markChecked() }
+                        .help("Checked today; the review comes due in a year unless a date is already set")
+                }
+            }
+            LabeledContent {
+                OptionalDatePicker(label: "Review due", date: $item.reviewDueAt, setTitle: "Set date…")
+            } label: {
+                Text("Review due")
+                if item.isOverdue() { Text("Overdue").foregroundStyle(.red) }
+            }
+            OptionalTextField(label: "Approved by", value: $item.approvedBy, prompt: "Who signed off")
+            Toggle("Needs owner confirmation", isOn: $item.needsOwnerConfirmation)
+                .help("Ask the owner to look at this figure before it is trusted; clears when they mark it owner confirmed")
+            OptionalTextField(label: "Assumption", value: $item.assumption,
+                              prompt: "What this figure assumes: crew size, supplier, season…", axis: .vertical)
+        } header: {
+            Text("Review")
+        } footer: {
+            Text(item.reviewLabel())
+        }
+        .onChange(of: item.confidenceRaw) { _, _ in save() }
+        .onChange(of: item.evidence) { _, _ in save() }
+        .onChange(of: item.checkedAt) { _, _ in save() }
+        .onChange(of: item.reviewDueAt) { _, _ in save() }
+        .onChange(of: item.approvedBy) { _, _ in save() }
+        .onChange(of: item.needsOwnerConfirmation) { _, _ in save() }
+        .onChange(of: item.assumption) { _, _ in save() }
     }
 
     private func save() {

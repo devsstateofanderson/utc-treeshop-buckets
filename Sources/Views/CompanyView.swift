@@ -21,6 +21,7 @@ private struct CompanyForm: View {
 
     var body: some View {
         Form {
+            CompanyReadinessSection()
             CompanyIdentitySection(company: company)
             CompanyPricingSection()
             CompanyLicensesSection(company: company)
@@ -47,6 +48,7 @@ private struct CompanyIdentitySection: View {
             OptionalTextField(label: "DBA", value: $company.dba, prompt: "Doing business as")
             OptionalTextField(label: "Owner", value: $company.owner, prompt: "Owner / principal")
             OptionalTextField(label: "Address", value: $company.address, prompt: "Street, city, state, zip", axis: .vertical)
+            OptionalTextField(label: "Service area", value: $company.serviceArea, prompt: "Orange, Seminole and Lake counties")
             OptionalTextField(label: "Phone", value: $company.phone, prompt: "Optional")
             OptionalTextField(label: "Email", value: $company.email, prompt: "Optional")
             OptionalTextField(label: "Website", value: $company.website, prompt: "Optional")
@@ -56,6 +58,7 @@ private struct CompanyIdentitySection: View {
         .onChange(of: company.dba) { _, _ in try? modelContext.save() }
         .onChange(of: company.owner) { _, _ in try? modelContext.save() }
         .onChange(of: company.address) { _, _ in try? modelContext.save() }
+        .onChange(of: company.serviceArea) { _, _ in try? modelContext.save() }
         .onChange(of: company.phone) { _, _ in try? modelContext.save() }
         .onChange(of: company.email) { _, _ in try? modelContext.save() }
         .onChange(of: company.website) { _, _ in try? modelContext.save() }
@@ -138,10 +141,13 @@ private struct PolicyRow: View {
     }
 }
 
-/// A date that can be unset ("none" until a date is chosen).
+/// A date that can be unset ("none" until a date is chosen). The button's title and the date it starts from
+/// default to an expiration a year out; the review fields pass their own.
 struct OptionalDatePicker: View {
     let label: String
     @Binding var date: Date?
+    var setTitle = "Set expiration…"
+    var makeDefault: () -> Date = { Calendar.current.date(byAdding: .year, value: 1, to: .now) ?? .now }
 
     var body: some View {
         HStack(spacing: 6) {
@@ -150,7 +156,7 @@ struct OptionalDatePicker: View {
                 Button { date = nil } label: { Image(systemName: "xmark.circle") }
                     .buttonStyle(.borderless).help("Clear the date")
             } else {
-                Button("Set expiration…") { date = Calendar.current.date(byAdding: .year, value: 1, to: .now) }
+                Button(setTitle) { date = makeDefault() }
                     .buttonStyle(.link)
             }
         }

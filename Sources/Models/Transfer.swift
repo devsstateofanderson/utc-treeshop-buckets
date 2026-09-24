@@ -4,7 +4,10 @@ import SwiftData
 /// Export JSON / Import JSON: a full round trip of the three models plus the five settings (DECISIONS 43).
 /// Lines reference rows by their index in `items`, so the models need no id field.
 struct TransferDocument: Codable, Equatable {
-    static let currentFormatVersion = 1
+    /// Format 2 (v0.2.0, DECISIONS 74) adds the review fields and the company's service area. Format 1 files
+    /// (v1.0–1.1) read as format 2 with those fields empty; a v1.1 app refuses a format 2 file rather than drop them.
+    static let currentFormatVersion = 2
+    static let readableFormatVersions = 1...2
 
     struct Item: Codable, Equatable {
         var bucket: Bucket
@@ -25,6 +28,15 @@ struct TransferDocument: Codable, Equatable {
         var model: String?
         var year: Int?
         var serial: String?
+        /// Review metadata (DECISIONS 72), format 2; absent in format-1 files. `confidence` nil is `missing`;
+        /// `needsOwnerConfirmation` is written only when true.
+        var evidence: String?
+        var checkedAt: Date?
+        var reviewDueAt: Date?
+        var confidence: Confidence?
+        var approvedBy: String?
+        var assumption: String?
+        var needsOwnerConfirmation: Bool?
     }
 
     struct CompanyRecord: Codable, Equatable {
@@ -47,6 +59,7 @@ struct TransferDocument: Codable, Equatable {
         var wcPolicy: String?
         var wcExpires: Date?
         var notes: String?
+        var serviceArea: String?
         var documents: [DocumentRecord]
     }
 
@@ -166,7 +179,8 @@ enum TransferError: Error, Equatable, LocalizedError {
 
     var errorDescription: String? {
         switch self {
-        case .unsupportedFormat(let v): "This file is Buckets format \(v); this app reads format \(TransferDocument.currentFormatVersion)."
+        case .unsupportedFormat(let v):
+            "This file is Buckets format \(v); this app reads formats \(TransferDocument.readableFormatVersions.lowerBound) to \(TransferDocument.readableFormatVersions.upperBound)."
         case .badItemIndex(let i): "A project line points at row #\(i), which is not in the file."
         }
     }
@@ -208,7 +222,10 @@ enum Transfer {
                 .init(bucket: i.bucket, name: i.name, rateCents: i.rateCents, unit: i.unit, isActive: i.isActive,
                       source: i.source, notes: i.notes, calcInputs: i.calcInputs.flatMap(JSONValue.from), sortOrder: i.sortOrder,
                       category: i.category, link: i.link, subcontractorIndex: i.subcontractor.flatMap { subIndex[$0.persistentModelID] },
-                      unitCode: i.unitCode, make: i.make, model: i.model, year: i.year, serial: i.serial)
+                      unitCode: i.unitCode, make: i.make, model: i.model, year: i.year, serial: i.serial,
+                      evidence: i.evidence, checkedAt: i.checkedAt, reviewDueAt: i.reviewDueAt,
+                      confidence: i.confidence == .missing ? nil : i.confidence, approvedBy: i.approvedBy, assumption: i.assumption,
+                      needsOwnerConfirmation: i.needsOwnerConfirmation ? true : nil)
             },
             projects: projects.map { p in
                 .init(name: p.name, client: p.client, date: p.date, hours: p.hours, multiplier: p.multiplier,
@@ -230,6 +247,7 @@ enum Transfer {
                       ein: c.ein, licenses: c.licenses, glCarrier: c.glCarrier, glPolicy: c.glPolicy, glExpires: c.glExpires,
                       autoCarrier: c.autoCarrier, autoPolicy: c.autoPolicy, autoExpires: c.autoExpires,
                       wcCarrier: c.wcCarrier, wcPolicy: c.wcPolicy, wcExpires: c.wcExpires, notes: c.notes,
+                      serviceArea: c.serviceArea,
                       documents: c.sortedDocuments.map { d in
                           .init(title: d.title, category: d.category, fileName: d.fileName, originalName: d.originalName,
                                 addedAt: d.addedAt, expiresAt: d.expiresAt, notes: d.notes)
@@ -247,7 +265,7 @@ enum Transfer {
     @discardableResult
     static func importJSON(_ data: Data, into context: ModelContext) throws -> AppSettings {
         let doc = try decoder().decode(TransferDocument.self, from: data)
-        guard doc.formatVersion == TransferDocument.currentFormatVersion else {
+        guard TransferDocument.readableFormatVersions.contains(doc.formatVersion) else {
             throw TransferError.unsupportedFormat(doc.formatVersion)
         }
         for line in doc.projects.flatMap(\.lines) {
@@ -277,6 +295,7 @@ enum Transfer {
             company.autoCarrier = c.autoCarrier; company.autoPolicy = c.autoPolicy; company.autoExpires = c.autoExpires
             company.wcCarrier = c.wcCarrier; company.wcPolicy = c.wcPolicy; company.wcExpires = c.wcExpires
             company.notes = c.notes
+            company.serviceArea = c.serviceArea
             context.insert(company)
             company.documents = c.documents.map { d in
                 CompanyDocument(title: d.title, category: d.category, fileName: d.fileName, originalName: d.originalName,
@@ -299,6 +318,7 @@ enum Transfer {
             if let s = record.subcontractorIndex { items[i].subcontractor = subs[s] }
             items[i].unitCode = record.unitCode; items[i].make = record.make; items[i].model = record.model
             items[i].year = record.year; items[i].serial = record.serial
+            items[i].applyReview(from: record)
         }
         for l in doc.loadouts ?? [] {
             let loadout = Loadout(name: l.name, notes: l.notes, sortOrder: l.sortOrder)
@@ -346,7 +366,7 @@ enum Transfer {
     @MainActor
     static func mergeItems(_ data: Data, into context: ModelContext) throws -> MergeResult {
         let doc = try decoder().decode(TransferDocument.self, from: data)
-        guard doc.formatVersion == TransferDocument.currentFormatVersion else {
+        guard TransferDocument.readableFormatVersions.contains(doc.formatVersion) else {
             throw TransferError.unsupportedFormat(doc.formatVersion)
         }
         var existing = try context.fetch(FetchDescriptor<BucketItem>())
@@ -405,6 +425,7 @@ enum Transfer {
                     && match.link == (i.link ?? match.link) && sameCalc
                     && match.unitCode == (i.unitCode ?? match.unitCode) && match.make == (i.make ?? match.make)
                     && match.model == (i.model ?? match.model) && match.year == (i.year ?? match.year) && match.serial == (i.serial ?? match.serial)
+                    && match.reviewMatches(i)
                 if same { result.unchanged += 1; continue }
                 match.rateCents = i.rateCents
                 match.unit = unit
@@ -418,6 +439,7 @@ enum Transfer {
                 if let v = i.model { match.model = v }
                 if let v = i.year { match.year = v }
                 if let v = i.serial { match.serial = v }
+                match.applyReview(from: i)
                 result.updated += 1
                 continue
             }
@@ -427,6 +449,7 @@ enum Transfer {
                                   calcInputs: i.calcInputs?.data, sortOrder: order)
             item.subcontractor = sub
             item.unitCode = i.unitCode; item.make = i.make; item.model = i.model; item.year = i.year; item.serial = i.serial
+            item.applyReview(from: i)
             context.insert(item)
             existing.append(item)
             merged.append(item)

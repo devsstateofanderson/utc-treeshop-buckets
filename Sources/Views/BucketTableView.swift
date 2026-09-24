@@ -13,17 +13,26 @@ struct BucketTableView: View {
     @State private var search = ""
     @State private var selection: BucketRow.ID?
 
-    /// Filtered in memory (the enum column does not predicate well) and searched; sorted by `sortOrder`, then name.
+    /// Filtered in memory (the enum column does not predicate well) by the review filter and the search;
+    /// sorted by `sortOrder`, then name.
     private var rows: [BucketItem] {
-        let result = allItems.rows(in: bucket)
+        let filter = appState.reviewFilter
+        let result = allItems.rows(in: bucket).filter { filter == .all || filter.includes($0) }
         return search.isEmpty ? result : result.filter { $0.matches(search) }
     }
 
-    /// Collapsible category groups (DECISIONS 69), collapsed at first; a flat list while searching or when no row
-    /// has a category, so every match and every uncategorised bucket reads as before.
+    /// How many rows each "Show" choice would list, for the menu titles.
+    private func filterCount(_ filter: ReviewFilter) -> Int {
+        allItems.rows(in: bucket).filter { filter.includes($0) }.count
+    }
+
+    /// Collapsible category groups (DECISIONS 69), collapsed at first; a flat list while searching or filtering,
+    /// or when no row has a category, so every match and every uncategorised bucket reads as before.
     private var tree: [BucketRow] {
         let items = rows
-        guard search.isEmpty, items.contains(where: { !$0.categoryText.isEmpty }) else { return items.map(BucketRow.item) }
+        guard search.isEmpty, appState.reviewFilter == .all, items.contains(where: { !$0.categoryText.isEmpty }) else {
+            return items.map(BucketRow.item)
+        }
         let keyed = Dictionary(grouping: items) { $0.categoryText }
         let titles = keyed.keys.sorted { a, b in
             if a.isEmpty != b.isEmpty { return b.isEmpty }
@@ -42,6 +51,14 @@ struct BucketTableView: View {
         Group {
             if rows.isEmpty && !search.isEmpty {
                 ContentUnavailableView.search(text: search)
+            } else if rows.isEmpty && appState.reviewFilter != .all {
+                ContentUnavailableView {
+                    Label("No \(appState.reviewFilter.title.lowercased()) rows", systemImage: "checkmark.circle")
+                } description: {
+                    Text("Every \(bucket.title.lowercased()) row is clear for this filter.")
+                } actions: {
+                    Button("Show All Rows") { appState.reviewFilter = .all }
+                }
             } else if rows.isEmpty {
                 ContentUnavailableView {
                     Label("No \(bucket.title.lowercased()) rows yet", systemImage: bucket.symbol)
@@ -80,6 +97,10 @@ struct BucketTableView: View {
                         }
                     }
                     .width(min: 50, ideal: 84)
+                    TableColumn("Review") { row in
+                        if let item = row.item { ReviewCell(item: item) }
+                    }
+                    .width(min: 90, ideal: 150)
                     TableColumn("Active") { row in
                         if let item = row.item { ActiveToggle(item: item) }
                     }
@@ -100,6 +121,13 @@ struct BucketTableView: View {
         .searchable(text: $search, placement: .toolbar, prompt: "Search \(bucket.title.lowercased())")
         .toolbar {
             ToolbarItemGroup {
+                Picker("Show", selection: $appState.reviewFilter) {
+                    ForEach(ReviewFilter.allCases, id: \.self) { filter in
+                        Text(filter == .all ? filter.title : "\(filter.title) (\(filterCount(filter)))").tag(filter)
+                    }
+                }
+                .pickerStyle(.menu)
+                .help("Show every row, or only the rows that still need review")
                 Button { appState.newItem(in: bucket) } label: { Label("New Row", systemImage: "plus") }
                     .help("New row (⌘N)")
                 Button { if let row = selectedRow { appState.duplicate(row) } } label: { Label("Duplicate Row", systemImage: "plus.square.on.square") }
@@ -180,6 +208,27 @@ private struct RateCell: View {
             }
         }
         .monospacedDigit()
+    }
+}
+
+/// "Verified · Sep 16, 2026", "Estimated", "Missing", "Overdue · due …" (DECISIONS 72); system colors only.
+private struct ReviewCell: View {
+    let item: BucketItem
+
+    var body: some View {
+        Text(item.reviewLabel())
+            .font(.caption)
+            .foregroundStyle(item.reviewSeverity().style)
+    }
+}
+
+extension BucketItem.ReviewSeverity {
+    var style: AnyShapeStyle {
+        switch self {
+        case .ok: AnyShapeStyle(.secondary)
+        case .attention: AnyShapeStyle(.orange)
+        case .overdue: AnyShapeStyle(.red)
+        }
     }
 }
 

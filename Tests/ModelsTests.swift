@@ -266,10 +266,10 @@ final class ModelsTests: XCTestCase {
     func testImportRejectsBadFiles() throws {
         XCTAssertThrowsError(try Transfer.importJSON(Data("{}".utf8), into: context))
         let bad = """
-        {"formatVersion": 2, "exportedAt": "2026-01-01T00:00:00Z", "settings": {"billableHoursPerYear": 1500, "laborBurdenPct": 30, "markupPct": 35, "minimumJobCents": 75000, "costOfMoneyPct": 0}, "items": [], "projects": []}
+        {"formatVersion": 3, "exportedAt": "2026-01-01T00:00:00Z", "settings": {"billableHoursPerYear": 1500, "laborBurdenPct": 30, "markupPct": 35, "minimumJobCents": 75000, "costOfMoneyPct": 0}, "items": [], "projects": []}
         """
         XCTAssertThrowsError(try Transfer.importJSON(Data(bad.utf8), into: context)) {
-            XCTAssertEqual($0 as? TransferError, .unsupportedFormat(2))
+            XCTAssertEqual($0 as? TransferError, .unsupportedFormat(3))
         }
         XCTAssertEqual(try StoreFixture.items(in: context).count, 25, "a rejected import changes nothing")
     }
