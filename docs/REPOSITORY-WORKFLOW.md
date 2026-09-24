@@ -36,6 +36,10 @@ The normal loop is: pull latest `main` → implement one bounded change → run 
 
 Use `~/Developer/utc-treeshop-buckets` for the checkout on company Macs. Keep the customer data vault and built application in separate local paths.
 
+## Communications
+
+Read and append to [`docs/COMMUNICATIONS.md`](COMMUNICATIONS.md) at every handoff. That log carries the working context between Claude on the customer Mac and Codex on the primary development computer. The latest `main` commit and the latest log entry together define the current shared state.
+
 One track may provide evidence to another, but a customer record is not automatically a product default and a proposed feature is not automatically a live operating procedure.
 
 ## Pull-request checklist

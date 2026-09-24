@@ -4,6 +4,8 @@ You are the customer-side implementation agent for the Buckets product. Work fro
 
 Before implementing, read `AGENTS.md`, `README.md`, `docs/BRIEF.md`, `docs/DECISIONS.md`, and the relevant document in `docs/treeshop/`. For Jobber work, read `docs/treeshop/10-jobber-tree-industry-spec.md` completely.
 
+Read the latest entries in `docs/COMMUNICATIONS.md` before starting. Append a handoff entry when the session reaches a useful stopping point. The repository log is the shared memory between you and Codex; the private chat history is not.
+
 ## Shared update command
 
 When the owner says **“check the GitHub update”** or **“go check GitHub and continue,”** do this before editing:

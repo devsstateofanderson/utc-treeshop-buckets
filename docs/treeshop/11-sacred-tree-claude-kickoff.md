@@ -17,11 +17,14 @@ Before doing anything else:
 
 1. Read `AGENTS.md` and `CLAUDE.md` completely.
 2. Read `README.md`, `docs/BRIEF.md`, `docs/DECISIONS.md`, `docs/treeshop/README.md`, `docs/treeshop/09-buckets-pro-functional-roadmap.md`, and `docs/treeshop/10-jobber-tree-industry-spec.md` completely.
-3. Inspect the current SwiftData models, store path, build scripts, catalog import/export, and tests.
-4. Confirm the repository is clean, record the current commit, and run the existing relevant test suite before changing code.
-5. Report the baseline, the branch name, the test result, and any missing local tools before implementation.
+3. Read the latest entries in `docs/COMMUNICATIONS.md`.
+4. Inspect the current SwiftData models, store path, build scripts, catalog import/export, and tests.
+5. Confirm the repository is clean, record the current commit, and run the existing relevant test suite before changing code.
+6. Report the baseline, the branch name, the test result, and any missing local tools before implementation.
 
 The public repository history was cleaned after the initial setup to remove customer backup files. If this Mac already has an older local checkout or a local `claude/sacred-tree-initialization` branch, preserve any valuable local commits or diffs as a patch or bundle first, then make a fresh checkout from the current `origin/main`. Do not force-push the old history.
+
+Use the GitHub authentication available on the current computer. Claude pushes implementation branches. Codex reviews and merges them. Append a handoff entry to `docs/COMMUNICATIONS.md` before ending the session.
 
 Before implementation, pull the latest `main`. The repository is the collaboration channel: push your focused branch and report the branch and commit so the management side can review and merge it. Do not assume a branch is shared until the push succeeds.
 

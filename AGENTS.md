@@ -9,6 +9,7 @@ This repository is the shared product and operating workspace for UTC, DBA TreeS
 3. `docs/treeshop/README.md` — UTC / TreeShop operating package.
 4. `docs/treeshop/09-buckets-pro-functional-roadmap.md` — functional product sequence.
 5. `docs/treeshop/10-jobber-tree-industry-spec.md` — Jobber and tree-industry integration contract.
+6. `docs/COMMUNICATIONS.md` — current cross-agent handoffs and decisions.
 
 ## Agent roles
 
@@ -31,6 +32,7 @@ The roles are complementary. Neither agent silently assumes authority to send cu
 - Keep raw customer data in the controlled customer workspace. Use redacted fixtures for tests and examples.
 - Run the smallest relevant test set, then the full test suite before merging a model or pricing change.
 - Update the applicable decision/spec document when implementation changes the operating contract.
+- Read and append to `docs/COMMUNICATIONS.md` at every agent handoff.
 
 ## Handoff format
 
