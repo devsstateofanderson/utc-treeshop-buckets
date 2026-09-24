@@ -15,7 +15,7 @@ TreeShop installs a measurable operating system in a service company, manages ag
 | Buckets | Product line owned by UTC and delivered and operated through TreeShop | The client sees Buckets as part of TreeShop's service |
 | Client company | Owns its customers, employees, domain, accounts, data, and operating decisions delegated to TreeShop | Continues to perform its real-world service |
 
-Alexander is the founder, owner, product designer, lead operator, and public face. Technical staff and AI tools execute defined work under that direction. TreeShop's value comes from operating judgment, execution, and accountability; Buckets makes the method repeatable.
+Mr. J. Anderson is the sole owner of UTC, TreeShop, and Buckets. He is the product designer, lead operator, and public face of the TreeShop service. Alexander Satoski owns and manages Sacred Tree Service, the first client company. Sacred Tree Service hired TreeShop and Mr. Anderson to improve operations, install Buckets, and scale its brand. Technical staff and AI tools execute defined work under the applicable owner's authority. TreeShop's value comes from operating judgment, execution, and accountability; Buckets makes the method repeatable.
 
 ## What each system owns
 
@@ -41,8 +41,9 @@ The first manual version can live in a company-specific operating log. The futur
 
 ## Responsibility and authority
 
-- The client owner approves strategy, spending limits, account access, public claims, hiring/firing, and material changes to customer pricing unless authority is explicitly delegated.
-- TreeShop owns the agreed operating cadence, analysis, recommendations, implementation work, and a record of changes and results.
+- The Sacred Tree client owner approves Sacred Tree strategy, spending limits, account access, public claims, hiring/firing, and material changes to Sacred Tree customer pricing unless authority is explicitly delegated.
+- Mr. Anderson owns UTC, TreeShop, and Buckets strategy, product direction, service design, implementation standards, and the shared product roadmap.
+- TreeShop owns the agreed operating cadence, analysis, recommendations, implementation work, and a record of changes and results for each client.
 - The field team owns safe service delivery and accurate frontline records. TreeShop improves the tools around that team rather than replacing its judgment.
 - AI tools may draft, analyze, reconcile, and implement within granted access. A named human remains accountable for consequential external actions.
 

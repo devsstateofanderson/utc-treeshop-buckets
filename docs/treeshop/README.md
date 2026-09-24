@@ -1,6 +1,6 @@
 # TreeShop operating package
 
-Working documents for the September 2026 launch. Alexander Satoski owns the vision, product direction, client relationship, and final operating decisions. These documents are proposals for the first installation, to be corrected with evidence from the live company.
+Working documents for the September 2026 launch. Mr. J. Anderson is the sole owner of UTC, TreeShop, and Buckets and owns the product vision, product direction, service design, and TreeShop operation. Alexander Satoski owns and manages Sacred Tree Service, the first client company that hired TreeShop and Mr. Anderson. These documents are proposals for the first installation, to be corrected with evidence from the live company.
 
 1. [UTC–TreeShop–Buckets operating model](01-operating-model.md) — ownership, responsibilities, operating loop, and product boundary.
 2. [TreeShop products and service packages](02-service-packages.md) — proposed offers, prices, scope, and commercial rules.

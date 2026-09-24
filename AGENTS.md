@@ -14,9 +14,10 @@ This repository is the shared product and operating workspace for UTC, DBA TreeS
 
 - **Codex / management side:** clarify the operating model, review architecture, turn observations into bounded product work, inspect diffs, and protect the system from scope drift.
 - **Claude Code / customer implementation side:** work on the assigned company Mac, inspect the live customer workflow with authorization, implement approved changes, run tests, and return a reviewable branch/diff.
-- **Owner:** Alexander Satoski is the final product, operating, and customer decision-maker.
+- **UTC / TreeShop / Buckets owner:** Mr. J. Anderson is the sole owner of UTC, TreeShop, and Buckets, and is the product owner, operator, and final authority for the product and TreeShop service.
+- **Sacred Tree Service client owner:** Alexander Satoski owns and manages Sacred Tree Service. Sacred Tree Service hired TreeShop and Mr. Anderson to improve operations, install Buckets, and scale the Sacred Tree Service brand.
 
-The roles are complementary. Neither agent silently assumes authority to send customer communications, change billing, publish a website, alter live Jobber records, or expose customer data.
+The roles are complementary. Neither agent silently assumes authority to send customer communications, change billing, publish a website, alter live Jobber records, or expose customer data. Sacred Tree's owner retains authority over Sacred Tree's customer-facing decisions and live business records; Mr. Anderson retains authority over UTC, TreeShop, and Buckets.
 
 ## Working rules
 
