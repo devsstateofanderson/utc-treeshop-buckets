@@ -70,9 +70,13 @@ struct Readiness: Equatable {
         }
         let name = (company?.name ?? "").trimmingCharacters(in: .whitespaces)
         let area = (company?.serviceArea ?? "").trimmingCharacters(in: .whitespaces)
+        let radius = company?.serviceRadiusMiles ?? 0
+        let zone = (company?.growingZone ?? "").trimmingCharacters(in: .whitespaces)
+        let areaDetail = [area.isEmpty ? nil : area, radius > 0 ? "\(radius)-mile radius" : nil, zone.isEmpty ? nil : zone]
+            .compactMap { $0 }.joined(separator: " · ")
         setupInputs = [
             .init(title: "Company name", isResolved: !name.isEmpty, detail: name.isEmpty ? "not set" : name),
-            .init(title: "Service area", isResolved: !area.isEmpty, detail: area.isEmpty ? "not set" : area),
+            .init(title: "Service area", isResolved: !area.isEmpty || radius > 0, detail: areaDetail.isEmpty ? "not set" : areaDetail),
             .init(title: "Billable hours", isResolved: settings.billableHoursPerYear >= 1,
                   detail: "\(settings.billableHoursPerYear.formatted(.number.locale(Locale(identifier: "en_US")))) hours per year"),
             .init(title: "Target margin", isResolved: settings.targetMarginPct > 0,

@@ -24,8 +24,12 @@ import SwiftData
     var wcPolicy: String?
     var wcExpires: Date?
     var notes: String?
-    /// Where the company works ("Orange, Seminole and Lake counties"); a required setup input (DECISIONS 73).
+    /// Where the company works (DECISIONS 73, 78): a description ("Apopka and Central Florida"), the radius in
+    /// miles around the company address that trips and advertising reach, and the USDA growing zone that decides
+    /// what belongs in the plant catalog. The setup input is resolved by the description or the radius.
     var serviceArea: String?
+    var serviceRadiusMiles: Int?
+    var growingZone: String?
     @Relationship(deleteRule: .cascade, inverse: \CompanyDocument.company) var documents: [CompanyDocument] = []
 
     init(name: String = "") {
@@ -46,6 +50,33 @@ extension Company {
 
     var sortedDocuments: [CompanyDocument] {
         documents.sorted { ($0.category, $0.title) < ($1.category, $1.title) }
+    }
+
+    /// Applies the profile fields a file carries (merge, DECISIONS 78): a nil field leaves the store's value, and
+    /// so does a blank name. Documents are records of local files and are not merged.
+    func apply(_ r: TransferDocument.CompanyRecord) {
+        if !r.name.trimmingCharacters(in: .whitespaces).isEmpty { name = r.name }
+        if let v = r.dba { dba = v }
+        if let v = r.owner { owner = v }
+        if let v = r.address { address = v }
+        if let v = r.phone { phone = v }
+        if let v = r.email { email = v }
+        if let v = r.website { website = v }
+        if let v = r.ein { ein = v }
+        if let v = r.licenses { licenses = v }
+        if let v = r.glCarrier { glCarrier = v }
+        if let v = r.glPolicy { glPolicy = v }
+        if let v = r.glExpires { glExpires = v }
+        if let v = r.autoCarrier { autoCarrier = v }
+        if let v = r.autoPolicy { autoPolicy = v }
+        if let v = r.autoExpires { autoExpires = v }
+        if let v = r.wcCarrier { wcCarrier = v }
+        if let v = r.wcPolicy { wcPolicy = v }
+        if let v = r.wcExpires { wcExpires = v }
+        if let v = r.notes { notes = v }
+        if let v = r.serviceArea { serviceArea = v }
+        if let v = r.serviceRadiusMiles { serviceRadiusMiles = v }
+        if let v = r.growingZone { growingZone = v }
     }
 }
 

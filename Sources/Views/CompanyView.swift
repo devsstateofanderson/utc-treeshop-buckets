@@ -48,7 +48,23 @@ private struct CompanyIdentitySection: View {
             OptionalTextField(label: "DBA", value: $company.dba, prompt: "Doing business as")
             OptionalTextField(label: "Owner", value: $company.owner, prompt: "Owner / principal")
             OptionalTextField(label: "Address", value: $company.address, prompt: "Street, city, state, zip", axis: .vertical)
-            OptionalTextField(label: "Service area", value: $company.serviceArea, prompt: "Orange, Seminole and Lake counties")
+            OptionalTextField(label: "Service area", value: $company.serviceArea, prompt: "Apopka and Central Florida")
+            LabeledContent {
+                HStack(spacing: 6) {
+                    TextField("Service radius", value: $company.serviceRadiusMiles, format: .number.grouping(.never), prompt: Text("30"))
+                        .labelsHidden().frame(width: 64).multilineTextAlignment(.trailing)
+                    Text("miles around the address").foregroundStyle(.secondary)
+                }
+            } label: {
+                Text("Service radius")
+                Text("How far trips and advertising reach").foregroundStyle(.secondary)
+            }
+            LabeledContent {
+                OptionalTextField(label: "Growing zone", value: $company.growingZone, prompt: "USDA 9b").labelsHidden().frame(width: 120)
+            } label: {
+                Text("Growing zone")
+                Text("What belongs in the plant catalog").foregroundStyle(.secondary)
+            }
             OptionalTextField(label: "Phone", value: $company.phone, prompt: "Optional")
             OptionalTextField(label: "Email", value: $company.email, prompt: "Optional")
             OptionalTextField(label: "Website", value: $company.website, prompt: "Optional")
@@ -59,6 +75,8 @@ private struct CompanyIdentitySection: View {
         .onChange(of: company.owner) { _, _ in try? modelContext.save() }
         .onChange(of: company.address) { _, _ in try? modelContext.save() }
         .onChange(of: company.serviceArea) { _, _ in try? modelContext.save() }
+        .onChange(of: company.serviceRadiusMiles) { _, _ in try? modelContext.save() }
+        .onChange(of: company.growingZone) { _, _ in try? modelContext.save() }
         .onChange(of: company.phone) { _, _ in try? modelContext.save() }
         .onChange(of: company.email) { _, _ in try? modelContext.save() }
         .onChange(of: company.website) { _, _ in try? modelContext.save() }

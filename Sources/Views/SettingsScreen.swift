@@ -127,7 +127,8 @@ struct SettingsScreen: View {
         guard panel.runModal() == .OK, let url = panel.url else { return }
         do {
             let result = try Transfer.mergeItems(try Data(contentsOf: url), into: modelContext)
-            lastTransfer = "Added \(result.added) rows, updated \(result.updated), left \(result.unchanged) unchanged (\(url.lastPathComponent))."
+            lastTransfer = "Added \(result.added) rows, updated \(result.updated), left \(result.unchanged) unchanged"
+                + (result.company ? ", applied the company profile" : "") + " (\(url.lastPathComponent))."
         } catch {
             fail("Couldn't add rows", error)
         }

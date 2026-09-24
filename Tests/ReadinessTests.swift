@@ -112,4 +112,20 @@ final class ReadinessTests: XCTestCase {
         XCTAssertEqual(Readiness(items: items, company: company, settings: AppSettings(), now: now).status, .notReady(missingInputs: 1))
         XCTAssertEqual(Readiness(items: items, company: nil, settings: AppSettings(), now: now).status, .notReady(missingInputs: 3))
     }
+
+    func testServiceAreaResolvesByDescriptionOrRadius() {
+        let company = Company(name: "STS")
+        var r = Readiness(items: [], company: company, settings: AppSettings(), now: now)
+        XCTAssertEqual(r.setupInputs.first { $0.title == "Service area" }?.isResolved, false)
+        company.serviceRadiusMiles = 30
+        r = Readiness(items: [], company: company, settings: AppSettings(), now: now)
+        XCTAssertEqual(r.setupInputs.first { $0.title == "Service area" }?.isResolved, true, "a radius alone resolves it (DECISIONS 78)")
+        XCTAssertEqual(r.setupInputs.first { $0.title == "Service area" }?.detail, "30-mile radius")
+        company.serviceArea = "Apopka and Central Florida"; company.growingZone = "USDA 9b"
+        r = Readiness(items: [], company: company, settings: AppSettings(), now: now)
+        XCTAssertEqual(r.setupInputs.first { $0.title == "Service area" }?.detail, "Apopka and Central Florida · 30-mile radius · USDA 9b")
+        company.serviceRadiusMiles = 0; company.serviceArea = "  "; company.growingZone = nil
+        r = Readiness(items: [], company: company, settings: AppSettings(), now: now)
+        XCTAssertEqual(r.setupInputs.first { $0.title == "Service area" }?.detail, "not set")
+    }
 }
