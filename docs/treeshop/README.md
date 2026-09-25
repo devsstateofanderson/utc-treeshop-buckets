@@ -19,3 +19,4 @@ The first working assumption is that the launch company is Sacred Tree Service. 
 ## Operating rule
 
 Every change should carry four facts: the starting state, the decision, the person who approved or performed it, and the observed result. If a number is estimated, label the estimate and its source. A launch-day checklist is complete when the system is usable and its unresolved inputs are visible; a full economic baseline may take longer.
+12. [Equipment classes plan](12-equipment-classes-plan.md) — wear parts as the sixth rate component, the $1,000-over-life rule, ten classes, ownership, track-only, and the four slices to build them.
