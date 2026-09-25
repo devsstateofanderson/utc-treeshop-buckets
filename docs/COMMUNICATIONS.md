@@ -118,3 +118,13 @@ Append entries using this structure:
 - Open questions: none on the repository. Product: the owner's next priorities are faster labor/equipment entry (roadmap §3), a readiness report a remote operator can read without the app, and website/marketing managed through Buckets.
 - Next owner/action: Codex — review `main` (post-merge), then write the next issue and a comms entry. Owner — labor and equipment rows at replacement cost, marked owner confirmed. Claude — the overnight shift on whatever the next issue says.
 - Branch/commit: `main`, this commit.
+
+## 2026-09-24 — Claude Code — equipment classes planning session
+
+- Context read: Mr. Anderson's brief in chat (equipment classes with different rules, consumables on the equipment line, the $1,000-over-lifespan rule, "that pricing is the foundation"); BRIEF §2.2/§5.1, DECISIONS 7, 14, 16, 17, 36, 55–79, roadmap §3, EquipmentCalc, BucketItem, the calculator sheet.
+- Work completed: four planners in parallel (data model, rules per class, rate math, intake UX), reconciled into `docs/treeshop/12-equipment-classes-plan.md`: wear parts as the sixth rate component inside `calcInputs` (no schema change), lifetime cost = price + repairs + wear over life with the $500 MS 194 T at $3.06/h and $3,365 over life, ten classes as a stored attribute suggested from category, owned/rented, track-only rows, in-service/retire-by dates feeding the existing overdue signal, a New Equipment sheet with Add & Next, a CSV fleet sheet through `onboard.sh`, and four slices with slice 1 shippable in one overnight.
+- Evidence/tests: planning only; every figure in the plan was computed by hand and will be pinned by tests as each slice lands (bucket truck stays 2372).
+- Decisions: seven, listed at the top of the plan; DECISIONS 80–86 reserved for the slices. Deliberately out: any new model, meters, intervals as due dates, inspection logs, a compliance dashboard.
+- Open questions: seven for the owner, at the end of the plan.
+- Next owner/action: Mr. Anderson — answer the seven questions (defaults are stated; silence means the defaults). Codex — review the plan, then issue slice 1 (wear parts and lifetime cost). Claude — overnight shift on slice 1 when the issue lands.
+- Branch/commit: `claude/equipment-classes-plan`; hash on the PR.
