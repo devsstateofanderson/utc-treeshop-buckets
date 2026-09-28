@@ -619,10 +619,10 @@
       "isActive": true,
       "link": null,
       "name": "2007 Chevy Silverado 3500",
-      "notes": "Unit __ \u00b7 VIN 1GCJK33D37F152070 \u00b7 ESTIMATES: current value $18,000 (replace with what you paid), life 10,000 h and repair factor 0.75 per BRIEF \u00a72.2 bigger trucks, ~1,200 h/yr, diesel ~$6/hr. Insurance $2,819/yr = 2025 fleet auto insurance $11,275.80 \u00f7 4 units. 2025 fleet fuel was $13,530 and auto maintenance $22,583 across all vehicles.",
+      "notes": "Unit __ \u00b7 VIN [VIN kept in the company vault] \u00b7 ESTIMATES: current value $18,000 (replace with what you paid), life 10,000 h and repair factor 0.75 per BRIEF \u00a72.2 bigger trucks, ~1,200 h/yr, diesel ~$6/hr. Insurance $2,819/yr = 2025 fleet auto insurance $11,275.80 \u00f7 4 units. 2025 fleet fuel was $13,530 and auto maintenance $22,583 across all vehicles.",
       "rateCents": 1100,
       "sortOrder": 9,
-      "source": "GEICO Marine policy 9300144565",
+      "source": "GEICO Marine policy [number kept in the company vault]",
       "unit": "hr"
     },
     {
@@ -641,10 +641,10 @@
       "isActive": true,
       "link": null,
       "name": "2013 Chevy Silverado 1500",
-      "notes": "Unit __ \u00b7 VIN 3GCPCSE04DG109136 \u00b7 ESTIMATES: current value $16,000, life 8,000 h (truck \u226410k GVW), repair 0.70, ~1,000 h/yr, gas ~$4.50/hr, insurance $2,819/yr (fleet policy \u00f7 4).",
+      "notes": "Unit __ \u00b7 VIN [VIN kept in the company vault] \u00b7 ESTIMATES: current value $16,000, life 8,000 h (truck \u226410k GVW), repair 0.70, ~1,000 h/yr, gas ~$4.50/hr, insurance $2,819/yr (fleet policy \u00f7 4).",
       "rateCents": 1022,
       "sortOrder": 10,
-      "source": "GEICO Marine policy 9300144565-0",
+      "source": "GEICO Marine policy [number kept in the company vault]",
       "unit": "hr"
     },
     {
@@ -685,10 +685,10 @@
       "isActive": true,
       "link": null,
       "name": "Dump Trailer",
-      "notes": "2006 LOUDO trailer \u00b7 VIN 1L9BU16226N383939 \u00b7 ESTIMATES: current value $6,500 (a new 7x14 14K dump trailer is $8,400-$15,750), trailer repair factor 0.50 per BRIEF \u00a72.2, ~800 h/yr, insurance $818/yr (fleet policy remainder). Replace price with what you paid.",
+      "notes": "2006 LOUDO trailer \u00b7 VIN [VIN kept in the company vault] \u00b7 ESTIMATES: current value $6,500 (a new 7x14 14K dump trailer is $8,400-$15,750), trailer repair factor 0.50 per BRIEF \u00a72.2, ~800 h/yr, insurance $818/yr (fleet policy remainder). Replace price with what you paid.",
       "rateCents": 180,
       "sortOrder": 12,
-      "source": "GEICO Marine policy 9300144565",
+      "source": "GEICO Marine policy [number kept in the company vault]",
       "unit": "hr"
     },
     {
