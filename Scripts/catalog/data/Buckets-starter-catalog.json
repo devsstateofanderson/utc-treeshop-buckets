@@ -100,7 +100,7 @@
         "lifeHours": 2000,
         "priceCents": 50999,
         "repairFactor": 2.5,
-        "salvageCents": 4000
+        "salvageCents": 5000
       },
       "category": "Chainsaws",
       "isActive": true,
@@ -271,8 +271,8 @@
       "category": "Saw wear parts (priced on saw rows)",
       "isActive": true,
       "link": "https://www.ohiopowertool.com/milwaukee-tool-49-16-2759",
-      "name": "Pole saw chain, Milwaukee 49-16-2759 \u2013 .325 in LP, .043 in, 46 DL (M18 FUEL 3013-21, 9 in bar)",
-      "notes": "Milwaukee 49-16-2759 for the 3013-21 telescoping pole saw's 9 in bar. File 5/32 in (4.0 mm). $27.97 seen 2026-09-28 at Ohio Power Tool (F-CAT-12, Baseline 0.1 \u00a74.6). Saw wear part: this row is the price and stock source for the saw rows' wear lines (OpenLoadout Baseline 0.1 \u00a75.3). Routine wear is priced on the saw's equipment row; toggle this row onto a project only for extraordinary loss, such as a chain destroyed by embedded metal (F-CAT-08).",
+      "name": "Pole saw chain, Milwaukee 49-16-2759 \u2013 .325 in LP, .043 in, 46 DL (M18 FUEL 3013-21, 10 in bar)",
+      "notes": "Milwaukee 49-16-2759 for the 3013-21 telescoping pole saw's 10 in bar 49-16-2760: Milwaukee lists it as a 10 in chain (https://www.milwaukeetool.com/products/details/10-inch-325-low-profile-pitch-saw-chain/49-16-2759, seen 2026-09-28). The kit's 9 in figure is its cut capacity; Baseline 0.1 \u00a74.0 says 9 in bar, flagged for the next FINDINGS revision. File 5/32 in (4.0 mm). $27.97 seen 2026-09-28 at Ohio Power Tool (F-CAT-12, Baseline 0.1 \u00a74.6). Saw wear part: this row is the price and stock source for the saw rows' wear lines (OpenLoadout Baseline 0.1 \u00a75.3). Routine wear is priced on the saw's equipment row; toggle this row onto a project only for extraordinary loss, such as a chain destroyed by embedded metal (F-CAT-08).",
       "rateCents": 2797,
       "sortOrder": 17,
       "source": "Milwaukee dealer (price seen at Ohio Power Tool)",
@@ -1829,7 +1829,7 @@
       "isActive": true,
       "link": null,
       "name": "Royal Palm - 100 Gallon",
-      "notes": null,
+      "notes": "Owner's call, pending: OpenLoadout Baseline 0.1 \u00a710.3 removes royal palm (not on UF's Central Florida palm list; severe potassium deficiency; F-CAT-16). Kept because the company listed it; archive this row to follow the Baseline.",
       "rateCents": 25000,
       "sortOrder": 92,
       "source": null,

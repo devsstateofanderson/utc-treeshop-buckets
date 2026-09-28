@@ -58,6 +58,6 @@ final class PrivacyGuardTests: XCTestCase {
         XCTAssertEqual(Self.hits(in: String(repeating: "a1", count: 8) + "b"), [])
         XCTAssertEqual(Self.hits(in: "Milwaukee 49-16-2723, STIHL 3003 008 8917, 48-11-1881, $32,976.00 on 2026-09-28"), [])
         XCTAssertEqual(Self.hits(in: "https://www.stihlusa.com/en/ap/picco-super-3-ps3-3-8%22-050%22-1027153"), [])
-        XCTAssertEqual(Self.hits(in: "(321) 204-8459; fleet policy \u{00f7} 4 units; policy renews 2027"), [])
+        XCTAssertEqual(Self.hits(in: "(407) 555-0142; fleet policy \u{00f7} 4 units; policy renews 2027"), [])
     }
 }

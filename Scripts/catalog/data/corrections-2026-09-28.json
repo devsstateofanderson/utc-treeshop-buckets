@@ -138,7 +138,7 @@
       "file": "Scripts/catalog/data/Buckets-default-catalog.json",
       "bucket": "consumables",
       "oldName": null,
-      "newName": "Pole saw chain, Milwaukee 49-16-2759 \u2013 .325 in LP, .043 in, 46 DL (M18 FUEL 3013-21, 9 in bar)",
+      "newName": "Pole saw chain, Milwaukee 49-16-2759 \u2013 .325 in LP, .043 in, 46 DL (M18 FUEL 3013-21, 10 in bar)",
       "changes": {
         "added": {
           "rateCents": 2797,
@@ -468,7 +468,7 @@
       "file": "Scripts/catalog/data/rows-equipment-consumables.json",
       "bucket": "consumables",
       "oldName": null,
-      "newName": "Pole saw chain, Milwaukee 49-16-2759 \u2013 .325 in LP, .043 in, 46 DL (M18 FUEL 3013-21, 9 in bar)",
+      "newName": "Pole saw chain, Milwaukee 49-16-2759 \u2013 .325 in LP, .043 in, 46 DL (M18 FUEL 3013-21, 10 in bar)",
       "changes": {
         "added": {
           "rateCents": 2797,
@@ -774,7 +774,7 @@
       "file": "Scripts/catalog/data/rows-all.json",
       "bucket": "consumables",
       "oldName": null,
-      "newName": "Pole saw chain, Milwaukee 49-16-2759 \u2013 .325 in LP, .043 in, 46 DL (M18 FUEL 3013-21, 9 in bar)",
+      "newName": "Pole saw chain, Milwaukee 49-16-2759 \u2013 .325 in LP, .043 in, 46 DL (M18 FUEL 3013-21, 10 in bar)",
       "changes": {
         "added": {
           "rateCents": 2797,
@@ -1068,7 +1068,7 @@
       "file": "Scripts/catalog/data/Buckets-starter-catalog.json",
       "bucket": "consumables",
       "oldName": null,
-      "newName": "Pole saw chain, Milwaukee 49-16-2759 \u2013 .325 in LP, .043 in, 46 DL (M18 FUEL 3013-21, 9 in bar)",
+      "newName": "Pole saw chain, Milwaukee 49-16-2759 \u2013 .325 in LP, .043 in, 46 DL (M18 FUEL 3013-21, 10 in bar)",
       "changes": {
         "added": {
           "rateCents": 2797,
@@ -4566,7 +4566,8 @@
           "to": "Unit __ \u00b7 S/N ________ \u00b7 The physical saw is an MS 193 T (30.1cc, 14in bar, 3/8 PICCO) and keeps its own serial number. Recorded and priced as its standard model, the MS 194 T, at the $509.99 list price (stihlusa.com, seen 2026-09-28; honorary upgrade, Baseline 0.1 \u00a74.5; F-FLEET-02). Read the bar-tail stamp first: 1.1 means .043 in, so run 61 PMM3 until that bar wears out, then fit the Baseline 1.3 mm bar with 63 PS3. Air filter 1137 120 1604 and plug 0000 400 7011 serve both models. Under $1,000: BRIEF \u00a72.2 would put it in overhead as a small-tools budget; kept here because you listed it."
         },
         "inputs": {
-          "price": 509.99
+          "price": 509.99,
+          "salvage": 50
         },
         "rateCents (derived)": 287
       },
@@ -4592,7 +4593,8 @@
           "to": "Unit __ \u00b7 S/N ________ \u00b7 The physical saw is an MS 193 T (30.1cc, 14in bar, 3/8 PICCO) and keeps its own serial number. Recorded and priced as its standard model, the MS 194 T, at the $509.99 list price (stihlusa.com, seen 2026-09-28; honorary upgrade, Baseline 0.1 \u00a74.5; F-FLEET-02). Read the bar-tail stamp first: 1.1 means .043 in, so run 61 PMM3 until that bar wears out, then fit the Baseline 1.3 mm bar with 63 PS3. Air filter 1137 120 1604 and plug 0000 400 7011 serve both models. Under $1,000: BRIEF \u00a72.2 would put it in overhead as a small-tools budget; kept here because you listed it. Evidence: https://www.stihlusa.com/products/chain-saws/in-tree-saws/ms194t/"
         },
         "inputs": {
-          "price": 509.99
+          "price": 509.99,
+          "salvage": 50
         },
         "rateCents (derived)": 287
       },
@@ -4641,7 +4643,7 @@
             "lifeHours": 2000,
             "priceCents": 50999,
             "repairFactor": 2.5,
-            "salvageCents": 4000
+            "salvageCents": 5000
           }
         }
       },
@@ -4942,6 +4944,36 @@
         }
       },
       "evidenceUrl": null,
+      "dateSeen": "2026-09-28"
+    },
+    {
+      "id": "F-CAT-16",
+      "file": "Scripts/catalog/data/Buckets-starter-catalog.json",
+      "bucket": "materials",
+      "oldName": "Royal Palm - 100 Gallon",
+      "newName": "Royal Palm - 100 Gallon",
+      "changes": {
+        "notes": {
+          "from": null,
+          "to": "Owner's call, pending: OpenLoadout Baseline 0.1 \u00a710.3 removes royal palm (not on UF's Central Florida palm list; severe potassium deficiency; F-CAT-16). Kept because the company listed it; archive this row to follow the Baseline."
+        }
+      },
+      "evidenceUrl": "https://ask.ifas.ufl.edu/publication/EP020",
+      "dateSeen": "2026-09-28"
+    },
+    {
+      "id": "F-CAT-16",
+      "file": "Scripts/catalog/data/rows-own.json",
+      "bucket": "materials",
+      "oldName": "Royal Palm - 100 Gallon",
+      "newName": "Royal Palm - 100 Gallon",
+      "changes": {
+        "notes": {
+          "from": null,
+          "to": "Owner's call, pending: OpenLoadout Baseline 0.1 \u00a710.3 removes royal palm (not on UF's Central Florida palm list; severe potassium deficiency; F-CAT-16). Kept because the company listed it; archive this row to follow the Baseline."
+        }
+      },
+      "evidenceUrl": "https://ask.ifas.ufl.edu/publication/EP020",
       "dateSeen": "2026-09-28"
     }
   ]

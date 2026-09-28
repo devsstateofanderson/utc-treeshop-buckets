@@ -77,6 +77,8 @@ final class DefaultCatalogTests: XCTestCase {
             XCTAssertNotNil(rows.first?.link, chain.code)
         }
         XCTAssertEqual(consumables.filter { $0.unit == "loop" }.count, Self.chains.count, "no generic chain loop is left")
+        // Milwaukee lists 49-16-2759 as a 10 in chain; 9 in is the 3013-21's cut capacity, not its bar.
+        XCTAssertTrue(consumables.contains { $0.name.contains("49-16-2759") && $0.name.contains("10 in bar") })
         for part in Self.parts {
             let rows = consumables.filter { $0.name.contains(part.number) }
             XCTAssertEqual(rows.count, 1, part.number)
@@ -141,6 +143,9 @@ final class DefaultCatalogTests: XCTestCase {
         for name in Self.removed where name != "Royal Palm" {  // the company's own royal palm row is the owner's call
             XCTAssertFalse(doc.items.contains { $0.name.localizedCaseInsensitiveContains(name) }, name)
         }
+        // The exemption is visible in the data, not only here: the kept row cites the section that removes it.
+        let royal = try XCTUnwrap(doc.items.first { $0.name == "Royal Palm - 100 Gallon" })
+        XCTAssertTrue(royal.notes?.contains("\u{00a7}10.3") ?? false)
         let counts = Dictionary(grouping: doc.items, by: \.bucket).mapValues(\.count)
         XCTAssertEqual(counts, [.equipment: 19, .materials: 76, .consumables: 19, .overhead: 18])
     }
@@ -169,6 +174,11 @@ final class DefaultCatalogTests: XCTestCase {
             XCTAssertEqual(row.rateCents, rate, name)
             XCTAssertTrue(row.notes?.contains("2026-09-28") ?? false, name)
         }
+        // The two MS 194 T rows are the same model: identical calculator inputs, not only the same price.
+        let saws = try ["Stihl 194T (MS 193 T unit, honorary upgrade)", "Stihl 194T"].map { name in
+            try XCTUnwrap(doc.items.first { $0.bucket == .equipment && $0.name == name }?.calcInputs?.data, name)
+        }.map { try JSONDecoder().decode(EquipmentCalcInputs.self, from: $0) }
+        XCTAssertEqual(saws[0], saws[1])
         let pole = try XCTUnwrap(doc.items.first { $0.name == "Milwaukee Pole Saw" })
         XCTAssertFalse(pole.notes?.contains("~13ft") ?? true, "the 3016-21PS reaches 7-10 ft (F-CAT-19)")
     }

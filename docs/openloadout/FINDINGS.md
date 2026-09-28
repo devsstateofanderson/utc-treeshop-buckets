@@ -1,6 +1,6 @@
 # FINDINGS — companion to OpenLoadout Tree Service Baseline 0.1 (2026-09-28)
 
-The corrections register for the standard, the Buckets default catalog and the worked-example fleet, plus the internal notes that do not belong in the public text. Every correction carries an ID that STANDARD.md cites. Prices are USD as seen on the date given. "Overturned" upstream findings were not used. No serials, VINs, policy numbers, wages or personal data appear here.
+The corrections register for the standard, the Buckets default catalog and the worked-example fleet. This repository copy leaves out the internal notes (sections 3 and 4), which are kept outside the repository. Every correction carries an ID that STANDARD.md cites. Prices are USD as seen on the date given. "Overturned" upstream findings were not used. No serials, VINs, policy numbers, wages or personal data appear here.
 
 ## 1. Index
 
