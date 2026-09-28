@@ -11,16 +11,6 @@
  },
  {
   "bucket": "materials",
-  "name": "Queen Palm \u2013 10 in pot (~3 gal equiv)",
-  "unit": "each",
-  "price": 218.14,
-  "source": "Home Depot (Apopka)",
-  "category": "Palms",
-  "link": "https://www.homedepot.com/p/Wekiva-Foliage-Queen-Palm-Live-Plant-in-a-10-in-Growers-Pot-Syagrus-Romanzoffiana-Handsome-and-Sturdy-Evergreen-Palm-Tree-QueenPalm10x1/334118616",
-  "notes": "Wekiva Foliage QueenPalm10x1. Home Depot online price, Sep 15 2026. Larger 7-gal and 15-gal Queen Palm listings (The Plant Stand of Arizona) exist on homedepot.com but showed as\u2026. You quote 12-16 ft B&B Queen palm at ~$600 plus ~$1,000 planting."
- },
- {
-  "bucket": "materials",
   "name": "Pygmy Date (Robellini) Palm \u2013 2 gal",
   "unit": "each",
   "price": 43.65,
@@ -201,96 +191,6 @@
  },
  {
   "bucket": "materials",
-  "name": "Ligustrum (tree form / standard) \u2013 2.5 gal",
-  "unit": "each",
-  "price": 36.98,
-  "source": "Home Depot (Apopka)",
-  "category": "Trees",
-  "link": "https://www.homedepot.com/p/Vigoro-2-5-Gal-Recurve-Ligustrum-Evergreen-Privet-Shrub-Dark-Green-Foliage-11375/330639233",
-  "notes": "Vigoro 11375. Home Depot online price, Sep 15 2026. Sold as a shrub/privet, not a clipped single-trunk 'tree form' standard -- homedepot.com did not show a distin\u2026."
- },
- {
-  "bucket": "materials",
-  "name": "Ligustrum (Wax Leaf Japanese Privet) \u2013 3 gal",
-  "unit": "each",
-  "price": 36.35,
-  "source": "Home Depot (Apopka)",
-  "category": "Trees",
-  "link": "https://www.homedepot.com/p/Perfect-Plants-3-Gal-Wax-Ligustrum-Shrub-with-Wax-Leaf-Japanese-Privet-2-Pack-THD00053/312499589",
-  "notes": "Perfect Plants THD00053. Home Depot online price, Sep 15 2026. Sold as a 2-pack for $72.69 total ($36.35/plant);."
- },
- {
-  "bucket": "materials",
-  "name": "Loquat (Bronze Loquat) \u2013 6 in pot (starter)",
-  "unit": "each",
-  "price": 70.7,
-  "source": "Home Depot (Apopka)",
-  "category": "Trees",
-  "link": "https://www.homedepot.com/p/Bronze-Loquat-Live-6-Inch-Plant-Eriobotrya-Japonica-Edible-Fruit-Bearing-Patio-Tree-BronLo6x1/333991813",
-  "notes": "BronLo6x1. Home Depot online price, Sep 15 2026. Small starter plant, not a standard nursery gallon size;."
- },
- {
-  "bucket": "materials",
-  "name": "Tabebuia (Pink Trumpet Tree) \u2013 3 gal",
-  "unit": "each",
-  "price": 204.37,
-  "source": "Home Depot (Apopka)",
-  "category": "Trees",
-  "link": "https://www.homedepot.com/p/Wekiva-Foliage-Pink-Tabebuia-Trumpet-Tree-Live-Plant-in-a-3-Gallon-Pot-Tabebuia-Heterophylla-Beautiful-Flowering-Tree-PinkTab3gx1/333992742",
-  "notes": "Wekiva Foliage PinkTab3gx1. Home Depot online price, Sep 15 2026."
- },
- {
-  "bucket": "materials",
-  "name": "Tabebuia (Yellow Trumpet Tree) \u2013 3 gal",
-  "unit": "each",
-  "price": 196.51,
-  "source": "Home Depot (Apopka)",
-  "category": "Trees",
-  "link": "https://www.homedepot.com/p/Wekiva-Foliage-Yellow-Tabebuia-Trumpet-Tree-Live-Plant-in-a-3-Gallon-Pot-Handroanthus-Chrysanthus-Beautiful-Flowering-Tree-YellTabTr3gx1/333992708",
-  "notes": "Wekiva Foliage YellTabTr3gx1. Home Depot online price, Sep 15 2026."
- },
- {
-  "bucket": "materials",
-  "name": "Bottlebrush (Red Flowering) \u2013 1 gal",
-  "unit": "each",
-  "price": 38.46,
-  "source": "Home Depot (Apopka)",
-  "category": "Trees",
-  "link": "https://www.homedepot.com/p/1-Gal-Red-Flowering-Bottlebrush-Tree-BOTRED01G/329903650",
-  "notes": "BOTRED01G. Home Depot online price, Sep 15 2026."
- },
- {
-  "bucket": "materials",
-  "name": "River Birch (multi-trunk) \u2013 1 gal",
-  "unit": "each",
-  "price": 44.98,
-  "source": "Home Depot (Apopka)",
-  "category": "Trees",
-  "link": "https://www.homedepot.com/p/1-Gal-River-Birch-Multi-Trunk-Shade-Tree-BIRDUR01G/313020338",
-  "notes": "BIRDUR01G. Home Depot online price, Sep 15 2026."
- },
- {
-  "bucket": "materials",
-  "name": "River Birch \u2013 2.5 gal",
-  "unit": "each",
-  "price": 38.76,
-  "source": "Home Depot (Apopka)",
-  "category": "Trees",
-  "link": "https://www.homedepot.com/p/FLOWERWOOD-2-5-Gal-River-Birch-Deciduous-Tree-04503FL/318306295",
-  "notes": "FLOWERWOOD 04503FL. Home Depot online price, Sep 15 2026."
- },
- {
-  "bucket": "materials",
-  "name": "River Birch (multi-stem) \u2013 5 gal",
-  "unit": "each",
-  "price": 82.99,
-  "source": "Home Depot (Apopka)",
-  "category": "Trees",
-  "link": "https://www.homedepot.com/p/5-Gal-River-Birch-Shade-Tree-Multi-Stem-BIRDHT05G/313396790",
-  "notes": "BIRDHT05G. Home Depot online price, Sep 15 2026."
- },
- {
-  "bucket": "materials",
   "name": "Eagleston Holly \u2013 7 gal",
   "unit": "each",
   "price": 84.62,
@@ -308,26 +208,6 @@
   "category": "Trees",
   "link": "https://www.homedepot.com/p/1-Gal-Dahoon-Holly-Evergreen-Tree-HOLDAH01G/315948341",
   "notes": "HOLDAH01G. Home Depot online price, Sep 15 2026. 5-gal size (HOLDAH05G, Ilex cassine) also listed on homedepot.com;. You quote 30-gal Dahoon Holly at ~$300 plus ~$350 planting."
- },
- {
-  "bucket": "materials",
-  "name": "Lemon Tree (Improved Meyer) \u2013 1 gal",
-  "unit": "each",
-  "price": 32.97,
-  "source": "Home Depot (Apopka)",
-  "category": "Trees",
-  "link": "https://www.homedepot.com/p/BELL-NURSERY-1-Gal-Improved-Meyer-Lemon-Tree-Live-Tropical-Tree-with-White-Flower-to-Yellow-Fruit-1-Pack-LEMON1MEY1PK/317131070",
-  "notes": "BELL NURSERY LEMON1MEY1PK. Home Depot online price, Sep 15 2026. 3-gal Meyer Lemon (CIIM03, semi-dwarf) also listed on homedepot.com but price not returned in search."
- },
- {
-  "bucket": "materials",
-  "name": "Orange Tree (Calamondin) \u2013 1 gal (3-plant bundle)",
-  "unit": "each",
-  "price": 220.06,
-  "source": "Home Depot (Apopka)",
-  "category": "Trees",
-  "link": "https://www.homedepot.com/p/Wekiva-Foliage-Calamondin-Orange-Tree-Calamansi-3-Live-Plants-in-1-Gallon-Pots-Cannot-Ship-Out-of-Florida-Fruit-Tree-CalaOra3x1g/334095932",
-  "notes": "Wekiva Foliage CalaOra3x1g. Home Depot online price, Sep 15 2026. Price is for a bundle of 3 plants (~$73.35/plant);."
  },
  {
   "bucket": "materials",

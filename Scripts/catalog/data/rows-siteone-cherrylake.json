@@ -163,11 +163,11 @@
   "bucket": "materials",
   "name": "Live Oak \u2013 30 gal",
   "unit": "each",
-  "price": 225.0,
-  "source": "Cherry Lake / wholesale nursery",
+  "price": 193.6,
+  "source": "Cherry Lake (Cherrylake, Inc., Groveland FL)",
   "category": "Trees",
-  "link": "https://www.creeknursery.com/creek_nursery_wholesale_availability.pdf",
-  "notes": "ESTIMATE, 2026-09-09. Cherrylake does not publish pricing. You quote Cathedral Live Oak at ~$676 (30 gal), ~$1,674 (45 gal), ~$1,349 (65 gal) installed."
+  "link": "https://cherrylakecommunities.com/",
+  "notes": "Cherrylake public retail $193.60 for the 30 gal size, seen 2026-09-28 at https://cherrylakecommunities.com/. The wholesale-account price is unverified until a quote is on file (OpenLoadout Baseline 0.1 \u00a75.4). Replaces an estimate of $225.00 taken from another nursery's list and labelled Cherry Lake (F-CAT-15)."
  },
  {
   "bucket": "materials",
@@ -177,7 +177,7 @@
   "source": "Cherry Lake / wholesale nursery",
   "category": "Trees",
   "link": "https://www.creeknursery.com/creek_nursery_wholesale_availability.pdf",
-  "notes": "ESTIMATE, 2026-09-09. Cherrylake pricing not public. You quote Cathedral Live Oak at ~$676 (30 gal), ~$1,674 (45 gal), ~$1,349 (65 gal) installed."
+  "notes": "ESTIMATE, 2026-09-09. Cherrylake pricing not public. You quote Cathedral Live Oak at ~$676 (30 gal), ~$1,674 (45 gal), ~$1,349 (65 gal) installed. NEEDS A CHERRYLAKE QUOTE: the price above is another nursery's estimate, not Cherrylake's, and no Cherrylake public price for this size was on file on 2026-09-28. Replace it from the wholesale-account quote (OpenLoadout Baseline 0.1 \u00a75.4; F-CAT-15)."
  },
  {
   "bucket": "materials",
@@ -187,7 +187,7 @@
   "source": "Cherry Lake / wholesale nursery",
   "category": "Trees",
   "link": "https://www.creeknursery.com/creek_nursery_wholesale_availability.pdf",
-  "notes": "ESTIMATE, 2026-09-09. Closest available size to the requested 30gal in current public price lists. You quote 30-gal Magnolia at ~$600 plus ~$400 planting."
+  "notes": "ESTIMATE, 2026-09-09. Closest available size to the requested 30gal in current public price lists. You quote 30-gal Magnolia at ~$600 plus ~$400 planting. NEEDS A CHERRYLAKE QUOTE: the price above is another nursery's estimate, not Cherrylake's, and no Cherrylake public price for this size was on file on 2026-09-28. Replace it from the wholesale-account quote (OpenLoadout Baseline 0.1 \u00a75.4; F-CAT-15)."
  },
  {
   "bucket": "materials",
@@ -197,7 +197,7 @@
   "source": "Cherry Lake / wholesale nursery",
   "category": "Palms",
   "link": "https://www.aqualityplant.com/sylvester-palm-silver-date-tree-phoenix-sylvestris",
-  "notes": "ESTIMATE, 2026-09-15. A Quality Plant (self-described wholesale palm nursery serving Central FL, incl. You quote Sylvester planting at ~$250 per foot of trunk, 12 ft minimum."
+  "notes": "ESTIMATE, 2026-09-15. A Quality Plant (self-described wholesale palm nursery serving Central FL, incl. You quote Sylvester planting at ~$250 per foot of trunk, 12 ft minimum. NEEDS A CHERRYLAKE QUOTE: the price above is another nursery's estimate, not Cherrylake's, and no Cherrylake public price for this size was on file on 2026-09-28. Replace it from the wholesale-account quote (OpenLoadout Baseline 0.1 \u00a75.4; F-CAT-15)."
  },
  {
   "bucket": "materials",
@@ -207,27 +207,17 @@
   "source": "Cherry Lake / wholesale nursery",
   "category": "Palms",
   "link": "https://www.creeknursery.com/creek_nursery_wholesale_availability.pdf",
-  "notes": "ESTIMATE, 2026-09-09. Creek Nursery (Stuart, FL) wholesale list, dated 9/9/26, flat price across the full 10-18ft trunk range. You quote Sabal delivery + planting at $395-$1,000 by trunk height."
- },
- {
-  "bucket": "materials",
-  "name": "Queen Palm \u2013 25 gal",
-  "unit": "each",
-  "price": 115.0,
-  "source": "Cherry Lake / wholesale nursery",
-  "category": "Palms",
-  "link": "https://www.creeknursery.com/creek_nursery_wholesale_availability.pdf",
-  "notes": "ESTIMATE, 2026-09-09. Creek Nursery (Stuart, FL), price list dated 9/9/26. You quote 12-16 ft B&B Queen palm at ~$600 plus ~$1,000 planting."
+  "notes": "ESTIMATE, 2026-09-09. Creek Nursery (Stuart, FL) wholesale list, dated 9/9/26, flat price across the full 10-18ft trunk range. You quote Sabal delivery + planting at $395-$1,000 by trunk height. NEEDS A CHERRYLAKE QUOTE: the price above is another nursery's estimate, not Cherrylake's, and no Cherrylake public price for this size was on file on 2026-09-28. Replace it from the wholesale-account quote (OpenLoadout Baseline 0.1 \u00a75.4; F-CAT-15)."
  },
  {
   "bucket": "materials",
   "name": "Crape Myrtle, multi-trunk \u2013 30 gal",
   "unit": "each",
-  "price": 195.0,
-  "source": "Cherry Lake / wholesale nursery",
+  "price": 143.0,
+  "source": "Cherry Lake (Cherrylake, Inc., Groveland FL)",
   "category": "Trees",
-  "link": "https://www.creeknursery.com/creek_nursery_wholesale_availability.pdf",
-  "notes": "ESTIMATE, 2026-09-09. Creek Nursery (Stuart, FL), price list dated 9/9/26. You quote 30-gal Crape Myrtle at $250-$400 plus ~$300 planting."
+  "link": "https://cherrylakecommunities.com/",
+  "notes": "Cherrylake public retail $143.00 for the 30 gal size, seen 2026-09-28 at https://cherrylakecommunities.com/. The wholesale-account price is unverified until a quote is on file (OpenLoadout Baseline 0.1 \u00a75.4). Replaces an estimate of $195.00 taken from another nursery's list and labelled Cherry Lake (F-CAT-15)."
  },
  {
   "bucket": "materials",
@@ -237,17 +227,17 @@
   "source": "Cherry Lake / wholesale nursery",
   "category": "Trees",
   "link": "https://www.creeknursery.com/creek_nursery_wholesale_availability.pdf",
-  "notes": "ESTIMATE, 2026-09-09. Bonus size beyond the requested 15/30gal, included since it was on the current price list. You quote 30-gal Crape Myrtle at $250-$400 plus ~$300 planting."
+  "notes": "ESTIMATE, 2026-09-09. Bonus size beyond the requested 15/30gal, included since it was on the current price list. You quote 30-gal Crape Myrtle at $250-$400 plus ~$300 planting. NEEDS A CHERRYLAKE QUOTE: the price above is another nursery's estimate, not Cherrylake's, and no Cherrylake public price for this size was on file on 2026-09-28. Replace it from the wholesale-account quote (OpenLoadout Baseline 0.1 \u00a75.4; F-CAT-15)."
  },
  {
   "bucket": "materials",
   "name": "Bald Cypress \u2013 30 gal",
   "unit": "each",
-  "price": 185.0,
-  "source": "Cherry Lake / wholesale nursery",
+  "price": 148.5,
+  "source": "Cherry Lake (Cherrylake, Inc., Groveland FL)",
   "category": "Trees",
-  "link": "https://www.creeknursery.com/creek_nursery_wholesale_availability.pdf",
-  "notes": "ESTIMATE, 2026-09-09. Creek Nursery (Stuart, FL), price list dated 9/9/26. You quote 45-gal Bald Cypress at ~$385."
+  "link": "https://cherrylakecommunities.com/",
+  "notes": "Cherrylake public retail $148.50 for the 30 gal size, seen 2026-09-28 at https://cherrylakecommunities.com/. The wholesale-account price is unverified until a quote is on file (OpenLoadout Baseline 0.1 \u00a75.4). Replaces an estimate of $185.00 taken from another nursery's list and labelled Cherry Lake (F-CAT-15)."
  },
  {
   "bucket": "materials",
@@ -257,7 +247,7 @@
   "source": "Cherry Lake / wholesale nursery",
   "category": "Trees",
   "link": "https://www.creeknursery.com/creek_nursery_wholesale_availability.pdf",
-  "notes": "ESTIMATE, 2026-09-09. Creek Nursery (Stuart, FL), price list dated 9/9/26;. You quote 30-gal Red Flame Maple at ~$300."
+  "notes": "ESTIMATE, 2026-09-09. Creek Nursery (Stuart, FL), price list dated 9/9/26;. You quote 30-gal Red Flame Maple at ~$300. NEEDS A CHERRYLAKE QUOTE: the price above is another nursery's estimate, not Cherrylake's, and no Cherrylake public price for this size was on file on 2026-09-28. Replace it from the wholesale-account quote (OpenLoadout Baseline 0.1 \u00a75.4; F-CAT-15)."
  },
  {
   "bucket": "materials",
@@ -267,6 +257,6 @@
   "source": "Cherry Lake / wholesale nursery",
   "category": "Trees",
   "link": "https://www.creeknursery.com/creek_nursery_wholesale_availability.pdf",
-  "notes": "ESTIMATE, 2026-09-09. Creek Nursery (Stuart, FL), price list dated 9/9/26 (listed as 'Holy Eagleston,' apparently a typo for Holly). You quote 30-gal Dahoon Holly at ~$300 plus ~$350 planting."
+  "notes": "ESTIMATE, 2026-09-09. Creek Nursery (Stuart, FL), price list dated 9/9/26 (listed as 'Holy Eagleston,' apparently a typo for Holly). You quote 30-gal Dahoon Holly at ~$300 plus ~$350 planting. NEEDS A CHERRYLAKE QUOTE: the price above is another nursery's estimate, not Cherrylake's, and no Cherrylake public price for this size was on file on 2026-09-28. Replace it from the wholesale-account quote (OpenLoadout Baseline 0.1 \u00a75.4; F-CAT-15)."
  }
 ]

@@ -68,7 +68,7 @@ The script quits Buckets, backs up the live store to the local vault, applies th
 
 ## Editions and backups
 
-- `Scripts/catalog/data/Buckets-default-catalog.json`: the blank commercial starting point (no labor or equipment, overhead as a $0 checklist, 112 materials and 57 consumables for professional tree work with links, and no company settings — DECISIONS 76–77). Load it with Add or Update Rows, or run the app once with `BUCKETS_MERGE_FILE` pointing at it.
+- `Scripts/catalog/data/Buckets-default-catalog.json`: the blank commercial starting point (no labor or equipment, overhead as a $0 checklist of 21 lines, 99 materials and 63 consumables for professional tree work with links, and no company settings — DECISIONS 76–77), corrected to OpenLoadout Tree Service Baseline 0.1 (`docs/openloadout/`, DECISIONS 87). Load it with Add or Update Rows, or run the app once with `BUCKETS_MERGE_FILE` pointing at it. A store that merged an older default also merges `archive-2026-09-24-removed-species.json` and `archive-2026-09-28-baseline-0.1.json` to archive the rows since renamed or removed; `corrections-2026-09-28.json` is the audit trail of the 2026-09-28 corrections.
 - `Backups/`: dated folders with an Export JSON and the raw store files; see `Backups/README.txt`.
 
 ## Where the data is
