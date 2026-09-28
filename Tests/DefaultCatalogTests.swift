@@ -92,7 +92,11 @@ final class DefaultCatalogTests: XCTestCase {
         let files = consumables.filter { $0.name.hasPrefix("Round chainsaw file") }
         XCTAssertEqual(files.count, 2)
         XCTAssertTrue(files.allSatisfy { $0.unit == "pack" && $0.rateCents == 3199 }, "a dozen is $31.99 (F-CAT-03)")
-        XCTAssertEqual(consumables.first { $0.name.hasPrefix("Bar and chain oil \u{2013} 5 gallon") }?.unit, "pail", "F-CAT-05")
+        let pail = consumables.first { $0.name.hasPrefix("Bar and chain oil \u{2013} 5 gallon") }
+        XCTAssertEqual(pail?.unit, "pail", "F-CAT-05")
+        // An unverified price is $0 with a quote needed, never priced from (FINDINGS section 2, DECISIONS 87).
+        XCTAssertEqual(pail?.rateCents, 0, "F-CAT-05")
+        XCTAssertTrue(pail?.source?.contains("quote needed") ?? false, "F-CAT-05")
     }
 
     /// The archive file lists every default row that was renamed or removed, under its old name, archived, so a store
@@ -119,6 +123,18 @@ final class DefaultCatalogTests: XCTestCase {
         XCTAssertTrue(try XCTUnwrap(rows.first { $0.name == "A row the company typed" }).isActive)
     }
 
+    /// The company edition's seven renamed rows, under their 2026-09-16 names, archived for a store that merged it.
+    func testStarterArchiveCoversTheCompanyEditionsRenamedRows() throws {
+        let (_, current) = try document("Buckets-starter-catalog.json")
+        let (_, archive) = try document("archive-2026-09-28-baseline-0.1-starter.json")
+        XCTAssertEqual(archive.items.count, 7)
+        XCTAssertTrue(archive.items.allSatisfy { !$0.isActive })
+        let now = Set(current.items.map { "\($0.bucket)|\($0.name)" })
+        for item in archive.items {
+            XCTAssertFalse(now.contains("\(item.bucket)|\(item.name)"), "\(item.name) is no longer a company-edition row")
+        }
+    }
+
     func testStarterCatalogCarriesNoSettingsAndNoRemovedRows() throws {
         let (_, doc) = try document("Buckets-starter-catalog.json")
         XCTAssertNil(doc.settings)
@@ -136,6 +152,7 @@ final class DefaultCatalogTests: XCTestCase {
         let expected: [String: (price: Int, fuel: Int?)] = [
             "Stihl 201T": (94999, nil),
             "Stihl 194T (MS 193 T unit, honorary upgrade)": (50999, nil),
+            "Stihl 194T": (50999, nil),  // Baseline 0.1 §4.5 rule 3: the standard model's STIHL USA list
             "Toro Mini Skid": (3297600, 633),
         ]
         XCTAssertFalse(doc.items.contains { $0.name == "Stihl 193" })

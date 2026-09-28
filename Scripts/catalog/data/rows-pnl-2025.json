@@ -185,10 +185,10 @@
  },
  {
   "bucket": "consumables",
-  "name": "Grapple Truck - Mike",
+  "name": "Grapple truck (sub)",
   "unit": "each",
   "price": 400.0,
-  "source": "Sub Contractor- Gaston",
+  "source": "Grapple-truck subcontractor",
   "notes": "Your rate. 2025 P&L: Grapple $1,300 for the year.",
   "category": "Subcontractors",
   "link": null

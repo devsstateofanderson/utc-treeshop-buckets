@@ -1,0 +1,93 @@
+{
+  "formatVersion": 2,
+  "exportedAt": "2026-09-28T00:00:00Z",
+  "projects": [],
+  "items": [
+    {
+      "bucket": "equipment",
+      "name": "Stihl 193",
+      "rateCents": 268,
+      "unit": "hr",
+      "isActive": false,
+      "source": null,
+      "notes": null,
+      "calcInputs": {
+        "annualHours": 300,
+        "costOfMoneyPct": 0,
+        "fuelOilPerHourCents": 200,
+        "insurancePerYearCents": 0,
+        "lifeHours": 2000,
+        "priceCents": 39995,
+        "repairFactor": 2.5,
+        "salvageCents": 4000
+      },
+      "sortOrder": 0
+    },
+    {
+      "bucket": "consumables",
+      "name": "Chain loop \u2013 3/8 PICCO PM3 (193/194/201)",
+      "rateCents": 3049,
+      "unit": "each",
+      "isActive": false,
+      "source": null,
+      "notes": null,
+      "calcInputs": null,
+      "sortOrder": 0
+    },
+    {
+      "bucket": "consumables",
+      "name": "Chain loop \u2013 3/8 RS3 (500i)",
+      "rateCents": 4999,
+      "unit": "each",
+      "isActive": false,
+      "source": null,
+      "notes": null,
+      "calcInputs": null,
+      "sortOrder": 0
+    },
+    {
+      "bucket": "consumables",
+      "name": "Pole saw chain (Oregon 90PX)",
+      "rateCents": 2375,
+      "unit": "each",
+      "isActive": false,
+      "source": null,
+      "notes": null,
+      "calcInputs": null,
+      "sortOrder": 0
+    },
+    {
+      "bucket": "consumables",
+      "name": "Chain sharpening kit (2-in-1 file guide)",
+      "rateCents": 1599,
+      "unit": "each",
+      "isActive": false,
+      "source": null,
+      "notes": null,
+      "calcInputs": null,
+      "sortOrder": 0
+    },
+    {
+      "bucket": "consumables",
+      "name": "M18 battery XC 8.0 (48-11-1880)",
+      "rateCents": 19900,
+      "unit": "each",
+      "isActive": false,
+      "source": null,
+      "notes": null,
+      "calcInputs": null,
+      "sortOrder": 0
+    },
+    {
+      "bucket": "consumables",
+      "name": "M18 battery HD 12.0 (48-11-1812)",
+      "rateCents": 27900,
+      "unit": "each",
+      "isActive": false,
+      "source": null,
+      "notes": null,
+      "calcInputs": null,
+      "sortOrder": 0
+    }
+  ]
+}

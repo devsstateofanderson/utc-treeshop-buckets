@@ -1,7 +1,7 @@
 {
   "baseline": "OpenLoadout Tree Service Baseline 0.1",
   "dateSeen": "2026-09-28",
-  "about": "Audit trail of the catalog corrections applied on branch claude/operating-standard-baseline-1 from docs/openloadout/FINDINGS.md section 1 and docs/openloadout/STANDARD.md (sections 4, 5.3, 10.3, Appendix A). One entry per correction per file and row. oldName null means the row was added; newName \"removed\" means it was deleted from that file (the default catalog's renamed and removed rows are archived for merged stores by archive-2026-09-28-baseline-0.1.json). No row was marked verified: confidence stays with the app's review workflow (DECISIONS 72-74).",
+  "about": "Audit trail of the catalog corrections applied on branch claude/operating-standard-baseline-1 from docs/openloadout/FINDINGS.md section 1 and docs/openloadout/STANDARD.md (sections 4, 5.3, 10.3, Appendix A). One entry per correction per file and row. oldName null means the row was added; newName \"removed\" means it was deleted from that file (the default catalog's renamed and removed rows are archived for merged stores by archive-2026-09-28-baseline-0.1.json). No row was marked verified: confidence stays with the app's review workflow (DECISIONS 72-74). Entries with id PRIVACY replace personal names with a role (Baseline 0.1 rule 26); their old values are deliberately not repeated, and a store holding the old row renames it by hand.",
   "corrections": [
     {
       "id": "F-LIST-01",
@@ -161,7 +161,7 @@
           "to": "Saw wear parts (priced on saw rows)"
         },
         "notes": {
-          "to": "Retail price 2026-09-15 Saw wear part: this row is the price and stock source for the saw rows' wear lines (OpenLoadout Baseline 0.1 \u00a75.3). Routine wear is priced on the saw's equipment row; toggle this row onto a project only for extraordinary loss, such as a chain destroyed by embedded metal (F-CAT-08)."
+          "to": "Retail price 2026-09-15. Saw wear part: this row is the price and stock source for the saw rows' wear lines (OpenLoadout Baseline 0.1 \u00a75.3). Routine wear is priced on the saw's equipment row; toggle this row onto a project only for extraordinary loss, such as a chain destroyed by embedded metal (F-CAT-08)."
         }
       },
       "evidenceUrl": "docs/openloadout/STANDARD.md \u00a75.3",
@@ -179,7 +179,7 @@
           "to": "Saw wear parts (priced on saw rows)"
         },
         "notes": {
-          "to": "Retail price 2026-09-15 Saw wear part: this row is the price and stock source for the saw rows' wear lines (OpenLoadout Baseline 0.1 \u00a75.3). Routine wear is priced on the saw's equipment row; toggle this row onto a project only for extraordinary loss, such as a chain destroyed by embedded metal (F-CAT-08)."
+          "to": "Retail price 2026-09-15. Saw wear part: this row is the price and stock source for the saw rows' wear lines (OpenLoadout Baseline 0.1 \u00a75.3). Routine wear is priced on the saw's equipment row; toggle this row onto a project only for extraordinary loss, such as a chain destroyed by embedded metal (F-CAT-08)."
         }
       },
       "evidenceUrl": "docs/openloadout/STANDARD.md \u00a75.3",
@@ -197,7 +197,7 @@
           "to": "Saw wear parts (priced on saw rows)"
         },
         "notes": {
-          "to": "Retail price 2026-09-15 Link needs re-verification: the Walmart page is dead (404 in the 2026-09-24 audit), so this price is unconfirmed; re-verify before use. Current STIHL safety data sheets: https://www.stihlusa.com/safety/data-sheets/ (seen 2026-09-28; F-CAT-07). Saw wear part: this row is the price and stock source for the saw rows' wear lines (OpenLoadout Baseline 0.1 \u00a75.3). Routine wear is priced on the saw's equipment row; toggle this row onto a project only for extraordinary loss, such as a chain destroyed by embedded metal (F-CAT-08)."
+          "to": "Retail price 2026-09-15. Link needs re-verification: the Walmart page is dead (404 in the 2026-09-24 audit), so this price is unconfirmed; re-verify before use. Current STIHL safety data sheets: https://www.stihlusa.com/safety/data-sheets/ (seen 2026-09-28; F-CAT-07). Saw wear part: this row is the price and stock source for the saw rows' wear lines (OpenLoadout Baseline 0.1 \u00a75.3). Routine wear is priced on the saw's equipment row; toggle this row onto a project only for extraordinary loss, such as a chain destroyed by embedded metal (F-CAT-08)."
         }
       },
       "evidenceUrl": "https://www.stihlusa.com/safety/data-sheets/",
@@ -1587,7 +1587,7 @@
           "to": "Saw wear parts (priced on saw rows)"
         },
         "notes": {
-          "to": "Forester. Price 2026-09-16. Per-file price ~$3.33; Saw wear part: this row is the price and stock source for the saw rows' wear lines (OpenLoadout Baseline 0.1 \u00a75.3). Routine wear is priced on the saw's equipment row; toggle this row onto a project only for extraordinary loss, such as a chain destroyed by embedded metal (F-CAT-08)."
+          "to": "Forester. Price 2026-09-16. Per-file price ~$3.33. Saw wear part: this row is the price and stock source for the saw rows' wear lines (OpenLoadout Baseline 0.1 \u00a75.3). Routine wear is priced on the saw's equipment row; toggle this row onto a project only for extraordinary loss, such as a chain destroyed by embedded metal (F-CAT-08)."
         }
       },
       "evidenceUrl": "docs/openloadout/STANDARD.md \u00a75.3",
@@ -1605,7 +1605,7 @@
           "to": "Saw wear parts (priced on saw rows)"
         },
         "notes": {
-          "to": "Husqvarna. Price 2026-09-16 Saw wear part: this row is the price and stock source for the saw rows' wear lines (OpenLoadout Baseline 0.1 \u00a75.3). Routine wear is priced on the saw's equipment row; toggle this row onto a project only for extraordinary loss, such as a chain destroyed by embedded metal (F-CAT-08)."
+          "to": "Husqvarna. Price 2026-09-16. Saw wear part: this row is the price and stock source for the saw rows' wear lines (OpenLoadout Baseline 0.1 \u00a75.3). Routine wear is priced on the saw's equipment row; toggle this row onto a project only for extraordinary loss, such as a chain destroyed by embedded metal (F-CAT-08)."
         }
       },
       "evidenceUrl": "docs/openloadout/STANDARD.md \u00a75.3",
@@ -1627,7 +1627,16 @@
           "to": "Saw wear parts (priced on saw rows)"
         },
         "notes": {
-          "to": "STIHL Platinum. Price 2026-09-16 Unit is the 5 gal pail, not a gallon. Price unverified: the cited page showed no price on 2026-09-28; get a dealer quote before use (F-CAT-05). Saw wear part: this row is the price and stock source for the saw rows' wear lines (OpenLoadout Baseline 0.1 \u00a75.3). Routine wear is priced on the saw's equipment row; toggle this row onto a project only for extraordinary loss, such as a chain destroyed by embedded metal (F-CAT-08)."
+          "to": "STIHL Platinum. Unit is the 5 gal pail, not a gallon. PRICE UNVERIFIED: the cited page showed no price on 2026-09-28, so the rate is $0 until a dealer quote is on file; the $141.99 last carried here dates from 2026-09-16 and is not a verified price (F-CAT-05; FINDINGS section 2). Saw wear part: this row is the price and stock source for the saw rows' wear lines (OpenLoadout Baseline 0.1 \u00a75.3). Routine wear is priced on the saw's equipment row; toggle this row onto a project only for extraordinary loss, such as a chain destroyed by embedded metal (F-CAT-08)."
+        },
+        "source": {
+          "from": "Arborist supply",
+          "to": "Arborist supply (quote needed)"
+        },
+        "rateCents": {
+          "from": 14199,
+          "to": 0,
+          "why": "price unverified: $0 until a dealer quote is on file (FINDINGS section 2), the same convention as spur sprocket 1137 640 2005"
         }
       },
       "evidenceUrl": "https://www.shforestrysupplies.com/451a-0781-516-5006-stihl-platinum-bar-and-chain-oil-5-gallon-pail.html",
@@ -1645,7 +1654,7 @@
           "to": "Saw wear parts (priced on saw rows)"
         },
         "notes": {
-          "to": "STIHL HP Ultra. Price 2026-09-16 Saw wear part: this row is the price and stock source for the saw rows' wear lines (OpenLoadout Baseline 0.1 \u00a75.3). Routine wear is priced on the saw's equipment row; toggle this row onto a project only for extraordinary loss, such as a chain destroyed by embedded metal (F-CAT-08)."
+          "to": "STIHL HP Ultra. Price 2026-09-16. Saw wear part: this row is the price and stock source for the saw rows' wear lines (OpenLoadout Baseline 0.1 \u00a75.3). Routine wear is priced on the saw's equipment row; toggle this row onto a project only for extraordinary loss, such as a chain destroyed by embedded metal (F-CAT-08)."
         }
       },
       "evidenceUrl": "docs/openloadout/STANDARD.md \u00a75.3",
@@ -1663,7 +1672,7 @@
           "to": "Saw wear parts (priced on saw rows)"
         },
         "notes": {
-          "to": "TruFuel 50:1. Price 2026-09-16. TruFuel not sold in a true 1 gal container; Saw wear part: this row is the price and stock source for the saw rows' wear lines (OpenLoadout Baseline 0.1 \u00a75.3). Routine wear is priced on the saw's equipment row; toggle this row onto a project only for extraordinary loss, such as a chain destroyed by embedded metal (F-CAT-08)."
+          "to": "TruFuel 50:1. Price 2026-09-16. TruFuel not sold in a true 1 gal container. Saw wear part: this row is the price and stock source for the saw rows' wear lines (OpenLoadout Baseline 0.1 \u00a75.3). Routine wear is priced on the saw's equipment row; toggle this row onto a project only for extraordinary loss, such as a chain destroyed by embedded metal (F-CAT-08)."
         }
       },
       "evidenceUrl": "docs/openloadout/STANDARD.md \u00a75.3",
@@ -1707,7 +1716,7 @@
       "newName": "Helmet \u2013 standard colors",
       "changes": {
         "notes": {
-          "to": "Petzl Vertex. Price 2026-09-16. Hi-vis yellow/orange colorway is $124.95; Costing: routine issue is costed on the overhead line \"PPE & uniforms\", not on projects; helmet and chaps are track-only equipment with retire-by dates. This row is the price and stock source (OpenLoadout Baseline 0.1 \u00a72.1, \u00a75.3; F-CAT-09)."
+          "to": "Petzl Vertex. Price 2026-09-16. Hi-vis yellow/orange colorway is $124.95. Costing: routine issue is costed on the overhead line \"PPE & uniforms\", not on projects; helmet and chaps are track-only equipment with retire-by dates. This row is the price and stock source (OpenLoadout Baseline 0.1 \u00a72.1, \u00a75.3; F-CAT-09)."
         }
       },
       "evidenceUrl": "docs/openloadout/STANDARD.md \u00a72.1, \u00a75.3",
@@ -1721,7 +1730,7 @@
       "newName": "Chainsaw chaps \u2013 36in, 6-layer apron style",
       "changes": {
         "notes": {
-          "to": "STIHL Dynamic. Price 2026-09-16. Husqvarna apron chaps run $49.99-$69.95 on secondary market per search Costing: routine issue is costed on the overhead line \"PPE & uniforms\", not on projects; helmet and chaps are track-only equipment with retire-by dates. This row is the price and stock source (OpenLoadout Baseline 0.1 \u00a72.1, \u00a75.3; F-CAT-09)."
+          "to": "STIHL Dynamic. Price 2026-09-16. Husqvarna apron chaps run $49.99-$69.95 on secondary market per search. Costing: routine issue is costed on the overhead line \"PPE & uniforms\", not on projects; helmet and chaps are track-only equipment with retire-by dates. This row is the price and stock source (OpenLoadout Baseline 0.1 \u00a72.1, \u00a75.3; F-CAT-09)."
         }
       },
       "evidenceUrl": "docs/openloadout/STANDARD.md \u00a72.1, \u00a75.3",
@@ -1735,7 +1744,7 @@
       "newName": "Safety glasses \u2013 12-pack",
       "changes": {
         "notes": {
-          "to": "Milwaukee. Price 2026-09-16. Price reflects a $25 store-card promo discount; Costing: routine issue is costed on the overhead line \"PPE & uniforms\", not on projects; helmet and chaps are track-only equipment with retire-by dates. This row is the price and stock source (OpenLoadout Baseline 0.1 \u00a72.1, \u00a75.3; F-CAT-09)."
+          "to": "Milwaukee. Price 2026-09-16. Price reflects a $25 store-card promo discount. Costing: routine issue is costed on the overhead line \"PPE & uniforms\", not on projects; helmet and chaps are track-only equipment with retire-by dates. This row is the price and stock source (OpenLoadout Baseline 0.1 \u00a72.1, \u00a75.3; F-CAT-09)."
         }
       },
       "evidenceUrl": "docs/openloadout/STANDARD.md \u00a72.1, \u00a75.3",
@@ -1749,7 +1758,7 @@
       "newName": "Ear plugs \u2013 200-pack (pairs)",
       "changes": {
         "notes": {
-          "to": "Cordova Encore. Price 2026-09-16. ULTRX 200-pack alternative is $29.19 Costing: routine issue is costed on the overhead line \"PPE & uniforms\", not on projects; helmet and chaps are track-only equipment with retire-by dates. This row is the price and stock source (OpenLoadout Baseline 0.1 \u00a72.1, \u00a75.3; F-CAT-09)."
+          "to": "Cordova Encore. Price 2026-09-16. ULTRX 200-pack alternative is $29.19. Costing: routine issue is costed on the overhead line \"PPE & uniforms\", not on projects; helmet and chaps are track-only equipment with retire-by dates. This row is the price and stock source (OpenLoadout Baseline 0.1 \u00a72.1, \u00a75.3; F-CAT-09)."
         }
       },
       "evidenceUrl": "docs/openloadout/STANDARD.md \u00a72.1, \u00a75.3",
@@ -1763,7 +1772,7 @@
       "newName": "Work gloves \u2013 12-pack, large",
       "changes": {
         "notes": {
-          "to": "Milwaukee Nitrile Level 1. Price 2026-09-16. Budget multipurpose gloves run ~$1/pair in bulk Costing: routine issue is costed on the overhead line \"PPE & uniforms\", not on projects; helmet and chaps are track-only equipment with retire-by dates. This row is the price and stock source (OpenLoadout Baseline 0.1 \u00a72.1, \u00a75.3; F-CAT-09)."
+          "to": "Milwaukee Nitrile Level 1. Price 2026-09-16. Budget multipurpose gloves run ~$1/pair in bulk. Costing: routine issue is costed on the overhead line \"PPE & uniforms\", not on projects; helmet and chaps are track-only equipment with retire-by dates. This row is the price and stock source (OpenLoadout Baseline 0.1 \u00a72.1, \u00a75.3; F-CAT-09)."
         }
       },
       "evidenceUrl": "docs/openloadout/STANDARD.md \u00a72.1, \u00a75.3",
@@ -1777,7 +1786,7 @@
       "newName": "Imidacloprid soil drench \u2013 27.5 oz bottle (~1 qt; yields 50 gal solution)",
       "changes": {
         "notes": {
-          "to": "Dominion 2L. Price 2026-09-16. 2.15 gal jug is $236.98; Gate: labelled for landscape trees by soil drench, but applying it for hire needs an FDACS Chapter 482 pest control licence; use only once the owner has answered Q-PHC (OpenLoadout Baseline 0.1 \u00a712; https://www.fdacs.gov/Business-Services/Pest-Control/Licensing-and-Certification, seen 2026-09-28; F-CAT-17)."
+          "to": "Dominion 2L. Price 2026-09-16. 2.15 gal jug is $236.98. Gate: labelled for landscape trees by soil drench, but applying it for hire needs an FDACS Chapter 482 pest control licence; use only once the owner has answered Q-PHC (OpenLoadout Baseline 0.1 \u00a712; https://www.fdacs.gov/Business-Services/Pest-Control/Licensing-and-Certification, seen 2026-09-28; F-CAT-17)."
         }
       },
       "evidenceUrl": "https://www.fdacs.gov/Business-Services/Pest-Control/Licensing-and-Certification",
@@ -2123,7 +2132,7 @@
           "to": "Saw wear parts (priced on saw rows)"
         },
         "notes": {
-          "to": "Forester. Price 2026-09-16. Per-file price ~$3.33; Saw wear part: this row is the price and stock source for the saw rows' wear lines (OpenLoadout Baseline 0.1 \u00a75.3). Routine wear is priced on the saw's equipment row; toggle this row onto a project only for extraordinary loss, such as a chain destroyed by embedded metal (F-CAT-08)."
+          "to": "Forester. Price 2026-09-16. Per-file price ~$3.33. Saw wear part: this row is the price and stock source for the saw rows' wear lines (OpenLoadout Baseline 0.1 \u00a75.3). Routine wear is priced on the saw's equipment row; toggle this row onto a project only for extraordinary loss, such as a chain destroyed by embedded metal (F-CAT-08)."
         }
       },
       "evidenceUrl": "docs/openloadout/STANDARD.md \u00a75.3",
@@ -2141,7 +2150,7 @@
           "to": "Saw wear parts (priced on saw rows)"
         },
         "notes": {
-          "to": "Husqvarna. Price 2026-09-16 Saw wear part: this row is the price and stock source for the saw rows' wear lines (OpenLoadout Baseline 0.1 \u00a75.3). Routine wear is priced on the saw's equipment row; toggle this row onto a project only for extraordinary loss, such as a chain destroyed by embedded metal (F-CAT-08)."
+          "to": "Husqvarna. Price 2026-09-16. Saw wear part: this row is the price and stock source for the saw rows' wear lines (OpenLoadout Baseline 0.1 \u00a75.3). Routine wear is priced on the saw's equipment row; toggle this row onto a project only for extraordinary loss, such as a chain destroyed by embedded metal (F-CAT-08)."
         }
       },
       "evidenceUrl": "docs/openloadout/STANDARD.md \u00a75.3",
@@ -2163,7 +2172,16 @@
           "to": "Saw wear parts (priced on saw rows)"
         },
         "notes": {
-          "to": "STIHL Platinum. Price 2026-09-16 Unit is the 5 gal pail, not a gallon. Price unverified: the cited page showed no price on 2026-09-28; get a dealer quote before use (F-CAT-05). Saw wear part: this row is the price and stock source for the saw rows' wear lines (OpenLoadout Baseline 0.1 \u00a75.3). Routine wear is priced on the saw's equipment row; toggle this row onto a project only for extraordinary loss, such as a chain destroyed by embedded metal (F-CAT-08)."
+          "to": "STIHL Platinum. Unit is the 5 gal pail, not a gallon. PRICE UNVERIFIED: the cited page showed no price on 2026-09-28, so the rate is $0 until a dealer quote is on file; the $141.99 last carried here dates from 2026-09-16 and is not a verified price (F-CAT-05; FINDINGS section 2). Saw wear part: this row is the price and stock source for the saw rows' wear lines (OpenLoadout Baseline 0.1 \u00a75.3). Routine wear is priced on the saw's equipment row; toggle this row onto a project only for extraordinary loss, such as a chain destroyed by embedded metal (F-CAT-08)."
+        },
+        "source": {
+          "from": "Arborist supply",
+          "to": "Arborist supply (quote needed)"
+        },
+        "rateCents": {
+          "from": 14199,
+          "to": 0,
+          "why": "price unverified: $0 until a dealer quote is on file (FINDINGS section 2), the same convention as spur sprocket 1137 640 2005"
         }
       },
       "evidenceUrl": "https://www.shforestrysupplies.com/451a-0781-516-5006-stihl-platinum-bar-and-chain-oil-5-gallon-pail.html",
@@ -2181,7 +2199,7 @@
           "to": "Saw wear parts (priced on saw rows)"
         },
         "notes": {
-          "to": "STIHL HP Ultra. Price 2026-09-16 Saw wear part: this row is the price and stock source for the saw rows' wear lines (OpenLoadout Baseline 0.1 \u00a75.3). Routine wear is priced on the saw's equipment row; toggle this row onto a project only for extraordinary loss, such as a chain destroyed by embedded metal (F-CAT-08)."
+          "to": "STIHL HP Ultra. Price 2026-09-16. Saw wear part: this row is the price and stock source for the saw rows' wear lines (OpenLoadout Baseline 0.1 \u00a75.3). Routine wear is priced on the saw's equipment row; toggle this row onto a project only for extraordinary loss, such as a chain destroyed by embedded metal (F-CAT-08)."
         }
       },
       "evidenceUrl": "docs/openloadout/STANDARD.md \u00a75.3",
@@ -2199,7 +2217,7 @@
           "to": "Saw wear parts (priced on saw rows)"
         },
         "notes": {
-          "to": "TruFuel 50:1. Price 2026-09-16. TruFuel not sold in a true 1 gal container; Saw wear part: this row is the price and stock source for the saw rows' wear lines (OpenLoadout Baseline 0.1 \u00a75.3). Routine wear is priced on the saw's equipment row; toggle this row onto a project only for extraordinary loss, such as a chain destroyed by embedded metal (F-CAT-08)."
+          "to": "TruFuel 50:1. Price 2026-09-16. TruFuel not sold in a true 1 gal container. Saw wear part: this row is the price and stock source for the saw rows' wear lines (OpenLoadout Baseline 0.1 \u00a75.3). Routine wear is priced on the saw's equipment row; toggle this row onto a project only for extraordinary loss, such as a chain destroyed by embedded metal (F-CAT-08)."
         }
       },
       "evidenceUrl": "docs/openloadout/STANDARD.md \u00a75.3",
@@ -2243,7 +2261,7 @@
       "newName": "Helmet \u2013 standard colors",
       "changes": {
         "notes": {
-          "to": "Petzl Vertex. Price 2026-09-16. Hi-vis yellow/orange colorway is $124.95; Costing: routine issue is costed on the overhead line \"PPE & uniforms\", not on projects; helmet and chaps are track-only equipment with retire-by dates. This row is the price and stock source (OpenLoadout Baseline 0.1 \u00a72.1, \u00a75.3; F-CAT-09)."
+          "to": "Petzl Vertex. Price 2026-09-16. Hi-vis yellow/orange colorway is $124.95. Costing: routine issue is costed on the overhead line \"PPE & uniforms\", not on projects; helmet and chaps are track-only equipment with retire-by dates. This row is the price and stock source (OpenLoadout Baseline 0.1 \u00a72.1, \u00a75.3; F-CAT-09)."
         }
       },
       "evidenceUrl": "docs/openloadout/STANDARD.md \u00a72.1, \u00a75.3",
@@ -2257,7 +2275,7 @@
       "newName": "Chainsaw chaps \u2013 36in, 6-layer apron style",
       "changes": {
         "notes": {
-          "to": "STIHL Dynamic. Price 2026-09-16. Husqvarna apron chaps run $49.99-$69.95 on secondary market per search Costing: routine issue is costed on the overhead line \"PPE & uniforms\", not on projects; helmet and chaps are track-only equipment with retire-by dates. This row is the price and stock source (OpenLoadout Baseline 0.1 \u00a72.1, \u00a75.3; F-CAT-09)."
+          "to": "STIHL Dynamic. Price 2026-09-16. Husqvarna apron chaps run $49.99-$69.95 on secondary market per search. Costing: routine issue is costed on the overhead line \"PPE & uniforms\", not on projects; helmet and chaps are track-only equipment with retire-by dates. This row is the price and stock source (OpenLoadout Baseline 0.1 \u00a72.1, \u00a75.3; F-CAT-09)."
         }
       },
       "evidenceUrl": "docs/openloadout/STANDARD.md \u00a72.1, \u00a75.3",
@@ -2271,7 +2289,7 @@
       "newName": "Safety glasses \u2013 12-pack",
       "changes": {
         "notes": {
-          "to": "Milwaukee. Price 2026-09-16. Price reflects a $25 store-card promo discount; Costing: routine issue is costed on the overhead line \"PPE & uniforms\", not on projects; helmet and chaps are track-only equipment with retire-by dates. This row is the price and stock source (OpenLoadout Baseline 0.1 \u00a72.1, \u00a75.3; F-CAT-09)."
+          "to": "Milwaukee. Price 2026-09-16. Price reflects a $25 store-card promo discount. Costing: routine issue is costed on the overhead line \"PPE & uniforms\", not on projects; helmet and chaps are track-only equipment with retire-by dates. This row is the price and stock source (OpenLoadout Baseline 0.1 \u00a72.1, \u00a75.3; F-CAT-09)."
         }
       },
       "evidenceUrl": "docs/openloadout/STANDARD.md \u00a72.1, \u00a75.3",
@@ -2285,7 +2303,7 @@
       "newName": "Ear plugs \u2013 200-pack (pairs)",
       "changes": {
         "notes": {
-          "to": "Cordova Encore. Price 2026-09-16. ULTRX 200-pack alternative is $29.19 Costing: routine issue is costed on the overhead line \"PPE & uniforms\", not on projects; helmet and chaps are track-only equipment with retire-by dates. This row is the price and stock source (OpenLoadout Baseline 0.1 \u00a72.1, \u00a75.3; F-CAT-09)."
+          "to": "Cordova Encore. Price 2026-09-16. ULTRX 200-pack alternative is $29.19. Costing: routine issue is costed on the overhead line \"PPE & uniforms\", not on projects; helmet and chaps are track-only equipment with retire-by dates. This row is the price and stock source (OpenLoadout Baseline 0.1 \u00a72.1, \u00a75.3; F-CAT-09)."
         }
       },
       "evidenceUrl": "docs/openloadout/STANDARD.md \u00a72.1, \u00a75.3",
@@ -2299,7 +2317,7 @@
       "newName": "Work gloves \u2013 12-pack, large",
       "changes": {
         "notes": {
-          "to": "Milwaukee Nitrile Level 1. Price 2026-09-16. Budget multipurpose gloves run ~$1/pair in bulk Costing: routine issue is costed on the overhead line \"PPE & uniforms\", not on projects; helmet and chaps are track-only equipment with retire-by dates. This row is the price and stock source (OpenLoadout Baseline 0.1 \u00a72.1, \u00a75.3; F-CAT-09)."
+          "to": "Milwaukee Nitrile Level 1. Price 2026-09-16. Budget multipurpose gloves run ~$1/pair in bulk. Costing: routine issue is costed on the overhead line \"PPE & uniforms\", not on projects; helmet and chaps are track-only equipment with retire-by dates. This row is the price and stock source (OpenLoadout Baseline 0.1 \u00a72.1, \u00a75.3; F-CAT-09)."
         }
       },
       "evidenceUrl": "docs/openloadout/STANDARD.md \u00a72.1, \u00a75.3",
@@ -2313,7 +2331,7 @@
       "newName": "Imidacloprid soil drench \u2013 27.5 oz bottle (~1 qt; yields 50 gal solution)",
       "changes": {
         "notes": {
-          "to": "Dominion 2L. Price 2026-09-16. 2.15 gal jug is $236.98; Gate: labelled for landscape trees by soil drench, but applying it for hire needs an FDACS Chapter 482 pest control licence; use only once the owner has answered Q-PHC (OpenLoadout Baseline 0.1 \u00a712; https://www.fdacs.gov/Business-Services/Pest-Control/Licensing-and-Certification, seen 2026-09-28; F-CAT-17)."
+          "to": "Dominion 2L. Price 2026-09-16. 2.15 gal jug is $236.98. Gate: labelled for landscape trees by soil drench, but applying it for hire needs an FDACS Chapter 482 pest control licence; use only once the owner has answered Q-PHC (OpenLoadout Baseline 0.1 \u00a712; https://www.fdacs.gov/Business-Services/Pest-Control/Licensing-and-Certification, seen 2026-09-28; F-CAT-17)."
         }
       },
       "evidenceUrl": "https://www.fdacs.gov/Business-Services/Pest-Control/Licensing-and-Certification",
@@ -2659,7 +2677,7 @@
           "to": "Saw wear parts (priced on saw rows)"
         },
         "notes": {
-          "to": "Forester. Price 2026-09-16. Per-file price ~$3.33; Saw wear part: this row is the price and stock source for the saw rows' wear lines (OpenLoadout Baseline 0.1 \u00a75.3). Routine wear is priced on the saw's equipment row; toggle this row onto a project only for extraordinary loss, such as a chain destroyed by embedded metal (F-CAT-08)."
+          "to": "Forester. Price 2026-09-16. Per-file price ~$3.33. Saw wear part: this row is the price and stock source for the saw rows' wear lines (OpenLoadout Baseline 0.1 \u00a75.3). Routine wear is priced on the saw's equipment row; toggle this row onto a project only for extraordinary loss, such as a chain destroyed by embedded metal (F-CAT-08)."
         }
       },
       "evidenceUrl": "docs/openloadout/STANDARD.md \u00a75.3",
@@ -2677,7 +2695,7 @@
           "to": "Saw wear parts (priced on saw rows)"
         },
         "notes": {
-          "to": "Husqvarna. Price 2026-09-16 Saw wear part: this row is the price and stock source for the saw rows' wear lines (OpenLoadout Baseline 0.1 \u00a75.3). Routine wear is priced on the saw's equipment row; toggle this row onto a project only for extraordinary loss, such as a chain destroyed by embedded metal (F-CAT-08)."
+          "to": "Husqvarna. Price 2026-09-16. Saw wear part: this row is the price and stock source for the saw rows' wear lines (OpenLoadout Baseline 0.1 \u00a75.3). Routine wear is priced on the saw's equipment row; toggle this row onto a project only for extraordinary loss, such as a chain destroyed by embedded metal (F-CAT-08)."
         }
       },
       "evidenceUrl": "docs/openloadout/STANDARD.md \u00a75.3",
@@ -2699,7 +2717,16 @@
           "to": "Saw wear parts (priced on saw rows)"
         },
         "notes": {
-          "to": "STIHL Platinum. Price 2026-09-16 Unit is the 5 gal pail, not a gallon. Price unverified: the cited page showed no price on 2026-09-28; get a dealer quote before use (F-CAT-05). Saw wear part: this row is the price and stock source for the saw rows' wear lines (OpenLoadout Baseline 0.1 \u00a75.3). Routine wear is priced on the saw's equipment row; toggle this row onto a project only for extraordinary loss, such as a chain destroyed by embedded metal (F-CAT-08)."
+          "to": "STIHL Platinum. Unit is the 5 gal pail, not a gallon. PRICE UNVERIFIED: the cited page showed no price on 2026-09-28, so the rate is $0 until a dealer quote is on file; the $141.99 last carried here dates from 2026-09-16 and is not a verified price (F-CAT-05; FINDINGS section 2). Saw wear part: this row is the price and stock source for the saw rows' wear lines (OpenLoadout Baseline 0.1 \u00a75.3). Routine wear is priced on the saw's equipment row; toggle this row onto a project only for extraordinary loss, such as a chain destroyed by embedded metal (F-CAT-08)."
+        },
+        "source": {
+          "from": "Arborist supply",
+          "to": "Arborist supply (quote needed)"
+        },
+        "price": {
+          "from": 141.99,
+          "to": 0.0,
+          "why": "price unverified: $0 until a dealer quote is on file (FINDINGS section 2), the same convention as spur sprocket 1137 640 2005"
         }
       },
       "evidenceUrl": "https://www.shforestrysupplies.com/451a-0781-516-5006-stihl-platinum-bar-and-chain-oil-5-gallon-pail.html",
@@ -2717,7 +2744,7 @@
           "to": "Saw wear parts (priced on saw rows)"
         },
         "notes": {
-          "to": "STIHL HP Ultra. Price 2026-09-16 Saw wear part: this row is the price and stock source for the saw rows' wear lines (OpenLoadout Baseline 0.1 \u00a75.3). Routine wear is priced on the saw's equipment row; toggle this row onto a project only for extraordinary loss, such as a chain destroyed by embedded metal (F-CAT-08)."
+          "to": "STIHL HP Ultra. Price 2026-09-16. Saw wear part: this row is the price and stock source for the saw rows' wear lines (OpenLoadout Baseline 0.1 \u00a75.3). Routine wear is priced on the saw's equipment row; toggle this row onto a project only for extraordinary loss, such as a chain destroyed by embedded metal (F-CAT-08)."
         }
       },
       "evidenceUrl": "docs/openloadout/STANDARD.md \u00a75.3",
@@ -2735,7 +2762,7 @@
           "to": "Saw wear parts (priced on saw rows)"
         },
         "notes": {
-          "to": "TruFuel 50:1. Price 2026-09-16. TruFuel not sold in a true 1 gal container; Saw wear part: this row is the price and stock source for the saw rows' wear lines (OpenLoadout Baseline 0.1 \u00a75.3). Routine wear is priced on the saw's equipment row; toggle this row onto a project only for extraordinary loss, such as a chain destroyed by embedded metal (F-CAT-08)."
+          "to": "TruFuel 50:1. Price 2026-09-16. TruFuel not sold in a true 1 gal container. Saw wear part: this row is the price and stock source for the saw rows' wear lines (OpenLoadout Baseline 0.1 \u00a75.3). Routine wear is priced on the saw's equipment row; toggle this row onto a project only for extraordinary loss, such as a chain destroyed by embedded metal (F-CAT-08)."
         }
       },
       "evidenceUrl": "docs/openloadout/STANDARD.md \u00a75.3",
@@ -2779,7 +2806,7 @@
       "newName": "Helmet \u2013 standard colors",
       "changes": {
         "notes": {
-          "to": "Petzl Vertex. Price 2026-09-16. Hi-vis yellow/orange colorway is $124.95; Costing: routine issue is costed on the overhead line \"PPE & uniforms\", not on projects; helmet and chaps are track-only equipment with retire-by dates. This row is the price and stock source (OpenLoadout Baseline 0.1 \u00a72.1, \u00a75.3; F-CAT-09)."
+          "to": "Petzl Vertex. Price 2026-09-16. Hi-vis yellow/orange colorway is $124.95. Costing: routine issue is costed on the overhead line \"PPE & uniforms\", not on projects; helmet and chaps are track-only equipment with retire-by dates. This row is the price and stock source (OpenLoadout Baseline 0.1 \u00a72.1, \u00a75.3; F-CAT-09)."
         }
       },
       "evidenceUrl": "docs/openloadout/STANDARD.md \u00a72.1, \u00a75.3",
@@ -2793,7 +2820,7 @@
       "newName": "Chainsaw chaps \u2013 36in, 6-layer apron style",
       "changes": {
         "notes": {
-          "to": "STIHL Dynamic. Price 2026-09-16. Husqvarna apron chaps run $49.99-$69.95 on secondary market per search Costing: routine issue is costed on the overhead line \"PPE & uniforms\", not on projects; helmet and chaps are track-only equipment with retire-by dates. This row is the price and stock source (OpenLoadout Baseline 0.1 \u00a72.1, \u00a75.3; F-CAT-09)."
+          "to": "STIHL Dynamic. Price 2026-09-16. Husqvarna apron chaps run $49.99-$69.95 on secondary market per search. Costing: routine issue is costed on the overhead line \"PPE & uniforms\", not on projects; helmet and chaps are track-only equipment with retire-by dates. This row is the price and stock source (OpenLoadout Baseline 0.1 \u00a72.1, \u00a75.3; F-CAT-09)."
         }
       },
       "evidenceUrl": "docs/openloadout/STANDARD.md \u00a72.1, \u00a75.3",
@@ -2807,7 +2834,7 @@
       "newName": "Safety glasses \u2013 12-pack",
       "changes": {
         "notes": {
-          "to": "Milwaukee. Price 2026-09-16. Price reflects a $25 store-card promo discount; Costing: routine issue is costed on the overhead line \"PPE & uniforms\", not on projects; helmet and chaps are track-only equipment with retire-by dates. This row is the price and stock source (OpenLoadout Baseline 0.1 \u00a72.1, \u00a75.3; F-CAT-09)."
+          "to": "Milwaukee. Price 2026-09-16. Price reflects a $25 store-card promo discount. Costing: routine issue is costed on the overhead line \"PPE & uniforms\", not on projects; helmet and chaps are track-only equipment with retire-by dates. This row is the price and stock source (OpenLoadout Baseline 0.1 \u00a72.1, \u00a75.3; F-CAT-09)."
         }
       },
       "evidenceUrl": "docs/openloadout/STANDARD.md \u00a72.1, \u00a75.3",
@@ -2821,7 +2848,7 @@
       "newName": "Ear plugs \u2013 200-pack (pairs)",
       "changes": {
         "notes": {
-          "to": "Cordova Encore. Price 2026-09-16. ULTRX 200-pack alternative is $29.19 Costing: routine issue is costed on the overhead line \"PPE & uniforms\", not on projects; helmet and chaps are track-only equipment with retire-by dates. This row is the price and stock source (OpenLoadout Baseline 0.1 \u00a72.1, \u00a75.3; F-CAT-09)."
+          "to": "Cordova Encore. Price 2026-09-16. ULTRX 200-pack alternative is $29.19. Costing: routine issue is costed on the overhead line \"PPE & uniforms\", not on projects; helmet and chaps are track-only equipment with retire-by dates. This row is the price and stock source (OpenLoadout Baseline 0.1 \u00a72.1, \u00a75.3; F-CAT-09)."
         }
       },
       "evidenceUrl": "docs/openloadout/STANDARD.md \u00a72.1, \u00a75.3",
@@ -2835,7 +2862,7 @@
       "newName": "Work gloves \u2013 12-pack, large",
       "changes": {
         "notes": {
-          "to": "Milwaukee Nitrile Level 1. Price 2026-09-16. Budget multipurpose gloves run ~$1/pair in bulk Costing: routine issue is costed on the overhead line \"PPE & uniforms\", not on projects; helmet and chaps are track-only equipment with retire-by dates. This row is the price and stock source (OpenLoadout Baseline 0.1 \u00a72.1, \u00a75.3; F-CAT-09)."
+          "to": "Milwaukee Nitrile Level 1. Price 2026-09-16. Budget multipurpose gloves run ~$1/pair in bulk. Costing: routine issue is costed on the overhead line \"PPE & uniforms\", not on projects; helmet and chaps are track-only equipment with retire-by dates. This row is the price and stock source (OpenLoadout Baseline 0.1 \u00a72.1, \u00a75.3; F-CAT-09)."
         }
       },
       "evidenceUrl": "docs/openloadout/STANDARD.md \u00a72.1, \u00a75.3",
@@ -2849,7 +2876,7 @@
       "newName": "Imidacloprid soil drench \u2013 27.5 oz bottle (~1 qt; yields 50 gal solution)",
       "changes": {
         "notes": {
-          "to": "Dominion 2L. Price 2026-09-16. 2.15 gal jug is $236.98; Gate: labelled for landscape trees by soil drench, but applying it for hire needs an FDACS Chapter 482 pest control licence; use only once the owner has answered Q-PHC (OpenLoadout Baseline 0.1 \u00a712; https://www.fdacs.gov/Business-Services/Pest-Control/Licensing-and-Certification, seen 2026-09-28; F-CAT-17)."
+          "to": "Dominion 2L. Price 2026-09-16. 2.15 gal jug is $236.98. Gate: labelled for landscape trees by soil drench, but applying it for hire needs an FDACS Chapter 482 pest control licence; use only once the owner has answered Q-PHC (OpenLoadout Baseline 0.1 \u00a712; https://www.fdacs.gov/Business-Services/Pest-Control/Licensing-and-Certification, seen 2026-09-28; F-CAT-17)."
         }
       },
       "evidenceUrl": "https://www.fdacs.gov/Business-Services/Pest-Control/Licensing-and-Certification",
@@ -4756,6 +4783,165 @@
         }
       },
       "evidenceUrl": "https://www.milwaukeetool.com/products/details/m18-fuel-pole-saw-w-quik-lok-kit/3016-21PS",
+      "dateSeen": "2026-09-28"
+    },
+    {
+      "id": "F-FLEET-02",
+      "file": "Scripts/catalog/data/Buckets-starter-catalog.json",
+      "bucket": "equipment",
+      "oldName": "Stihl 194T",
+      "newName": "Stihl 194T",
+      "changes": {
+        "link": {
+          "from": "https://www.concordgarden.com/product/stihl-ms-194-t-16-compact-professional-tree-chainsaw/",
+          "to": "https://www.stihlusa.com/products/chain-saws/in-tree-saws/ms194t/"
+        },
+        "rateCents": {
+          "from": 285,
+          "to": 287,
+          "method": "build_catalog.equipment_rate_cents (one division, DECISIONS 7)"
+        },
+        "notes": {
+          "to": "Unit __ \u00b7 S/N ________ \u00b7 MS 194 T, 31.8cc, 3/8 in P (PICCO), the Baseline compact top-handle. Priced at the $509.99 STIHL USA list price, seen 2026-09-28, as every saw row is priced at its standard model's current STIHL USA list (Baseline 0.1 \u00a74.5 rule 3; F-FLEET-02); the old $499.99 was a dealer page on 2026-09-15. Baseline 0.1 \u00a74.3 setup: 12 in bar 3005 000 4805 with 63 PS3 44, or 16 in bar 3005 000 4813 with 63 PS3 55; 6T spur sprocket 1137 640 2005; 5/32 in file. Ownership unconfirmed (F-FLEET-03): archive this row if you don't own one."
+        },
+        "calcInputs": {
+          "from": {
+            "annualHours": 300,
+            "costOfMoneyPct": 0,
+            "fuelOilPerHourCents": 200,
+            "insurancePerYearCents": 0,
+            "lifeHours": 2000,
+            "priceCents": 49999,
+            "repairFactor": 2.5,
+            "salvageCents": 5000
+          },
+          "to": {
+            "annualHours": 300,
+            "costOfMoneyPct": 0,
+            "fuelOilPerHourCents": 200,
+            "insurancePerYearCents": 0,
+            "lifeHours": 2000,
+            "priceCents": 50999,
+            "repairFactor": 2.5,
+            "salvageCents": 5000
+          }
+        }
+      },
+      "evidenceUrl": "https://www.stihlusa.com/products/chain-saws/in-tree-saws/ms194t/",
+      "dateSeen": "2026-09-28"
+    },
+    {
+      "id": "F-FLEET-02",
+      "file": "Scripts/catalog/data/rows-all.json",
+      "bucket": "equipment",
+      "oldName": "Stihl 194T",
+      "newName": "Stihl 194T",
+      "changes": {
+        "notes": {
+          "to": "Unit __ \u00b7 S/N ________ \u00b7 MS 194 T, 31.8cc, 3/8 in P (PICCO), the Baseline compact top-handle. Priced at the $509.99 STIHL USA list price, seen 2026-09-28, as every saw row is priced at its standard model's current STIHL USA list (Baseline 0.1 \u00a74.5 rule 3; F-FLEET-02); the old $499.99 was a dealer page on 2026-09-15. Baseline 0.1 \u00a74.3 setup: 12 in bar 3005 000 4805 with 63 PS3 44, or 16 in bar 3005 000 4813 with 63 PS3 55; 6T spur sprocket 1137 640 2005; 5/32 in file. Ownership unconfirmed (F-FLEET-03): archive this row if you don't own one. Evidence: https://www.stihlusa.com/products/chain-saws/in-tree-saws/ms194t/"
+        },
+        "inputs": {
+          "price": 509.99
+        },
+        "rateCents (derived)": 287
+      },
+      "evidenceUrl": "https://www.stihlusa.com/products/chain-saws/in-tree-saws/ms194t/",
+      "dateSeen": "2026-09-28"
+    },
+    {
+      "id": "F-FLEET-02",
+      "file": "Scripts/catalog/data/rows-equipment-consumables.json",
+      "bucket": "equipment",
+      "oldName": "Stihl 194T",
+      "newName": "Stihl 194T",
+      "changes": {
+        "link": {
+          "from": "https://www.concordgarden.com/product/stihl-ms-194-t-16-compact-professional-tree-chainsaw/",
+          "to": "https://www.stihlusa.com/products/chain-saws/in-tree-saws/ms194t/"
+        },
+        "notes": {
+          "to": "Unit __ \u00b7 S/N ________ \u00b7 MS 194 T, 31.8cc, 3/8 in P (PICCO), the Baseline compact top-handle. Priced at the $509.99 STIHL USA list price, seen 2026-09-28, as every saw row is priced at its standard model's current STIHL USA list (Baseline 0.1 \u00a74.5 rule 3; F-FLEET-02); the old $499.99 was a dealer page on 2026-09-15. Baseline 0.1 \u00a74.3 setup: 12 in bar 3005 000 4805 with 63 PS3 44, or 16 in bar 3005 000 4813 with 63 PS3 55; 6T spur sprocket 1137 640 2005; 5/32 in file. Ownership unconfirmed (F-FLEET-03): archive this row if you don't own one."
+        },
+        "inputs": {
+          "price": 509.99
+        },
+        "rateCents (derived)": 287
+      },
+      "evidenceUrl": "https://www.stihlusa.com/products/chain-saws/in-tree-saws/ms194t/",
+      "dateSeen": "2026-09-28"
+    },
+    {
+      "id": "PRIVACY",
+      "file": "Scripts/catalog/data/Buckets-starter-catalog.json",
+      "bucket": "consumables",
+      "oldName": "[subcontractor row named after a person; old value not repeated]",
+      "newName": "Grapple truck (sub)",
+      "changes": {
+        "name": {
+          "to": "Grapple truck (sub)"
+        },
+        "source": {
+          "to": "Grapple-truck subcontractor"
+        }
+      },
+      "evidenceUrl": null,
+      "dateSeen": "2026-09-28"
+    },
+    {
+      "id": "PRIVACY",
+      "file": "Scripts/catalog/data/rows-all.json",
+      "bucket": "consumables",
+      "oldName": "[subcontractor row named after a person; old value not repeated]",
+      "newName": "Grapple truck (sub)",
+      "changes": {
+        "name": {
+          "to": "Grapple truck (sub)"
+        },
+        "source": {
+          "to": "Grapple-truck subcontractor"
+        }
+      },
+      "evidenceUrl": null,
+      "dateSeen": "2026-09-28"
+    },
+    {
+      "id": "PRIVACY",
+      "file": "Scripts/catalog/data/rows-pnl-2025.json",
+      "bucket": "consumables",
+      "oldName": "[subcontractor row named after a person; old value not repeated]",
+      "newName": "Grapple truck (sub)",
+      "changes": {
+        "name": {
+          "to": "Grapple truck (sub)"
+        },
+        "source": {
+          "to": "Grapple-truck subcontractor"
+        }
+      },
+      "evidenceUrl": null,
+      "dateSeen": "2026-09-28"
+    },
+    {
+      "id": "PRIVACY",
+      "file": "Scripts/catalog/data/sts-subcontractors-migration.json",
+      "bucket": "subcontractors",
+      "oldName": "[subcontractor and contact named after people; old values not repeated]",
+      "newName": "Grapple-truck subcontractor",
+      "changes": {
+        "subcontractors[0].name": {
+          "to": "Grapple-truck subcontractor"
+        },
+        "subcontractors[0].contact": {
+          "to": null
+        },
+        "items[0].source": {
+          "to": "Grapple-truck subcontractor"
+        },
+        "items[3].name": {
+          "to": "Grapple truck (sub)"
+        }
+      },
+      "evidenceUrl": null,
       "dateSeen": "2026-09-28"
     }
   ]

@@ -78,7 +78,7 @@
   "bucket": "equipment",
   "name": "Stihl 194T",
   "unit": "hr",
-  "price": 499.99,
+  "price": 509.99,
   "salvage": 50,
   "life_h": 2000,
   "annual_h": 300,
@@ -87,7 +87,7 @@
   "insurance_per_yr": 0,
   "cost_of_money_pct": 0,
   "source": "STIHL dealer",
-  "notes": "Unit __ \u00b7 S/N ________ \u00b7 MS 194 T, 31.8cc, 14-16in bar, 3/8 PICCO. Dealer price $499.99, 2026-09-15. Archive this row if you don't own one."
+  "notes": "Unit __ \u00b7 S/N ________ \u00b7 MS 194 T, 31.8cc, 3/8 in P (PICCO), the Baseline compact top-handle. Priced at the $509.99 STIHL USA list price, seen 2026-09-28, as every saw row is priced at its standard model's current STIHL USA list (Baseline 0.1 \u00a74.5 rule 3; F-FLEET-02); the old $499.99 was a dealer page on 2026-09-15. Baseline 0.1 \u00a74.3 setup: 12 in bar 3005 000 4805 with 63 PS3 44, or 16 in bar 3005 000 4813 with 63 PS3 55; 6T spur sprocket 1137 640 2005; 5/32 in file. Ownership unconfirmed (F-FLEET-03): archive this row if you don't own one. Evidence: https://www.stihlusa.com/products/chain-saws/in-tree-saws/ms194t/"
  },
  {
   "bucket": "equipment",
@@ -424,10 +424,10 @@
  },
  {
   "bucket": "consumables",
-  "name": "Grapple Truck - Mike",
+  "name": "Grapple truck (sub)",
   "unit": "each",
   "price": 400.0,
-  "source": "Sub Contractor- Gaston",
+  "source": "Grapple-truck subcontractor",
   "notes": "Your rate. 2025 P&L: Grapple $1,300 for the year."
  },
  {
