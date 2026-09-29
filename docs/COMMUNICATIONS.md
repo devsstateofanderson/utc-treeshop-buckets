@@ -209,3 +209,55 @@ Append entries using this structure:
 - Open questions: none new. The review's reminder still applies: the rehearsal on a store copy should include `export-final.json` itself. Merging it now replaces the live "New package" (197 lines) with the file's copy.
 - Next owner/action: Codex reviews `claude/merge-packages` after PR #8. The caller rehearses on a store copy, then installs.
 - Branch/commit: `claude/merge-packages`, pushed: 1e552bb (fixes) and this commit (log).
+
+## 2026-09-29 — Claude Code — 0.2.2 installed; Sacred Tree layer v2 (crew, kits, packages, subs) applied live
+
+- Context read: Mr. Anderson in chat on 09-29.
+  - Pole saws: one standard, the telescoping 3013-21.
+  - Price the standard crew, not today's truck: "charge for it and then go get it".
+  - Clean up and flesh out the Sacred Tree layer with a loadout and default packages.
+  - Employees come from the 2025-26 insurance audit record (six W-2 leased employees, a PEO), and the subcontractors from the same record, with public business profiles.
+- Work completed:
+  - **Workflow sts-layer-v2.**
+    - Subcontractor profiles: 4 researchers (Opus) plus identity checks (Fable). Businesses only; private individuals were not researched.
+    - Wages from BLS OEWS May 2025 for the Orlando MSA (Opus).
+    - A crew-kit, loadout and packages design (Fable), then an adversarial design review (Opus). It found 4 high-severity issues:
+      - renames would duplicate rows;
+      - "Use Package" would re-add every row switched ON;
+      - the owner's 500i would be touched;
+      - labor would come in at $0.
+      All were fixed in assembly.
+    - This branch (0.2.2) with its code review and fixes.
+  - **The layer file.** `~/Developer/sacred-tree-local-vault/sacred-tree-layer-v2-2026-09-29.json` is company data with employee names, so it lives in the vault and not in the repository. It carries:
+    - every active live row, copied exactly;
+    - 13 renamed rows, archived under their old names and re-added with unit codes (SAW, PSW, MCH, TRK, TRL, RIG, KIT, PPE);
+    - the 3016 pole saw honorarily upgraded to a 3013-21;
+    - priced to-acquire kits: rigging, 2 climbing kits with a hand saw, traffic control;
+    - $0 track-only PPE kits (x6) and truck safety kits (x3), with their cost on "PPE & uniforms" ($1,447.40/yr, formula in the row's notes);
+    - "Small tools" flagged for an overlap review;
+    - six labor rows at an ESTIMATED $20.20/h wage (3,501¢/h; confidence estimated, needs owner confirmation);
+    - 11 new subcontractors (3 archived with "COI pending"), and corrected contact details on the 2 existing subs;
+    - the loadout "STS Standard Crew" (23 members);
+    - 9 packages, each with a line for every active row, so Use Package adds nothing unexpected.
+  - **Rehearsed** on a store copy with 0.2.2, including a second merge to prove idempotence (0 changes; packages updated, not duplicated).
+- Evidence/tests:
+  - This branch: 289 executed, 3 skipped, 0 failures (see the entries above).
+  - Live: 0.2.1 parked at `~/Developer/sacred-tree-local-vault/Buckets-0.2.1.app`. 0.2.2 (build 4) installed at `/Applications/Buckets.app`, codesign verified.
+  - `onboard.sh` backup: `onboard-2026-09-29-143040/`.
+  - Merge counts: added 32, updated 20, unchanged 195, packages added 9, lines skipped 0, identical to the rehearsal. The live export's rows are byte-identical to the rehearsal's.
+  - Active rows: labor 7, equipment 32, materials 100, consumables 68, sub services 3, overhead 24 ($88,592.99/yr = $59.06/h at 1,500 h). Subs 13. The owner's labor row and Stihl 500i are unchanged.
+  - Readiness: NEEDS REVIEW, 234 rows unresolved (honest; nothing is owner-confirmed yet).
+- Decisions: none new (DECISIONS 89 covers the package merge). The company-layer pattern: each company keeps its profile and layer file in its own vault, and `onboard.sh` applies them on top of the Baseline catalog.
+- Open questions (owner):
+  - (a) Employees' real wages and roles; the loadout's three names are placeholders.
+  - (b) Two crews? If so, overhead is spread over 3,000 h, which roughly halves the $59.06/h.
+  - (c) Who ran the "65 yard" grapple loads: Gaston, or J&J's Grapple Service?
+  - (d) The legal payee behind "Florida Stump Grind (TreeShop)", plus its W-9 and COI.
+  - (e) Standard stump sub and its per-size prices; the crane sub.
+  - (f) A gloves, plugs and glasses budget.
+  - (g) The saw assumption basis (the owner's 500i vs BRIEF defaults on the other saws).
+  - (h) Clean-up: the old "New project", "New package" and the unnamed loadout; typos in the sub and service names ("Recylcing", "walksing").
+- Next owner/action:
+  - Owner: open Projects → Packages and use one; enter the real wages.
+  - Codex: review the PR for `claude/merge-packages` (stacked on PR #8).
+- Branch/commit: `claude/merge-packages`, this commit (log).
