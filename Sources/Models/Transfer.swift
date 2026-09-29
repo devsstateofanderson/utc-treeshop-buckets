@@ -370,6 +370,8 @@ enum Transfer {
         var packagesUpdated = 0
         /// Package lines whose row could not be resolved through the file's item positions; not merged.
         var packageLinesSkipped = 0
+        /// File packages not merged because their name matches several store packages (DECISIONS 89).
+        var packagesSkipped = 0
     }
 
     /// Adds or updates rows from a file without deleting anything (DECISIONS 55): a row whose bucket and
@@ -377,9 +379,11 @@ enum Transfer {
     /// calculator inputs replaced by the file's, unless nothing differs; any other file row is added. Rows
     /// that are not in the file are untouched, and the file's settings and ordinary projects are ignored. This is
     /// how a researched catalog both joins and corrects rows the owner typed from memory. The file's packages
-    /// (projects with `isTemplate`) are merged by name (DECISIONS 89).
+    /// (projects with `isTemplate`) are merged by name (DECISIONS 89); `settings` prices a new package whose file
+    /// entry carries no target margin.
     @MainActor
-    static func mergeItems(_ data: Data, into context: ModelContext) throws -> MergeResult {
+    static func mergeItems(_ data: Data, into context: ModelContext,
+                           settings: AppSettings = AppSettings.current()) throws -> MergeResult {
         let doc = try decoder().decode(TransferDocument.self, from: data)
         guard TransferDocument.readableFormatVersions.contains(doc.formatVersion) else {
             throw TransferError.unsupportedFormat(doc.formatVersion)
@@ -493,9 +497,13 @@ enum Transfer {
         }
         // Packages by name (DECISIONS 89): created, or an existing package's header and lines replaced. Lines resolve
         // through the file's item positions like loadout members and snapshot the merged row now (DECISIONS 17);
-        // a line whose row cannot be resolved is skipped and counted. Ordinary projects stay ignored (DECISIONS 55).
+        // a line whose row cannot be resolved is skipped and counted. A name that matches several store packages is
+        // ambiguous and skipped whole, as a row is (66). On update a nil header field leaves the store's value alone,
+        // as rows and the company profile do (78). Ordinary projects stay ignored (DECISIONS 55).
         var packages = try context.fetch(FetchDescriptor<Project>()).filter(\.isTemplate)
         for p in doc.projects where p.isTemplate == true {
+            let sameName = packages.filter { normalized($0.name) == normalized(p.name) }
+            if sameName.count > 1 { result.packagesSkipped += 1; continue }
             var lines: [ProjectLine] = []
             for l in p.lines {
                 guard let item = resolve(l.itemIndex) else { result.packageLinesSkipped += 1; continue }
@@ -503,26 +511,34 @@ enum Transfer {
                                          rateCents: item.rateCents, isOn: l.isOn, qty: l.qty))
             }
             let package: Project
-            if let match = packages.first(where: { normalized($0.name) == normalized(p.name) }) {
+            if let match = sameName.first {
                 package = match
                 for line in match.lines { context.delete(line) }
                 match.lines = []
+                if let v = p.notes { match.notes = v }
+                if let v = p.crewName { match.crewName = v }
+                match.minimumJobCents = p.minimumJobCents
+                match.markupPct = p.markupPct
+                if let v = p.targetMarginPct { match.targetMarginPct = v }
                 result.packagesUpdated += 1
             } else {
                 package = Project(name: p.name, client: p.client, date: p.date, markupPct: p.markupPct,
-                                  minimumJobCents: p.minimumJobCents)
+                                  minimumJobCents: p.minimumJobCents, notes: p.notes)
                 package.isTemplate = true
+                package.crewName = p.crewName
+                if let v = p.targetMarginPct {
+                    package.targetMarginPct = v
+                } else {
+                    // A file without a margin predates margins: price from the company defaults, as a new project
+                    // does (DECISIONS 70), rather than from the legacy markup rule.
+                    package.setPricing(from: settings)
+                }
                 context.insert(package)
                 packages.append(package)
                 result.packages += 1
             }
             package.hours = p.hours
-            package.notes = p.notes
-            package.crewName = p.crewName
             package.multiplier = p.multiplier
-            package.minimumJobCents = p.minimumJobCents
-            package.markupPct = p.markupPct
-            package.targetMarginPct = p.targetMarginPct
             package.lines = lines
         }
         // The company profile (DECISIONS 78): the fields the file carries are applied; nothing is blanked.

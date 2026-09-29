@@ -130,7 +130,11 @@ struct SettingsScreen: View {
             lastTransfer = "Added \(result.added) rows, updated \(result.updated), left \(result.unchanged) unchanged"
                 + (result.company ? ", applied the company profile" : "")
                 + (result.packages + result.packagesUpdated > 0
-                    ? ", \(result.packages) packages added and \(result.packagesUpdated) updated" : "") + " (\(url.lastPathComponent))."
+                    ? ", \(result.packages) packages added and \(result.packagesUpdated) updated" : "")
+                + (result.packagesSkipped > 0
+                    ? ", \(result.packagesSkipped) packages skipped (name matches several packages)" : "")
+                + (result.packageLinesSkipped > 0 ? ", \(result.packageLinesSkipped) package lines skipped" : "")
+                + " (\(url.lastPathComponent))."
         } catch {
             fail("Couldn't add rows", error)
         }
