@@ -148,3 +148,24 @@ Append entries using this structure:
 - Open questions: (a) repository visibility, unchanged. (b) Royal palm in the company edition: keep or archive (owner).
 - Next owner/action: owner — repository visibility and the royal palm call. Codex — review the seven commits once pushed.
 - Branch/commit: `claude/operating-standard-baseline-1`, committed locally and NOT pushed: `697221d` (fixes) and this commit (log).
+
+## 2026-09-29 — Claude Code — Baseline 0.1 and the Sacred Tree layer installed on the live store; branch pushed
+
+- Context read: Mr. Anderson in chat on 09-29. The repository stays public ("it doesn't need to be private"), so the branch is pushed. He wants Buckets updated on this Mac, with the Sacred Tree data layer installed on top so the company can start getting value. Also read the live store as exported today, `Scripts/onboard.sh`, and DECISIONS 55 and 68 (merge matching).
+- Work completed:
+  - **Rehearsal first.** The whole install ran twice on copies of the live store (`BUCKETS_STORE`), and the exports were diffed.
+  - **Two problems caught and fixed before the live run.** (1) The company edition would have overwritten the owner's own "Stihl 500i" row: $1,800, 1,500 h life, 1,500 h/yr, repair 0.8, $0.40/h fuel, 256¢/h, entered 09-27. (2) Its 2025 P&L overhead lines would have landed beside the default checklist lines under different names ("Office / shop rent" next to "Shop / office rent").
+  - **The Sacred Tree layer as its own file.** Built as the company edition minus the owner's 500i row, with units #2 and #3 copying the owner's inputs. Nine P&L lines are renamed onto their checklist names (the old name is kept in notes), and the three "(sub)" consumables rows are dropped because the store already has its own Subcontractors rows. The file is `~/Developer/sacred-tree-local-vault/sacred-tree-layer-2026-09-29.json`: company data, in the vault, not in the repository.
+  - **The live apply.** `Scripts/onboard.sh` ran with the vault profile, `Buckets-default-catalog.json`, `archive-2026-09-28-baseline-0.1.json` and the layer. `archive-2026-09-28-baseline-0.1-starter.json` was not applied, because this store never merged the old starter and it would only add seven inactive rows.
+- Evidence/tests:
+  - Backup: `~/Developer/sacred-tree-local-vault/onboard-2026-09-29-134534/`.
+  - Merge counts matched the rehearsal: default added 22, updated 26, unchanged 135; archive updated 27; layer added 27, updated 16, unchanged 85.
+  - Live export: labor 1 (the owner's row, unchanged), equipment 19 (the owner's 500i unchanged; 18 new rows), materials 100, consumables 68, subcontractors 3 (unchanged), overhead 24 lines with no duplicate names at $87,453.81/yr ($58.30 per billable hour at 1,500 h). Both projects, both subs, the loadout, the settings and the company profile are unchanged.
+  - Readiness: NEEDS REVIEW, 215 active rows unresolved (honest: nothing is owner-confirmed yet). App 0.2.1 relaunched.
+- Decisions: none new. For the repository's company edition (`Buckets-starter-catalog.json`): its overhead lines should carry the default checklist names, and its "(sub)" consumables rows conflict with the Subcontractors bucket (DECISIONS 60). Fix both in the repository before another company uses it as a template.
+- Open questions:
+  - (a) Crew labor rows: only the owner's row exists. Owner to enter the crew, each with wage, paid hours and burden.
+  - (b) Hours basis on saws: the owner's 500i uses 1,500 h/yr and repair 0.8, while the other saws came in at BRIEF §2.2 defaults (300 h/yr, repair 2.50). Pick one basis and conform in one pass.
+  - (c) Royal palm row: keep or archive.
+- Next owner/action: owner — enter the crew, then review the equipment rows (Show → Needs review). Codex — review PR for `claude/operating-standard-baseline-1` (seven commits plus this log). Claude — conform the company edition's overhead names and sub rows on request.
+- Branch/commit: `claude/operating-standard-baseline-1`, pushed; this commit (log).
