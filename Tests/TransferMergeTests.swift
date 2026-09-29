@@ -43,4 +43,141 @@ final class TransferMergeTests: XCTestCase {
         XCTAssertEqual(try Transfer.mergeItems(Data(file.utf8), into: context).unchanged, 4)
         XCTAssertEqual(try context.fetch(FetchDescriptor<BucketItem>()).count, 5)
     }
+    // MARK: - Packages in a merge file (DECISIONS 89)
+
+    private func row(_ bucket: String, _ name: String, _ cents: Int, _ unit: String, code: String? = nil) -> String {
+        #"{"bucket": "\#(bucket)", "name": "\#(name)", "rateCents": \#(cents), "unit": "\#(unit)", "isActive": true, "source": null, "notes": null, "calcInputs": null, "sortOrder": 0\#(code.map { #", "unitCode": "\#($0)""# } ?? "")}"#
+    }
+
+    private func line(_ index: Int?, isOn: Bool, qty: Int = 1) -> String {
+        // The file's own snapshot is deliberately stale: a merge must snapshot the merged row, not the file's copy.
+        #"{"itemIndex": \#(index.map(String.init) ?? "null"), "bucket": "materials", "name": "stale", "unit": "x", "rateCents": 1, "isOn": \#(isOn), "qty": \#(qty), "actualQty": null}"#
+    }
+
+    private func project(_ name: String, template: Bool?, hours: Int = 6, crew: String? = nil, lines: [String]) -> String {
+        let flag = template.map { #", "isTemplate": \#($0)"# } ?? ""
+        let crewKey = crew.map { #", "crewName": "\#($0)""# } ?? ""
+        return #"{"name": "\#(name)", "client": null, "date": "2026-09-29T00:00:00Z", "hours": \#(hours), "multiplier": 2, "markupPct": 100, "minimumJobCents": 75000, "actualHours": null, "notes": "from the file", "targetMarginPct": 50, "lines": [\#(lines.joined(separator: ", "))]\#(flag)\#(crewKey)}"#
+    }
+
+    private func file(items: [String], projects: [String], loadouts: String = "[]") -> Data {
+        Data(#"{"formatVersion": 2, "exportedAt": "2026-09-29T00:00:00Z", "items": [\#(items.joined(separator: ", "))], "projects": [\#(projects.joined(separator: ", "))], "loadouts": \#(loadouts)}"#.utf8)
+    }
+
+    func testMergeCreatesPackagesWithLineSnapshotsAndIgnoresOrdinaryProjects() throws {
+        let container = try Store.inMemoryContainer()
+        let context = container.mainContext
+        context.insert(BucketItem(bucket: .consumables, name: "Dump fee", rateCents: 9000, unit: "load", sortOrder: 0))
+        // An ordinary project that shares a package's name is not a package and is never touched.
+        let job = Project(name: "Small removal", date: Date(timeIntervalSince1970: 0), markupPct: 35, minimumJobCents: 75000)
+        context.insert(job)
+        try context.save()
+
+        let items = [row("labor", "Crew lead", 5000, "hr"), row("equipment", "Chipper", 2500, "hr"),
+                     row("materials", "Mulch", 3200, "yard"), row("consumables", "dump  FEE", 7500, "load")]
+        let data = file(items: items, projects: [
+            project("Small removal", template: true, crew: "Crew A",
+                    lines: [line(0, isOn: true), line(1, isOn: false), line(3, isOn: true, qty: 2)]),
+            project("Mulch ring", template: true, hours: 2, lines: [line(2, isOn: true, qty: 3), line(9, isOn: true), line(nil, isOn: true)]),
+            project("A job", template: false, lines: [line(0, isOn: true)]),
+            project("An older job", template: nil, lines: [line(0, isOn: true)]),
+        ])
+        let result = try Transfer.mergeItems(data, into: context)
+        XCTAssertEqual(result, Transfer.MergeResult(added: 3, updated: 1, unchanged: 0, packages: 2, packagesUpdated: 0, packageLinesSkipped: 2))
+
+        let projects = try context.fetch(FetchDescriptor<Project>())
+        XCTAssertEqual(projects.count, 3, "two packages plus the store's own project; the file's ordinary projects are ignored")
+        XCTAssertTrue(job.lines.isEmpty)
+        XCTAssertFalse(job.isTemplate)
+        XCTAssertEqual(job.markupPct, 35)
+
+        let removal = projects.first { $0.isTemplate && $0.name == "Small removal" }!
+        XCTAssertEqual(removal.hours, 6)
+        XCTAssertEqual(removal.multiplier, 2)
+        XCTAssertEqual(removal.markupPct, 100)
+        XCTAssertEqual(removal.targetMarginPct, 50)
+        XCTAssertEqual(removal.minimumJobCents, 75000)
+        XCTAssertEqual(removal.crewName, "Crew A")
+        XCTAssertEqual(removal.notes, "from the file")
+        let lines = removal.sortedLines
+        XCTAssertEqual(lines.map(\.name), ["Crew lead", "Chipper", "Dump fee"])
+        XCTAssertEqual(lines.map(\.bucket), [.labor, .equipment, .consumables])
+        XCTAssertEqual(lines.map(\.unit), ["hr", "hr", "load"])
+        XCTAssertEqual(lines.map(\.rateCents), [5000, 2500, 7500], "snapshots of the merged rows, the updated Dump fee included")
+        XCTAssertEqual(lines.map(\.isOn), [true, false, true])
+        XCTAssertEqual(lines.map(\.qty), [1, 1, 2])
+        XCTAssertEqual(lines.map { $0.item?.name }, ["Crew lead", "Chipper", "Dump fee"])
+        XCTAssertTrue(lines.allSatisfy { $0.actualQty == nil })
+
+        let ring = projects.first { $0.name == "Mulch ring" }!
+        XCTAssertTrue(ring.isTemplate)
+        XCTAssertEqual(ring.hours, 2)
+        XCTAssertNil(ring.crewName)
+        XCTAssertEqual(ring.lines.map(\.name), ["Mulch"])
+        XCTAssertEqual(ring.lines.map(\.unit), ["yard"])
+        XCTAssertEqual(ring.lines.map(\.rateCents), [3200])
+        XCTAssertEqual(ring.lines.map(\.qty), [3])
+    }
+
+    func testRemergingAPackageReplacesItRatherThanDuplicating() throws {
+        let container = try Store.inMemoryContainer()
+        let context = container.mainContext
+        let items = [row("labor", "Crew lead", 5000, "hr"), row("equipment", "Chipper", 2500, "hr"), row("materials", "Mulch", 3200, "yard")]
+        _ = try Transfer.mergeItems(file(items: items, projects: [
+            project("Small removal", template: true, crew: "Crew A", lines: [line(0, isOn: true), line(1, isOn: true), line(2, isOn: true, qty: 4)]),
+        ]), into: context)
+
+        let changed = [row("labor", "Crew lead", 5500, "hr"), row("equipment", "Chipper", 2500, "hr"), row("materials", "Mulch", 3200, "yard")]
+        let result = try Transfer.mergeItems(file(items: changed, projects: [
+            project("  small   REMOVAL ", template: true, hours: 8, lines: [line(0, isOn: true), line(1, isOn: false)]),
+        ]), into: context)
+        XCTAssertEqual(result.packages, 0)
+        XCTAssertEqual(result.packagesUpdated, 1)
+        XCTAssertEqual(result.packageLinesSkipped, 0)
+
+        let packages = try context.fetch(FetchDescriptor<Project>())
+        XCTAssertEqual(packages.count, 1)
+        let package = packages[0]
+        XCTAssertEqual(package.name, "Small removal", "the store's name is kept")
+        XCTAssertEqual(package.hours, 8)
+        XCTAssertNil(package.crewName, "header fields are the file's")
+        XCTAssertEqual(package.sortedLines.map(\.name), ["Crew lead", "Chipper"])
+        XCTAssertEqual(package.sortedLines.map(\.rateCents), [5500, 2500])
+        XCTAssertEqual(package.sortedLines.map(\.isOn), [true, false])
+        XCTAssertEqual(try context.fetch(FetchDescriptor<ProjectLine>()).count, 2, "the replaced lines are deleted, not orphaned")
+    }
+
+    func testASkippedCodedDuplicateRowDoesNotShiftLoadoutOrPackageMembers() throws {
+        let container = try Store.inMemoryContainer()
+        let context = container.mainContext
+        for code in ["SAW-01", "SAW-02"] {
+            let saw = BucketItem(bucket: .equipment, name: "Stihl 500i", rateCents: 256, sortOrder: 0)
+            saw.unitCode = code
+            context.insert(saw)
+        }
+        context.insert(BucketItem(bucket: .labor, name: "Marcus", rateCents: 5408, sortOrder: 0))
+        try context.save()
+
+        // Position 0 names two coded units without a code, so it is skipped; positions 1 and 2 must still mean
+        // Marcus and the Chipper.
+        let items = [row("equipment", "Stihl 500i", 999, "hr"), row("labor", "Marcus", 5408, "hr"), row("equipment", "Chipper", 2500, "hr")]
+        let result = try Transfer.mergeItems(file(items: items, projects: [
+            project("Crew day", template: true, lines: [line(0, isOn: true), line(1, isOn: true), line(2, isOn: false, qty: 3)]),
+        ], loadouts: #"[{"name": "Chipper crew", "notes": null, "sortOrder": 0, "memberIndexes": [1, 2]}]"#), into: context)
+        XCTAssertEqual(result.added, 1)
+        XCTAssertEqual(result.unchanged, 2)
+        XCTAssertEqual(result.loadouts, 1)
+        XCTAssertEqual(result.packages, 1)
+        XCTAssertEqual(result.packageLinesSkipped, 1)
+
+        let loadout = try context.fetch(FetchDescriptor<Loadout>())[0]
+        XCTAssertEqual(Set(loadout.members.map(\.name)), ["Marcus", "Chipper"])
+        let package = try context.fetch(FetchDescriptor<Project>())[0]
+        XCTAssertEqual(package.sortedLines.map(\.name), ["Marcus", "Chipper"])
+        XCTAssertEqual(package.sortedLines.map(\.rateCents), [5408, 2500])
+        XCTAssertEqual(package.sortedLines.map(\.isOn), [true, false])
+        XCTAssertEqual(package.sortedLines.map(\.qty), [1, 3])
+        let saws = try context.fetch(FetchDescriptor<BucketItem>()).filter { $0.name == "Stihl 500i" }
+        XCTAssertEqual(saws.map(\.rateCents), [256, 256], "the skipped row changes neither unit")
+    }
 }
