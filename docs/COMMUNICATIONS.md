@@ -190,3 +190,22 @@ Append entries using this structure:
   - (b) Two store packages with the same name: the first one found is updated.
 - Next owner/action: caller rehearses 0.2.2 on a copy of the live store (`BUCKETS_STORE`), then installs it and merges the Sacred Tree packages file. Codex reviews `claude/merge-packages` after PR #8.
 - Branch/commit: `claude/merge-packages`, pushed: `2348e08` (change) and this commit (log). No PR opened.
+
+## 2026-09-29 — Claude Code — merge-packages review fixes (0.2.2, build 4)
+
+- Context read: the review of `claude/merge-packages` (2348e08, 6705b01), relayed through the workflow on 09-29. The review found no blocking issues, five low ones and two open questions. `Transfer.mergeItems`, `Project.setPricing` / `make`, `SettingsScreen.chooseMerge`, the `BUCKETS_MERGE_FILE` hook and DECISIONS 66, 70 and 78 were read too.
+- Work completed (branch `claude/merge-packages`, new commit, nothing rewritten):
+  - **Open question (a) resolved: nil leaves the store's value alone.** On update, a package's notes, crew name and target margin change only where the file carries a value, as for rows, subcontractors, loadouts and the company profile. Hours, multiplier, markup and minimum job are required fields in the file and are always replaced.
+  - **Pricing for a new package without a margin.** If a new package's file entry has no target margin, it is priced from the company defaults (`setPricing`, DECISIONS 70), not from the legacy markup rule. `mergeItems` takes `settings:`, which defaults to `AppSettings.current()`.
+  - **Open question (b) resolved: an ambiguous name is skipped.** If a file package's name matches more than one store package, it is skipped whole, touching neither. It is counted in the new `MergeResult.packagesSkipped`, the same way an ambiguous row is (66).
+  - **Skips are reported.** The Settings message now reports packages skipped and package lines skipped when either is not zero. The `BUCKETS_MERGE_FILE` stderr line adds `packages skipped N`.
+  - **Tests.** The ordinary project now has a line of its own and must keep it. The line-count check is scoped by adding a second project with two lines. Four new cases: nil fields on update, a new package without a margin, duplicate store package names, and a line to a row that the same file archives (kept and linked).
+  - DECISIONS 89 now states all of these rules.
+- Evidence/tests:
+  - `Scripts/test.sh`: 289 executed, 3 skipped (the same three), 0 failures.
+  - `Scripts/build.sh Release`: `build/Buckets.app`, 0.2.2 (4), codesign verified.
+  - Not installed and not merged; the live store was not touched.
+- Decisions: DECISIONS 89 amended as above (no new number).
+- Open questions: none new. The review's reminder still applies: the rehearsal on a store copy should include `export-final.json` itself. Merging it now replaces the live "New package" (197 lines) with the file's copy.
+- Next owner/action: Codex reviews `claude/merge-packages` after PR #8. The caller rehearses on a store copy, then installs.
+- Branch/commit: `claude/merge-packages`, pushed: 1e552bb (fixes) and this commit (log).
