@@ -169,3 +169,24 @@ Append entries using this structure:
   - (c) Royal palm row: keep or archive.
 - Next owner/action: owner — enter the crew, then review the equipment rows (Show → Needs review). Codex — review PR for `claude/operating-standard-baseline-1` (seven commits plus this log). Claude — conform the company edition's overhead names and sub rows on request.
 - Branch/commit: `claude/operating-standard-baseline-1`, pushed; this commit (log).
+
+## 2026-09-29 — Claude Code — merge files carry packages (0.2.2, build 4)
+
+- Context read: Mr. Anderson's instruction (relayed through the workflow on 09-29): a company data-layer merge file should carry packages as well as rows, subcontractors and loadouts. Also read `AGENTS.md`, `CLAUDE.md`, `docs/REPOSITORY-WORKFLOW.md`, DECISIONS 17, 55, 61–63, 66, 74–79 and 87–88, `Transfer.mergeItems`, `Project.make` / `duplicate` / `asPackage`, and the `BUCKETS_MERGE_FILE` hook.
+- Work completed: branch `claude/merge-packages`, stacked on `claude/operating-standard-baseline-1` (PR #8, unmerged).
+  - `Transfer.mergeItems` merges the file's projects with `isTemplate: true` as packages, matched by name (case- and whitespace-insensitive) against packages only. A new name creates the package, with the file's date and client. An existing package has its lines and header fields (hours, notes, crew name, multiplier, minimum job, markup, target margin) replaced; its name, date and client are kept.
+  - Package lines resolve through the same file-position-to-merged-row mapping as loadout members. They snapshot name, bucket, unit and rate from the merged row, with `isOn` and `qty` from the file. Lines that cannot be resolved are skipped and counted.
+  - Ordinary projects in a merge file are still ignored.
+  - `MergeResult` gains `packages`, `packagesUpdated` and `packageLinesSkipped`. The `BUCKETS_MERGE_FILE` stderr line and the Settings message report them.
+  - **Fix.** A file row skipped as ambiguous (an uncoded name matching several coded units) was not appended to the merged list, so every later loadout member shifted by one. It now holds its position as nil.
+  - Version 0.2.2, build 4 (`project.yml`). DECISIONS 89; README Settings line.
+- Evidence/tests:
+  - `Scripts/test.sh`: 285 executed, 3 skipped (the same three), 0 failures. Three new `TransferMergeTests` cases: two packages created with correct snapshots and `isOn`/`qty`, ordinary projects ignored, and a same-named ordinary project untouched; a re-merge updates rather than duplicates and deletes the replaced lines; a skipped coded-duplicate row shifts neither loadout members nor package lines. With the fix reverted, the last test fails 3 assertions.
+  - `Scripts/build.sh Release` built `build/Buckets.app` (0.2.2, build 4, codesign verified).
+  - Not installed; the live store was not touched.
+- Decisions: DECISIONS 89. Package line snapshots come from the merged row, not from the file's line copy, so a package always prices from the catalog as merged.
+- Open questions:
+  - (a) A package's `nil` notes, crew or target margin in the file clears the store's value on update ("replace"). This differs from rows and the company profile, where nil leaves a field alone. Keep it, or switch to nil-leaves-alone?
+  - (b) Two store packages with the same name: the first one found is updated.
+- Next owner/action: caller rehearses 0.2.2 on a copy of the live store (`BUCKETS_STORE`), then installs it and merges the Sacred Tree packages file. Codex reviews `claude/merge-packages` after PR #8.
+- Branch/commit: `claude/merge-packages`, pushed: `2348e08` (change) and this commit (log). No PR opened.
