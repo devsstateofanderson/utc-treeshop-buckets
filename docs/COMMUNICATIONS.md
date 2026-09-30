@@ -441,3 +441,19 @@ Append entries using this structure:
   - Codex: review the PR for this branch after #10.
   - Next build: slice 2 (Offers for marketing).
 - Branch/commit: `claude/sales-commission`, this commit (log).
+
+## 2026-09-30 — Claude Code — merged #8 → #9 → #10 → #11 on the owner's instruction
+
+- Context read: Mr. Anderson in chat: "push to repo and make sure it's up to date." `main` was at 0.2.1 while this Mac runs 0.2.5.
+- Work completed: merged the stack in order with merge commits.
+  - #8: OpenLoadout Baseline 0.1 catalog, docs and privacy guard.
+  - #9: merge files carry packages (0.2.2).
+  - #10: Planning placeholder, and merge can remove or archive a subcontractor (0.2.3).
+  - #11: commission-aware pricing, Sold by, not-on-the-crew, salary calculator (0.2.4–0.2.5).
+  - Deleting #8's branch on merge closed #9 rather than retargeting it. The branch was restored, #9 reopened, and the rest were retargeted to `main` before any further deletion. All four head branches are now deleted.
+  - #7 (the equipment-classes plan) stays open for review.
+- Evidence/tests: `main`'s tree is identical to the tested head `5a36bb0` (347 executed, 3 skipped, 0 failures). This is 0.2.5 build 7, the version installed on the Sacred Tree Mac.
+- Decisions: this was the owner's direct merge instruction (as on 09-24); the Codex review loop resumes from here.
+- Open questions: the ones listed in the 0.2.5 entry above (sales allowance, commission base, payroll tax on commission, salary burden, when commission is payable).
+- Next owner/action: Codex, a post-merge review of `main`. Claude, slice 2 (Offers) when the owner says go.
+- Branch/commit: `main`, this commit.
