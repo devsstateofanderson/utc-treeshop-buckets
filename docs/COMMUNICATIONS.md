@@ -368,3 +368,18 @@ Append entries using this structure:
 - Open questions: the plan's ten, unchanged. The first is the owner's: turn on a 7% allowance (prices rise 17.75%) or keep today's prices at about 42.5% after commission.
 - Next owner/action: Codex reviews `claude/sales-commission` after PR #10. Then the vault layer v4 and the rehearsal before any install.
 - Branch/commit: `claude/sales-commission`, 9e2c113 (change) and this commit (log). No PR opened.
+
+## 2026-09-30 — Claude Code — Sales commission review fixes (0.2.4, build 6)
+
+- Context read: the review of `claude/sales-commission` (slice 1a): no High or Medium issues, six Low.
+- Work completed (7ab3679):
+  - (1) The plan's Copy breakdown clause now matches DECISIONS 92: "Profit after commission" follows Profit.
+  - (2) The plan's store table is retitled "Shape of the store … example rates" and keeps only the loaded rates ($35.01, $86.67, $45.07); the hourly wage inputs are gone. The worked-examples heading no longer says "live export".
+  - (3) Re-price packages reports "Re-priced N stale packages" (or none stale) beside the banner, and a failed save in red; cleared when the margin, allowance or tax changes.
+  - (4) Sold by shows only when an active Labor row carries a %, the same rows the menu lists.
+  - (5) Import refuses a `salespersonIndex` that points outside Labor (`TransferError.salespersonNotLabor`); the out-of-range refusal is now tested.
+  - (6) Import and merge apply a file's `trackOnly` to Labor rows only until Equipment has its own toggle; DECISIONS 95 says so.
+- Evidence/tests: `Scripts/test.sh`: 335 executed, 3 skipped (the same three), 0 failures. `Scripts/build.sh Release`: `build/Buckets.app`, 0.2.4 (6), codesign verified. Not installed; the live store and the vault were not touched.
+- Decisions: 95 amended (non-Labor salesperson refused; `trackOnly` Labor-only from files for 0.2.4).
+- Next owner/action: Codex re-reviews `claude/sales-commission`.
+- Branch/commit: `claude/sales-commission`, 7ab3679 (fixes) and this commit (log). No PR opened.
