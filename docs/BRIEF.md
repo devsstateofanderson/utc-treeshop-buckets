@@ -264,7 +264,7 @@ enum Bucket: String, Codable, CaseIterable { case labor, equipment, materials, c
   var isActive: Bool          // archived rows stay for old projects, hidden from new ones
   var source: String?         // free text (vendor, supplier, sub name)
   var notes: String?
-  var calcInputs: Data?       // JSON of the Labor or Equipment calculator inputs so "Calculate…" reopens filled in
+  var calcInputs: Data?       // JSON of the Labor, Equipment or Overhead salary calculator inputs (DECISIONS 93) so "Calculate…" reopens filled in
   var sortOrder: Int
 }
 

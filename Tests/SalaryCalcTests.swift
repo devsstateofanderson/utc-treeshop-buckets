@@ -130,10 +130,12 @@ final class SalaryCalcTests: XCTestCase {
         XCTAssertNil(BucketItem(bucket: .overhead, name: "z", calcInputs: Data("{\"amountCents\":1,\"period\":\"fortnight\"}".utf8)).salaryInputs)
     }
 
-    /// Export and import carry the inputs as they carry every calculator's (DECISIONS 43): no format change.
+    /// Export and import carry the inputs as they carry every calculator's (DECISIONS 43): no format change. Fractional
+    /// counts and burden (4.5 days, 50.5 weeks, 7.65%) come back exactly through `JSONValue.number(Decimal)`.
     func testTransferCarriesTheInputs() throws {
-        let saved = inputs(20_000, .day)
-        let row = BucketItem(bucket: .overhead, name: "Sales salary", rateCents: 6_760_000, calcInputs: try JSONEncoder().encode(saved))
+        let saved = inputs(20_000, .day, days: Decimal(string: "4.5")!, weeks: Decimal(string: "50.5")!, burden: Decimal(string: "7.65")!)
+        let rate = try SalaryCalc.annualCents(saved)
+        let row = BucketItem(bucket: .overhead, name: "Sales salary", rateCents: rate, calcInputs: try JSONEncoder().encode(saved))
         context.insert(row)
         try context.save()
         let data = try Transfer.exportJSON(from: context, settings: AppSettings(), exportedAt: .now)
@@ -142,8 +144,11 @@ final class SalaryCalcTests: XCTestCase {
         let other = try Store.inMemoryContainer()
         _ = try Transfer.importJSON(data, into: other.mainContext)
         let back = try XCTUnwrap(try other.mainContext.fetch(FetchDescriptor<BucketItem>()).first { $0.name == "Sales salary" })
-        XCTAssertEqual(back.rateCents, 6_760_000)
+        XCTAssertEqual(back.rateCents, rate)
         XCTAssertEqual(back.salaryInputs, saved)
+        XCTAssertEqual(back.salaryInputs?.burdenPct, Decimal(string: "7.65")!)
+        XCTAssertEqual(back.salaryInputs?.daysPerWeek, Decimal(string: "4.5")!)
+        XCTAssertEqual(back.salaryInputs?.weeksPerYear, Decimal(string: "50.5")!)
     }
 
     // MARK: The sheet's draft

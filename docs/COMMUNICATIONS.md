@@ -320,15 +320,15 @@ Append entries using this structure:
 ## 2026-09-30 — Claude Code — 0.2.3 installed; Sacred Tree layer v3 applied (sales manager, single crew, sub corrections)
 
 - Context read: Mr. Anderson in chat on 09-30.
-  - New Sales Manager, Noah Aquinas: $200/day salary on a 5-day week, plus 7% commission on revenue he creates.
+  - A new Sales Manager: salaried, plus a commission on revenue he creates.
   - One crew for now, lean. The wage estimates stand until he edits them.
   - Gaston and J&J both run 50 and 65 yd grapple trucks, so treat them as equivalent.
   - **Correction:** "Florida Stump Grind" is NOT TreeShop. TreeShop is Mr. Anderson's own company and must never appear as a subcontractor or vendor. He believes Florida Stump Grind was a demo entry.
   - Cranes are deferred (billed as a flat add plus an hourly increase; no data yet).
   - Reserve a Planning section (this branch).
 - Work completed: layer v3 (`~/Developer/sacred-tree-local-vault/sacred-tree-layer-v3-2026-09-30.json`, built from the live export with `tools/build_layer_v2.py` and `tools/layer-v3-overrides.json`):
-  - **Noah Aquinas as a labor row** (Sales, $25/h over 2,080 paid h, 30% burden, 4,507¢/h; owner confirmed). Off in every package, so he is never double-counted.
-  - **His salary as an overhead line:** "Sales manager salary – Noah Aquinas", $67,600/yr = $52,000 + 30% burden, which is +$45.07 per crew hour at 1,500 h.
+  - **The Sales Manager's labor row** (Sales; owner confirmed). Off in every package, so he is never double-counted.
+  - **His salary as an overhead line** (salary plus a 30% burden, spread over billable hours like any overhead).
   - **PPE budgeted for one crew:** "PPE & uniforms" goes to $1,118.71/yr, and PPE-04..06 are archived.
   - **Grapple subs:** Gaston's notes corrected, with its public Lake/Orange phone; J&J's Grapple Service added as a sub with no rate row yet.
   - **The "Florida Stump Grind (TreeShop)" sub removed** through DECISIONS 91; the older vault files were scrubbed of it too.
