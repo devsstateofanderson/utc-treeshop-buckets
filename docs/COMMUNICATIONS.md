@@ -383,3 +383,24 @@ Append entries using this structure:
 - Decisions: 95 amended (non-Labor salesperson refused; `trackOnly` Labor-only from files for 0.2.4).
 - Next owner/action: Codex re-reviews `claude/sales-commission`.
 - Branch/commit: `claude/sales-commission`, 7ab3679 (fixes) and this commit (log). No PR opened.
+
+## 2026-09-30 — Claude Code — Salary calculator on overhead rows, Projects list columns (0.2.5, build 7)
+
+- Context read: `docs/treeshop/13-sales-marketing-plan.md` (slice 1b), `AGENTS.md`, `CLAUDE.md`, `docs/REPOSITORY-WORKFLOW.md`, BRIEF, DECISIONS, the entries above. Scope: slice 1b only, on `claude/sales-commission` after slice 1a.
+- Work completed:
+  - **Salary calculator (DECISIONS 93, second paragraph; amends 34 for this case).** `Sources/Core/SalaryCalc.swift`: `SalaryPeriod` (day · week · biweekly · semimonthly · month · year), `SalaryCalcInputs {amountCents, period, daysPerWeek, weeksPerYear, burdenPct}`, `SalaryCalc.annualCents` = `round(amount × periods a year × (100 + burden) ÷ 100)`, one division, rounded once; throws on negatives (as 9) and on a result above the $9,999,999.99 rate bound (30).
+  - **Overhead Form.** "Calculate…" beside "Cost per year" opens `SalaryCalcSheet`: pay and period, days per week (day rate), weeks per year (day and week rates), burden (default from Settings), billable hours read-only, and "= $67,600.00 per year · $45.07 per hour at 1,500 billable hours" over its formula. Save stores `rateCents` and `calcInputs`; `BucketItem.salaryInputs` reads them back (derived, no new attribute). Other overhead lines are typed as before.
+  - **Projects list.** "Sold by" (the project's name snapshot) and "Profit after" (the header's profit after commission and its payroll tax; a loss in orange) columns. Every column of the Projects list sorts, newest first by default. Packages unchanged. DECISIONS 94 records it.
+  - `BUCKETS_SCREEN=salarycalc` opens the sheet (first overhead row with salary inputs); the screenshot fixture gains a synthetic salary line added after its two projects.
+  - BRIEF §2.3; README; the plan's status line; `docs/treeshop/README.md`.
+- Evidence/tests:
+  - `Scripts/test.sh`: 347 executed, 3 skipped (the same three), 0 failures.
+  - New: `SalaryCalcTests` (20,000/day × 5 × 52 at 30% → 6,760,000, at 10% → 5,720,000; the period table; the 4,212,344.5 → 4,212,345 tie and the 4,212,260 two-step figure; negatives and the bound throw; `salaryInputs` round-trips through `calcInputs` and through export/import; the sheet's draft; the calculator moves no price, before and after Re-price; the screen hook). `ProjectsListTests`: the two columns match the header's figures (157,370 / 145,402 / 185,296) and sort both ways; ties fall back to newest first.
+  - `PricerCommissionTests.testZeroAllowanceReproducesEveryPinnedPrice` (A = 0 loop over every pinned fixture) still passes.
+  - `Scripts/build.sh Release`: `build/Buckets.app`, 0.2.5 (7), codesign verified. The sheet and the list were rendered from a synthetic fixture store in the scratch area (light and dark).
+  - Not installed; the live store and the vault were not touched.
+- Decisions: 93 (second paragraph, amending 34); 94 (one sentence on the list columns). No format change: `calcInputs` already travels (43, 95).
+- Known limits: at the default 1,180-point window the Projects list's Name and Sold by cells truncate long names; widening the list pane shows them. The Project header's figure row was already cramped at that width before this change.
+- Not done here (vault side): data layer v5 (the salary overhead row's `calcInputs` through `tools/build_layer_v2.py`) and its rehearsal.
+- Next owner/action: Codex reviews slice 1b on `claude/sales-commission`. Then vault layers v4 and v5 and the rehearsal before any install.
+- Branch/commit: `claude/sales-commission`, cd6b36e (change) and this commit (log). No PR opened.
