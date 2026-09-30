@@ -84,6 +84,9 @@ struct TransferDocument: Codable, Equatable {
         var notes: String?
         var isActive: Bool
         var sortOrder: Int
+        /// Merge only (DECISIONS 91): true removes the store's sub of this name, deleting it when none of its
+        /// services is on a project and archiving it otherwise. Export never writes it; a missing key is nil.
+        var remove: Bool? = nil
     }
 
     struct LoadoutRecord: Codable, Equatable {
@@ -362,6 +365,10 @@ enum Transfer {
         var updated = 0
         var unchanged = 0
         var subcontractors = 0
+        /// Existing subs a `remove` record deleted (none of their services on a project; services cascade), and
+        /// existing subs archived by a `remove` record or by `isActive: false` (DECISIONS 91).
+        var subcontractorsRemoved = 0
+        var subcontractorsArchived = 0
         var loadouts = 0
         /// The file carried a company profile and it was applied (DECISIONS 78).
         var company = false
@@ -380,7 +387,8 @@ enum Transfer {
     /// that are not in the file are untouched, and the file's settings and ordinary projects are ignored. This is
     /// how a researched catalog both joins and corrects rows the owner typed from memory. The file's packages
     /// (projects with `isTemplate`) are merged by name (DECISIONS 89); `settings` prices a new package whose file
-    /// entry carries no target margin.
+    /// entry carries no target margin. The one deletion: a subcontractor record marked `remove` deletes the store's
+    /// sub of that name when none of its services is on a project, and archives it otherwise (DECISIONS 91).
     @MainActor
     static func mergeItems(_ data: Data, into context: ModelContext,
                            settings: AppSettings = AppSettings.current()) throws -> MergeResult {
@@ -390,20 +398,57 @@ enum Transfer {
         }
         var existing = try context.fetch(FetchDescriptor<BucketItem>())
         var result = MergeResult()
-        // Subcontractors by name: update contact details the file provides, add the rest (DECISIONS 60).
+        // Subcontractors by name: update contact details the file provides, add the rest (DECISIONS 60). A `remove`
+        // record deletes an unreferenced sub (its services cascade) and archives a referenced one, so old projects keep
+        // their lines (22); `isActive: false` archives, and a file never un-archives (55). A `remove` for a name the
+        // store lacks does nothing and creates nothing (DECISIONS 91).
         var subs = try context.fetch(FetchDescriptor<Subcontractor>())
-        var fileSubs: [Subcontractor] = []
+        // One entry per file position; nil for a sub the file removed or never had, whose file rows are then skipped.
+        // A sub archived instead of removed keeps its position: rows under it still merge, new ones archived (91).
+        var fileSubs: [Subcontractor?] = []
+        // File rows under a sub this file archives are added archived, as `setActive(false)` archives the sub's services.
+        var archivedByFile: Set<PersistentIdentifier> = []
         for s in doc.subcontractors ?? [] {
-            if let match = subs.first(where: { normalized($0.name) == normalized(s.name) }) {
+            let match = subs.first(where: { normalized($0.name) == normalized(s.name) })
+            if s.remove == true {
+                guard let match else { fileSubs.append(nil); continue }
+                if match.referenceCount == 0 {
+                    let gone = Set(match.services.map(\.persistentModelID))
+                    for service in match.services { context.delete(service) }
+                    existing.removeAll { gone.contains($0.persistentModelID) }
+                    subs.removeAll { $0.persistentModelID == match.persistentModelID }
+                    context.delete(match)
+                    result.subcontractorsRemoved += 1
+                    fileSubs.append(nil)
+                } else {
+                    if match.isActive || match.services.contains(where: \.isActive) {
+                        match.setActive(false)
+                        result.subcontractorsArchived += 1
+                    }
+                    archivedByFile.insert(match.persistentModelID)
+                    fileSubs.append(match)
+                }
+                continue
+            }
+            if let match {
                 if let v = s.contact { match.contact = v }
                 if let v = s.phone { match.phone = v }
                 if let v = s.email { match.email = v }
                 if let v = s.notes { match.notes = v }
+                if !s.isActive {
+                    if match.isActive || match.services.contains(where: \.isActive) {
+                        match.setActive(false)
+                        result.subcontractorsArchived += 1
+                    }
+                    archivedByFile.insert(match.persistentModelID)
+                }
                 fileSubs.append(match)
             } else {
                 let sub = Subcontractor(name: s.name, contact: s.contact, phone: s.phone, email: s.email, notes: s.notes,
                                         isActive: s.isActive, sortOrder: Subcontractor.nextSortOrder(context: context) + subs.count)
                 context.insert(sub)
+                // A sub the file adds archived takes its new services archived too, as `setActive(false)` would.
+                if !s.isActive { archivedByFile.insert(sub.persistentModelID) }
                 subs.append(sub)
                 fileSubs.append(sub)
                 result.subcontractors += 1
@@ -418,6 +463,12 @@ enum Transfer {
         for i in doc.items {
             let key = normalized(i.name)
             let sub = i.subcontractorIndex.flatMap { $0 < fileSubs.count ? fileSubs[$0] : nil }
+            // A row under a sub the file removed (deleted, or never in the store) is skipped, never re-created unattached.
+            if let s = i.subcontractorIndex, s < fileSubs.count, fileSubs[s] == nil {
+                result.unchanged += 1
+                merged.append(nil)
+                continue
+            }
             // Identical units (two "Stihl 500i") are told apart by unit code (DECISIONS 66): a coded file row matches the
             // row with that code, else an uncoded row of that name (which then gets the code). An uncoded file row matches
             // an uncoded row of that name, else the one coded row of that name; with several coded units it is skipped.
@@ -469,7 +520,8 @@ enum Transfer {
                 continue
             }
             let order = (existing.filter { $0.bucket == i.bucket }.map(\.sortOrder).max() ?? -1) + 1
-            let item = BucketItem(bucket: i.bucket, name: i.name, rateCents: i.rateCents, unit: i.unit, isActive: i.isActive,
+            let archived = sub.map { archivedByFile.contains($0.persistentModelID) } ?? false
+            let item = BucketItem(bucket: i.bucket, name: i.name, rateCents: i.rateCents, unit: i.unit, isActive: i.isActive && !archived,
                                   source: i.source, notes: i.notes, category: i.category, link: i.link,
                                   calcInputs: i.calcInputs?.data, sortOrder: order)
             item.subcontractor = sub

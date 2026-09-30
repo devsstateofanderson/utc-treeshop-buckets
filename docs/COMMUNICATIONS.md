@@ -261,3 +261,90 @@ Append entries using this structure:
   - Owner: open Projects → Packages and use one; enter the real wages.
   - Codex: review the PR for `claude/merge-packages` (stacked on PR #8).
 - Branch/commit: `claude/merge-packages`, this commit (log).
+
+## 2026-09-30 — Claude Code — Planning section reserved; merge can remove or archive a subcontractor (0.2.3, build 5)
+
+- Context read: Mr. Anderson's instructions, relayed through the workflow on 09-30. He wants a place for business planning and operating documents, marked under construction for now, which he will build with Fable 5.1. He also wants a merge file to be able to take out a subcontractor. Also read `AGENTS.md`, `CLAUDE.md`, `docs/REPOSITORY-WORKFLOW.md`, DECISIONS 22, 55, 60, 66 and 89, `Transfer.mergeItems`, `Subcontractor`, `AppState`, `RootView` and `Scripts/screenshot.sh`.
+- Work completed: branch `claude/planning-and-sub-removal`, stacked on `claude/merge-packages` (PR #9, unmerged).
+  - **Planning (DECISIONS 90).** A new sidebar section, Business, with one item: Planning.
+    - `PlanningScreen` shows "Under construction" and five planned tools as plain text, each marked "Coming soon": revenue forecast; cash flow, 30/60/90 days; annual budget and break-even; crew capacity and utilization; business plan and operating documents.
+    - The detail column is empty. The screen has no model, reads no data and shows no figures. ⌘N and ⌘D do nothing on it (new `AppState.canCreate`).
+    - `BUCKETS_SCREEN=planning` opens it.
+    - The header doc comment marks it as the reserved seam for the section.
+  - **Subcontractor removal (DECISIONS 91).** `SubcontractorRecord.remove: Bool?` is new; the format stays 2 and export never writes the key.
+    - A matching sub with `remove: true` is deleted with its services when none of them is on a project. Otherwise it is archived, and project lines keep their snapshots.
+    - A matching sub with `isActive: false` is archived. A file never un-archives a sub.
+    - A `remove` for a name the store lacks does nothing and creates nothing.
+    - File rows under a removed or never-created sub are skipped, and their file position is held so later references stay aligned. New rows under a sub the same file archives are added archived.
+    - `MergeResult` gains `subcontractorsRemoved` and `subcontractorsArchived`. The `BUCKETS_MERGE_FILE` stderr line reports both, and the Settings message reports each one that is not zero.
+  - README, DECISIONS 90–91, version 0.2.3, build 5.
+- Evidence/tests:
+  - `Scripts/test.sh`: 298 executed, 3 skipped (the same three), 0 failures.
+  - New `SubcontractorMergeRemovalTests` (6 tests):
+    - remove deletes an unreferenced sub and its services;
+    - remove archives a referenced sub, and the line keeps its snapshot and the price;
+    - `isActive: false` archives and never un-archives;
+    - an unknown remove creates nothing;
+    - an old file without the key merges as before;
+    - export never writes `remove`.
+  - New `PlanningScreenTests` (3 tests): the screen hook and no creation; the planned-tools list; the screen hosts in light and dark.
+  - `Scripts/build.sh Release`: `build/Buckets.app`, 0.2.3 (5), codesign verified.
+  - Screenshots: Planning rendered with `--fixture --render` in light and dark. In the first render, `ContentUnavailableView` inside a grouped Form drew nothing offscreen, so it was replaced with a plain header row.
+  - Not installed; the live store was not touched.
+- Decisions: DECISIONS 90 and 91.
+- Open questions: none new. From the owner's 09-30 notes, for the next data layer (not this branch):
+  - Florida Stump Grind is not TreeShop, and TreeShop is never a sub or vendor. With 91, a layer file can now remove or archive that sub.
+  - The crane sub is deferred.
+  - One crew for now.
+- Next owner/action: Codex reviews `claude/planning-and-sub-removal` after PR #9. The caller rehearses on a store copy before installing.
+- Branch/commit: `claude/planning-and-sub-removal`, pushed: 8d4d5b5 (change) and this commit (log). No PR opened.
+
+## 2026-09-30 — Claude Code — Sub removal review fixes (0.2.3, build 5)
+
+- Context read: the review of `claude/planning-and-sub-removal` (8d4d5b5, ed46da5): one medium, three low, one note.
+- Work completed (9e4f6e9):
+  - **Medium, fixed.** The Settings help for Add or Update Rows no longer says "nothing is deleted". It now says a file may remove a subcontractor it names, and one whose services are on a project is archived instead.
+  - **Low, fixed.** A new sub that a file adds with `isActive: false` now adds its new services archived. It was not in `archivedByFile`, so its services came in active.
+  - **Low, documented.** A sub archived instead of removed keeps its file position, so rows under it still merge and new ones are added archived. Skipping them would break loadout members that reference those services. This is now stated in DECISIONS 91 and the merge comment.
+  - **Note, documented.** DECISIONS 91 now says that deleting a sub also takes its services out of any loadout, the same as deleting it in the app does.
+  - **Tests.** The removal test now checks that a second sub and its services survive. New tests: a new archived sub archives its new services; rows under a removed sub or an unknown sub hold their file positions, so a loadout member and a package line after them resolve to the right rows.
+- Evidence/tests:
+  - `Scripts/test.sh`: 300 executed, 3 skipped (the same three), 0 failures.
+  - `Scripts/build.sh Release`: `build/Buckets.app`.
+  - The Planning screen is unchanged, so its screenshot was not retaken.
+  - Not installed; the live store was not touched.
+- Decisions: DECISIONS 91 amended (clarifications only; no version change).
+- Next owner/action: Codex re-reviews `claude/planning-and-sub-removal` after PR #9.
+- Branch/commit: `claude/planning-and-sub-removal`, pushed: 9e4f6e9 (fixes) and this commit (log). No PR opened.
+
+## 2026-09-30 — Claude Code — 0.2.3 installed; Sacred Tree layer v3 applied (sales manager, single crew, sub corrections)
+
+- Context read: Mr. Anderson in chat on 09-30.
+  - New Sales Manager, Noah Aquinas: $200/day salary on a 5-day week, plus 7% commission on revenue he creates.
+  - One crew for now, lean. The wage estimates stand until he edits them.
+  - Gaston and J&J both run 50 and 65 yd grapple trucks, so treat them as equivalent.
+  - **Correction:** "Florida Stump Grind" is NOT TreeShop. TreeShop is Mr. Anderson's own company and must never appear as a subcontractor or vendor. He believes Florida Stump Grind was a demo entry.
+  - Cranes are deferred (billed as a flat add plus an hourly increase; no data yet).
+  - Reserve a Planning section (this branch).
+- Work completed: layer v3 (`~/Developer/sacred-tree-local-vault/sacred-tree-layer-v3-2026-09-30.json`, built from the live export with `tools/build_layer_v2.py` and `tools/layer-v3-overrides.json`):
+  - **Noah Aquinas as a labor row** (Sales, $25/h over 2,080 paid h, 30% burden, 4,507¢/h; owner confirmed). Off in every package, so he is never double-counted.
+  - **His salary as an overhead line:** "Sales manager salary – Noah Aquinas", $67,600/yr = $52,000 + 30% burden, which is +$45.07 per crew hour at 1,500 h.
+  - **PPE budgeted for one crew:** "PPE & uniforms" goes to $1,118.71/yr, and PPE-04..06 are archived.
+  - **Grapple subs:** Gaston's notes corrected, with its public Lake/Orange phone; J&J's Grapple Service added as a sub with no rate row yet.
+  - **The "Florida Stump Grind (TreeShop)" sub removed** through DECISIONS 91; the older vault files were scrubbed of it too.
+  - All 9 packages regenerated.
+  - Rehearsed on a store copy with 0.2.3, including a second merge to prove idempotence.
+- Evidence/tests:
+  - This branch: 300 executed, 3 skipped, 0 failures (see the entries above).
+  - Live: 0.2.2 parked at `~/Developer/sacred-tree-local-vault/Buckets-0.2.2.app`. 0.2.3 (build 5) installed, codesign verified.
+  - `onboard.sh` backup: `onboard-2026-09-30-054709/`.
+  - Merge counts: added 2, updated 4, unchanged 230, packages updated 9, subcontractors removed 1. The live rows and subs are identical to the rehearsal's.
+  - Active rows: labor 8, equipment 29, overhead 25 ($155,864.30/yr = $103.91/h at 1,500 h). Subs 13. No store row or sub mentions TreeShop.
+- Decisions: none new beyond 90–91. The earlier log entry's open question "(d) the legal payee behind 'Florida Stump Grind (TreeShop)'" is withdrawn: the record was a demo entry, not TreeShop.
+- Open questions (owner):
+  - (a) The 7% commission comes out of the 50% target margin (about 43% net). Setting the target margin to 57% keeps 50% net after commission (price = cost / 0.43).
+  - (b) Real wages, and the crew roster (the audit list is dated).
+  - (c) The Sales manager burden (30% assumed).
+  - (d) Crane pricing later.
+- Next owner/action: owner — review the Planning placeholder and the package prices. Codex — review this branch after PR #9.
+- Branch/commit: `claude/planning-and-sub-removal`, this commit (log).
