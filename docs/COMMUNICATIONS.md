@@ -348,3 +348,23 @@ Append entries using this structure:
   - (d) Crane pricing later.
 - Next owner/action: owner — review the Planning placeholder and the package prices. Codex — review this branch after PR #9.
 - Branch/commit: `claude/planning-and-sub-removal`, this commit (log).
+
+## 2026-09-30 — Claude Code — Commission-aware pricing, Sold by, rows not on the crew (0.2.4, build 6)
+
+- Context read: the reviewed plan "Sales and marketing in Buckets" (now `docs/treeshop/13-sales-marketing-plan.md`, reworded so it names nobody and states pay only as example figures, DECISIONS 88), `AGENTS.md`, `CLAUDE.md`, `docs/REPOSITORY-WORKFLOW.md`, BRIEF, DECISIONS. Scope: slice 1a only.
+- Work completed: branch `claude/sales-commission`, stacked on `claude/planning-and-sub-removal` (PRs #8 → #9 → #10, unmerged).
+  - **Price rule (DECISIONS 92).** A company sales allowance A and payroll tax on commission B (Company → Pricing defaults; defaults 0 and 7.65) sit in the one price division; margin means after commission. A = 0 prices exactly as 0.2.3, so no price moves on install. The Company screen refuses a margin, allowance or tax over the 95% share and offers **Re-price packages** when packages were priced under an older allowance.
+  - **Sold by (DECISIONS 94).** A project names its salesperson (a Labor row with a commission %), with name and % snapshots and a per-job override. The header shows the commission, its payroll tax, and the profit and margin after commission (orange when under the target or a loss). Copy breakdown adds the same lines and never a name.
+  - **Not on the crew (DECISIONS 83, 93).** A Labor row can be marked not on the crew: new projects, Re-price, loadouts and the member picker skip it; readiness counts priced rows only.
+  - **Format 3 (DECISIONS 95).** Exports carry the new keys; formats 1–3 read; 0.2.3 refuses format 3. Merge sets `trackOnly` and never clears it.
+  - BRIEF §1, §2.1, §5.1 amended; README; `onboard.sh` readiness gates count priced rows.
+- Evidence/tests:
+  - `Scripts/test.sh`: 333 executed, 3 skipped (the same three), 0 failures.
+  - New: `PricerCommissionTests` (the A = 0 loop over every pinned fixture; 522,921 / 516,409 / 1,045,843 / 1,568,764; 36,604 + 2,800 → 261,461; floor 75,000 with 5,250 / 402 / 39,356; −5,927; the 864.5 → 865 tie), `ProjectSalespersonTests`, `RepriceTemplatesTests`, `TransferFormat3Tests`, `StoreMigrationV023Tests` (`BucketsSchemaV023`: nine packages, an empty package, a legacy project and a salary line keep every price).
+  - `Scripts/build.sh Release`: `build/Buckets.app`, 0.2.4 (6), codesign verified. Project, Labor and Company screens rendered from the screenshot fixture (now with a synthetic salesperson on the Oak removal).
+  - Not installed; the live store and the vault were not touched.
+- Decisions: 83 (shared text), 92, 93 (first paragraph), 94, 95.
+- Not done here (the plan's other 1a items, vault side): `tools/build_layer_v2.py` learning `trackOnly`, `commissionPct` and the two settings keys; data layer v4; the rehearsal on a store copy.
+- Open questions: the plan's ten, unchanged. The first is the owner's: turn on a 7% allowance (prices rise 17.75%) or keep today's prices at about 42.5% after commission.
+- Next owner/action: Codex reviews `claude/sales-commission` after PR #10. Then the vault layer v4 and the rehearsal before any install.
+- Branch/commit: `claude/sales-commission`, 9e2c113 (change) and this commit (log). No PR opened.
