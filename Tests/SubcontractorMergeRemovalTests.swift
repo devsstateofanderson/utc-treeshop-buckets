@@ -45,6 +45,7 @@ final class SubcontractorMergeRemovalTests: XCTestCase {
 
     func testRemoveDeletesAnUnreferencedSubAndItsServices() throws {
         try addSub()
+        let (craneCo, _, _) = try addSub("Crane Co")
         context.insert(BucketItem(bucket: .consumables, name: "Dump fee", rateCents: 7500, unit: "load", sortOrder: 0))
         try context.save()
         // The whitespace and case differ: names match as rows do. The service row under it is skipped, not re-created.
@@ -53,9 +54,12 @@ final class SubcontractorMergeRemovalTests: XCTestCase {
         XCTAssertEqual(result.subcontractorsRemoved, 1)
         XCTAssertEqual(result.subcontractorsArchived, 0)
         XCTAssertEqual(result.added, 0)
-        XCTAssertEqual(subs.count, 0)
-        XCTAssertEqual(services.count, 0, "services cascade with the sub")
-        XCTAssertEqual(try context.fetch(FetchDescriptor<BucketItem>()).map(\.name), ["Dump fee"], "other rows are untouched")
+        XCTAssertEqual(subs.map(\.name), ["Crane Co"], "only the named sub is deleted")
+        XCTAssertTrue(craneCo.isActive)
+        XCTAssertEqual(services.count, 2, "only the removed sub's services cascade")
+        XCTAssertTrue(services.allSatisfy { $0.subcontractor === craneCo && $0.isActive })
+        XCTAssertEqual(try context.fetch(FetchDescriptor<BucketItem>()).filter { $0.bucket != .subcontractors }.map(\.name), ["Dump fee"],
+                       "other rows are untouched")
         // Merging it again is a no-op.
         let again = try Transfer.mergeItems(file(subs: [sub("Stump Co", remove: true)]), into: context)
         XCTAssertEqual(again, Transfer.MergeResult())
@@ -108,6 +112,48 @@ final class SubcontractorMergeRemovalTests: XCTestCase {
         XCTAssertEqual(back.subcontractorsArchived, 0)
         XCTAssertFalse(stumpCo.isActive)
         XCTAssertFalse(stump.isActive)
+    }
+
+    func testANewSubTheFileAddsArchivedHasItsNewServicesArchived() throws {
+        let result = try Transfer.mergeItems(file(subs: [sub("Crane Co", active: false)], items: [service("Crane day", cents: 180_000)]),
+                                             into: context)
+        XCTAssertEqual(result.subcontractors, 1)
+        XCTAssertEqual(result.added, 1)
+        let craneCo = try XCTUnwrap(subs.first)
+        XCTAssertFalse(craneCo.isActive)
+        let day = try XCTUnwrap(services.first { $0.name == "Crane day" })
+        XCTAssertTrue(day.subcontractor === craneCo)
+        XCTAssertFalse(day.isActive, "a sub's services follow the sub")
+    }
+
+    /// Rows under a removed or unknown sub hold their file positions, so a loadout member or package line that points past
+    /// them still resolves to the row it names (the class of misalignment DECISIONS 89 fixed).
+    func testSkippedRowsHoldTheirPositionsForLoadoutsAndPackages() throws {
+        try addSub()
+        let rope = BucketItem(bucket: .consumables, name: "Rope", rateCents: 1200, unit: "ft", sortOrder: 0)
+        context.insert(rope)
+        try context.save()
+        let ropeRow = #"{"bucket": "consumables", "name": "Rope", "rateCents": 1300, "unit": "ft", "isActive": true, "source": null, "notes": null, "calcInputs": null, "sortOrder": 0}"#
+        let chips = #"{"bucket": "consumables", "name": "Chip dump", "rateCents": 4000, "unit": "load", "isActive": true, "source": null, "notes": null, "calcInputs": null, "sortOrder": 1}"#
+        func line(_ index: Int) -> String {
+            #"{"itemIndex": \#(index), "bucket": "consumables", "name": "stale", "unit": "x", "rateCents": 1, "isOn": true, "qty": 2, "actualQty": null}"#
+        }
+        let package = #"{"name": "Climb day", "client": null, "date": "2026-09-30T00:00:00Z", "hours": 8, "multiplier": 2, "markupPct": 100, "minimumJobCents": 75000, "actualHours": null, "notes": null, "targetMarginPct": 50, "isTemplate": true, "lines": [\#(line(0)), \#(line(2)), \#(line(3))]}"#
+        // File positions: 0 under the removed Stump Co, 1 under the unknown Crane Co, 2 Rope, 3 Chip dump.
+        let data = Data(#"{"formatVersion": 2, "exportedAt": "2026-09-30T00:00:00Z", "subcontractors": [\#(sub("Stump Co", remove: true)), \#(sub("Crane Co", remove: true))], "items": [\#(service("Stump grinding", cents: 9000)), \#(service("Crane day", cents: 180_000, subIndex: 1)), \#(ropeRow), \#(chips)], "projects": [\#(package)], "loadouts": [{"name": "Climb kit", "notes": null, "sortOrder": 0, "memberIndexes": [0, 2, 3]}]}"#.utf8)
+
+        let result = try Transfer.mergeItems(data, into: context)
+        XCTAssertEqual(result.subcontractorsRemoved, 1)
+        XCTAssertEqual(result.unchanged, 2, "both rows under the removed and unknown subs are skipped")
+        XCTAssertEqual(result.updated, 1)
+        XCTAssertEqual(result.added, 1)
+        XCTAssertEqual(result.packageLinesSkipped, 1)
+        XCTAssertEqual(rope.rateCents, 1300)
+        let kit = try XCTUnwrap(try context.fetch(FetchDescriptor<Loadout>()).first)
+        XCTAssertEqual(Set(kit.members.map(\.name)), ["Rope", "Chip dump"])
+        let climb = try XCTUnwrap(try context.fetch(FetchDescriptor<Project>()).first { $0.isTemplate })
+        XCTAssertEqual(Set(climb.lines.map(\.name)), ["Rope", "Chip dump"])
+        XCTAssertTrue(climb.lines.contains { $0.item === rope && $0.rateCents == 1300 })
     }
 
     func testARemoveForAnUnknownNameCreatesNothing() throws {

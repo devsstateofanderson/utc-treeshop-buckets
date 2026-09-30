@@ -56,7 +56,7 @@ struct SettingsScreen: View {
                     Button("Add or Update Rows…") { chooseMerge() }
                 } label: {
                     Text("Add or update rows")
-                    Text("Adds a file's rows to your buckets and updates rows with the same name. Rows not in the file are untouched; nothing is deleted.")
+                    Text("Adds a file's rows to your buckets and updates rows with the same name. Rows not in the file are untouched. A file may remove a subcontractor it names; one whose services are on a project is archived instead.")
                         .foregroundStyle(.secondary)
                 }
                 LabeledContent {

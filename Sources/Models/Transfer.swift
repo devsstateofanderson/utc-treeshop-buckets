@@ -404,6 +404,7 @@ enum Transfer {
         // store lacks does nothing and creates nothing (DECISIONS 91).
         var subs = try context.fetch(FetchDescriptor<Subcontractor>())
         // One entry per file position; nil for a sub the file removed or never had, whose file rows are then skipped.
+        // A sub archived instead of removed keeps its position: rows under it still merge, new ones archived (91).
         var fileSubs: [Subcontractor?] = []
         // File rows under a sub this file archives are added archived, as `setActive(false)` archives the sub's services.
         var archivedByFile: Set<PersistentIdentifier> = []
@@ -446,6 +447,8 @@ enum Transfer {
                 let sub = Subcontractor(name: s.name, contact: s.contact, phone: s.phone, email: s.email, notes: s.notes,
                                         isActive: s.isActive, sortOrder: Subcontractor.nextSortOrder(context: context) + subs.count)
                 context.insert(sub)
+                // A sub the file adds archived takes its new services archived too, as `setActive(false)` would.
+                if !s.isActive { archivedByFile.insert(sub.persistentModelID) }
                 subs.append(sub)
                 fileSubs.append(sub)
                 result.subcontractors += 1
