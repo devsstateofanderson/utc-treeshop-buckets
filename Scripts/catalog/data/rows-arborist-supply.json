@@ -1,83 +1,133 @@
 [
  {
   "bucket": "consumables",
-  "name": "Chainsaw chain loop, 3/8 .050 20in 72DL full chisel \u2013 20in bar / 72 drive links, single loop",
+  "name": "Chain loop, STIHL 33 RS 72 \u2013 3/8 in, .050 in, 72 DL (MS 500i, 20 in bar)",
   "unit": "loop",
-  "price": 16.99,
-  "source": "Arborist supply",
-  "category": "Chains & bars",
-  "link": "https://www.baileysonline.com/oregon-20-chainsaw-chain-loop-72exl-72-drive-links-72exl072g-orf-72exl072g.html",
-  "notes": "Oregon 72EXL072G. Price 2026-09-16. Bailey's sale price (reg."
+  "price": 39.89,
+  "source": "STIHL dealer (price seen at Bailey's)",
+  "category": "Saw wear parts (priced on saw rows)",
+  "link": "https://www.baileysonline.com/stihl-20-chainsaw-chain-loop-33rs-72-drive-links-3623-005-0072.html",
+  "notes": "STIHL 33 RS 72, 3623 005 0072: the MS 500i alternate for the 20 in bar 3003 008 8921 (US manual \u00a724.1). $39.89 seen 2026-09-28 at Bailey's; replaces an Oregon 72EXL loop that is not on STIHL's approved list (F-CAT-02, Baseline 0.1 \u00a74.1). Order from the local authorized STIHL dealer first (warranty, same day); the vendor named is the online fallback whose price is cited (Baseline 0.1 Appendix A.0). Saw wear part: this row is the price and stock source for the saw rows' wear lines (OpenLoadout Baseline 0.1 \u00a75.3). Routine wear is priced on the saw's equipment row; toggle this row onto a project only for extraordinary loss, such as a chain destroyed by embedded metal (F-CAT-08)."
  },
  {
   "bucket": "consumables",
-  "name": "Chainsaw chain loop, 3/8 low-profile .050 16in (top-handle) \u2013 16in bar / 56 drive links, single loop",
+  "name": "Chain loop, STIHL 63 PS3 55 \u2013 3/8 in P, .050 in, 55 DL (MS 201 T C-M / MS 194 T, 16 in bar)",
   "unit": "loop",
-  "price": 20.99,
-  "source": "Arborist supply",
-  "category": "Chains & bars",
-  "link": "https://www.treestuff.com/oregon-91vxl-chain/",
-  "notes": "Oregon 91VXL VersaCut. Price 2026-09-16. 55DL variant is $26.99;"
+  "price": 27.99,
+  "source": "STIHL dealer (price seen at Bailey's)",
+  "category": "Saw wear parts (priced on saw rows)",
+  "link": "https://www.baileysonline.com/stihl-16-chainsaw-chain-loop-63ps3-55-drive-links-3616-005-0055.html",
+  "notes": "STIHL 63 PS3 55, 3616 005 0055, on the 16 in Rollomatic E 3005 000 4813. A STIHL 16 in 3/8 in P bar takes 55 drive links; a 56 DL loop will not fit. $27.99 seen 2026-09-28 at Bailey's (F-CAT-11, Baseline 0.1 \u00a74.2). Order from the local authorized STIHL dealer first (warranty, same day); the vendor named is the online fallback whose price is cited (Baseline 0.1 Appendix A.0). Saw wear part: this row is the price and stock source for the saw rows' wear lines (OpenLoadout Baseline 0.1 \u00a75.3). Routine wear is priced on the saw's equipment row; toggle this row onto a project only for extraordinary loss, such as a chain destroyed by embedded metal (F-CAT-08)."
  },
  {
   "bucket": "consumables",
-  "name": "25 ft reel of 3/8 chain \u2013 25 ft reel, 3/8in low-profile .050",
+  "name": "Chain reel 25 ft, Oregon 72LPX \u2013 3/8 in, .050 in, 410 DL (MS 500i class, not low-kickback)",
   "unit": "reel",
   "price": 135.99,
-  "source": "Arborist supply",
-  "category": "Chains & bars",
+  "source": "Bailey's",
+  "category": "Saw wear parts (priced on saw rows)",
   "link": "https://www.baileysonline.com/oregon-25-chainsaw-chain-reel-72lpx-410-drive-links-72lpx025u-orf-72lpx025r.html",
-  "notes": "Oregon 72LPX. Price 2026-09-16. Bailey's sale price (reg $159.99);"
+  "notes": "Oregon 72LPX is standard 3/8 in (.375) pitch, .050 in gauge, full chisel and not low-kickback approved: MS 500i-class chain for loops of 66/72/84 DL. It never serves the 3/8 in P top-handles or the .043 in pole saws, and a spun loop of a non-green-label chain is not in the MS 500i manual's \u00a724.1 low-kickback list. $135.99 sale ($159.99 regular) seen 2026-09-28 at Bailey's (F-CAT-10, Baseline 0.1 \u00a74.1). Saw wear part: this row is the price and stock source for the saw rows' wear lines (OpenLoadout Baseline 0.1 \u00a75.3). Routine wear is priced on the saw's equipment row; toggle this row onto a project only for extraordinary loss, such as a chain destroyed by embedded metal (F-CAT-08)."
  },
  {
   "bucket": "consumables",
-  "name": "Chainsaw bar, 20in \u2013 20in, 3/8 .050, 72DL, Rollomatic",
+  "name": "Guide bar, STIHL 20 in 3003 008 8921 \u2013 3/8 in, .050 in, 72 DL (MS 500i)",
   "unit": "each",
-  "price": 68.99,
-  "source": "Arborist supply",
-  "category": "Chains & bars",
-  "link": "https://russopower.com/products/stihl-3003-000-5221-rollomatic-chainsaw-guide-bar-20-inch",
-  "notes": "STIHL 3003 000 5221. Price 2026-09-16. Genuine STIHL OEM bar"
+  "price": 67.99,
+  "source": "STIHL dealer (price seen at Ohio Power Tool)",
+  "category": "Saw wear parts (priced on saw rows)",
+  "link": "https://www.ohiopowertool.com/stihl-3003-008-8921",
+  "notes": "STIHL 20 in laminated bar 3003 008 8921 (.050 in), the MS 500i alternate; runs 33 RS 72. Never buy 3003 000 5221 for this system: it is a .063 in bar. $67.99 seen 2026-09-28 at Ohio Power Tool (F-CAT-02, Baseline 0.1 \u00a74.1). Order from the local authorized STIHL dealer first (warranty, same day); the vendor named is the online fallback whose price is cited (Baseline 0.1 Appendix A.0). Saw wear part: this row is the price and stock source for the saw rows' wear lines (OpenLoadout Baseline 0.1 \u00a75.3). Routine wear is priced on the saw's equipment row; toggle this row onto a project only for extraordinary loss, such as a chain destroyed by embedded metal (F-CAT-08)."
  },
  {
   "bucket": "consumables",
-  "name": "Top-handle bar, 16in \u2013 16in, 3/8 low-profile .050, 55DL",
+  "name": "Guide bar, STIHL 18 in 3003 008 8917 \u2013 3/8 in, .050 in, 66 DL (MS 500i)",
   "unit": "each",
-  "price": 54.99,
-  "source": "Arborist supply",
-  "category": "Chains & bars",
-  "link": "https://www.treestuff.com/oregon-advancecut-guide-bar-16/",
-  "notes": "Oregon AdvanceCut (for STIHL). Price 2026-09-16. Light-commercial bar sized for top-handle/small saws"
+  "price": 56.99,
+  "source": "STIHL dealer (price seen at Foard's)",
+  "category": "Saw wear parts (priced on saw rows)",
+  "link": "https://www.foards.com/products/3003-008-8917",
+  "notes": "STIHL 18 in laminated bar 3003 008 8917 (Rollomatic E / Light 04), the MS 500i stock short bar; runs 33 RS 66. $56.99 seen 2026-09-28 at Foard's (F-LIST-01, Baseline 0.1 \u00a74.1). Order from the local authorized STIHL dealer first (warranty, same day); the vendor named is the online fallback whose price is cited (Baseline 0.1 Appendix A.0). Saw wear part: this row is the price and stock source for the saw rows' wear lines (OpenLoadout Baseline 0.1 \u00a75.3). Routine wear is priced on the saw's equipment row; toggle this row onto a project only for extraordinary loss, such as a chain destroyed by embedded metal (F-CAT-08)."
  },
  {
   "bucket": "consumables",
-  "name": "Rim sprocket, 3/8 7-tooth \u2013 3/8 pitch, 7 tooth, std spline",
+  "name": "Guide bar, STIHL 25 in Rollomatic ES 3003 000 4030 \u2013 3/8 in, .050 in, 84 DL (MS 500i)",
   "unit": "each",
-  "price": 4.99,
-  "source": "Arborist supply",
-  "category": "Chains & bars",
-  "link": "https://www.cutterschoice.com/en/42327-rim-small-3-8-7-tooth",
-  "notes": "Generic/OEM-spec. Price 2026-09-16"
+  "price": 101.99,
+  "source": "STIHL dealer (price seen at Foard's)",
+  "category": "Saw wear parts (priced on saw rows)",
+  "link": "https://www.foards.com/products/3003-000-4030",
+  "notes": "STIHL 25 in Rollomatic ES (solid, replaceable nose) 3003 000 4030, the MS 500i long bar; runs 33 RS 84. $101.99 seen 2026-09-28 at Foard's (F-LIST-01, Baseline 0.1 \u00a74.1). Order from the local authorized STIHL dealer first (warranty, same day); the vendor named is the online fallback whose price is cited (Baseline 0.1 Appendix A.0). Saw wear part: this row is the price and stock source for the saw rows' wear lines (OpenLoadout Baseline 0.1 \u00a75.3). Routine wear is priced on the saw's equipment row; toggle this row onto a project only for extraordinary loss, such as a chain destroyed by embedded metal (F-CAT-08)."
+ },
+ {
+  "bucket": "consumables",
+  "name": "Guide bar, STIHL 16 in Rollomatic E 3005 000 4813 \u2013 3/8 in P, .050 in, 55 DL (MS 201 T C-M / MS 194 T)",
+  "unit": "each",
+  "price": 53.99,
+  "source": "STIHL dealer (price seen at Foard's)",
+  "category": "Saw wear parts (priced on saw rows)",
+  "link": "https://www.foards.com/products/3005-000-4813",
+  "notes": "STIHL 16 in Rollomatic E 3005 000 4813, the long bar on both climbing saws (the longest approved on the MS 201 T C-M); runs 63 PS3 55. The owner's brand default is the stock STIHL pro bar, replacing an Oregon AdvanceCut. $53.99 seen 2026-09-28 at Foard's (F-LIST-01, Baseline 0.1 \u00a74.2-4.3). Order from the local authorized STIHL dealer first (warranty, same day); the vendor named is the online fallback whose price is cited (Baseline 0.1 Appendix A.0). Saw wear part: this row is the price and stock source for the saw rows' wear lines (OpenLoadout Baseline 0.1 \u00a75.3). Routine wear is priced on the saw's equipment row; toggle this row onto a project only for extraordinary loss, such as a chain destroyed by embedded metal (F-CAT-08)."
+ },
+ {
+  "bucket": "consumables",
+  "name": "Guide bar, STIHL 12 in Rollomatic E 3005 000 4805 \u2013 3/8 in P, .050 in, 44 DL (MS 201 T C-M / MS 194 T)",
+  "unit": "each",
+  "price": 45.99,
+  "source": "STIHL dealer (price seen at Russo Power Equipment)",
+  "category": "Saw wear parts (priced on saw rows)",
+  "link": "https://russopower.com/products/stihl-3005-000-4805-rollomatic-e-chain-saw-bar-12",
+  "notes": "STIHL 12 in Rollomatic E 3005 000 4805, the short bar on both climbing saws; runs 63 PS3 44. $45.99 seen 2026-09-28 at Russo Power Equipment (Bailey's lists $79.99) (F-LIST-01, Baseline 0.1 \u00a74.2-4.3). Order from the local authorized STIHL dealer first (warranty, same day); the vendor named is the online fallback whose price is cited (Baseline 0.1 Appendix A.0). Saw wear part: this row is the price and stock source for the saw rows' wear lines (OpenLoadout Baseline 0.1 \u00a75.3). Routine wear is priced on the saw's equipment row; toggle this row onto a project only for extraordinary loss, such as a chain destroyed by embedded metal (F-CAT-08)."
+ },
+ {
+  "bucket": "consumables",
+  "name": "Rim sprocket, STIHL 0000 642 1223 \u2013 3/8 in, 7 tooth (MS 500i)",
+  "unit": "each",
+  "price": 12.99,
+  "source": "STIHL dealer (price seen at Bailey's)",
+  "category": "Saw wear parts (priced on saw rows)",
+  "link": "https://www.baileysonline.com/stihl-rim-sprocket-sd7-375-x-7-tooth.html",
+  "notes": "STIHL rim sprocket 3/8 in 7T 0000 642 1223, the only sprocket listed for the MS 500i (US manual \u00a723.3; parts list items 80-81). New sprocket after two chains or at 0.5 mm wear marks. $12.99 seen 2026-09-28 at Bailey's (F-LIST-01, Baseline 0.1 \u00a74.1). Order from the local authorized STIHL dealer first (warranty, same day); the vendor named is the online fallback whose price is cited (Baseline 0.1 Appendix A.0). Saw wear part: this row is the price and stock source for the saw rows' wear lines (OpenLoadout Baseline 0.1 \u00a75.3). Routine wear is priced on the saw's equipment row; toggle this row onto a project only for extraordinary loss, such as a chain destroyed by embedded metal (F-CAT-08)."
+ },
+ {
+  "bucket": "consumables",
+  "name": "Spur sprocket, STIHL 1145 640 2010 \u2013 3/8 in P, 6 tooth (MS 201 T C-M)",
+  "unit": "each",
+  "price": 32.99,
+  "source": "STIHL dealer (price seen at Forester Shop)",
+  "category": "Saw wear parts (priced on saw rows)",
+  "link": "https://forestershop.com/stihl-3-8-picco-6-tooth-spur-sprocket-kit-ms201-ms201t/",
+  "notes": "STIHL 3/8 in P 6T spur sprocket 1145 640 2010, the only sprocket for the MS 201 T C-M (US manual \u00a729.8). $32.99 seen 2026-09-28 at Forester Shop (F-LIST-01, Baseline 0.1 \u00a74.2). Order from the local authorized STIHL dealer first (warranty, same day); the vendor named is the online fallback whose price is cited (Baseline 0.1 Appendix A.0). Saw wear part: this row is the price and stock source for the saw rows' wear lines (OpenLoadout Baseline 0.1 \u00a75.3). Routine wear is priced on the saw's equipment row; toggle this row onto a project only for extraordinary loss, such as a chain destroyed by embedded metal (F-CAT-08)."
+ },
+ {
+  "bucket": "consumables",
+  "name": "Spur sprocket, STIHL 1137 640 2005 \u2013 3/8 in P, 6 tooth (MS 194 T)",
+  "unit": "each",
+  "price": 0.0,
+  "source": "STIHL dealer (quote needed)",
+  "category": "Saw wear parts (priced on saw rows)",
+  "link": "https://sawagain.com/products/stihl-ms-192t-193t-194t-020t-ms-200t-3-8-pitch-clutch-drum-spur-sprocket-new-oem-11376402007",
+  "notes": "STIHL 3/8 in P 6T spur sprocket 1137 640 2005 for the MS 194 T (parts list 02/08/2023 item 8). PRICE UNVERIFIED: the bare part has no verified price, so the rate is $0 until a dealer quote is on file; the OEM clutch drum kit linked here was $48.98 on 2026-09-28 (FINDINGS section 2; Baseline 0.1 \u00a74.3). Order from the local authorized STIHL dealer first (warranty, same day); the vendor named is the online fallback whose price is cited (Baseline 0.1 Appendix A.0). Saw wear part: this row is the price and stock source for the saw rows' wear lines (OpenLoadout Baseline 0.1 \u00a75.3). Routine wear is priced on the saw's equipment row; toggle this row onto a project only for extraordinary loss, such as a chain destroyed by embedded metal (F-CAT-08)."
  },
  {
   "bucket": "consumables",
   "name": "Round chainsaw file, 5/32in \u2013 12-pack (dozen)",
   "unit": "pack",
-  "price": 2.67,
-  "source": "Arborist supply",
-  "category": "Sharpening",
+  "price": 31.99,
+  "source": "TreeStuff",
+  "category": "Saw wear parts (priced on saw rows)",
   "link": "https://www.treestuff.com/pferd-dozen-round-chainsaw-files/",
-  "notes": "Pferd. Price 2026-09-16. Fits 1/4 pitch and 3/8 low-profile chain"
+  "notes": "Pferd round file 5/32 in (4.0 mm): fits 3/8 in P chain (MS 201 T C-M, MS 194 T) and the 3013-21 pole saw's .325 in LP chain; the 3016-21PS takes 11/64 in. $31.99 per dozen ($2.67 each) seen 2026-09-28 at TreeStuff; the old $2.67 was the per-file price on a pack row (F-CAT-03, Baseline 0.1 Appendix A). Saw wear part: this row is the price and stock source for the saw rows' wear lines (OpenLoadout Baseline 0.1 \u00a75.3). Routine wear is priced on the saw's equipment row; toggle this row onto a project only for extraordinary loss, such as a chain destroyed by embedded metal (F-CAT-08)."
  },
  {
   "bucket": "consumables",
   "name": "Round chainsaw file, 13/64in \u2013 12-pack (dozen)",
   "unit": "pack",
-  "price": 2.67,
-  "source": "Arborist supply",
-  "category": "Sharpening",
+  "price": 31.99,
+  "source": "TreeStuff",
+  "category": "Saw wear parts (priced on saw rows)",
   "link": "https://www.treestuff.com/pferd-dozen-round-chainsaw-files/",
-  "notes": "Pferd. Price 2026-09-16. Fits standard 3/8 pitch chain"
+  "notes": "Pferd round file 13/64 in (5.2 mm): fits standard 3/8 in chain (MS 500i). $31.99 per dozen ($2.67 each) seen 2026-09-28 at TreeStuff; the old $2.67 was the per-file price on a pack row (F-CAT-03, Baseline 0.1 Appendix A). Saw wear part: this row is the price and stock source for the saw rows' wear lines (OpenLoadout Baseline 0.1 \u00a75.3). Routine wear is priced on the saw's equipment row; toggle this row onto a project only for extraordinary loss, such as a chain destroyed by embedded metal (F-CAT-08)."
  },
  {
   "bucket": "consumables",
@@ -85,9 +135,9 @@
   "unit": "pack",
   "price": 40.0,
   "source": "Arborist supply",
-  "category": "Sharpening",
+  "category": "Saw wear parts (priced on saw rows)",
   "link": "https://www.sawsalvage.co/products/forester-12-pack-chainsaw-sharpening-raker-flat-file-8",
-  "notes": "Forester. Price 2026-09-16. Per-file price ~$3.33;"
+  "notes": "Forester. Price 2026-09-16. Per-file price ~$3.33. Saw wear part: this row is the price and stock source for the saw rows' wear lines (OpenLoadout Baseline 0.1 \u00a75.3). Routine wear is priced on the saw's equipment row; toggle this row onto a project only for extraordinary loss, such as a chain destroyed by embedded metal (F-CAT-08)."
  },
  {
   "bucket": "consumables",
@@ -105,19 +155,19 @@
   "unit": "gal",
   "price": 21.99,
   "source": "Arborist supply",
-  "category": "Fuel & oil",
+  "category": "Saw wear parts (priced on saw rows)",
   "link": "https://www.treestuff.com/husqvarna-b-c-oil-1-gallon/",
-  "notes": "Husqvarna. Price 2026-09-16"
+  "notes": "Husqvarna. Price 2026-09-16. Saw wear part: this row is the price and stock source for the saw rows' wear lines (OpenLoadout Baseline 0.1 \u00a75.3). Routine wear is priced on the saw's equipment row; toggle this row onto a project only for extraordinary loss, such as a chain destroyed by embedded metal (F-CAT-08)."
  },
  {
   "bucket": "consumables",
   "name": "Bar and chain oil \u2013 5 gallon pail",
-  "unit": "gal",
-  "price": 141.99,
-  "source": "Arborist supply",
-  "category": "Fuel & oil",
+  "unit": "pail",
+  "price": 0.0,
+  "source": "Arborist supply (quote needed)",
+  "category": "Saw wear parts (priced on saw rows)",
   "link": "https://www.shforestrysupplies.com/451a-0781-516-5006-stihl-platinum-bar-and-chain-oil-5-gallon-pail.html",
-  "notes": "STIHL Platinum. Price 2026-09-16"
+  "notes": "STIHL Platinum. Unit is the 5 gal pail, not a gallon. PRICE UNVERIFIED: the cited page showed no price on 2026-09-28, so the rate is $0 until a dealer quote is on file; the $141.99 last carried here dates from 2026-09-16 and is not a verified price (F-CAT-05; FINDINGS section 2). Saw wear part: this row is the price and stock source for the saw rows' wear lines (OpenLoadout Baseline 0.1 \u00a75.3). Routine wear is priced on the saw's equipment row; toggle this row onto a project only for extraordinary loss, such as a chain destroyed by embedded metal (F-CAT-08)."
  },
  {
   "bucket": "consumables",
@@ -125,9 +175,9 @@
   "unit": "pack",
   "price": 17.99,
   "source": "Arborist supply",
-  "category": "Fuel & oil",
+  "category": "Saw wear parts (priced on saw rows)",
   "link": "https://shoptruevalueamerica.com/p/stihl-high-performance-ultra-cycle-engine-oil-pack-795711346300",
-  "notes": "STIHL HP Ultra. Price 2026-09-16"
+  "notes": "STIHL HP Ultra. Price 2026-09-16. Saw wear part: this row is the price and stock source for the saw rows' wear lines (OpenLoadout Baseline 0.1 \u00a75.3). Routine wear is priced on the saw's equipment row; toggle this row onto a project only for extraordinary loss, such as a chain destroyed by embedded metal (F-CAT-08)."
  },
  {
   "bucket": "consumables",
@@ -135,29 +185,9 @@
   "unit": "each",
   "price": 25.99,
   "source": "Arborist supply",
-  "category": "Fuel & oil",
+  "category": "Saw wear parts (priced on saw rows)",
   "link": "https://www.truevalue.com/product/small-engine-pre-mixed-fuel-oil-50-1-110-oz/",
-  "notes": "TruFuel 50:1. Price 2026-09-16. TruFuel not sold in a true 1 gal container;"
- },
- {
-  "bucket": "consumables",
-  "name": "Pump gas, regular \u2013 per gallon, FL average",
-  "unit": "gal",
-  "price": 4.2,
-  "source": "Arborist supply",
-  "category": "Fuel & oil",
-  "link": "https://gasprices.aaa.com/?state=FL",
-  "notes": "AAA Florida average. Price 2026-09-16. AAA shows $4.1987"
- },
- {
-  "bucket": "consumables",
-  "name": "Diesel \u2013 per gallon, FL average",
-  "unit": "gal",
-  "price": 6.33,
-  "source": "Arborist supply",
-  "category": "Fuel & oil",
-  "link": "https://gasprices.aaa.com/?state=FL",
-  "notes": "AAA Florida average. Price 2026-09-16. AAA shows $6.3272;"
+  "notes": "TruFuel 50:1. Price 2026-09-16. TruFuel not sold in a true 1 gal container. Saw wear part: this row is the price and stock source for the saw rows' wear lines (OpenLoadout Baseline 0.1 \u00a75.3). Routine wear is priced on the saw's equipment row; toggle this row onto a project only for extraordinary loss, such as a chain destroyed by embedded metal (F-CAT-08)."
  },
  {
   "bucket": "consumables",
@@ -327,7 +357,7 @@
   "source": "Arborist supply",
   "category": "PPE & safety",
   "link": "https://www.bartlettman.com/products/petzl-vertex-helmet",
-  "notes": "Petzl Vertex. Price 2026-09-16. Hi-vis yellow/orange colorway is $124.95;"
+  "notes": "Petzl Vertex. Price 2026-09-16. Hi-vis yellow/orange colorway is $124.95. Costing: routine issue is costed on the overhead line \"PPE & uniforms\", not on projects; helmet and chaps are track-only equipment with retire-by dates. This row is the price and stock source (OpenLoadout Baseline 0.1 \u00a72.1, \u00a75.3; F-CAT-09)."
  },
  {
   "bucket": "consumables",
@@ -337,7 +367,7 @@
   "source": "Arborist supply",
   "category": "PPE & safety",
   "link": "https://www.ohiopowertool.com/stihl-stl-0000-886-3202",
-  "notes": "STIHL Dynamic. Price 2026-09-16. Husqvarna apron chaps run $49.99-$69.95 on secondary market per search"
+  "notes": "STIHL Dynamic. Price 2026-09-16. Husqvarna apron chaps run $49.99-$69.95 on secondary market per search. Costing: routine issue is costed on the overhead line \"PPE & uniforms\", not on projects; helmet and chaps are track-only equipment with retire-by dates. This row is the price and stock source (OpenLoadout Baseline 0.1 \u00a72.1, \u00a75.3; F-CAT-09)."
  },
  {
   "bucket": "consumables",
@@ -347,7 +377,7 @@
   "source": "Arborist supply",
   "category": "PPE & safety",
   "link": "https://www.homedepot.com/p/Milwaukee-Safety-Glasses-with-Gray-Anti-Scratch-Lenses-12-Pack-48-73-2105X12/314974923",
-  "notes": "Milwaukee. Price 2026-09-16. Price reflects a $25 store-card promo discount;"
+  "notes": "Milwaukee. Price 2026-09-16. Price reflects a $25 store-card promo discount. Costing: routine issue is costed on the overhead line \"PPE & uniforms\", not on projects; helmet and chaps are track-only equipment with retire-by dates. This row is the price and stock source (OpenLoadout Baseline 0.1 \u00a72.1, \u00a75.3; F-CAT-09)."
  },
  {
   "bucket": "consumables",
@@ -357,7 +387,7 @@
   "source": "Arborist supply",
   "category": "PPE & safety",
   "link": "https://homedepot.com/p/Cordova-Encore-Disposable-Ear-Plugs-200-per-Box-EPFU01/202593530",
-  "notes": "Cordova Encore. Price 2026-09-16. ULTRX 200-pack alternative is $29.19"
+  "notes": "Cordova Encore. Price 2026-09-16. ULTRX 200-pack alternative is $29.19. Costing: routine issue is costed on the overhead line \"PPE & uniforms\", not on projects; helmet and chaps are track-only equipment with retire-by dates. This row is the price and stock source (OpenLoadout Baseline 0.1 \u00a72.1, \u00a75.3; F-CAT-09)."
  },
  {
   "bucket": "consumables",
@@ -367,7 +397,7 @@
   "source": "Arborist supply",
   "category": "PPE & safety",
   "link": "https://www.homedepot.com/p/Milwaukee-Large-Red-Nitrile-Level-1-Cut-Resistant-Dipped-Work-Gloves-12-Pack-48-22-8902B/307720354",
-  "notes": "Milwaukee Nitrile Level 1. Price 2026-09-16. Budget multipurpose gloves run ~$1/pair in bulk"
+  "notes": "Milwaukee Nitrile Level 1. Price 2026-09-16. Budget multipurpose gloves run ~$1/pair in bulk. Costing: routine issue is costed on the overhead line \"PPE & uniforms\", not on projects; helmet and chaps are track-only equipment with retire-by dates. This row is the price and stock source (OpenLoadout Baseline 0.1 \u00a72.1, \u00a75.3; F-CAT-09)."
  },
  {
   "bucket": "consumables",
@@ -417,7 +447,7 @@
   "source": "Arborist supply",
   "category": "Plant health",
   "link": "https://www.domyown.com/dominion-2l-termiticide-concentrate-p-1223.html",
-  "notes": "Dominion 2L. Price 2026-09-16. 2.15 gal jug is $236.98;"
+  "notes": "Dominion 2L. Price 2026-09-16. 2.15 gal jug is $236.98. Gate: labelled for landscape trees by soil drench, but applying it for hire needs an FDACS Chapter 482 pest control licence; use only once the owner has answered Q-PHC (OpenLoadout Baseline 0.1 \u00a712; https://www.fdacs.gov/Business-Services/Pest-Control/Licensing-and-Certification, seen 2026-09-28; F-CAT-17)."
  },
  {
   "bucket": "materials",

@@ -48,7 +48,7 @@
   "bucket": "equipment",
   "name": "Stihl 201T",
   "unit": "hr",
-  "price": 984.99,
+  "price": 949.99,
   "salvage": 98,
   "life_h": 2000,
   "annual_h": 300,
@@ -57,28 +57,13 @@
   "insurance_per_yr": 0,
   "cost_of_money_pct": 0,
   "source": "STIHL dealer",
-  "notes": "Unit __ \u00b7 S/N ________ \u00b7 MS 201 T C-M, 35.2cc M-Tronic, 12-16in bar, 3/8 PICCO PM3. Dealer price $969.99-$999.99, 2026-09-15. Top-handle fuel+oil ~$2/hr (0.15-0.25 gal/hr at load)."
+  "notes": "Unit __ \u00b7 S/N ________ \u00b7 MS 201 T C-M, 35.2cc M-Tronic, the Baseline top-handle. List price $949.99 at stihlusa.com, seen 2026-09-28; the dealer page behind the old $984.99 now errors (F-FLEET-01). Bar length unrecorded (\"12-16in\"): confirm at re-entry. Baseline 0.1 \u00a74.2 setup: 12 in bar 3005 000 4805 with 63 PS3 44, or 16 in bar 3005 000 4813 with 63 PS3 55; 6T spur sprocket 1145 640 2010; 5/32 in file. Top-handle fuel+oil ~$2/hr (0.15-0.25 gal/hr at load). Evidence: https://www.stihlusa.com/en/p/chainsaws-ms-201-gasoline-chainsaw-1027365"
  },
  {
   "bucket": "equipment",
-  "name": "Stihl 193",
+  "name": "Stihl 194T (MS 193 T unit, honorary upgrade)",
   "unit": "hr",
-  "price": 399.95,
-  "salvage": 40,
-  "life_h": 2000,
-  "annual_h": 300,
-  "fuel_oil_per_h": 2.0,
-  "repair_factor": 2.5,
-  "insurance_per_yr": 0,
-  "cost_of_money_pct": 0,
-  "source": "STIHL dealer",
-  "notes": "Unit __ \u00b7 S/N ________ \u00b7 MS 193 T, 30.1cc, 14in bar, 3/8 PICCO. Dealer price $399.95, 2026-09-15 (being superseded by MS 194 T). Under $1,000: BRIEF \u00a72.2 would put it in overhead as a small-tools budget; kept here because you listed it."
- },
- {
-  "bucket": "equipment",
-  "name": "Stihl 194T",
-  "unit": "hr",
-  "price": 499.99,
+  "price": 509.99,
   "salvage": 50,
   "life_h": 2000,
   "annual_h": 300,
@@ -87,7 +72,22 @@
   "insurance_per_yr": 0,
   "cost_of_money_pct": 0,
   "source": "STIHL dealer",
-  "notes": "Unit __ \u00b7 S/N ________ \u00b7 MS 194 T, 31.8cc, 14-16in bar, 3/8 PICCO. Dealer price $499.99, 2026-09-15. Archive this row if you don't own one."
+  "notes": "Unit __ \u00b7 S/N ________ \u00b7 The physical saw is an MS 193 T (30.1cc, 14in bar, 3/8 PICCO) and keeps its own serial number. Recorded and priced as its standard model, the MS 194 T, at the $509.99 list price (stihlusa.com, seen 2026-09-28; honorary upgrade, Baseline 0.1 \u00a74.5; F-FLEET-02). Read the bar-tail stamp first: 1.1 means .043 in, so run 61 PMM3 until that bar wears out, then fit the Baseline 1.3 mm bar with 63 PS3. Air filter 1137 120 1604 and plug 0000 400 7011 serve both models. Under $1,000: BRIEF \u00a72.2 would put it in overhead as a small-tools budget; kept here because you listed it. Evidence: https://www.stihlusa.com/products/chain-saws/in-tree-saws/ms194t/"
+ },
+ {
+  "bucket": "equipment",
+  "name": "Stihl 194T",
+  "unit": "hr",
+  "price": 509.99,
+  "salvage": 50,
+  "life_h": 2000,
+  "annual_h": 300,
+  "fuel_oil_per_h": 2.0,
+  "repair_factor": 2.5,
+  "insurance_per_yr": 0,
+  "cost_of_money_pct": 0,
+  "source": "STIHL dealer",
+  "notes": "Unit __ \u00b7 S/N ________ \u00b7 MS 194 T, 31.8cc, 3/8 in P (PICCO), the Baseline compact top-handle. Priced at the $509.99 STIHL USA list price, seen 2026-09-28, as every saw row is priced at its standard model's current STIHL USA list (Baseline 0.1 \u00a74.5 rule 3; F-FLEET-02); the old $499.99 was a dealer page on 2026-09-15. Baseline 0.1 \u00a74.3 setup: 12 in bar 3005 000 4805 with 63 PS3 44, or 16 in bar 3005 000 4813 with 63 PS3 55; 6T spur sprocket 1137 640 2005; 5/32 in file. Ownership unconfirmed (F-FLEET-03): archive this row if you don't own one. Evidence: https://www.stihlusa.com/products/chain-saws/in-tree-saws/ms194t/"
  },
  {
   "bucket": "equipment",
@@ -102,7 +102,7 @@
   "insurance_per_yr": 0,
   "cost_of_money_pct": 0,
   "source": "Milwaukee",
-  "notes": "Unit __ \u00b7 S/N ________ \u00b7 M18 FUEL 10in pole saw kit 3016-21PS (replaces 2825-21PS): XC8.0 battery, rapid charger, 3ft extension, ~13ft reach. $429 retail 2026-09-15. Bar oil only (~$0.40/hr); repair factor 1.00 covers chains, bars and a battery over its life."
+  "notes": "Unit __ \u00b7 S/N ________ \u00b7 M18 FUEL 10in pole saw kit 3016-21PS (replaces 2825-21PS): XC8.0 battery, rapid charger, 3ft extension, 7-10 ft reach with the included extension (https://www.milwaukeetool.com/products/details/m18-fuel-pole-saw-w-quik-lok-kit/3016-21PS, seen 2026-09-28; 13 ft is the 3013-21 telescoping model; F-CAT-19). $429 retail 2026-09-15. Bar oil only (~$0.40/hr); repair factor 1.00 covers chains, bars and a battery over its life."
  },
  {
   "bucket": "equipment",
@@ -123,40 +123,64 @@
   "bucket": "equipment",
   "name": "Toro Mini Skid",
   "unit": "hr",
-  "price": 32400.5,
+  "price": 32976.0,
   "salvage": 8100,
   "life_h": 7500,
   "annual_h": 500,
-  "fuel_oil_per_h": 3.75,
+  "fuel_oil_per_h": 6.33,
   "repair_factor": 0.8,
   "insurance_per_yr": 600,
   "cost_of_money_pct": 0,
   "source": "Toro dealer",
-  "notes": "Unit __ \u00b7 S/N ________ \u00b7 Toro Dingo TX 427 (Kohler gas, $31,825) / TX 525 (Kubota diesel, $32,976), midpoint 2026-09-15. Life 7,500 h and repair 0.80 per BRIEF \u00a72.2; ~500 h/yr; fuel ~1 gal/hr; insurance $600/yr estimate. Replace price with what you paid."
+  "notes": "Unit __ \u00b7 S/N ________ \u00b7 Toro Dingo TX 525 Wide, model 22324, Kubota D902E3B diesel, 553 lb rated operating capacity: $32,976.00 at toro.com, seen 2026-09-28. The owner's Dingo is the diesel, so this replaces the gas/diesel midpoint and the pump-gas fuel (F-FLEET-04). Fuel = diesel at about 1 gal/hr \u00d7 the AAA Florida diesel average $6.33/gal (gasprices.aaa.com, recorded 2026-09-16) = $6.33/hr. Record the engine from the data plate before choosing filter and oil wear lines (older TX 525 units carry a Kubota D1105). Hydraulic oil: Toro HYPR-Oil / HYPR-Oil Plus or a UTHF per the operator's manual, never AW46. Life 7,500 h and repair 0.80 per BRIEF \u00a72.2; ~500 h/yr; insurance $600/yr estimate. Evidence: https://www.toro.com/en/product/22324"
  },
  {
   "bucket": "consumables",
-  "name": "Chain loop \u2013 3/8 PICCO PM3 (193/194/201)",
-  "unit": "each",
-  "price": 30.49,
-  "source": "STIHL dealer",
-  "notes": "STIHL 63PM3 14-16in loop, $28.99-$31.99 2026-09-15. Routine wear is inside the saw's repair factor; add here only when a chain is ruined on the job."
+  "name": "Chain loop, STIHL 63 PS3 44 \u2013 3/8 in P, .050 in, 44 DL (MS 201 T C-M / MS 194 T, 12 in bar)",
+  "unit": "loop",
+  "price": 22.99,
+  "source": "STIHL dealer (list price at STIHL USA)",
+  "notes": "STIHL 63 PS3 44 PICCO Super 3 full chisel, 3616 005 0044, on the 12 in Rollomatic E 3005 000 4805: the largest professional chain STIHL approves on both climbing saws (US manuals \u00a729.8). $22.99 STIHL USA list, seen 2026-09-28 (F-LIST-01, Baseline 0.1 \u00a74.2-4.4). Order from the local authorized STIHL dealer first (warranty, same day); the vendor named is the online fallback whose price is cited (Baseline 0.1 Appendix A.0). Saw wear part: this row is the price and stock source for the saw rows' wear lines (OpenLoadout Baseline 0.1 \u00a75.3). Routine wear is priced on the saw's equipment row; toggle this row onto a project only for extraordinary loss, such as a chain destroyed by embedded metal (F-CAT-08). Evidence: https://www.stihlusa.com/en/ap/picco-super-3-ps3-3-8%22-050%22-1027153"
  },
  {
   "bucket": "consumables",
-  "name": "Chain loop \u2013 3/8 RS3 (500i)",
-  "unit": "each",
-  "price": 49.99,
-  "source": "STIHL dealer",
-  "notes": "STIHL 33 RS3, .063, 84 DL for 24-25in bar, $49.99 2026-09-15."
+  "name": "Chain loop, STIHL 63 PS3 55 \u2013 3/8 in P, .050 in, 55 DL (MS 201 T C-M / MS 194 T, 16 in bar)",
+  "unit": "loop",
+  "price": 27.99,
+  "source": "STIHL dealer (price seen at Bailey's)",
+  "notes": "STIHL 63 PS3 55, 3616 005 0055, on the 16 in Rollomatic E 3005 000 4813. A STIHL 16 in 3/8 in P bar takes 55 drive links; a 56 DL loop will not fit. $27.99 seen 2026-09-28 at Bailey's (F-CAT-11, Baseline 0.1 \u00a74.2). Order from the local authorized STIHL dealer first (warranty, same day); the vendor named is the online fallback whose price is cited (Baseline 0.1 Appendix A.0). Saw wear part: this row is the price and stock source for the saw rows' wear lines (OpenLoadout Baseline 0.1 \u00a75.3). Routine wear is priced on the saw's equipment row; toggle this row onto a project only for extraordinary loss, such as a chain destroyed by embedded metal (F-CAT-08). Evidence: https://www.baileysonline.com/stihl-16-chainsaw-chain-loop-63ps3-55-drive-links-3616-005-0055.html"
  },
  {
   "bucket": "consumables",
-  "name": "Pole saw chain (Oregon 90PX)",
-  "unit": "each",
-  "price": 23.75,
-  "source": "Oregon / Milwaukee",
-  "notes": "3/8 low-profile .050; 10in Milwaukee loop likely $12-18. $23.75 derived from a 16in 2-pack, 2026-09-15."
+  "name": "Chain loop, STIHL 33 RS 84 \u2013 3/8 in, .050 in, 84 DL (MS 500i, 25 in bar)",
+  "unit": "loop",
+  "price": 46.99,
+  "source": "STIHL dealer (price seen at Bailey's)",
+  "notes": "STIHL 33 RS 84, 3623 005 0084: the MS 500i long-bar chain on the 25 in Rollomatic ES 3003 000 4030 (US manual \u00a724.1). It is .050 in, not .063 (the .063 3/8 in chain is 36 RS). $46.99 seen 2026-09-28 at Bailey's (F-CAT-01, Baseline 0.1 \u00a74.1). Order from the local authorized STIHL dealer first (warranty, same day); the vendor named is the online fallback whose price is cited (Baseline 0.1 Appendix A.0). Saw wear part: this row is the price and stock source for the saw rows' wear lines (OpenLoadout Baseline 0.1 \u00a75.3). Routine wear is priced on the saw's equipment row; toggle this row onto a project only for extraordinary loss, such as a chain destroyed by embedded metal (F-CAT-08). Evidence: https://www.baileysonline.com/stihl-24-chainsaw-chain-loop-33rs-84-drive-links-3623-005-0084.html"
+ },
+ {
+  "bucket": "consumables",
+  "name": "Chain loop, STIHL 33 RS 66 \u2013 3/8 in, .050 in, 66 DL (MS 500i, 18 in bar)",
+  "unit": "loop",
+  "price": 36.99,
+  "source": "STIHL dealer (price seen at Bailey's)",
+  "notes": "STIHL 33 RS 66 RAPID Super full chisel, 3623 005 0066: the MS 500i short-bar chain on bar 3003 008 8917 (US manual \u00a724.1). $36.99 seen 2026-09-28 at Bailey's (F-LIST-01, Baseline 0.1 \u00a74.1). Order from the local authorized STIHL dealer first (warranty, same day); the vendor named is the online fallback whose price is cited (Baseline 0.1 Appendix A.0). Saw wear part: this row is the price and stock source for the saw rows' wear lines (OpenLoadout Baseline 0.1 \u00a75.3). Routine wear is priced on the saw's equipment row; toggle this row onto a project only for extraordinary loss, such as a chain destroyed by embedded metal (F-CAT-08). Evidence: https://www.baileysonline.com/stihl-18-chainsaw-chain-loop-33rs-66-drive-links-3623-005-0066.html"
+ },
+ {
+  "bucket": "consumables",
+  "name": "Pole saw chain, Milwaukee 49-16-2723 \u2013 3/8 in LP, .043 in, 40 DL (M18 FUEL 3016-21PS, 10 in bar)",
+  "unit": "loop",
+  "price": 27.97,
+  "source": "Milwaukee dealer (price seen at Ohio Power Tool)",
+  "notes": "Milwaukee 49-16-2723 for the 3016-21PS 10 in bar; Oregon equivalent 90PX040G (40 DL, never the 34 DL 90PX034G, which is for an 8 in bar). File 11/64 in (4.5 mm), not 5/32 in. $27.97 seen 2026-09-28 at Ohio Power Tool (F-CAT-12, Baseline 0.1 \u00a74.6). Saw wear part: this row is the price and stock source for the saw rows' wear lines (OpenLoadout Baseline 0.1 \u00a75.3). Routine wear is priced on the saw's equipment row; toggle this row onto a project only for extraordinary loss, such as a chain destroyed by embedded metal (F-CAT-08). Evidence: https://www.ohiopowertool.com/milwaukee-tools-49-16-2723"
+ },
+ {
+  "bucket": "consumables",
+  "name": "Pole saw chain, Milwaukee 49-16-2759 \u2013 .325 in LP, .043 in, 46 DL (M18 FUEL 3013-21, 10 in bar)",
+  "unit": "loop",
+  "price": 27.97,
+  "source": "Milwaukee dealer (price seen at Ohio Power Tool)",
+  "notes": "Milwaukee 49-16-2759 for the 3013-21 telescoping pole saw's 10 in bar 49-16-2760: Milwaukee lists it as a 10 in chain (https://www.milwaukeetool.com/products/details/10-inch-325-low-profile-pitch-saw-chain/49-16-2759, seen 2026-09-28). The kit's 9 in figure is its cut capacity; Baseline 0.1 \u00a74.0 says 9 in bar, flagged for the next FINDINGS revision. File 5/32 in (4.0 mm). $27.97 seen 2026-09-28 at Ohio Power Tool (F-CAT-12, Baseline 0.1 \u00a74.6). Saw wear part: this row is the price and stock source for the saw rows' wear lines (OpenLoadout Baseline 0.1 \u00a75.3). Routine wear is priced on the saw's equipment row; toggle this row onto a project only for extraordinary loss, such as a chain destroyed by embedded metal (F-CAT-08). Evidence: https://www.ohiopowertool.com/milwaukee-tool-49-16-2759"
  },
  {
   "bucket": "consumables",
@@ -164,7 +188,7 @@
   "unit": "gal",
   "price": 27.99,
   "source": "STIHL dealer",
-  "notes": "STIHL Platinum, $27.99/gal 2026-09-15."
+  "notes": "STIHL Platinum, $27.99/gal 2026-09-15. Saw wear part: this row is the price and stock source for the saw rows' wear lines (OpenLoadout Baseline 0.1 \u00a75.3). Routine wear is priced on the saw's equipment row; toggle this row onto a project only for extraordinary loss, such as a chain destroyed by embedded metal (F-CAT-08)."
  },
  {
   "bucket": "consumables",
@@ -172,7 +196,7 @@
   "unit": "each",
   "price": 4.08,
   "source": "STIHL dealer",
-  "notes": "6-pack $24.50 \u2192 $4.08 per bottle, 2026-09-15."
+  "notes": "6-pack $24.50 \u2192 $4.08 per bottle, 2026-09-15. Saw wear part: this row is the price and stock source for the saw rows' wear lines (OpenLoadout Baseline 0.1 \u00a75.3). Routine wear is priced on the saw's equipment row; toggle this row onto a project only for extraordinary loss, such as a chain destroyed by embedded metal (F-CAT-08)."
  },
  {
   "bucket": "consumables",
@@ -180,31 +204,39 @@
   "unit": "gal",
   "price": 27.47,
   "source": "STIHL dealer",
-  "notes": "$25.97-$28.97/gal 2026-09-15."
+  "notes": "$25.97-$28.97/gal 2026-09-15. Link needs re-verification: the Walmart page is dead (404 in the 2026-09-24 audit), so this price is unconfirmed; re-verify before use. Current STIHL safety data sheets: https://www.stihlusa.com/safety/data-sheets/ (seen 2026-09-28; F-CAT-07). Saw wear part: this row is the price and stock source for the saw rows' wear lines (OpenLoadout Baseline 0.1 \u00a75.3). Routine wear is priced on the saw's equipment row; toggle this row onto a project only for extraordinary loss, such as a chain destroyed by embedded metal (F-CAT-08)."
  },
  {
   "bucket": "consumables",
-  "name": "Chain sharpening kit (2-in-1 file guide)",
+  "name": "2-in-1 file guide, STIHL 5605 750 4305 \u2013 3/8 in (MS 500i)",
   "unit": "each",
-  "price": 15.99,
-  "source": "STIHL dealer",
-  "notes": "Estimate; dealer showed from $10.99. 2026-09-15."
+  "price": 54.99,
+  "source": "STIHL dealer (price seen at Ohio Power Tool)",
+  "notes": "STIHL 2-in-1 file guide for 3/8 in chain (13/64 in, 5.2 mm file), one per pitch per truck. $54.99 seen 2026-09-28 at Ohio Power Tool; replaces a $15.99 estimate (F-CAT-04, Baseline 0.1 Appendix A). Order from the local authorized STIHL dealer first (warranty, same day); the vendor named is the online fallback whose price is cited (Baseline 0.1 Appendix A.0). Saw wear part: this row is the price and stock source for the saw rows' wear lines (OpenLoadout Baseline 0.1 \u00a75.3). Routine wear is priced on the saw's equipment row; toggle this row onto a project only for extraordinary loss, such as a chain destroyed by embedded metal (F-CAT-08). Evidence: https://www.ohiopowertool.com/stihl-5605-750-4305"
  },
  {
   "bucket": "consumables",
-  "name": "M18 battery XC 8.0 (48-11-1880)",
+  "name": "2-in-1 file guide, STIHL 5605 750 4303 \u2013 3/8 in P (MS 201 T C-M / MS 194 T)",
   "unit": "each",
-  "price": 199.0,
-  "source": "Home Depot / Milwaukee",
-  "notes": "Estimate 2026-09-15 (FORGE XC 8.0 lists $229). Batteries last years; put replacement here only when one dies on a job."
+  "price": 54.99,
+  "source": "STIHL dealer (price seen at Ohio Power Tool)",
+  "notes": "STIHL 2-in-1 file guide for 3/8 in P chain (5/32 in, 4.0 mm file), one per pitch per truck. $54.99 seen 2026-09-28 at Ohio Power Tool (F-CAT-04, Baseline 0.1 Appendix A). Order from the local authorized STIHL dealer first (warranty, same day); the vendor named is the online fallback whose price is cited (Baseline 0.1 Appendix A.0). Saw wear part: this row is the price and stock source for the saw rows' wear lines (OpenLoadout Baseline 0.1 \u00a75.3). Routine wear is priced on the saw's equipment row; toggle this row onto a project only for extraordinary loss, such as a chain destroyed by embedded metal (F-CAT-08). Evidence: https://www.ohiopowertool.com/stihl-5605-750-4303"
  },
  {
   "bucket": "consumables",
-  "name": "M18 battery HD 12.0 (48-11-1812)",
+  "name": "M18 battery \u2013 FORGE XC8.0 (48-11-1881)",
+  "unit": "each",
+  "price": 229.0,
+  "source": "Milwaukee dealer (price seen at Ohio Power Tool)",
+  "notes": "Milwaukee M18 FORGE XC8.0, the 3016-21PS pole saw's battery: a wear line on the pole-saw row, not a stand-alone row. The HIGH OUTPUT XC 8.0 48-11-1880 is marked no longer available by Milwaukee (https://www.milwaukeetool.com/products/48-11-1880). $229.00 seen 2026-09-28 at Ohio Power Tool, no sale price shown (F-CAT-13, Baseline 0.1 \u00a74.6). Saw wear part: this row is the price and stock source for the saw rows' wear lines (OpenLoadout Baseline 0.1 \u00a75.3). Routine wear is priced on the saw's equipment row; toggle this row onto a project only for extraordinary loss, such as a chain destroyed by embedded metal (F-CAT-08). Evidence: https://www.ohiopowertool.com/milwaukee-tools-48-11-1881"
+ },
+ {
+  "bucket": "consumables",
+  "name": "M18 battery \u2013 FORGE HD12.0 (48-11-1813)",
   "unit": "each",
   "price": 279.0,
-  "source": "Home Depot / Milwaukee",
-  "notes": "Estimate 2026-09-15; verify at Home Depot."
+  "source": "Milwaukee dealer (price seen at Ohio Power Tool)",
+  "notes": "Milwaukee M18 FORGE HD12.0, the 3013-21 pole saw's battery: a wear line on the pole-saw row, not a stand-alone row. The HIGH OUTPUT HD 12.0 48-11-1812 is marked no longer available by Milwaukee. $279.00 seen 2026-09-28 at Ohio Power Tool, no sale price shown (F-CAT-13, Baseline 0.1 \u00a74.6). Saw wear part: this row is the price and stock source for the saw rows' wear lines (OpenLoadout Baseline 0.1 \u00a75.3). Routine wear is priced on the saw's equipment row; toggle this row onto a project only for extraordinary loss, such as a chain destroyed by embedded metal (F-CAT-08). Evidence: https://www.ohiopowertool.com/milwaukee-tools-48-11-1813"
  },
  {
   "bucket": "consumables",
@@ -343,6 +375,22 @@
   "notes": "2025 P&L: Life Insurance $3,751.59 (owner benefit; archive this row if you'd rather not price it into jobs)."
  },
  {
+  "bucket": "overhead",
+  "name": "Computers & devices",
+  "unit": "yr",
+  "price": 0,
+  "source": null,
+  "notes": "Added 2026-09-28 as a $0 overhead checklist line (OpenLoadout Baseline 0.1 \u00a75.5; F-CAT-18). Enter the year's budget when there is one; nothing is being bought today."
+ },
+ {
+  "bucket": "overhead",
+  "name": "Shop & fleet maintenance supplies",
+  "unit": "yr",
+  "price": 0,
+  "source": null,
+  "notes": "Added 2026-09-28 as a $0 overhead checklist line (OpenLoadout Baseline 0.1 \u00a75.5; F-CAT-18). Enter the year's budget when there is one; nothing is being bought today."
+ },
+ {
   "bucket": "consumables",
   "name": "Dump fee",
   "unit": "load",
@@ -376,10 +424,10 @@
  },
  {
   "bucket": "consumables",
-  "name": "Grapple Truck - Mike",
+  "name": "Grapple truck (sub)",
   "unit": "each",
   "price": 400.0,
-  "source": "Sub Contractor- Gaston",
+  "source": "Grapple-truck subcontractor",
   "notes": "Your rate. 2025 P&L: Grapple $1,300 for the year."
  },
  {
@@ -394,8 +442,8 @@
   "repair_factor": 0.75,
   "insurance_per_yr": 2819,
   "cost_of_money_pct": 0,
-  "source": "GEICO Marine policy 9300144565",
-  "notes": "Unit __ \u00b7 VIN 1GCJK33D37F152070 \u00b7 ESTIMATES: current value $18,000 (replace with what you paid), life 10,000 h and repair factor 0.75 per BRIEF \u00a72.2 bigger trucks, ~1,200 h/yr, diesel ~$6/hr. Insurance $2,819/yr = 2025 fleet auto insurance $11,275.80 \u00f7 4 units. 2025 fleet fuel was $13,530 and auto maintenance $22,583 across all vehicles."
+  "source": "GEICO Marine policy [number kept in the company vault]",
+  "notes": "Unit __ \u00b7 VIN [VIN kept in the company vault] \u00b7 ESTIMATES: current value $18,000 (replace with what you paid), life 10,000 h and repair factor 0.75 per BRIEF \u00a72.2 bigger trucks, ~1,200 h/yr, diesel ~$6/hr. Insurance $2,819/yr = 2025 fleet auto insurance $11,275.80 \u00f7 4 units. 2025 fleet fuel was $13,530 and auto maintenance $22,583 across all vehicles."
  },
  {
   "bucket": "equipment",
@@ -409,8 +457,8 @@
   "repair_factor": 0.7,
   "insurance_per_yr": 2819,
   "cost_of_money_pct": 0,
-  "source": "GEICO Marine policy 9300144565-0",
-  "notes": "Unit __ \u00b7 VIN 3GCPCSE04DG109136 \u00b7 ESTIMATES: current value $16,000, life 8,000 h (truck \u226410k GVW), repair 0.70, ~1,000 h/yr, gas ~$4.50/hr, insurance $2,819/yr (fleet policy \u00f7 4)."
+  "source": "GEICO Marine policy [number kept in the company vault]",
+  "notes": "Unit __ \u00b7 VIN [VIN kept in the company vault] \u00b7 ESTIMATES: current value $16,000, life 8,000 h (truck \u226410k GVW), repair 0.70, ~1,000 h/yr, gas ~$4.50/hr, insurance $2,819/yr (fleet policy \u00f7 4)."
  },
  {
   "bucket": "equipment",
@@ -439,8 +487,8 @@
   "repair_factor": 0.5,
   "insurance_per_yr": 818,
   "cost_of_money_pct": 0,
-  "source": "GEICO Marine policy 9300144565",
-  "notes": "2006 LOUDO trailer \u00b7 VIN 1L9BU16226N383939 \u00b7 ESTIMATES: current value $6,500 (a new 7x14 14K dump trailer is $8,400-$15,750), trailer repair factor 0.50 per BRIEF \u00a72.2, ~800 h/yr, insurance $818/yr (fleet policy remainder). Replace price with what you paid."
+  "source": "GEICO Marine policy [number kept in the company vault]",
+  "notes": "2006 LOUDO trailer \u00b7 VIN [VIN kept in the company vault] \u00b7 ESTIMATES: current value $6,500 (a new 7x14 14K dump trailer is $8,400-$15,750), trailer repair factor 0.50 per BRIEF \u00a72.2, ~800 h/yr, insurance $818/yr (fleet policy remainder). Replace price with what you paid."
  },
  {
   "bucket": "materials",
@@ -574,9 +622,9 @@
   "bucket": "materials",
   "name": "Live Oak \u2013 30 gal",
   "unit": "each",
-  "price": 225.0,
-  "source": "Cherry Lake / wholesale nursery",
-  "notes": "ESTIMATE 2026-09-09 \u00b7 Cherrylake does not publish pricing. Figure is from Creek Nursery's wholesale availability list (Stuart, FL - Treasure Coast, not Central FL, but a current statewide wholesale-grower reference), price-list dated 9/9/26. \u00b7 You've quoted Cathedral Live Oak at ~$676 (30 gal), ~$1,674 (45 gal), ~$1,349 (65 gal) installed."
+  "price": 193.6,
+  "source": "Cherry Lake (Cherrylake, Inc., Groveland FL)",
+  "notes": "Cherrylake public retail $193.60 for the 30 gal size, seen 2026-09-28 at https://cherrylakecommunities.com/. The wholesale-account price is unverified until a quote is on file (OpenLoadout Baseline 0.1 \u00a75.4). Replaces an estimate of $225.00 taken from another nursery's list and labelled Cherry Lake (F-CAT-15)."
  },
  {
   "bucket": "materials",
@@ -584,7 +632,7 @@
   "unit": "each",
   "price": 325.0,
   "source": "Cherry Lake / wholesale nursery",
-  "notes": "ESTIMATE 2026-09-09 \u00b7 Cherrylake pricing not public. Creek Nursery (Stuart, FL) wholesale list, dated 9/9/26. \u00b7 You've quoted Cathedral Live Oak at ~$676 (30 gal), ~$1,674 (45 gal), ~$1,349 (65 gal) installed."
+  "notes": "ESTIMATE 2026-09-09 \u00b7 Cherrylake pricing not public. Creek Nursery (Stuart, FL) wholesale list, dated 9/9/26. \u00b7 You've quoted Cathedral Live Oak at ~$676 (30 gal), ~$1,674 (45 gal), ~$1,349 (65 gal) installed. NEEDS A CHERRYLAKE QUOTE: the price above is another nursery's estimate, not Cherrylake's, and no Cherrylake public price for this size was on file on 2026-09-28. Replace it from the wholesale-account quote (OpenLoadout Baseline 0.1 \u00a75.4; F-CAT-15)."
  },
  {
   "bucket": "materials",
@@ -592,7 +640,7 @@
   "unit": "each",
   "price": 150.0,
   "source": "Cherry Lake / wholesale nursery",
-  "notes": "ESTIMATE 2026-09-09 \u00b7 Closest available size to the requested 30gal in current public price lists. Creek Nursery (Stuart, FL), price list dated 9/9/26. \u00b7 You've quoted 30-gal Magnolia at ~$600 plus ~$400 planting."
+  "notes": "ESTIMATE 2026-09-09 \u00b7 Closest available size to the requested 30gal in current public price lists. Creek Nursery (Stuart, FL), price list dated 9/9/26. \u00b7 You've quoted 30-gal Magnolia at ~$600 plus ~$400 planting. NEEDS A CHERRYLAKE QUOTE: the price above is another nursery's estimate, not Cherrylake's, and no Cherrylake public price for this size was on file on 2026-09-28. Replace it from the wholesale-account quote (OpenLoadout Baseline 0.1 \u00a75.4; F-CAT-15)."
  },
  {
   "bucket": "materials",
@@ -600,7 +648,7 @@
   "unit": "each",
   "price": 650.0,
   "source": "Cherry Lake / wholesale nursery",
-  "notes": "ESTIMATE 2026-09-15 \u00b7 A Quality Plant (self-described wholesale palm nursery serving Central FL, incl. Orlando) public price for a 6ft clear-trunk Sylvester palm. Cherrylake itself does not publish pricing. \u00b7 You've quoted Sylvester palm planting at ~$250 per foot of trunk (12 ft minimum) and ~$3,250 for a 10-12 ft install."
+  "notes": "ESTIMATE 2026-09-15 \u00b7 A Quality Plant (self-described wholesale palm nursery serving Central FL, incl. Orlando) public price for a 6ft clear-trunk Sylvester palm. Cherrylake itself does not publish pricing. \u00b7 You've quoted Sylvester palm planting at ~$250 per foot of trunk (12 ft minimum) and ~$3,250 for a 10-12 ft install. NEEDS A CHERRYLAKE QUOTE: the price above is another nursery's estimate, not Cherrylake's, and no Cherrylake public price for this size was on file on 2026-09-28. Replace it from the wholesale-account quote (OpenLoadout Baseline 0.1 \u00a75.4; F-CAT-15)."
  },
  {
   "bucket": "materials",
@@ -608,23 +656,15 @@
   "unit": "each",
   "price": 160.0,
   "source": "Cherry Lake / wholesale nursery",
-  "notes": "ESTIMATE 2026-09-09 \u00b7 Creek Nursery (Stuart, FL) wholesale list, dated 9/9/26, flat price across the full 10-18ft trunk range. Sabal (cabbage) palm is FL's state tree, very commonly available, and price tends to be fairly stable statewide. \u00b7 You've quoted Sabal palm delivery + planting at $395-$1,000 depending on trunk height."
- },
- {
-  "bucket": "materials",
-  "name": "Queen Palm \u2013 25 gal",
-  "unit": "each",
-  "price": 115.0,
-  "source": "Cherry Lake / wholesale nursery",
-  "notes": "ESTIMATE 2026-09-09 \u00b7 Creek Nursery (Stuart, FL), price list dated 9/9/26. \u00b7 You've quoted 12-16 ft B&B Queen palm at ~$600 plus ~$1,000 planting."
+  "notes": "ESTIMATE 2026-09-09 \u00b7 Creek Nursery (Stuart, FL) wholesale list, dated 9/9/26, flat price across the full 10-18ft trunk range. Sabal (cabbage) palm is FL's state tree, very commonly available, and price tends to be fairly stable statewide. \u00b7 You've quoted Sabal palm delivery + planting at $395-$1,000 depending on trunk height. NEEDS A CHERRYLAKE QUOTE: the price above is another nursery's estimate, not Cherrylake's, and no Cherrylake public price for this size was on file on 2026-09-28. Replace it from the wholesale-account quote (OpenLoadout Baseline 0.1 \u00a75.4; F-CAT-15)."
  },
  {
   "bucket": "materials",
   "name": "Crape Myrtle, multi-trunk \u2013 30 gal",
   "unit": "each",
-  "price": 195.0,
-  "source": "Cherry Lake / wholesale nursery",
-  "notes": "ESTIMATE 2026-09-09 \u00b7 Creek Nursery (Stuart, FL), price list dated 9/9/26. \u00b7 You've quoted 30-gal Crape Myrtle at $250-$400 plus ~$300 planting."
+  "price": 143.0,
+  "source": "Cherry Lake (Cherrylake, Inc., Groveland FL)",
+  "notes": "Cherrylake public retail $143.00 for the 30 gal size, seen 2026-09-28 at https://cherrylakecommunities.com/. The wholesale-account price is unverified until a quote is on file (OpenLoadout Baseline 0.1 \u00a75.4). Replaces an estimate of $195.00 taken from another nursery's list and labelled Cherry Lake (F-CAT-15)."
  },
  {
   "bucket": "materials",
@@ -632,15 +672,15 @@
   "unit": "each",
   "price": 250.0,
   "source": "Cherry Lake / wholesale nursery",
-  "notes": "ESTIMATE 2026-09-09 \u00b7 Bonus size beyond the requested 15/30gal, included since it was on the current price list. Creek Nursery, dated 9/9/26. \u00b7 You've quoted 30-gal Crape Myrtle at $250-$400 plus ~$300 planting."
+  "notes": "ESTIMATE 2026-09-09 \u00b7 Bonus size beyond the requested 15/30gal, included since it was on the current price list. Creek Nursery, dated 9/9/26. \u00b7 You've quoted 30-gal Crape Myrtle at $250-$400 plus ~$300 planting. NEEDS A CHERRYLAKE QUOTE: the price above is another nursery's estimate, not Cherrylake's, and no Cherrylake public price for this size was on file on 2026-09-28. Replace it from the wholesale-account quote (OpenLoadout Baseline 0.1 \u00a75.4; F-CAT-15)."
  },
  {
   "bucket": "materials",
   "name": "Bald Cypress \u2013 30 gal",
   "unit": "each",
-  "price": 185.0,
-  "source": "Cherry Lake / wholesale nursery",
-  "notes": "ESTIMATE 2026-09-09 \u00b7 Creek Nursery (Stuart, FL), price list dated 9/9/26. \u00b7 You've quoted 45-gal Bald Cypress at ~$385."
+  "price": 148.5,
+  "source": "Cherry Lake (Cherrylake, Inc., Groveland FL)",
+  "notes": "Cherrylake public retail $148.50 for the 30 gal size, seen 2026-09-28 at https://cherrylakecommunities.com/. The wholesale-account price is unverified until a quote is on file (OpenLoadout Baseline 0.1 \u00a75.4). Replaces an estimate of $185.00 taken from another nursery's list and labelled Cherry Lake (F-CAT-15)."
  },
  {
   "bucket": "materials",
@@ -648,7 +688,7 @@
   "unit": "each",
   "price": 300.0,
   "source": "Cherry Lake / wholesale nursery",
-  "notes": "ESTIMATE 2026-09-09 \u00b7 Creek Nursery (Stuart, FL), price list dated 9/9/26; closest available size to the requested 15/30gal (their list starts at 45gal). \u00b7 You've quoted 30-gal Red Flame Maple at ~$300."
+  "notes": "ESTIMATE 2026-09-09 \u00b7 Creek Nursery (Stuart, FL), price list dated 9/9/26; closest available size to the requested 15/30gal (their list starts at 45gal). \u00b7 You've quoted 30-gal Red Flame Maple at ~$300. NEEDS A CHERRYLAKE QUOTE: the price above is another nursery's estimate, not Cherrylake's, and no Cherrylake public price for this size was on file on 2026-09-28. Replace it from the wholesale-account quote (OpenLoadout Baseline 0.1 \u00a75.4; F-CAT-15)."
  },
  {
   "bucket": "materials",
@@ -656,7 +696,7 @@
   "unit": "each",
   "price": 230.0,
   "source": "Cherry Lake / wholesale nursery",
-  "notes": "ESTIMATE 2026-09-09 \u00b7 Creek Nursery (Stuart, FL), price list dated 9/9/26 (listed as 'Holy Eagleston,' apparently a typo for Holly). \u00b7 You've quoted 30-gal Dahoon Holly at ~$300 plus ~$350 planting."
+  "notes": "ESTIMATE 2026-09-09 \u00b7 Creek Nursery (Stuart, FL), price list dated 9/9/26 (listed as 'Holy Eagleston,' apparently a typo for Holly). \u00b7 You've quoted 30-gal Dahoon Holly at ~$300 plus ~$350 planting. NEEDS A CHERRYLAKE QUOTE: the price above is another nursery's estimate, not Cherrylake's, and no Cherrylake public price for this size was on file on 2026-09-28. Replace it from the wholesale-account quote (OpenLoadout Baseline 0.1 \u00a75.4; F-CAT-15)."
  },
  {
   "bucket": "materials",
@@ -665,14 +705,6 @@
   "price": 143.72,
   "source": "Home Depot (Apopka)",
   "notes": "Home Depot online price 2026-09-15 \u00b7 Wekiva Foliage 64-Z3N7-QNC6 \u00b7 Ship-to-home online price. Also seen at $118.72 with a $25 Home Depot credit-card instant-savings promo applied; regular price used here. \u00b7 You've quoted Sylvester palm planting at ~$250 per foot of trunk (12 ft minimum) and ~$3,250 for a 10-12 ft install."
- },
- {
-  "bucket": "materials",
-  "name": "Queen Palm \u2013 10 in pot (~3 gal equiv)",
-  "unit": "each",
-  "price": 218.14,
-  "source": "Home Depot (Apopka)",
-  "notes": "Home Depot online price 2026-09-15 \u00b7 Wekiva Foliage QueenPalm10x1 \u00b7 Larger 7-gal and 15-gal Queen Palm listings (The Plant Stand of Arizona) exist on homedepot.com but showed as unavailable with no price during this search. \u00b7 You've quoted 12-16 ft B&B Queen palm at ~$600 plus ~$1,000 planting."
  },
  {
   "bucket": "materials",
@@ -820,78 +852,6 @@
  },
  {
   "bucket": "materials",
-  "name": "Ligustrum (tree form / standard) \u2013 2.5 gal",
-  "unit": "each",
-  "price": 36.98,
-  "source": "Home Depot (Apopka)",
-  "notes": "Home Depot online price 2026-09-15 \u00b7 Vigoro 11375 \u00b7 Sold as a shrub/privet, not a clipped single-trunk 'tree form' standard -- homedepot.com did not show a distinct tree-form SKU in this search."
- },
- {
-  "bucket": "materials",
-  "name": "Ligustrum (Wax Leaf Japanese Privet) \u2013 3 gal",
-  "unit": "each",
-  "price": 36.35,
-  "source": "Home Depot (Apopka)",
-  "notes": "Home Depot online price 2026-09-15 \u00b7 Perfect Plants THD00053 \u00b7 Sold as a 2-pack for $72.69 total ($36.35/plant); shrub form."
- },
- {
-  "bucket": "materials",
-  "name": "Loquat (Bronze Loquat) \u2013 6 in pot (starter)",
-  "unit": "each",
-  "price": 70.7,
-  "source": "Home Depot (Apopka)",
-  "notes": "Home Depot online price 2026-09-15 \u00b7 BronLo6x1 \u00b7 Small starter plant, not a standard nursery gallon size; no 3/7-gal loquat found on homedepot.com in this search."
- },
- {
-  "bucket": "materials",
-  "name": "Tabebuia (Pink Trumpet Tree) \u2013 3 gal",
-  "unit": "each",
-  "price": 204.37,
-  "source": "Home Depot (Apopka)",
-  "notes": "Home Depot online price 2026-09-15 \u00b7 Wekiva Foliage PinkTab3gx1"
- },
- {
-  "bucket": "materials",
-  "name": "Tabebuia (Yellow Trumpet Tree) \u2013 3 gal",
-  "unit": "each",
-  "price": 196.51,
-  "source": "Home Depot (Apopka)",
-  "notes": "Home Depot online price 2026-09-15 \u00b7 Wekiva Foliage YellTabTr3gx1"
- },
- {
-  "bucket": "materials",
-  "name": "Bottlebrush (Red Flowering) \u2013 1 gal",
-  "unit": "each",
-  "price": 38.46,
-  "source": "Home Depot (Apopka)",
-  "notes": "Home Depot online price 2026-09-15 \u00b7 BOTRED01G"
- },
- {
-  "bucket": "materials",
-  "name": "River Birch (multi-trunk) \u2013 1 gal",
-  "unit": "each",
-  "price": 44.98,
-  "source": "Home Depot (Apopka)",
-  "notes": "Home Depot online price 2026-09-15 \u00b7 BIRDUR01G"
- },
- {
-  "bucket": "materials",
-  "name": "River Birch \u2013 2.5 gal",
-  "unit": "each",
-  "price": 38.76,
-  "source": "Home Depot (Apopka)",
-  "notes": "Home Depot online price 2026-09-15 \u00b7 FLOWERWOOD 04503FL"
- },
- {
-  "bucket": "materials",
-  "name": "River Birch (multi-stem) \u2013 5 gal",
-  "unit": "each",
-  "price": 82.99,
-  "source": "Home Depot (Apopka)",
-  "notes": "Home Depot online price 2026-09-15 \u00b7 BIRDHT05G"
- },
- {
-  "bucket": "materials",
   "name": "Eagleston Holly \u2013 7 gal",
   "unit": "each",
   "price": 84.62,
@@ -905,22 +865,6 @@
   "price": 44.98,
   "source": "Home Depot (Apopka)",
   "notes": "Home Depot online price 2026-09-15 \u00b7 HOLDAH01G \u00b7 5-gal size (HOLDAH05G, Ilex cassine) also listed on homedepot.com; price not returned in search results."
- },
- {
-  "bucket": "materials",
-  "name": "Lemon Tree (Improved Meyer) \u2013 1 gal",
-  "unit": "each",
-  "price": 32.97,
-  "source": "Home Depot (Apopka)",
-  "notes": "Home Depot online price 2026-09-15 \u00b7 BELL NURSERY LEMON1MEY1PK \u00b7 3-gal Meyer Lemon (CIIM03, semi-dwarf) also listed on homedepot.com but price not returned in search."
- },
- {
-  "bucket": "materials",
-  "name": "Orange Tree (Calamondin) \u2013 1 gal (3-plant bundle)",
-  "unit": "each",
-  "price": 220.06,
-  "source": "Home Depot (Apopka)",
-  "notes": "Home Depot online price 2026-09-15 \u00b7 Wekiva Foliage CalaOra3x1g \u00b7 Price is for a bundle of 3 plants (~$73.35/plant); Florida-only item, cannot ship out of state."
  },
  {
   "bucket": "materials",

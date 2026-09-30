@@ -46,6 +46,7 @@
   "name": "Royal Palm - 100 Gallon",
   "unit": "each",
   "price": 250,
-  "category": "Palms"
+  "category": "Palms",
+  "notes": "Owner's call, pending: OpenLoadout Baseline 0.1 \u00a710.3 removes royal palm (not on UF's Central Florida palm list; severe potassium deficiency; F-CAT-16). Kept because the company listed it; archive this row to follow the Baseline."
  }
 ]
