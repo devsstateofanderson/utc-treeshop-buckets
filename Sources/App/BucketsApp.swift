@@ -115,7 +115,7 @@ struct BucketsApp: App {
         if let path = ProcessInfo.processInfo.environment["BUCKETS_MERGE_FILE"], !path.isEmpty {
             do {
                 let result = try Transfer.mergeItems(try Data(contentsOf: URL(fileURLWithPath: path)), into: container.mainContext)
-                FileHandle.standardError.write(Data("BUCKETS_MERGE_FILE: added \(result.added), updated \(result.updated), unchanged \(result.unchanged)\n".utf8))
+                FileHandle.standardError.write(Data("BUCKETS_MERGE_FILE: added \(result.added), updated \(result.updated), unchanged \(result.unchanged), packages added \(result.packages), packages updated \(result.packagesUpdated), packages skipped \(result.packagesSkipped), package lines skipped \(result.packageLinesSkipped)\n".utf8))
             } catch {
                 FileHandle.standardError.write(Data("BUCKETS_MERGE_FILE failed: \(error)\n".utf8))
             }
