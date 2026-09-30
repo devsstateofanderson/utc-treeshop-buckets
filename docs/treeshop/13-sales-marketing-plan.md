@@ -2,7 +2,7 @@
 
 Planning session, 2026-09-30, revised after review the same day (see "Review log" at the end). Four planners (compensation math, offers and deals, pipeline and attribution, scope critique) worked the owner's brief in parallel against `claude/planning-and-sub-removal` (0.2.3, build 5); this document is the reconciliation and the build order. Binding once the DECISIONS entries named below (92–98) are written. Read-only against the repository, the live export `onboard-2026-09-30-054709/export-final.json`, and OpenLoadout Baseline 0.1.
 
-> **Status.** Slice 1a is implemented on `claude/sales-commission` (0.2.4, build 6; DECISIONS 83, 92, 93's first paragraph, 94 and 95). The vault's data layer v4 and its rehearsal are not part of that branch. Slices 1b to 4 are plans.
+> **Status.** Slice 1a is implemented on `claude/sales-commission` (0.2.4, build 6; DECISIONS 83, 92, 93's first paragraph, 94 and 95), and slice 1b on the same branch (0.2.5, build 7; DECISIONS 93's second paragraph, amending 34, and the Projects-list sentence in 94). The vault's data layers v4 and v5 and their rehearsal are not part of that branch. Slices 2 to 4 are plans.
 
 > **Privacy (DECISIONS 88).** This committed copy names nobody. It says "the example salesperson" and "the owner" for the two people involved, and the pay figures it uses (an example salaried salesperson at $200/day on a 5-day week, 7% commission; example crew and owner-operator rates) are worked-example inputs chosen to match the shape of the first client's catalog, not any employee's pay. The company's real pay figures live in its vault. The data-layer file described under "Data layer v4 and rehearsal" belongs in `~/Developer/sacred-tree-local-vault`, never in `Scripts/catalog/data`.
 

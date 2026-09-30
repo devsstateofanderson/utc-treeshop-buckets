@@ -14,7 +14,8 @@ import SwiftData
     /// Free text (vendor, supplier, sub name).
     var source: String?
     var notes: String?
-    /// JSON of the Labor or Equipment calculator inputs so "Calculate…" reopens filled in.
+    /// JSON of the Labor, Equipment or Overhead salary calculator inputs so "Calculate…" reopens filled in (DECISIONS 35,
+    /// 36, 93).
     var calcInputs: Data?
     var sortOrder: Int
     /// Optional grouping shown in the tables and project sections: "Palms", "Chains & bars", "Trucks"… (DECISIONS 57).
@@ -146,6 +147,13 @@ extension BucketItem {
     var equipmentInputs: EquipmentCalcInputs? {
         guard bucket == .equipment, let calcInputs else { return nil }
         return try? JSONDecoder().decode(EquipmentCalcInputs.self, from: calcInputs)
+    }
+
+    /// The Overhead salary calculator's inputs (DECISIONS 93), derived from `calcInputs` as `laborInputs` is for Labor;
+    /// nil on any other bucket and on an overhead line typed by hand. A salaried position is a row that has them.
+    var salaryInputs: SalaryCalcInputs? {
+        guard bucket == .overhead, let calcInputs else { return nil }
+        return try? JSONDecoder().decode(SalaryCalcInputs.self, from: calcInputs)
     }
 
     /// Lines in any project that still point at this row. Delete is allowed only when this is 0 (DECISIONS 22).

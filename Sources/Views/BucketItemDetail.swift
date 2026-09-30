@@ -1,7 +1,7 @@
 import SwiftUI
 import SwiftData
 
-/// The Form for the selected row (BRIEF §5.5 item 1; DECISIONS 25, 26, 27, 34).
+/// The Form for the selected row (BRIEF §5.5 item 1; DECISIONS 25, 26, 27, 34, 93).
 struct BucketItemDetail: View {
     @Environment(AppState.self) private var appState
     @Environment(\.modelContext) private var modelContext
@@ -32,7 +32,8 @@ private struct ItemForm: View {
     @State private var showingCalc = false
     @FocusState private var nameFocused: Bool
 
-    private var hasCalcSheet: Bool { item.bucket == .labor || item.bucket == .equipment }
+    /// Labor and Equipment work their rate out (DECISIONS 35, 36); an Overhead line can work a salary out (93).
+    private var hasCalcSheet: Bool { item.bucket == .labor || item.bucket == .equipment || item.bucket == .overhead }
 
     var body: some View {
         Form {
@@ -101,7 +102,7 @@ private struct ItemForm: View {
         .sheet(isPresented: $showingCalc) { calcSheet }
         .onAppear { if item.name.isEmpty { nameFocused = true } }
         .task {
-            // Screenshot hook: BUCKETS_SCREEN=laborcalc|equipmentcalc opens the sheet for the selected row.
+            // Screenshot hook: BUCKETS_SCREEN=laborcalc|equipmentcalc|salarycalc opens the sheet for the selected row.
             guard appState.wantsCalcSheet, hasCalcSheet else { return }
             appState.wantsCalcSheet = false
             try? await Task.sleep(for: .milliseconds(400))
@@ -151,6 +152,8 @@ private struct ItemForm: View {
                         .labelsHidden()
                         .frame(width: 120)
                     Text("/yr").foregroundStyle(.secondary)
+                    Button("Calculate…") { showingCalc = true }
+                        .help("For a salary: work the cost per year out from the pay, how often it is paid and the burden")
                 }
             } label: {
                 Text("Cost per year")
@@ -183,7 +186,7 @@ private struct ItemForm: View {
         }
     }
 
-    /// DECISIONS 34: "= $4.00 per hour at 1,500 billable hours".
+    /// DECISIONS 34: "= $4.00 per hour at 1,500 billable hours" (display only, 4).
     private var overheadCaption: String {
         let hourly = item.hourlyRateCents(billableHours: Decimal(billableHoursPerYear)) ?? 0
         return "= \(Money.format(hourly)) per hour at \(hoursString(Decimal(billableHoursPerYear))) billable hours"
@@ -199,6 +202,7 @@ private struct ItemForm: View {
         switch item.bucket {
         case .labor: LaborCalcSheet(item: item)
         case .equipment: EquipmentCalcSheet(item: item)
+        case .overhead: SalaryCalcSheet(item: item)
         default: EmptyView()
         }
     }

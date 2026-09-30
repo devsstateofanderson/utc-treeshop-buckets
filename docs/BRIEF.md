@@ -135,6 +135,8 @@ Row = one annual cost. The app shows it as $/hr = annual ÷ billable hours. Ente
 Goes here: GL/umbrella insurance, phones, internet, website, marketing, software (Jobber, Workspace), accounting, shop rent, licenses.
 Does **not**: workers comp (in labor burden), vehicle insurance (on the vehicle row), fuel (on equipment).
 
+Salaries of staff who are not on the crew (§2.1) are entered through the overhead row's "Calculate…" sheet: pay per day, week, two weeks, half month, month or year × periods a year × (1 + burden%), one division, rounded once, stored as the row's $/yr (DECISIONS 93, amending 34 for this case). $200/day × 5 × 52 × 1.30 = $67,600/yr = $45.07/hr at 1,500. Every other overhead line is typed as its annual cost.
+
 | Overhead | $/yr | $/hr |
 |---|---|---|
 | General liability | $6,000 | $4.00 |

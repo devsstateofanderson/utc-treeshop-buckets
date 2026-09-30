@@ -36,7 +36,7 @@ final class AppState {
     private var context: ModelContext { container.mainContext }
 
     /// `screen` is the BUCKETS_SCREEN screenshot hook (DECISIONS 48): buckets | labor | equipment | materials |
-    /// consumables | overhead | subcontractors | laborcalc | equipmentcalc | projects | project | actuals | packages |
+    /// consumables | overhead | subcontractors | laborcalc | equipmentcalc | salarycalc | projects | project | actuals | packages |
     /// loadouts | planning | settings. It only selects; it never creates data.
     init(container: ModelContainer, screen: String? = ProcessInfo.processInfo.environment["BUCKETS_SCREEN"]) {
         self.container = container
@@ -67,6 +67,14 @@ final class AppState {
             wantsCalcSheet = selectedItem != nil
         case "equipmentcalc":
             selectFirstRow(in: .equipment)
+            wantsCalcSheet = selectedItem != nil
+        case "salarycalc":
+            // The first overhead line with salary inputs (DECISIONS 93), else the first overhead line.
+            selectFirstRow(in: .overhead)
+            let items = (try? context.fetch(FetchDescriptor<BucketItem>())) ?? []
+            if let salary = items.rows(in: .overhead).first(where: { $0.salaryInputs != nil }) {
+                selectedItem = salary.persistentModelID
+            }
             wantsCalcSheet = selectedItem != nil
         case let name?:
             if let bucket = Bucket(rawValue: name) { selectFirstRow(in: bucket) }
