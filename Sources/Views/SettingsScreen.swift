@@ -305,6 +305,20 @@ enum SettingsText {
         count == 1 ? "1 package priced under an older allowance" : "\(count) packages priced under an older allowance"
     }
 
+    /// What Re-price packages reports (DECISIONS 92): "Re-priced 9 stale packages", or that none were stale.
+    static func repricedPackages(_ count: Int) -> String {
+        switch count {
+        case 0: "No package was stale; nothing changed"
+        case 1: "Re-priced 1 stale package"
+        default: "Re-priced \(count) stale packages"
+        }
+    }
+
+    /// A failed Re-price packages save, in words the owner can act on.
+    static func repriceFailed(_ error: Error) -> String {
+        "Could not re-price packages: \(error.localizedDescription)"
+    }
+
     /// "Buckets-export-2026-09-14.json", the day in the local calendar.
     static func exportFileName(for date: Date, timeZone: TimeZone = .current) -> String {
         let formatter = DateFormatter()

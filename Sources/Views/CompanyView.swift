@@ -107,6 +107,8 @@ private struct CompanyPricingSection: View {
     @AppStorage(AppSettings.Key.minimumJobCents) private var minimumJobCents = AppSettings.defaults.minimumJobCents
     @AppStorage(AppSettings.Key.salesAllowancePct) private var salesAllowancePct = AppSettings.defaults.salesAllowancePct
     @AppStorage(AppSettings.Key.commissionBurdenPct) private var commissionBurdenPct = AppSettings.defaults.commissionBurdenPct
+    /// The last Re-price packages result: how many were stale, or why the save failed (DECISIONS 92).
+    @State private var repriceResult: (text: String, failed: Bool)?
 
     /// The defaults as they stand now, from the same UserDefaults keys `AppSettings.current()` reads.
     private var settings: AppSettings {
@@ -155,15 +157,30 @@ private struct CompanyPricingSection: View {
                 }
                 .accessibilityIdentifier("stalePackages")
             }
+            if let result = repriceResult {
+                Label(result.text, systemImage: result.failed ? "exclamationmark.octagon" : "checkmark.circle")
+                    .font(.caption)
+                    .foregroundStyle(result.failed ? AnyShapeStyle(.red) : AnyShapeStyle(.secondary))
+                    .accessibilityIdentifier("repriceResult")
+            }
         } header: {
             Text("Pricing defaults")
         } footer: {
             Text(SettingsText.pricingShareFooter).font(.caption).foregroundStyle(.secondary)
         }
+        // A new allowance, tax or margin makes the last result stale; the banner speaks again if packages are.
+        .onChange(of: salesAllowancePct) { _, _ in repriceResult = nil }
+        .onChange(of: commissionBurdenPct) { _, _ in repriceResult = nil }
+        .onChange(of: targetMarginPct) { _, _ in repriceResult = nil }
     }
 
     private func repricePackages() {
-        _ = try? Project.repriceTemplates(in: modelContext, settings: settings)
+        do {
+            let stale = try Project.repriceTemplates(in: modelContext, settings: settings)
+            repriceResult = (SettingsText.repricedPackages(stale), false)
+        } catch {
+            repriceResult = (SettingsText.repriceFailed(error), true)
+        }
     }
 }
 

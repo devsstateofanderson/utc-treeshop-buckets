@@ -10,14 +10,14 @@ Planning session, 2026-09-30, revised after review the same day (see "Review log
 
 Combine marketing and sales in Buckets, at least somewhat, now. Marketing needs to know the packages and deals to promote, what they are worth to the customer, and what they cost and earn the company, so it can do the job correctly. Say we push palm installs for spring: presell, pre-order, let marketing drum up traction before ads run; the ad people use pixels for retargeting. A salesperson's commission (7% in the example) is tracked as a bonus. Upgrade Buckets to handle commissions and salary accurately while keeping a clear system of costs, profit and reports. Plan, then upgrade.
 
-## What the store holds today (export 2026-09-30 05:47, format 2)
+## Shape of the store (export 2026-09-30 05:47, format 2; pay figures are example rates)
 
 | Fact | Value |
 |---|---|
 | Settings | 1,500 billable h · 30% burden · 50% target margin · $750 minimum · 0% cost of money (six keys in the export's `settings`) |
-| Hourly crew rows | 6 rows; example inputs $20.20/h, 2,000 paid h, 30%: `2020 × 1.30 × 2000 ÷ 1500 = 3501.33 → $35.01/h`; the standard crew = 3 of them = **$105.03/h** |
-| An owner-operator labor row | example inputs $50/h, 2,000 h, 30% → $86.67/h; hourly, active, not on the crew loadout |
-| The example salesperson's labor row | hourly, example inputs `2500 × 1.30 × 2080 ÷ 1500 = 4506.67 → $45.07/h`, off in every package, note says "do not turn this row on" |
+| Hourly crew rows | 6 rows; example loaded rate $35.01/h each; the standard crew = 3 of them = **$105.03/h** |
+| An owner-operator labor row | example loaded rate $86.67/h; hourly, active, not on the crew loadout |
+| The example salesperson's labor row | hourly, example loaded rate $45.07/h, off in every package, note says "do not turn this row on" |
 | The sales salary overhead line | the example salary, typed by hand: `$200 × 5 × 52 = $52,000; × 1.30 = $67,600.00/yr`, estimated, owner confirmation pending |
 | Overhead, 25 active lines | **$155,864.30/yr → $103.91/h** (`15,586,430 ÷ 1,500 = 10,390.95`); without the salary line $88,264.30 → $58.84/h |
 | Advertising & lead services | $22,659.62/yr, the biggest overhead line after rent (2025 P&L); this is the fixed advertising cost every price already carries |
@@ -174,7 +174,7 @@ atTarget         = targetUnits × {dealPrice, unitDirectCost, unitCost, unitComm
 
 The floor's one-division rounding can land a fraction of a cent under the stated margin (34.99955% shows as 35.0%); the DECISIONS entry records that, as 3 does. On a project the same floor is recomputed from the project's own cost and effective C, and the offer's economics box re-checks the package floor against the deal after every re-price, so a materials quote that rises between the presale and the planting is seen, not hidden.
 
-## Worked examples (Sacred Tree, live export, recomputed by hand)
+## Worked examples (the store's shape with example rates, recomputed by hand)
 
 ### Tree Removal – Medium, 8 h, 3-person crew, two dump loads
 
@@ -336,7 +336,7 @@ The presale is where the two dates matter most: 30 palms sold in February and Ma
 - **Labor Form:** "Not on the crew" toggle with the caption "Salary or sales: never priced as labor; a salary goes on an Overhead line", and a "Commission %" field (0…100). The Labor table adds a "Commission" column when any row has one and greys a not-on-crew row's rate.
 - **Company → Pricing defaults:** two fields after the minimum job, with the §Data model captions, each 0…100; the field refuses `M + A(1 + B/100) > 95`. When A or B changes and any template's snapshot differs: "N packages priced under an older allowance — **Re-price packages**", one action over every template.
 - **Project header:** a **Sold by** menu beside Crew (None, then every active Labor row with its %), shown once any Labor row carries a commission % or the project names someone; hidden on packages. Picking a person sets the link, the name and the snapshot %; a small "Commission %" field beside it is the override, disabled until Sold by is set, captioned "person's rate: 7%" when they differ. When A > 0 or C > 0 the figure row becomes: Cost · Target margin "50% · 7% allowance" · **Price** (`.largeTitle`) · Commission "$366.04 · 7%" with caption "+ $28.00 payroll tax" · Profit "$2,614.61" with caption "50.0% after commission · $3,008.65 before". Below target: the caption reads "below 50% target" in `.orange`; a negative profit after reads "loses $59.27 after commission". With A = 0 and C = 0 the header is today's, unchanged. Semantic styles only (DECISIONS 39).
-- **Copy price** is unchanged. **Copy breakdown** adds, after Price: `Sales allowance: 7% (+7.65% payroll tax)` when A > 0, `Commission: $366.04 (7%)` and `Commission payroll tax: $28.00` when C > 0, and `Profit after commission: $2,614.61 (50.0% margin)`; never a person's name.
+- **Copy price** is unchanged. **Copy breakdown** adds, after Price: `Sales allowance: 7% (+7.65% payroll tax)` when A > 0, `Commission: $366.04 (7%)` and `Commission payroll tax: $28.00` when C > 0; and after Profit, `Profit after commission: $2,614.61 (50.0% margin)` (DECISIONS 92); never a person's name.
 - **Loadouts:** the member picker lists labor rows that are on the crew.
 - **Readiness:** the Labor and Equipment gates count priced (not track-only) rows and list track-only rows separately ("3 priced · 1 not on the crew"); a salaried manager does not make a crew.
 - **Bucket table delete:** "used in N projects · sold M" and the guard.

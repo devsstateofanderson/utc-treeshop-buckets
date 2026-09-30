@@ -136,6 +136,60 @@ final class TransferFormat3Tests: XCTestCase {
         XCTAssertThrowsError(try Transfer.mergeItems(Data(newer.utf8), into: context))
     }
 
+    /// DECISIONS 94, 95: a `salespersonIndex` outside `items` is refused like a bad line index, and one that points at a
+    /// row outside Labor is refused too; either way the store is left as it was.
+    func testABadOrNonLaborSalespersonIndexIsRefused() throws {
+        func file(_ index: Int) -> Data {
+            Data("""
+            {"formatVersion": 3, "exportedAt": "2026-09-30T00:00:00Z", \(Self.format2Settings),
+             "items": [{"bucket": "labor", "name": "Lee", "rateCents": 3500, "unit": "hr", "isActive": true, "sortOrder": 0},
+                       {"bucket": "equipment", "name": "Chipper", "rateCents": 2500, "unit": "hr", "isActive": true, "sortOrder": 0}],
+             "projects": [{"name": "Job", "date": "2026-09-01T00:00:00Z", "hours": 8, "multiplier": 1, "markupPct": 100, "minimumJobCents": 75000,
+                           "targetMarginPct": 50, "salespersonIndex": \(index), "salespersonName": "Lee", "lines": []}]}
+            """.utf8)
+        }
+        let before = try context.fetch(FetchDescriptor<BucketItem>()).count
+        XCTAssertThrowsError(try Transfer.importJSON(file(2), into: context)) { error in
+            XCTAssertEqual(error as? TransferError, .badItemIndex(2))
+        }
+        XCTAssertThrowsError(try Transfer.importJSON(file(-1), into: context)) { error in
+            XCTAssertEqual(error as? TransferError, .badItemIndex(-1))
+        }
+        XCTAssertThrowsError(try Transfer.importJSON(file(1), into: context)) { error in
+            XCTAssertEqual(error as? TransferError, .salespersonNotLabor(1))
+            XCTAssertEqual(error.localizedDescription, "A project names row #1 as its salesperson, which is not a Labor row.")
+        }
+        XCTAssertEqual(try context.fetch(FetchDescriptor<BucketItem>()).count, before, "refused before anything is deleted")
+
+        XCTAssertNoThrow(try Transfer.importJSON(file(0), into: context))
+        XCTAssertEqual(try context.fetch(FetchDescriptor<Project>())[0].salesperson?.name, "Lee")
+    }
+
+    /// DECISIONS 95: until Equipment has its own "Track only" toggle, a file cannot set the flag on a row outside Labor,
+    /// because 0.2.4 offers no way to clear it there. Import and merge both ignore it.
+    func testTrackOnlyFromAFileAppliesToLaborRowsOnly() throws {
+        let file = Data("""
+        {"formatVersion": 3, "exportedAt": "2026-09-30T00:00:00Z", \(Self.format2Settings),
+         "items": [{"bucket": "equipment", "name": "Chipper", "rateCents": 2500, "unit": "hr", "isActive": true, "sortOrder": 0, "trackOnly": true},
+                   {"bucket": "labor", "name": "Lee", "rateCents": 3500, "unit": "hr", "isActive": true, "sortOrder": 0, "trackOnly": true}],
+         "projects": []}
+        """.utf8)
+        let fresh = try Store.inMemoryContainer()
+        _ = try Transfer.importJSON(file, into: fresh.mainContext)
+        let restored = try fresh.mainContext.fetch(FetchDescriptor<BucketItem>())
+        XCTAssertFalse(restored.first { $0.name == "Chipper" }!.trackOnly)
+        XCTAssertTrue(restored.first { $0.name == "Lee" }!.trackOnly)
+
+        let result = try Transfer.mergeItems(file, into: context)
+        let merged = try StoreFixture.items(in: context)
+        XCTAssertFalse(merged.first { $0.name == "Chipper" }!.trackOnly, "a new equipment row stays priced")
+        XCTAssertTrue(merged.first { $0.name == "Lee" }!.trackOnly)
+        XCTAssertEqual(result.added, 2)
+        let again = try Transfer.mergeItems(file, into: context)
+        XCTAssertEqual(again.updated, 0, "the ignored flag never counts as a change")
+        XCTAssertEqual(again.unchanged, 2)
+    }
+
     func testMergeSetsTrackOnlyNeverClearsItAndAppliesTheCommissionPct() throws {
         let marcusFile = """
         {"formatVersion": 3, "exportedAt": "2026-09-30T00:00:00Z",

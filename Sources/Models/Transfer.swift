@@ -44,6 +44,10 @@ struct TransferDocument: Codable, Equatable {
         var trackOnly: Bool?
         /// Format 3 (DECISIONS 94): the row's commission %, whole percent.
         var commissionPct: Decimal?
+
+        /// The flag as 0.2.4 applies it: only a Labor row takes it from a file, because only the Labor form can clear
+        /// it until the equipment-classes plan adds "Track only" to Equipment (DECISIONS 95).
+        var appliedTrackOnly: Bool { bucket == .labor && trackOnly == true }
     }
 
     struct CompanyRecord: Codable, Equatable {
@@ -202,12 +206,14 @@ enum JSONValue: Codable, Equatable {
 enum TransferError: Error, Equatable, LocalizedError {
     case unsupportedFormat(Int)
     case badItemIndex(Int)
+    case salespersonNotLabor(Int)
 
     var errorDescription: String? {
         switch self {
         case .unsupportedFormat(let v):
             "This file is Buckets format \(v); this app reads formats \(TransferDocument.readableFormatVersions.lowerBound) to \(TransferDocument.readableFormatVersions.upperBound)."
         case .badItemIndex(let i): "A project line points at row #\(i), which is not in the file."
+        case .salespersonNotLabor(let i): "A project names row #\(i) as its salesperson, which is not a Labor row."
         }
     }
 }
@@ -312,7 +318,10 @@ enum Transfer {
             for m in l.memberIndexes where !(0..<doc.items.count).contains(m) { throw TransferError.badItemIndex(m) }
         }
         for p in doc.projects {
-            if let i = p.salespersonIndex, !(0..<doc.items.count).contains(i) { throw TransferError.badItemIndex(i) }
+            guard let i = p.salespersonIndex else { continue }
+            guard (0..<doc.items.count).contains(i) else { throw TransferError.badItemIndex(i) }
+            // Sold by is a Labor row (DECISIONS 94); a hand-edited file cannot link equipment or a material.
+            guard doc.items[i].bucket == .labor else { throw TransferError.salespersonNotLabor(i) }
         }
         // Per-object deletes: a batch delete cannot honor the nullify inverse on ProjectLine.item.
         for loadout in try context.fetch(FetchDescriptor<Loadout>()) { context.delete(loadout) }
@@ -357,7 +366,7 @@ enum Transfer {
             items[i].unitCode = record.unitCode; items[i].make = record.make; items[i].model = record.model
             items[i].year = record.year; items[i].serial = record.serial
             items[i].applyReview(from: record)
-            items[i].trackOnly = record.trackOnly ?? false
+            items[i].trackOnly = record.appliedTrackOnly
             items[i].commissionPct = record.commissionPct
         }
         for l in doc.loadouts ?? [] {
@@ -429,7 +438,7 @@ enum Transfer {
     /// how a researched catalog both joins and corrects rows the owner typed from memory. The file's packages
     /// (projects with `isTemplate`) are merged by name (DECISIONS 89); `settings` prices a new package whose file
     /// entry carries no target margin, and the allowance and its payroll tax of a new package whose file entry lacks
-    /// them (DECISIONS 92). A row's `trackOnly` is set by a file and never cleared (DECISIONS 83, 95). The one deletion:
+    /// them (DECISIONS 92). A Labor row's `trackOnly` is set by a file and never cleared (DECISIONS 83, 95). The one deletion:
     /// a subcontractor record marked `remove` deletes the store's sub of that name when none of its services is on a
     /// project, and archives it otherwise (DECISIONS 91).
     @MainActor
@@ -545,7 +554,7 @@ enum Transfer {
                     && match.unitCode == (i.unitCode ?? match.unitCode) && match.make == (i.make ?? match.make)
                     && match.model == (i.model ?? match.model) && match.year == (i.year ?? match.year) && match.serial == (i.serial ?? match.serial)
                     && match.reviewMatches(i)
-                    && (i.trackOnly != true || match.trackOnly) && match.commissionPct == (i.commissionPct ?? match.commissionPct)
+                    && (!i.appliedTrackOnly || match.trackOnly) && match.commissionPct == (i.commissionPct ?? match.commissionPct)
                 if same { result.unchanged += 1; continue }
                 match.rateCents = i.rateCents
                 match.unit = unit
@@ -561,7 +570,7 @@ enum Transfer {
                 if let v = i.serial { match.serial = v }
                 match.applyReview(from: i)
                 // A file may make a row track-only; it never clears the flag (DECISIONS 83, 95), as it never un-archives.
-                if i.trackOnly == true { match.trackOnly = true }
+                if i.appliedTrackOnly { match.trackOnly = true }
                 if let v = i.commissionPct { match.commissionPct = v }
                 result.updated += 1
                 continue
@@ -574,7 +583,7 @@ enum Transfer {
             item.subcontractor = sub
             item.unitCode = i.unitCode; item.make = i.make; item.model = i.model; item.year = i.year; item.serial = i.serial
             item.applyReview(from: i)
-            item.trackOnly = i.trackOnly ?? false
+            item.trackOnly = i.appliedTrackOnly
             item.commissionPct = i.commissionPct
             context.insert(item)
             existing.append(item)

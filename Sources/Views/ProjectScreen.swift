@@ -554,10 +554,10 @@ enum ProjectText {
         return ProfitCaption(text: "\(margin) after commission · \(Money.format(b.profit)) before", isWarning: false)
     }
 
-    /// Sold by is offered once any Labor row carries a commission % or the project already names someone; never on a
-    /// package (DECISIONS 94).
+    /// Sold by is offered once any active Labor row carries a commission % or the project already names someone; never
+    /// on a package (DECISIONS 94). Active only, as the menu lists, so it never opens on "None" alone.
     static func showsSoldBy(_ project: Project, laborRows: [BucketItem]) -> Bool {
-        !project.isTemplate && (project.hasSalesperson || laborRows.contains { $0.commissionPct != nil })
+        !project.isTemplate && (project.hasSalesperson || laborRows.contains { $0.isActive && $0.commissionPct != nil })
     }
 
     /// "Sold by" with nobody picked; "Sold by Sam Rivera"; "Sold by Sam Rivera (row deleted)" once the row is gone.

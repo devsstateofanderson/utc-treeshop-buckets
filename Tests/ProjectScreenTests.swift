@@ -208,6 +208,9 @@ final class ProjectScreenTests: XCTestCase {
         let labor = try StoreFixture.items(in: context).rows(in: .labor)
         XCTAssertTrue(ProjectText.showsSoldBy(project, laborRows: labor), "a labor row carries a commission %")
         XCTAssertFalse(ProjectText.showsSoldBy(project, laborRows: labor.filter { $0.name != "Sam Rivera" }), "nobody earns commission")
+        sam.isActive = false
+        XCTAssertFalse(ProjectText.showsSoldBy(project, laborRows: labor), "an archived row's % never opens a menu that would list only None")
+        sam.isActive = true
         XCTAssertFalse(ProjectText.overrideIsEnabled(project), "disabled with no Sold by")
         XCTAssertEqual(ProjectText.soldByTitle(project), "Sold by")
         XCTAssertEqual(ProjectText.salespersonTitle(sam), "Sam Rivera · 7%")

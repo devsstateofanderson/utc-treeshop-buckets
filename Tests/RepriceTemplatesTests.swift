@@ -70,6 +70,11 @@ final class RepriceTemplatesTests: XCTestCase {
     func testCopyForTheBanner() {
         XCTAssertEqual(SettingsText.stalePackages(1), "1 package priced under an older allowance")
         XCTAssertEqual(SettingsText.stalePackages(9), "9 packages priced under an older allowance")
+        XCTAssertEqual(SettingsText.repricedPackages(0), "No package was stale; nothing changed")
+        XCTAssertEqual(SettingsText.repricedPackages(1), "Re-priced 1 stale package")
+        XCTAssertEqual(SettingsText.repricedPackages(9), "Re-priced 9 stale packages")
+        XCTAssertEqual(SettingsText.repriceFailed(TransferError.badItemIndex(2)),
+                       "Could not re-price packages: A project line points at row #2, which is not in the file.")
     }
 
     func testThePricingDefaultsRefuseAShareOver95() {
