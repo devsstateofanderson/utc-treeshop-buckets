@@ -3,7 +3,7 @@
 # Usage: Scripts/screenshot.sh light|dark [screen] [output.png] [--fixture] [--render]
 #   screen: optional name passed to the app as BUCKETS_SCREEN so it opens on that screen
 #           (buckets | labor | equipment | materials | consumables | overhead | laborcalc | equipmentcalc |
-#           projects | project | settings); default is the app's normal start.
+#           projects | project | packages | loadouts | company | subcontractors | planning | settings); default is the app's normal start.
 #   --render: instead of screencapture, have the app render its windows offscreen (BUCKETS_SNAPSHOT_DIR)
 #           and write the sheet if one is open, else the Settings window if open, else the main window
 #           (toolbar included). Works with the

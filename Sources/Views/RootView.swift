@@ -27,6 +27,9 @@ struct RootView: View {
                     Label("Packages", systemImage: "shippingbox.and.arrow.backward").tag(SidebarItem.packages)
                     Label("Loadouts", systemImage: "person.3").tag(SidebarItem.loadouts)
                 }
+                Section("Business") {
+                    Label("Planning", systemImage: "chart.line.uptrend.xyaxis").tag(SidebarItem.planning)
+                }
             }
             .navigationSplitViewColumnWidth(min: 170, ideal: 190, max: 240)
         } content: {
@@ -37,6 +40,7 @@ struct RootView: View {
             case .projects: ProjectsListView(templates: false)
             case .packages: ProjectsListView(templates: true)
             case .loadouts: LoadoutsListView()
+            case .planning: PlanningScreen()
             case nil: ContentUnavailableView("Pick a bucket", systemImage: "sidebar.left")
             }
         } detail: {
@@ -46,6 +50,7 @@ struct RootView: View {
             case .subcontractors: SubcontractorDetail()
             case .projects, .packages: ProjectScreen()
             case .loadouts: LoadoutDetail()
+            case .planning: EmptyView()
             case nil: EmptyView()
             }
         }

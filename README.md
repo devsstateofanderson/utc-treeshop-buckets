@@ -15,7 +15,7 @@ The spec of record is [docs/BRIEF.md](docs/BRIEF.md). Every resolution of an amb
 Scripts/build.sh        # generates Buckets.xcodeproj from project.yml, builds Debug, prints build/Buckets.app
 Scripts/run.sh          # builds if needed, then opens the app
 Scripts/test.sh         # runs the BucketsTests XCTest bundle from the CLI; exit status is xcodebuild's
-Scripts/screenshot.sh light|dark [screen] [out.png] [--fixture] [--render]   # screen: buckets, labor, equipment, materials, consumables, overhead, laborcalc, equipmentcalc, projects, project, settings
+Scripts/screenshot.sh light|dark [screen] [out.png] [--fixture] [--render]   # screen: buckets, labor, equipment, materials, consumables, overhead, laborcalc, equipmentcalc, projects, project, packages, loadouts, company, subcontractors, planning, settings
 ```
 
 The scripts regenerate the Xcode project whenever `project.yml` or anything under `Sources/` or `Tests/` changes, so add files freely and never edit the `.xcodeproj` by hand (it is not committed).
@@ -31,7 +31,8 @@ DerivedData lives in `~/Library/Developer/Xcode/DerivedData/Buckets-cli` (overri
 - **Company**: **Setup & readiness** first — the required setup inputs, catalog completion per bucket, and the unresolved rows grouped by reason with a jump to each (DECISIONS 73); then the profile (name, service area with its mileage radius and growing zone, address, licenses, three insurance policies with expirations), the pricing defaults (target margin, minimum job) and a documents shelf for COIs, policies and certifications with expiry warnings.
 - **Buckets**: Labor, Equipment (with unit codes, make, model, year, serial), Materials, Consumables, Subcontractors (each sub with its own priced services), Overhead. Every row has a category, a product link, and a **Review** section — evidence, checked and review-due dates, confidence (missing · estimated · owner confirmed · verified), who approved it, an owner-confirmation flag and an assumption note (DECISIONS 72). Verified needs evidence and a checked date. Tables are searchable, sortable, and filter to the unresolved rows.
 - **Projects**: the pricing screen. An enabled line whose row is unresolved carries a small warning and the header counts them; the price never changes because of it. **Packages** are saved projects to start jobs from; **Loadouts** are crew formations applied from the project's Crew menu.
-- **Settings**: billable hours, labor burden and cost of money, plus Export JSON, Import JSON (replace) and Add or Update Rows (merge; a file may also carry the company profile, DECISIONS 78, and packages, DECISIONS 89). Files are format 2; format-1 files from v1.x still read (DECISIONS 74). The target margin (default 50%) and the minimum job (default $750) are company defaults, set under Company → Pricing defaults; every new project and every Re-price copies them (DECISIONS 70).
+- **Planning** (sidebar section Business): reserved for revenue and cash-flow forecasts, budgets, crew capacity and the business plan; under construction, with no data yet (DECISIONS 90).
+- **Settings**: billable hours, labor burden and cost of money, plus Export JSON, Import JSON (replace) and Add or Update Rows (merge; a file may also carry the company profile, DECISIONS 78, and packages, DECISIONS 89, and can remove or archive a subcontractor, DECISIONS 91). Files are format 2; format-1 files from v1.x still read (DECISIONS 74). The target margin (default 50%) and the minimum job (default $750) are company defaults, set under Company → Pricing defaults; every new project and every Re-price copies them (DECISIONS 70).
 
 Version numbering restarted at 0.2.0 with the first Buckets Pro release, after v1.1 (DECISIONS 75).
 

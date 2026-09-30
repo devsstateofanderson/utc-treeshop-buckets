@@ -117,7 +117,8 @@ struct SettingsScreen: View {
         }
     }
 
-    /// Non-destructive: adds rows, fills in $0 rows, never deletes (DECISIONS 55).
+    /// Non-destructive: adds rows, fills in $0 rows, never deletes (DECISIONS 55), except an unreferenced subcontractor
+    /// the file marks `remove` (DECISIONS 91).
     private func chooseMerge() {
         let panel = NSOpenPanel()
         panel.title = "Add Rows from Buckets JSON"
@@ -134,6 +135,8 @@ struct SettingsScreen: View {
                 + (result.packagesSkipped > 0
                     ? ", \(result.packagesSkipped) packages skipped (name matches several packages)" : "")
                 + (result.packageLinesSkipped > 0 ? ", \(result.packageLinesSkipped) package lines skipped" : "")
+                + (result.subcontractorsRemoved > 0 ? ", \(result.subcontractorsRemoved) subcontractors removed" : "")
+                + (result.subcontractorsArchived > 0 ? ", \(result.subcontractorsArchived) subcontractors archived" : "")
                 + " (\(url.lastPathComponent))."
         } catch {
             fail("Couldn't add rows", error)

@@ -10,6 +10,8 @@ enum SidebarItem: Hashable {
     case projects
     case packages
     case loadouts
+    /// Business planning and operating documents (DECISIONS 90); reserved, under construction.
+    case planning
 
     /// The five row buckets in the sidebar's Buckets section; Subcontractors has its own screen.
     static let rowBuckets: [Bucket] = Bucket.allCases.filter { $0 != .subcontractors }
@@ -35,7 +37,7 @@ final class AppState {
 
     /// `screen` is the BUCKETS_SCREEN screenshot hook (DECISIONS 48): buckets | labor | equipment | materials |
     /// consumables | overhead | subcontractors | laborcalc | equipmentcalc | projects | project | actuals | packages |
-    /// loadouts | settings. It only selects; it never creates data.
+    /// loadouts | planning | settings. It only selects; it never creates data.
     init(container: ModelContainer, screen: String? = ProcessInfo.processInfo.environment["BUCKETS_SCREEN"]) {
         self.container = container
         wantsSettingsWindow = screen == "settings"
@@ -55,6 +57,7 @@ final class AppState {
             sidebar = .loadouts
             selectedLoadout = ((try? context.fetch(FetchDescriptor<Loadout>(sortBy: [SortDescriptor(\.sortOrder)]))) ?? []).first?.persistentModelID
         case "company": sidebar = .company
+        case "planning": sidebar = .planning
         case "subcontractors":
             sidebar = .subcontractors
             selectedSubcontractor = ((try? context.fetch(FetchDescriptor<Subcontractor>(sortBy: [SortDescriptor(\.sortOrder)]))) ?? []).first?.persistentModelID
@@ -105,7 +108,15 @@ final class AppState {
         case .packages: "New Package"
         case .loadouts: "New Loadout"
         case .company: "Add Document…"
-        case nil: "New"
+        case .planning, nil: "New"
+        }
+    }
+
+    /// ⌘N does nothing on the Planning screen (DECISIONS 90) or with nothing selected.
+    var canCreate: Bool {
+        switch sidebar {
+        case .planning, nil: false
+        default: true
         }
     }
 
@@ -126,7 +137,7 @@ final class AppState {
         case .packages: newPackage()
         case .loadouts: newLoadout()
         case .company: wantsDocumentPicker = true
-        case nil: break
+        case .planning, nil: break
         }
     }
 
