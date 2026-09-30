@@ -316,3 +316,35 @@ Append entries using this structure:
 - Decisions: DECISIONS 91 amended (clarifications only; no version change).
 - Next owner/action: Codex re-reviews `claude/planning-and-sub-removal` after PR #9.
 - Branch/commit: `claude/planning-and-sub-removal`, pushed: 9e4f6e9 (fixes) and this commit (log). No PR opened.
+
+## 2026-09-30 — Claude Code — 0.2.3 installed; Sacred Tree layer v3 applied (sales manager, single crew, sub corrections)
+
+- Context read: Mr. Anderson in chat on 09-30.
+  - New Sales Manager, Noah Aquinas: $200/day salary on a 5-day week, plus 7% commission on revenue he creates.
+  - One crew for now, lean. The wage estimates stand until he edits them.
+  - Gaston and J&J both run 50 and 65 yd grapple trucks, so treat them as equivalent.
+  - **Correction:** "Florida Stump Grind" is NOT TreeShop. TreeShop is Mr. Anderson's own company and must never appear as a subcontractor or vendor. He believes Florida Stump Grind was a demo entry.
+  - Cranes are deferred (billed as a flat add plus an hourly increase; no data yet).
+  - Reserve a Planning section (this branch).
+- Work completed: layer v3 (`~/Developer/sacred-tree-local-vault/sacred-tree-layer-v3-2026-09-30.json`, built from the live export with `tools/build_layer_v2.py` and `tools/layer-v3-overrides.json`):
+  - **Noah Aquinas as a labor row** (Sales, $25/h over 2,080 paid h, 30% burden, 4,507¢/h; owner confirmed). Off in every package, so he is never double-counted.
+  - **His salary as an overhead line:** "Sales manager salary – Noah Aquinas", $67,600/yr = $52,000 + 30% burden, which is +$45.07 per crew hour at 1,500 h.
+  - **PPE budgeted for one crew:** "PPE & uniforms" goes to $1,118.71/yr, and PPE-04..06 are archived.
+  - **Grapple subs:** Gaston's notes corrected, with its public Lake/Orange phone; J&J's Grapple Service added as a sub with no rate row yet.
+  - **The "Florida Stump Grind (TreeShop)" sub removed** through DECISIONS 91; the older vault files were scrubbed of it too.
+  - All 9 packages regenerated.
+  - Rehearsed on a store copy with 0.2.3, including a second merge to prove idempotence.
+- Evidence/tests:
+  - This branch: 300 executed, 3 skipped, 0 failures (see the entries above).
+  - Live: 0.2.2 parked at `~/Developer/sacred-tree-local-vault/Buckets-0.2.2.app`. 0.2.3 (build 5) installed, codesign verified.
+  - `onboard.sh` backup: `onboard-2026-09-30-054709/`.
+  - Merge counts: added 2, updated 4, unchanged 230, packages updated 9, subcontractors removed 1. The live rows and subs are identical to the rehearsal's.
+  - Active rows: labor 8, equipment 29, overhead 25 ($155,864.30/yr = $103.91/h at 1,500 h). Subs 13. No store row or sub mentions TreeShop.
+- Decisions: none new beyond 90–91. The earlier log entry's open question "(d) the legal payee behind 'Florida Stump Grind (TreeShop)'" is withdrawn: the record was a demo entry, not TreeShop.
+- Open questions (owner):
+  - (a) The 7% commission comes out of the 50% target margin (about 43% net). Setting the target margin to 57% keeps 50% net after commission (price = cost / 0.43).
+  - (b) Real wages, and the crew roster (the audit list is dated).
+  - (c) The Sales manager burden (30% assumed).
+  - (d) Crane pricing later.
+- Next owner/action: owner — review the Planning placeholder and the package prices. Codex — review this branch after PR #9.
+- Branch/commit: `claude/planning-and-sub-removal`, this commit (log).
