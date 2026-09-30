@@ -298,3 +298,21 @@ Append entries using this structure:
   - One crew for now.
 - Next owner/action: Codex reviews `claude/planning-and-sub-removal` after PR #9. The caller rehearses on a store copy before installing.
 - Branch/commit: `claude/planning-and-sub-removal`, pushed: 8d4d5b5 (change) and this commit (log). No PR opened.
+
+## 2026-09-30 — Claude Code — Sub removal review fixes (0.2.3, build 5)
+
+- Context read: the review of `claude/planning-and-sub-removal` (8d4d5b5, ed46da5): one medium, three low, one note.
+- Work completed (9e4f6e9):
+  - **Medium, fixed.** The Settings help for Add or Update Rows no longer says "nothing is deleted". It now says a file may remove a subcontractor it names, and one whose services are on a project is archived instead.
+  - **Low, fixed.** A new sub that a file adds with `isActive: false` now adds its new services archived. It was not in `archivedByFile`, so its services came in active.
+  - **Low, documented.** A sub archived instead of removed keeps its file position, so rows under it still merge and new ones are added archived. Skipping them would break loadout members that reference those services. This is now stated in DECISIONS 91 and the merge comment.
+  - **Note, documented.** DECISIONS 91 now says that deleting a sub also takes its services out of any loadout, the same as deleting it in the app does.
+  - **Tests.** The removal test now checks that a second sub and its services survive. New tests: a new archived sub archives its new services; rows under a removed sub or an unknown sub hold their file positions, so a loadout member and a package line after them resolve to the right rows.
+- Evidence/tests:
+  - `Scripts/test.sh`: 300 executed, 3 skipped (the same three), 0 failures.
+  - `Scripts/build.sh Release`: `build/Buckets.app`.
+  - The Planning screen is unchanged, so its screenshot was not retaken.
+  - Not installed; the live store was not touched.
+- Decisions: DECISIONS 91 amended (clarifications only; no version change).
+- Next owner/action: Codex re-reviews `claude/planning-and-sub-removal` after PR #9.
+- Branch/commit: `claude/planning-and-sub-removal`, pushed: 9e4f6e9 (fixes) and this commit (log). No PR opened.
