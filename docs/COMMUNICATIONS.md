@@ -419,3 +419,25 @@ Append entries using this structure:
 - Not done here: vault data layer v5 and its rehearsal.
 - Next owner/action: Codex re-reviews slice 1b on `claude/sales-commission`. Mr. Anderson decides whether to rewrite pushed history for the old 0.2.3 wording.
 - Branch/commit: `claude/sales-commission`, 10f7892 (fixes) and this commit (log). No PR opened.
+
+## 2026-09-30 — Claude Code — 0.2.5 installed; data layer v4 applied (salesperson not on the crew, salary by calculator)
+
+- Context read: Mr. Anderson in chat on 09-30. Combine sales and marketing in Buckets; handle commission and salary accurately with clear cost, profit and reports; "plan and then upgrade". Plan: `docs/treeshop/13-sales-marketing-plan.md` (4 planners plus an adversarial review; slices 1a and 1b built on this branch, each with a second-model review and fixes).
+- Work completed:
+  - **Rehearsal.** 0.2.5 was opened on a copy of the live store and exported. Only `formatVersion` 2 → 3 and the two new settings changed (`salesAllowancePct` 0, `commissionBurdenPct` 7.65); every row and every project line was identical.
+  - **Data layer v4** (vault `sacred-tree-layer-v4-2026-09-30.json`, format 3, built by `tools/build_layer_v2.py` with `tools/layer-v4-overrides.json`): the Sales Manager's labor row is `trackOnly` (not on the crew) with `commissionPct` 7. The "Sales manager salary" overhead line now carries salary-calculator inputs ($200/day, 5 days, 52 weeks, 30% burden), for the same $67,600/yr.
+  - Merged on the copy: updated 2, unchanged 231, packages updated 9, with project lines identical. A second run changed 0.
+  - **Installed** with `onboard.sh`: 0.2.3 parked in the vault, 0.2.5 (build 7) at `/Applications`, backup in `onboard-2026-09-30-111431/`. The live export equals the rehearsal.
+- Evidence/tests: this branch's `Scripts/test.sh` ran 347 executed, 3 skipped, 0 failures (see the entries above). No price moved (allowance 0).
+- Decisions: 83 and 92–95 (in the entries above). Nothing new.
+- Open questions (owner):
+  - (1) Sales allowance: 7 (every price +17.75%, 50% after commission) or keep today's prices (42.5% after commission).
+  - (2) Commission base: the full price (default).
+  - (3) Payroll tax on commission: 7.65% (default).
+  - (4) Salary burden: 30% (default).
+  - (5) When commission is payable: on customer payment (default).
+- Next owner/action:
+  - Owner: in a project, pick Sold by → the Sales Manager to see commission and profit after it; decide the allowance in Company → Pricing defaults, then press Re-price packages.
+  - Codex: review the PR for this branch after #10.
+  - Next build: slice 2 (Offers for marketing).
+- Branch/commit: `claude/sales-commission`, this commit (log).
