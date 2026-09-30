@@ -91,6 +91,49 @@ struct CentsField: View {
     }
 }
 
+/// Text field bound to an optional whole percent (a row's commission %, a project's override, DECISIONS 94), updating
+/// on every keystroke. Empty text is nil; otherwise a plain non-negative number with at most two decimals, at most
+/// `maximum`; anything else leaves the last good value.
+struct OptionalDecimalField: View {
+    let label: String
+    @Binding var value: Decimal?
+    var placeholder = ""
+    var maximum: Decimal = 100
+    @State private var text = ""
+    @FocusState private var focused: Bool
+
+    var body: some View {
+        TextField(label, text: $text, prompt: Text(placeholder))
+            .multilineTextAlignment(.trailing)
+            .focused($focused)
+            .onAppear { text = Self.string(value) }
+            .onChange(of: text) { _, new in
+                if let parsed = Self.parse(new, maximum: maximum), parsed != value { value = parsed }
+            }
+            .onChange(of: value) { _, new in
+                if Self.parse(text, maximum: maximum) != .some(new) { text = Self.string(new) }
+            }
+            .onChange(of: focused) { _, isFocused in
+                if !isFocused { text = Self.string(value) }
+            }
+    }
+
+    /// `.some(nil)` for empty text, `.some(x)` for a valid number, nil for anything the field refuses.
+    static func parse(_ text: String, maximum: Decimal = 100) -> Decimal?? {
+        let trimmed = text.trimmingCharacters(in: .whitespaces)
+        if trimmed.isEmpty { return .some(nil) }
+        guard DecimalField.isPlainNumber(trimmed), let d = Decimal(string: trimmed, locale: Locale(identifier: "en_US_POSIX")),
+              d.isFinite, d >= 0, d <= maximum else { return nil }
+        return .some(d)
+    }
+
+    /// "" for nil; "0" for zero (an explicit 0% is a value, not an absence); "7", "7.5".
+    static func string(_ value: Decimal?) -> String {
+        guard let value else { return "" }
+        return value.formatted(.number.precision(.fractionLength(0...2)).grouping(.never).locale(Locale(identifier: "en_US")))
+    }
+}
+
 /// Optional text bound to a `String?` model field (empty ⇢ nil).
 struct OptionalTextField: View {
     let label: String

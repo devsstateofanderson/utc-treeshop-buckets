@@ -86,6 +86,158 @@ final class ProjectScreenTests: XCTestCase {
         XCTAssertEqual(ProjectText.qtyMaximum, Decimal(string: "999999.99")!)
     }
 
+    // MARK: Commission in the header and Copy breakdown (DECISIONS 92, 94)
+
+    /// The §3.3 job at the 50% target margin with a 7% allowance (7.65% payroll tax), and a synthetic salesperson.
+    private func commissionProject() throws -> (Project, BucketItem) {
+        let project = try StoreFixture.baseProject(in: context)
+        project.name = "Oak removal"
+        project.date = Date(timeIntervalSince1970: 1_757_800_000)
+        project.targetMarginPct = 50
+        project.salesAllowancePct = 7
+        project.commissionBurdenPct = Decimal(string: "7.65")!
+        let sam = BucketItem(bucket: .labor, name: "Sam Rivera", rateCents: 4000, sortOrder: 9)
+        sam.trackOnly = true
+        sam.commissionPct = 7
+        context.insert(sam)
+        try context.save()
+        return (project, sam)
+    }
+
+    private func header(_ project: Project) -> String {
+        ProjectText.breakdown(project, breakdown: project.breakdown(billableHours: 1500))
+    }
+
+    private let subtotals = """
+        Hours: 8
+        Multiplier: 1× Normal
+        Labor: $995.12
+        Equipment: $563.84
+        Materials: $0.00
+        Consumables: $150.00
+        Subcontractors: $0.00
+        Overhead: $144.00
+        Cost: $1,852.96
+        """
+
+    func testCopyBreakdownWithASalesperson() throws {
+        let (project, sam) = try commissionProject()
+        project.setSalesperson(sam)
+        let text = header(project)
+        XCTAssertEqual(text, """
+        Oak removal
+        Date: \(ProjectText.dateString(project.date))
+        \(subtotals)
+        Target margin: 50%
+        Price: $4,363.55
+        Sales allowance: 7% (+7.65% payroll tax)
+        Commission: $305.45 (7%)
+        Commission payroll tax: $23.37
+        Profit: $2,510.59 (57.5% margin)
+        Profit after commission: $2,181.77 (50.0% margin)
+        """)
+        XCTAssertFalse(text.contains("Sam"), "never a person's name (DECISIONS 41, 88)")
+        XCTAssertFalse(text.contains("Rivera"))
+        XCTAssertEqual(ProjectText.price(name: project.displayName, priceCents: project.priceCents), "Oak removal — $4,363.55",
+                       "Copy price is name and price, nothing else")
+        project.commissionPctOverride = 10
+        XCTAssertTrue(header(project).contains("\nCommission: $436.36 (10%)\n"), "436,355 × 10 ÷ 100 = 43,635.5 → 43,636")
+    }
+
+    func testCopyBreakdownWithoutASalesperson() throws {
+        let (project, _) = try commissionProject()
+        XCTAssertEqual(header(project), """
+        Oak removal
+        Date: \(ProjectText.dateString(project.date))
+        \(subtotals)
+        Target margin: 50%
+        Price: $4,363.55
+        Sales allowance: 7% (+7.65% payroll tax)
+        Profit: $2,510.59 (57.5% margin)
+        Profit after commission: $2,510.59 (57.5% margin)
+        """)
+        // No allowance and no salesperson: exactly the breakdown from before the allowance existed.
+        project.salesAllowancePct = 0
+        let plain = header(project)
+        XCTAssertEqual(plain.components(separatedBy: "\n").count, 14)
+        XCTAssertTrue(plain.hasSuffix("Price: $3,705.92\nProfit: $1,852.96 (50.0% margin)"), plain)
+        XCTAssertFalse(ProjectText.showsCommissionFigures(project))
+    }
+
+    func testHeaderFiguresShowCommissionOnlyWhenPaid() throws {
+        let (project, sam) = try commissionProject()
+        var b = project.breakdown(billableHours: 1500)
+        XCTAssertTrue(ProjectText.showsCommissionFigures(project), "an allowance shows the after-commission profit")
+        XCTAssertNil(ProjectText.commissionFigure(project, b), "no commission paid, no Commission figure")
+        XCTAssertEqual(ProjectText.pricingFigure(project), "50% · 7% allowance")
+        XCTAssertEqual(ProjectText.profitCaption(project, b), .init(text: "57.5% margin · no commission", isWarning: false))
+
+        project.setSalesperson(sam)
+        b = project.breakdown(billableHours: 1500)
+        let figure = try XCTUnwrap(ProjectText.commissionFigure(project, b))
+        XCTAssertEqual(figure.value, "$305.45 · 7%")
+        XCTAssertEqual(figure.caption, "+ $23.37 payroll tax")
+        XCTAssertEqual(ProjectText.profitCaption(project, b), .init(text: "50.0% after commission · $2,510.59 before", isWarning: false))
+
+        // The live defect: no allowance, the salesperson paid out of the 50% margin.
+        project.salesAllowancePct = 0
+        b = project.breakdown(billableHours: 1500)
+        XCTAssertEqual(ProjectText.pricingFigure(project), "50%")
+        XCTAssertEqual(b.profitAfterCommission, 157_370)
+        XCTAssertEqual(ProjectText.profitCaption(project, b), .init(text: "42.5% after commission · below 50% target", isWarning: true))
+
+        // A loss after commission reads as one.
+        project.targetMarginPct = 5
+        project.commissionPctOverride = 7
+        b = project.breakdown(billableHours: 1500)
+        XCTAssertLessThan(b.profitAfterCommission, 0)
+        XCTAssertEqual(ProjectText.profitCaption(project, b).text, "loses \(Money.format(-b.profitAfterCommission)) after commission")
+        XCTAssertTrue(ProjectText.profitCaption(project, b).isWarning)
+
+        // A legacy markup project ignores the allowance but still shows a named salesperson's commission.
+        project.targetMarginPct = nil
+        project.salesAllowancePct = 7
+        XCTAssertEqual(ProjectText.pricingFigure(project), "35%")
+        XCTAssertNil(ProjectText.allowanceLine(project))
+        XCTAssertEqual(project.priceCents, 250_150)
+        XCTAssertTrue(ProjectText.showsCommissionFigures(project))
+    }
+
+    func testSoldByAndTheOverrideField() throws {
+        let (project, sam) = try commissionProject()
+        let labor = try StoreFixture.items(in: context).rows(in: .labor)
+        XCTAssertTrue(ProjectText.showsSoldBy(project, laborRows: labor), "a labor row carries a commission %")
+        XCTAssertFalse(ProjectText.showsSoldBy(project, laborRows: labor.filter { $0.name != "Sam Rivera" }), "nobody earns commission")
+        XCTAssertFalse(ProjectText.overrideIsEnabled(project), "disabled with no Sold by")
+        XCTAssertEqual(ProjectText.soldByTitle(project), "Sold by")
+        XCTAssertEqual(ProjectText.salespersonTitle(sam), "Sam Rivera · 7%")
+        XCTAssertEqual(ProjectText.salespersonTitle(labor.first { $0.name == "Marcus" }!), "Marcus")
+        project.setSalesperson(sam)
+        XCTAssertTrue(ProjectText.overrideIsEnabled(project))
+        XCTAssertEqual(ProjectText.soldByTitle(project), "Sold by Sam Rivera")
+        XCTAssertNil(ProjectText.personRateCaption(project))
+        project.commissionPctOverride = 7
+        XCTAssertNil(ProjectText.personRateCaption(project), "shown only when they differ")
+        project.commissionPctOverride = Decimal(string: "8.5")!
+        XCTAssertEqual(ProjectText.personRateCaption(project), "person's rate: 7%")
+        XCTAssertTrue(ProjectText.showsSoldBy(project, laborRows: []), "a project that names someone keeps the menu")
+    }
+
+    func testOptionalPercentFieldParsing() {
+        XCTAssertEqual(OptionalDecimalField.parse(""), .some(nil))
+        XCTAssertEqual(OptionalDecimalField.parse("  "), .some(nil))
+        XCTAssertEqual(OptionalDecimalField.parse("7"), .some(7))
+        XCTAssertEqual(OptionalDecimalField.parse("7.65"), .some(Decimal(string: "7.65")!))
+        XCTAssertEqual(OptionalDecimalField.parse("0"), .some(0))
+        XCTAssertNil(OptionalDecimalField.parse("101"))
+        XCTAssertNil(OptionalDecimalField.parse("-1"))
+        XCTAssertNil(OptionalDecimalField.parse("7%"))
+        XCTAssertNil(OptionalDecimalField.parse("7.655"))
+        XCTAssertEqual(OptionalDecimalField.string(nil), "")
+        XCTAssertEqual(OptionalDecimalField.string(0), "0")
+        XCTAssertEqual(OptionalDecimalField.string(Decimal(string: "7.5")!), "7.5")
+    }
+
     // MARK: Row labels (DECISIONS 21, 29)
 
     func testLineLabelsTotalsAndStatus() throws {

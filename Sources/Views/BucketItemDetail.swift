@@ -56,6 +56,9 @@ private struct ItemForm: View {
                     Text("Product or supplier page").foregroundStyle(.secondary)
                 }
             }
+            if item.bucket == .labor {
+                LaborSalesFields(item: item)
+            }
             if item.bucket == .equipment {
                 Section {
                     LabeledContent {
@@ -186,11 +189,10 @@ private struct ItemForm: View {
         return "= \(Money.format(hourly)) per hour at \(hoursString(Decimal(billableHoursPerYear))) billable hours"
     }
 
+    /// DECISIONS 22, 94: a row used on a project line, or named as Sold by on a project, is archived, not deleted.
     private var usage: String {
-        switch item.referenceCount {
-        case 0: "Not used in any project yet, so it can be deleted."
-        default: "Used in \(projectsPhrase(item.referenceCount)). It can be archived, not deleted."
-        }
+        if item.canDelete { return "Not used in any project yet, so it can be deleted." }
+        return "\(item.usagePhrase.prefix(1).uppercased())\(item.usagePhrase.dropFirst()). It can be archived, not deleted."
     }
 
     @ViewBuilder private var calcSheet: some View {
@@ -204,6 +206,43 @@ private struct ItemForm: View {
     private func save() {
         try? modelContext.save()
     }
+}
+
+/// Labor only (DECISIONS 83, 93, 94): "Not on the crew" for a salaried salesperson or office manager whose pay is an
+/// Overhead line, so the price never touches the row; and the commission % paid on the jobs this person sells.
+private struct LaborSalesFields: View {
+    @Bindable var item: BucketItem
+    @Environment(\.modelContext) private var modelContext
+
+    var body: some View {
+        Section {
+            Toggle(isOn: $item.trackOnly) {
+                Text(Bucket.labor.trackOnlyLabel)
+                Text(LaborText.notOnCrewCaption).foregroundStyle(.secondary)
+            }
+            LabeledContent {
+                HStack(spacing: 6) {
+                    OptionalDecimalField(label: "Commission %", value: $item.commissionPct, placeholder: "none")
+                        .labelsHidden()
+                        .frame(width: 80)
+                    Text("%").foregroundStyle(.secondary)
+                }
+            } label: {
+                Text("Commission %")
+                Text(LaborText.commissionCaption).foregroundStyle(.secondary)
+            }
+        } header: {
+            Text("Crew and sales")
+        }
+        .onChange(of: item.trackOnly) { _, _ in try? modelContext.save() }
+        .onChange(of: item.commissionPct) { _, _ in try? modelContext.save() }
+    }
+}
+
+/// Captions for the Labor Form's crew and sales fields.
+enum LaborText {
+    static let notOnCrewCaption = "Salary or sales: never priced as labor; a salary goes on an Overhead line"
+    static let commissionCaption = "Paid on the price of each job this person sells, picked as Sold by on the project"
 }
 
 /// The review section of a row's Form (DECISIONS 72): confidence, evidence, the two dates, who approved, the

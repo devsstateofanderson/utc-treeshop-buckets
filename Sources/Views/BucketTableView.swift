@@ -46,6 +46,11 @@ struct BucketTableView: View {
         return rows.first { $0.persistentModelID == id }
     }
 
+    /// The Labor table's Commission column shows once any labor row carries a % (DECISIONS 94).
+    private var showsCommission: Bool {
+        bucket == .labor && allItems.contains { $0.bucket == .labor && $0.commissionPct != nil }
+    }
+
     var body: some View {
         @Bindable var appState = appState
         Group {
@@ -77,6 +82,9 @@ struct BucketTableView: View {
                                 if bucket == .equipment, !item.identification.isEmpty {
                                     Text(item.identification).font(.caption).foregroundStyle(.secondary)
                                 }
+                                if item.trackOnly {
+                                    Text(bucket.trackOnlyLabel).font(.caption).foregroundStyle(.secondary)
+                                }
                             }
                         } else {
                             Text(row.title).font(.headline)
@@ -91,6 +99,16 @@ struct BucketTableView: View {
                         }
                     }
                     .width(min: 120, ideal: 170)
+                    if showsCommission {
+                        TableColumn("Commission") { row in
+                            if let item = row.item {
+                                Text(item.commissionText ?? "—")
+                                    .foregroundStyle(item.commissionPct == nil || !item.isActive ? Color.secondary : Color.primary)
+                                    .monospacedDigit()
+                            }
+                        }
+                        .width(min: 60, ideal: 76)
+                    }
                     TableColumn("Unit") { row in
                         if let item = row.item {
                             Text(item.unit).foregroundStyle(item.isActive ? Color.primary : Color.secondary)
@@ -150,7 +168,7 @@ struct BucketTableView: View {
             }
             Button("Cancel", role: .cancel) {}
         } message: {
-            Text("It is used in \(projectsPhrase(selectedRow?.referenceCount ?? 0)), so it can't be deleted. Archiving hides it from new projects; the projects that already use it keep it.")
+            Text("It is \(selectedRow?.usagePhrase ?? "used in 0 projects"), so it can't be deleted. Archiving hides it from new projects; the projects that already use it keep it.")
         }
         .onChange(of: bucket) { _, _ in appState.selectedItem = nil }
     }
@@ -164,9 +182,9 @@ struct BucketTableView: View {
 
     private var removal: Removal {
         guard let row = selectedRow else { return .disabled("Select a row to delete it.") }
-        if row.referenceCount == 0 { return .delete }
+        if row.canDelete { return .delete }
         if row.isActive { return .archive }
-        return .disabled("Used in \(projectsPhrase(row.referenceCount)), so it can't be deleted. It is already archived.")
+        return .disabled("\(row.usagePhrase.prefix(1).uppercased())\(row.usagePhrase.dropFirst()), so it can't be deleted. It is already archived.")
     }
 
     @ViewBuilder private var removalButton: some View {
@@ -200,8 +218,9 @@ private struct RateCell: View {
 
     var body: some View {
         HStack(spacing: 6) {
+            // A not-on-the-crew row's rate is greyed: the price never touches it (DECISIONS 83).
             Text(item.rateLabel)
-                .foregroundStyle(item.isActive ? Color.primary : Color.secondary)
+                .foregroundStyle(item.isActive && !item.trackOnly ? Color.primary : Color.secondary)
             if item.bucket.isAnnual, let hourly = item.hourlyRateCents(billableHours: billableHours) {
                 Text("= \(Money.format(hourly))/hr")
                     .foregroundStyle(.secondary)

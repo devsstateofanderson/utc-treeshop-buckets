@@ -195,7 +195,7 @@ final class SubcontractorMergeRemovalTests: XCTestCase {
         let data = try Transfer.exportJSON(from: context, settings: AppSettings(), exportedAt: Date(timeIntervalSince1970: 0))
         XCTAssertFalse(String(decoding: data, as: UTF8.self).contains("\"remove\""))
         let doc = try Transfer.decoder().decode(TransferDocument.self, from: data)
-        XCTAssertEqual(doc.formatVersion, 2)
+        XCTAssertEqual(doc.formatVersion, 3, "format 3 since 0.2.4 (DECISIONS 95); `remove` never changed the format")
         XCTAssertNil(doc.subcontractors?[0].remove)
     }
 }

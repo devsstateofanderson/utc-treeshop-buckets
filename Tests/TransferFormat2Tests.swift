@@ -3,7 +3,8 @@ import SwiftData
 @testable import Buckets
 
 /// Export/import format 2 (DECISIONS 74; issue #3 §5): the review fields and the service area round-trip,
-/// format-1 files still read, format 3 is refused, and the merge carries review fields without vouching for a row.
+/// format-1 files still read, a newer format is refused, and the merge carries review fields without vouching for a row.
+/// Exports are format 3 since 0.2.4 (DECISIONS 95; `TransferFormat3Tests`); the format-2 fields travel unchanged.
 @MainActor
 final class TransferFormat2Tests: XCTestCase {
     private var container: ModelContainer!
@@ -20,7 +21,7 @@ final class TransferFormat2Tests: XCTestCase {
     private static let format1Settings =
         #""settings": {"billableHoursPerYear": 1500, "laborBurdenPct": 30, "markupPct": 35, "minimumJobCents": 75000, "costOfMoneyPct": 0}"#
 
-    func testExportIsFormat2AndRoundTripsTheReviewFields() throws {
+    func testExportRoundTripsTheReviewFields() throws {
         let items = try StoreFixture.items(in: context)
         let marcus = items.first { $0.name == "Marcus" }!
         marcus.evidence = "Southern Personnel Leasing invoice"; marcus.checkedAt = checked; marcus.reviewDueAt = due
@@ -33,7 +34,7 @@ final class TransferFormat2Tests: XCTestCase {
 
         let data = try Transfer.exportJSON(from: context, settings: AppSettings(), exportedAt: stamp)
         let text = String(data: data, encoding: .utf8)!
-        XCTAssertTrue(text.contains("\"formatVersion\" : 2"))
+        XCTAssertTrue(text.contains("\"formatVersion\" : 3"))
         XCTAssertTrue(text.contains("\"confidence\" : \"verified\""))
         XCTAssertTrue(text.contains("\"checkedAt\" : \"2026-09-16T05:20:00Z\""))
         XCTAssertTrue(text.contains("\"needsOwnerConfirmation\" : true"))
@@ -79,9 +80,9 @@ final class TransferFormat2Tests: XCTestCase {
         XCTAssertFalse(dump.needsOwnerConfirmation)
         XCTAssertEqual(dump.source, "Orange County landfill", "existing fields are untouched")
         XCTAssertEqual(try fresh.mainContext.fetch(FetchDescriptor<Project>())[0].priceCents, 75_000)
-        // The re-export is format 2 and reads back identically.
+        // The re-export is the current format and reads back identically.
         let data = try Transfer.exportJSON(from: fresh.mainContext, settings: AppSettings(), exportedAt: stamp)
-        XCTAssertTrue(String(data: data, encoding: .utf8)!.contains("\"formatVersion\" : 2"))
+        XCTAssertTrue(String(data: data, encoding: .utf8)!.contains("\"formatVersion\" : 3"))
         let third = try Store.inMemoryContainer()
         try Transfer.importJSON(data, into: third.mainContext)
         XCTAssertEqual(try third.mainContext.fetch(FetchDescriptor<BucketItem>())[0].confidence, .missing)
@@ -89,15 +90,15 @@ final class TransferFormat2Tests: XCTestCase {
 
     func testNewerFormatsAreRefusedWithARangeMessage() throws {
         let newer = """
-        {"formatVersion": 3, "exportedAt": "2026-01-01T00:00:00Z", \(Self.format1Settings), "items": [], "projects": []}
+        {"formatVersion": 4, "exportedAt": "2026-01-01T00:00:00Z", \(Self.format1Settings), "items": [], "projects": []}
         """
         XCTAssertThrowsError(try Transfer.importJSON(Data(newer.utf8), into: context)) { error in
-            XCTAssertEqual(error as? TransferError, .unsupportedFormat(3))
-            XCTAssertEqual(error.localizedDescription, "This file is Buckets format 3; this app reads formats 1 to 2.")
+            XCTAssertEqual(error as? TransferError, .unsupportedFormat(4))
+            XCTAssertEqual(error.localizedDescription, "This file is Buckets format 4; this app reads formats 1 to 3.")
         }
         XCTAssertThrowsError(try Transfer.mergeItems(Data(newer.utf8), into: context))
         XCTAssertEqual(try StoreFixture.items(in: context).count, 25, "a refused file changes nothing")
-        XCTAssertEqual(TransferDocument.readableFormatVersions, 1...2)
+        XCTAssertEqual(TransferDocument.readableFormatVersions, 1...3)
     }
 
     func testMergeCarriesReviewFieldsButNeverVouchesForARow() throws {

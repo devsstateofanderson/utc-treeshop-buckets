@@ -6,8 +6,11 @@ import SwiftData
 struct TransferDocument: Codable, Equatable {
     /// Format 2 (v0.2.0, DECISIONS 74) adds the review fields and the company's service area. Format 1 files
     /// (v1.0–1.1) read as format 2 with those fields empty; a v1.1 app refuses a format 2 file rather than drop them.
-    static let currentFormatVersion = 2
-    static let readableFormatVersions = 1...2
+    /// Format 3 (v0.2.4, DECISIONS 95) adds the sales allowance, the payroll tax on commission, track-only rows, the
+    /// commission % on a row and the sale terms on a project. Formats 1 and 2 read with those fields empty and the
+    /// defaults; a 0.2.3 app refuses a format 3 file, because dropping `salesAllowancePct` would price lower.
+    static let currentFormatVersion = 3
+    static let readableFormatVersions = 1...3
 
     struct Item: Codable, Equatable {
         var bucket: Bucket
@@ -37,6 +40,10 @@ struct TransferDocument: Codable, Equatable {
         var approvedBy: String?
         var assumption: String?
         var needsOwnerConfirmation: Bool?
+        /// Format 3 (DECISIONS 83, 95): written only when true; a merge sets it and never clears it.
+        var trackOnly: Bool?
+        /// Format 3 (DECISIONS 94): the row's commission %, whole percent.
+        var commissionPct: Decimal?
     }
 
     struct CompanyRecord: Codable, Equatable {
@@ -122,6 +129,15 @@ struct TransferDocument: Codable, Equatable {
         var isTemplate: Bool?
         var crewName: String?
         var targetMarginPct: Decimal?
+        /// Format 3 (DECISIONS 92): the allowance and payroll-tax snapshots beside the target margin.
+        var salesAllowancePct: Decimal?
+        var commissionBurdenPct: Decimal?
+        /// Format 3 (DECISIONS 94): Sold by, as a position in `items`, with the name and % snapshots and the override.
+        /// Packages never carry them.
+        var salespersonIndex: Int?
+        var salespersonName: String?
+        var commissionPct: Decimal?
+        var commissionPctOverride: Decimal?
     }
 
     struct SettingsRecord: Codable, Equatable {
@@ -132,6 +148,9 @@ struct TransferDocument: Codable, Equatable {
         var minimumJobCents: Int
         var costOfMoneyPct: Double
         var targetMarginPct: Double?
+        /// Format 3 (DECISIONS 92, 95): always written, as every setting is (76); absent in older files → the defaults.
+        var salesAllowancePct: Double?
+        var commissionBurdenPct: Double?
     }
 
     var formatVersion: Int
@@ -224,7 +243,8 @@ enum Transfer {
             settings: .init(billableHoursPerYear: settings.billableHoursPerYear, laborBurdenPct: settings.laborBurdenPct,
                             markupPct: NSDecimalNumber(decimal: Project.rounded2(settings.pricingRule.markupPercent)).doubleValue,
                             minimumJobCents: settings.minimumJobCents, costOfMoneyPct: settings.costOfMoneyPct,
-                            targetMarginPct: settings.targetMarginPct),
+                            targetMarginPct: settings.targetMarginPct, salesAllowancePct: settings.salesAllowancePct,
+                            commissionBurdenPct: settings.commissionBurdenPct),
             items: items.map { i in
                 .init(bucket: i.bucket, name: i.name, rateCents: i.rateCents, unit: i.unit, isActive: i.isActive,
                       source: i.source, notes: i.notes, calcInputs: i.calcInputs.flatMap(JSONValue.from), sortOrder: i.sortOrder,
@@ -232,7 +252,8 @@ enum Transfer {
                       unitCode: i.unitCode, make: i.make, model: i.model, year: i.year, serial: i.serial,
                       evidence: i.evidence, checkedAt: i.checkedAt, reviewDueAt: i.reviewDueAt,
                       confidence: i.confidence == .missing ? nil : i.confidence, approvedBy: i.approvedBy, assumption: i.assumption,
-                      needsOwnerConfirmation: i.needsOwnerConfirmation ? true : nil)
+                      needsOwnerConfirmation: i.needsOwnerConfirmation ? true : nil,
+                      trackOnly: i.trackOnly ? true : nil, commissionPct: i.commissionPct)
             },
             projects: projects.map { p in
                 .init(name: p.name, client: p.client, date: p.date, hours: p.hours, multiplier: p.multiplier,
@@ -240,7 +261,12 @@ enum Transfer {
                       lines: p.sortedLines.map { l in
                           .init(itemIndex: l.item.flatMap { index[$0.persistentModelID] }, bucket: l.bucket, name: l.name,
                                 unit: l.unit, rateCents: l.rateCents, isOn: l.isOn, qty: l.qty, actualQty: l.actualQty)
-                      }, isTemplate: p.isTemplate, crewName: p.crewName, targetMarginPct: p.targetMarginPct)
+                      }, isTemplate: p.isTemplate, crewName: p.crewName, targetMarginPct: p.targetMarginPct,
+                      salesAllowancePct: p.salesAllowancePct, commissionBurdenPct: p.commissionBurdenPct,
+                      salespersonIndex: p.isTemplate ? nil : p.salesperson.flatMap { index[$0.persistentModelID] },
+                      salespersonName: p.isTemplate ? nil : p.salespersonName,
+                      commissionPct: p.isTemplate ? nil : p.commissionPct,
+                      commissionPctOverride: p.isTemplate ? nil : p.commissionPctOverride)
             },
             subcontractors: subs.map { s in
                 .init(name: s.name, contact: s.contact, phone: s.phone, email: s.email, notes: s.notes, isActive: s.isActive, sortOrder: s.sortOrder)
@@ -285,6 +311,9 @@ enum Transfer {
         for l in doc.loadouts ?? [] {
             for m in l.memberIndexes where !(0..<doc.items.count).contains(m) { throw TransferError.badItemIndex(m) }
         }
+        for p in doc.projects {
+            if let i = p.salespersonIndex, !(0..<doc.items.count).contains(i) { throw TransferError.badItemIndex(i) }
+        }
         // Per-object deletes: a batch delete cannot honor the nullify inverse on ProjectLine.item.
         for loadout in try context.fetch(FetchDescriptor<Loadout>()) { context.delete(loadout) }
         for project in try context.fetch(FetchDescriptor<Project>()) { context.delete(project) }
@@ -328,6 +357,8 @@ enum Transfer {
             items[i].unitCode = record.unitCode; items[i].make = record.make; items[i].model = record.model
             items[i].year = record.year; items[i].serial = record.serial
             items[i].applyReview(from: record)
+            items[i].trackOnly = record.trackOnly ?? false
+            items[i].commissionPct = record.commissionPct
         }
         for l in doc.loadouts ?? [] {
             let loadout = Loadout(name: l.name, notes: l.notes, sortOrder: l.sortOrder)
@@ -341,7 +372,15 @@ enum Transfer {
             project.isTemplate = p.isTemplate ?? false
             project.crewName = p.crewName
             project.targetMarginPct = p.targetMarginPct
+            project.salesAllowancePct = p.salesAllowancePct
+            project.commissionBurdenPct = p.commissionBurdenPct
             context.insert(project)
+            if !project.isTemplate {
+                project.salesperson = p.salespersonIndex.map { items[$0] }
+                project.salespersonName = p.salespersonName
+                project.commissionPct = p.commissionPct
+                project.commissionPctOverride = p.commissionPctOverride
+            }
             project.lines = p.lines.map { l in
                 ProjectLine(item: l.itemIndex.map { items[$0] }, bucket: l.bucket, name: l.name, unit: l.unit,
                             rateCents: l.rateCents, isOn: l.isOn, qty: l.qty, actualQty: l.actualQty)
@@ -355,7 +394,9 @@ enum Transfer {
             ?? s.markupPct.map { $0 / (100 + $0) * 100 }
             ?? AppSettings.defaults.targetMarginPct
         return AppSettings(billableHoursPerYear: s.billableHoursPerYear, laborBurdenPct: s.laborBurdenPct,
-                        targetMarginPct: margin, minimumJobCents: s.minimumJobCents, costOfMoneyPct: s.costOfMoneyPct)
+                           targetMarginPct: margin, minimumJobCents: s.minimumJobCents, costOfMoneyPct: s.costOfMoneyPct,
+                           salesAllowancePct: s.salesAllowancePct ?? AppSettings.defaults.salesAllowancePct,
+                           commissionBurdenPct: s.commissionBurdenPct ?? AppSettings.defaults.commissionBurdenPct)
     }
 
     // MARK: - Add rows (merge)
@@ -387,8 +428,10 @@ enum Transfer {
     /// that are not in the file are untouched, and the file's settings and ordinary projects are ignored. This is
     /// how a researched catalog both joins and corrects rows the owner typed from memory. The file's packages
     /// (projects with `isTemplate`) are merged by name (DECISIONS 89); `settings` prices a new package whose file
-    /// entry carries no target margin. The one deletion: a subcontractor record marked `remove` deletes the store's
-    /// sub of that name when none of its services is on a project, and archives it otherwise (DECISIONS 91).
+    /// entry carries no target margin, and the allowance and its payroll tax of a new package whose file entry lacks
+    /// them (DECISIONS 92). A row's `trackOnly` is set by a file and never cleared (DECISIONS 83, 95). The one deletion:
+    /// a subcontractor record marked `remove` deletes the store's sub of that name when none of its services is on a
+    /// project, and archives it otherwise (DECISIONS 91).
     @MainActor
     static func mergeItems(_ data: Data, into context: ModelContext,
                            settings: AppSettings = AppSettings.current()) throws -> MergeResult {
@@ -502,6 +545,7 @@ enum Transfer {
                     && match.unitCode == (i.unitCode ?? match.unitCode) && match.make == (i.make ?? match.make)
                     && match.model == (i.model ?? match.model) && match.year == (i.year ?? match.year) && match.serial == (i.serial ?? match.serial)
                     && match.reviewMatches(i)
+                    && (i.trackOnly != true || match.trackOnly) && match.commissionPct == (i.commissionPct ?? match.commissionPct)
                 if same { result.unchanged += 1; continue }
                 match.rateCents = i.rateCents
                 match.unit = unit
@@ -516,6 +560,9 @@ enum Transfer {
                 if let v = i.year { match.year = v }
                 if let v = i.serial { match.serial = v }
                 match.applyReview(from: i)
+                // A file may make a row track-only; it never clears the flag (DECISIONS 83, 95), as it never un-archives.
+                if i.trackOnly == true { match.trackOnly = true }
+                if let v = i.commissionPct { match.commissionPct = v }
                 result.updated += 1
                 continue
             }
@@ -527,6 +574,8 @@ enum Transfer {
             item.subcontractor = sub
             item.unitCode = i.unitCode; item.make = i.make; item.model = i.model; item.year = i.year; item.serial = i.serial
             item.applyReview(from: i)
+            item.trackOnly = i.trackOnly ?? false
+            item.commissionPct = i.commissionPct
             context.insert(item)
             existing.append(item)
             merged.append(item)
@@ -572,6 +621,9 @@ enum Transfer {
                 match.minimumJobCents = p.minimumJobCents
                 match.markupPct = p.markupPct
                 if let v = p.targetMarginPct { match.targetMarginPct = v }
+                // The allowance and its payroll tax follow the margin's rule (DECISIONS 89, 92): nil leaves the store's.
+                if let v = p.salesAllowancePct { match.salesAllowancePct = v }
+                if let v = p.commissionBurdenPct { match.commissionBurdenPct = v }
                 result.packagesUpdated += 1
             } else {
                 package = Project(name: p.name, client: p.client, date: p.date, markupPct: p.markupPct,
@@ -580,11 +632,17 @@ enum Transfer {
                 package.crewName = p.crewName
                 if let v = p.targetMarginPct {
                     package.targetMarginPct = v
+                    package.salesAllowancePct = settings.salesAllowancePctDecimal
+                    package.commissionBurdenPct = settings.commissionBurdenPctDecimal
                 } else {
                     // A file without a margin predates margins: price from the company defaults, as a new project
                     // does (DECISIONS 70), rather than from the legacy markup rule.
                     package.setPricing(from: settings)
                 }
+                // The file's allowance and payroll tax when present, the company's on create (DECISIONS 89, 92), so a
+                // package merged in later still prices with the allowance.
+                if let v = p.salesAllowancePct { package.salesAllowancePct = v }
+                if let v = p.commissionBurdenPct { package.commissionBurdenPct = v }
                 context.insert(package)
                 packages.append(package)
                 result.packages += 1

@@ -34,6 +34,13 @@ final class FixtureStoreWriter: XCTestCase {
         removal.actualHours = 10
         removal.line("Dump fee").actualQty = 3
         removal.setPricing(from: AppSettings())   // priced at the company's 50% target margin (DECISIONS 70)
+        // A salaried salesperson, not on the crew, who sold the removal at 7% (DECISIONS 83, 94). Synthetic.
+        let sales = BucketItem(bucket: .labor, name: "Sam Rivera", rateCents: 4000,
+                               sortOrder: BucketItem.nextSortOrder(in: .labor, context: context))
+        sales.trackOnly = true
+        sales.commissionPct = 7
+        context.insert(sales)
+        removal.setSalesperson(sales)
 
         let palms = Project.make(name: "Palm install", date: Date(timeIntervalSince1970: 1_757_900_000),
                                  items: try StoreFixture.items(in: context), settings: AppSettings())

@@ -47,6 +47,15 @@ import SwiftData
     /// Inverse of `ProjectLine.item`. Declared so that deleting a row sets every referencing line's
     /// `item` to nil instead of leaving a dangling reference (DECISIONS 21); also the delete guard (22).
     @Relationship(deleteRule: .nullify, inverse: \ProjectLine.item) var lines: [ProjectLine] = []
+    /// A track-only row is not priced (DECISIONS 83): new projects, Re-price, loadouts and the loadout member picker
+    /// skip it; an existing project line for it keeps its snapshot (17). Labor calls it "Not on the crew" (a salaried
+    /// salesperson or office manager, whose pay is an Overhead line, DECISIONS 93); Equipment calls it "Track only".
+    var trackOnly: Bool = false
+    /// Whole percent of the base of the jobs this person sells (DECISIONS 94); Labor rows only in the Form; nil = none.
+    var commissionPct: Decimal?
+    /// Inverse of `Project.salesperson`, declared so deleting a row nullifies the projects' link and keeps their name
+    /// snapshot (DECISIONS 21, 94); also part of the delete guard (22).
+    @Relationship(deleteRule: .nullify, inverse: \Project.salesperson) var soldProjects: [Project] = []
 
     init(bucket: Bucket, name: String, rateCents: Int = 0, unit: String? = nil, isActive: Bool = true,
          source: String? = nil, notes: String? = nil, category: String? = nil, link: String? = nil,
@@ -141,6 +150,25 @@ extension BucketItem {
 
     /// Lines in any project that still point at this row. Delete is allowed only when this is 0 (DECISIONS 22).
     var referenceCount: Int { lines.count }
+
+    /// Projects this person is named on as Sold by (DECISIONS 94).
+    var soldCount: Int { soldProjects.count }
+
+    /// Delete only when no project line points at the row and no project names it as Sold by (DECISIONS 22, 94);
+    /// otherwise archive.
+    var canDelete: Bool { referenceCount == 0 && soldProjects.isEmpty }
+
+    /// "Used in 3 projects · sold 2" (DECISIONS 94): the sold count is added only when there is one.
+    var usagePhrase: String {
+        let used = "used in \(referenceCount == 1 ? "1 project" : "\(referenceCount) projects")"
+        return soldCount > 0 ? "\(used) · sold \(soldCount)" : used
+    }
+
+    /// The row's commission % as display text, "7%" (nil when it has none).
+    var commissionText: String? {
+        guard let pct = commissionPct else { return nil }
+        return pct.formatted(.number.precision(.fractionLength(0...2)).locale(Locale(identifier: "en_US"))) + "%"
+    }
 
     /// Next `sortOrder` for a new row in `bucket` (DECISIONS 28).
     @MainActor

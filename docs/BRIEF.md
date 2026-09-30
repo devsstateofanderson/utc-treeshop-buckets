@@ -28,6 +28,12 @@ Profit   = Price − Cost
 Margin   = Profit ÷ Price          (display only)
 ```
 
+Amended (DECISIONS 70, 92): the input is the company's target margin, after an optional sales allowance for commission and the employer payroll tax on it, in one division:
+
+```
+Price = max( MinimumJob , Cost × 10000 × Multiplier ÷ (10000 − 100·Margin − Allowance·(100 + CommissionTax)) )
+```
+
 Settings (set once):
 
 | Setting | Default | Rule |
@@ -66,6 +72,8 @@ Marcus: $30 × 1.30 × 2,080 ÷ 1,500 = $54.08/hr
 ```
 
 The row stores `$54.08`. A "Calculate…" sheet on the row does the math from wage / paid hours (default 2,080) / burden (default from Settings). Day-to-day nobody sees the math.
+
+Salaried staff who are not on the crew (sales, office) are Overhead lines; their Labor row is marked not on the crew and is never priced (DECISIONS 83, 93).
 
 Tree-service workers comp (FL class 0106) is heavy — burden of 25–45% is normal. Read the real number off the Southern Personnel Leasing invoice once.
 
@@ -231,7 +239,7 @@ Enter actual hours → read variance.
 ## 5. Mac app spec
 
 ### 5.1 Scope fence — what killed OO, and is not in this app
-No compliance, insurance, credentials, verification queue, flags. No positions, ladders, pay bands. No vendors, subcontractor dossiers. No loadouts or inheritance. No maintenance profiles. No expense ledger, assets, loans. No Jobber / QuickBooks / Slack, no Connections screen. No import prompts, no activity log. No lookup editors. No price-history tables. No sample data ever.
+No compliance, insurance, credentials, verification queue, flags. No positions, ladders, pay bands. No CRM, no pipeline stages, no pixels, no email, no payroll (DECISIONS 92–95: Buckets prices commission and shows it; it pays nobody). No vendors, subcontractor dossiers. No loadouts or inheritance. No maintenance profiles. No expense ledger, assets, loans. No Jobber / QuickBooks / Slack, no Connections screen. No import prompts, no activity log. No lookup editors. No price-history tables. No sample data ever.
 
 OO: 28K lines, 228 files, 75 tables, 27 screens, production DB never created. Target: ~2,000 lines, 3 models, 4 screens.
 

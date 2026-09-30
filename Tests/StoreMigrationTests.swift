@@ -300,3 +300,328 @@ final class StoreMigrationTests: XCTestCase {
         XCTAssertEqual(try again.mainContext.fetch(FetchDescriptor<Project>()).map(\.priceCents).sorted(), [318_720, 370_592], "prices untouched")
     }
 }
+
+/// The 0.2.3 schema (build 5), declared here for the same reason as `BucketsSchemaV11`: a store written with it is
+/// what a customer Mac holds before 0.2.4. Only the attributes 0.2.4 added are absent: `BucketItem.trackOnly`,
+/// `commissionPct` and `soldProjects`; `Project.salesAllowancePct`, `commissionBurdenPct`, `salesperson`,
+/// `salespersonName`, `commissionPct` and `commissionPctOverride` (DECISIONS 92–95).
+enum BucketsSchemaV023: VersionedSchema {
+    static let versionIdentifier = Schema.Version(0, 2, 3)
+    static var models: [any PersistentModel.Type] {
+        [BucketItem.self, Project.self, ProjectLine.self, Subcontractor.self, Loadout.self, Company.self, CompanyDocument.self]
+    }
+
+    @Model final class BucketItem {
+        var bucket: Bucket
+        var name: String
+        var rateCents: Int
+        var unit: String
+        var isActive: Bool
+        var source: String?
+        var notes: String?
+        var calcInputs: Data?
+        var sortOrder: Int
+        var category: String?
+        var link: String?
+        var subcontractor: Subcontractor?
+        var loadouts: [Loadout] = []
+        var unitCode: String?
+        var make: String?
+        var model: String?
+        var year: Int?
+        var serial: String?
+        var evidence: String?
+        var checkedAt: Date?
+        var reviewDueAt: Date?
+        var confidenceRaw: String?
+        var approvedBy: String?
+        var assumption: String?
+        var needsOwnerConfirmation: Bool = false
+        @Relationship(deleteRule: .nullify, inverse: \ProjectLine.item) var lines: [ProjectLine] = []
+
+        init(bucket: Bucket, name: String, rateCents: Int, unit: String, sortOrder: Int) {
+            self.bucket = bucket
+            self.name = name
+            self.rateCents = rateCents
+            self.unit = unit
+            self.isActive = true
+            self.sortOrder = sortOrder
+        }
+    }
+
+    @Model final class Project {
+        var name: String
+        var client: String?
+        var date: Date
+        var hours: Decimal
+        var multiplier: Int
+        var markupPct: Decimal
+        var targetMarginPct: Decimal?
+        var minimumJobCents: Int
+        var actualHours: Decimal?
+        var notes: String?
+        var isTemplate: Bool = false
+        var crewName: String?
+        @Relationship(deleteRule: .cascade) var lines: [ProjectLine] = []
+
+        init(name: String, date: Date, hours: Decimal, markupPct: Decimal, targetMarginPct: Decimal?, minimumJobCents: Int) {
+            self.name = name
+            self.date = date
+            self.hours = hours
+            self.multiplier = 1
+            self.markupPct = markupPct
+            self.targetMarginPct = targetMarginPct
+            self.minimumJobCents = minimumJobCents
+        }
+    }
+
+    @Model final class ProjectLine {
+        var item: BucketItem?
+        var bucket: Bucket
+        var name: String
+        var unit: String
+        var rateCents: Int
+        var isOn: Bool
+        var qty: Decimal
+        var actualQty: Decimal?
+
+        init(item: BucketItem, isOn: Bool, qty: Decimal = 1) {
+            self.item = item
+            self.bucket = item.bucket
+            self.name = item.name
+            self.unit = item.unit
+            self.rateCents = item.rateCents
+            self.isOn = isOn
+            self.qty = qty
+        }
+    }
+
+    @Model final class Subcontractor {
+        var name: String
+        var contact: String?
+        var phone: String?
+        var email: String?
+        var notes: String?
+        var isActive: Bool
+        var sortOrder: Int
+        @Relationship(deleteRule: .cascade, inverse: \BucketItem.subcontractor) var services: [BucketItem] = []
+
+        init(name: String, sortOrder: Int) {
+            self.name = name
+            self.isActive = true
+            self.sortOrder = sortOrder
+        }
+    }
+
+    @Model final class Loadout {
+        var name: String
+        var notes: String?
+        var sortOrder: Int
+        @Relationship(inverse: \BucketItem.loadouts) var members: [BucketItem] = []
+
+        init(name: String, sortOrder: Int) {
+            self.name = name
+            self.sortOrder = sortOrder
+        }
+    }
+
+    @Model final class Company {
+        var name: String
+        var dba: String?
+        var owner: String?
+        var address: String?
+        var phone: String?
+        var email: String?
+        var website: String?
+        var ein: String?
+        var licenses: String?
+        var glCarrier: String?
+        var glPolicy: String?
+        var glExpires: Date?
+        var autoCarrier: String?
+        var autoPolicy: String?
+        var autoExpires: Date?
+        var wcCarrier: String?
+        var wcPolicy: String?
+        var wcExpires: Date?
+        var notes: String?
+        var serviceArea: String?
+        var serviceRadiusMiles: Int?
+        var growingZone: String?
+        @Relationship(deleteRule: .cascade, inverse: \CompanyDocument.company) var documents: [CompanyDocument] = []
+
+        init(name: String) { self.name = name }
+    }
+
+    @Model final class CompanyDocument {
+        var title: String
+        var category: String
+        var fileName: String
+        var originalName: String
+        var addedAt: Date
+        var expiresAt: Date?
+        var notes: String?
+        var company: Company?
+
+        init(title: String, category: String, fileName: String, originalName: String, addedAt: Date) {
+            self.title = title
+            self.category = category
+            self.fileName = fileName
+            self.originalName = originalName
+            self.addedAt = addedAt
+        }
+    }
+}
+
+/// A store written by the 0.2.3 schema opens under 0.2.4 with every price unchanged and the sales fields empty
+/// (DECISIONS 92–95). Its shape follows the customer store: nine priced packages at the 50% target margin, each with
+/// the salesperson's labor line off and the sales salary overhead line on; an empty "New package" and a legacy markup
+/// "New project" that predate both rows. Synthetic rows and figures (the §3.3 rows plus a "Sales lead" at 4,200¢/h and
+/// a $48,000 "Sales salary" line).
+@MainActor
+final class StoreMigrationV023Tests: XCTestCase {
+    private var url: URL!
+    /// Each project's price as the 0.2.3 rule computed it when the store was written.
+    private var pinned: [String: Int] = [:]
+
+    override func setUp() async throws {
+        let dir = FileManager.default.temporaryDirectory.appending(path: "BucketsMigration023-\(UUID().uuidString)", directoryHint: .isDirectory)
+        try FileManager.default.createDirectory(at: dir, withIntermediateDirectories: true)
+        url = dir.appending(path: "Buckets.store")
+        pinned = try Self.writeV023Store(at: url)
+    }
+
+    override func tearDown() async throws {
+        try? FileManager.default.removeItem(at: url.deletingLastPathComponent())
+    }
+
+    static let packageShapes: [(name: String, hours: Decimal, skid: Bool, dump: Decimal, stumps: Decimal, multiplier: Int)] = [
+        ("Crown cleaning", 5, false, 0, 0, 1), ("Lot clearing", 10, true, 3, 0, 1), ("Palm trimming", 3, false, 1, 0, 1),
+        ("Storm cleanup", 10, true, 4, 0, 2), ("Stump grinding", 1, false, 0, 1, 1), ("Tree planting", 3, true, 0, 0, 1),
+        ("Removal large", 16, true, 4, 2, 1), ("Removal medium", 8, false, 2, 0, 1), ("Removal small", Decimal(string: "4.5")!, false, 1, 0, 1),
+    ]
+
+    /// Writes the store and returns each project's price under the 0.2.3 rule (the old signature, no allowance).
+    static func writeV023Store(at url: URL) throws -> [String: Int] {
+        typealias Item = BucketsSchemaV023.BucketItem
+        typealias Line = BucketsSchemaV023.ProjectLine
+        let container = try ModelContainer(for: Schema(versionedSchema: BucketsSchemaV023.self),
+                                           configurations: ModelConfiguration(url: url))
+        let context = container.mainContext
+        var ordered: [Item] = []
+        var order: [Bucket: Int] = [:]
+        func add(_ bucket: Bucket, _ name: String, _ rate: Int, unit: String? = nil) {
+            let item = Item(bucket: bucket, name: name, rateCents: rate, unit: unit ?? bucket.fixedUnit ?? "each", sortOrder: order[bucket, default: 0])
+            order[bucket, default: 0] += 1
+            context.insert(item)
+            ordered.append(item)
+        }
+        add(.labor, "Marcus", 5408); add(.labor, "David", 3966); add(.labor, "Miguel", 3065)
+        add(.equipment, "Bucket truck (50 ft)", 2372); add(.equipment, "Chip truck (F-550)", 2215)
+        add(.equipment, "Chipper (12\")", 1711); add(.equipment, "Chainsaws (3)", 750); add(.equipment, "Mini skid steer", 1603)
+        add(.overhead, "General liability", 600_000); add(.overhead, "Shop rent", 960_000); add(.overhead, "Website + marketing", 360_000)
+        add(.overhead, "Phones + internet", 240_000); add(.overhead, "Accounting + legal", 240_000); add(.overhead, "Software", 180_000)
+        add(.overhead, "Licenses + misc", 120_000)
+        add(.materials, "Queen palm, 10 gal", 8500, unit: "each"); add(.materials, "Mulch", 3200, unit: "yard")
+        add(.consumables, "Dump fee", 7500, unit: "load"); add(.consumables, "Stump grinding (sub)", 9000, unit: "stump")
+        let before = ordered   // the rows the two old projects were made from
+        add(.labor, "Sales lead", 4200)
+        add(.overhead, "Sales salary", 4_800_000)
+        let sub = BucketsSchemaV023.Subcontractor(name: "Grapple Co", sortOrder: 0)
+        context.insert(sub)
+
+        var pinned: [String: Int] = [:]
+        func lines(from rows: [Item], skid: Bool = false, dump: Decimal = 0, stumps: Decimal = 0) -> [Line] {
+            rows.map { row in
+                switch row.name {
+                case "Sales lead": return Line(item: row, isOn: false)
+                case "Mini skid steer": return Line(item: row, isOn: skid)
+                case "Dump fee": return Line(item: row, isOn: dump > 0, qty: dump > 0 ? dump : 1)
+                case "Stump grinding (sub)": return Line(item: row, isOn: stumps > 0, qty: stumps > 0 ? stumps : 1)
+                default: return Line(item: row, isOn: row.bucket.rowKind == .hourly)
+                }
+            }
+        }
+        func price(_ p: BucketsSchemaV023.Project) -> Int {
+            let rule: PriceRule = p.targetMarginPct.map { .targetMargin($0) } ?? .markup(p.markupPct / 100)
+            return Pricer.price(lines: p.lines.map { PriceLine(bucket: $0.bucket, rateCents: $0.rateCents, isOn: $0.isOn, qty: $0.qty) },
+                                hours: p.hours, multiplier: p.multiplier, rule: rule,
+                                minimumJobCents: p.minimumJobCents, billableHours: 1500).price
+        }
+        for (n, shape) in packageShapes.enumerated() {
+            let p = BucketsSchemaV023.Project(name: shape.name, date: Date(timeIntervalSince1970: 1_790_000_000 + Double(n)), hours: shape.hours,
+                                              markupPct: 100, targetMarginPct: 50, minimumJobCents: 75_000)
+            p.isTemplate = true
+            p.multiplier = shape.multiplier
+            p.crewName = "Standard crew"
+            context.insert(p)
+            p.lines = lines(from: ordered, skid: shape.skid, dump: shape.dump, stumps: shape.stumps)
+            pinned[shape.name] = price(p)
+        }
+        let empty = BucketsSchemaV023.Project(name: "New package", date: Date(timeIntervalSince1970: 1_789_000_000), hours: 0,
+                                              markupPct: 100, targetMarginPct: 50, minimumJobCents: 75_000)
+        empty.isTemplate = true
+        context.insert(empty)
+        empty.lines = lines(from: before)
+        pinned[empty.name] = price(empty)
+        let legacy = BucketsSchemaV023.Project(name: "New project", date: Date(timeIntervalSince1970: 1_758_000_000), hours: 8,
+                                               markupPct: 35, targetMarginPct: nil, minimumJobCents: 75_000)
+        context.insert(legacy)
+        legacy.lines = lines(from: before, dump: 2)
+        pinned[legacy.name] = price(legacy)
+        try context.save()
+        return pinned
+    }
+
+    func testV023StoreOpensWithEveryPriceUnchangedAndTheSalesFieldsEmpty() throws {
+        // Independent pins: the medium removal is the §3.3 job plus the $48,000 salary line, at the 50% target margin:
+        // overhead (2,700,000 + 4,800,000) × 8 ÷ 1,500 = 40,000; cost 99,512 + 56,384 + 15,000 + 40,000 = 210,896; ×2.
+        XCTAssertEqual(pinned["Removal medium"], 421_792)
+        XCTAssertEqual(pinned["New package"], 75_000, "0 h, nothing on: the floor")
+        XCTAssertEqual(pinned["New project"], 250_150, "the §3.3 job at its 35% snapshot markup")
+        XCTAssertEqual(pinned.count, 11)
+
+        let container = try Store.container(at: url)
+        let context = container.mainContext
+        let items = try context.fetch(FetchDescriptor<BucketItem>())
+        XCTAssertEqual(items.count, 21)
+        for item in items {
+            XCTAssertFalse(item.trackOnly, item.name)
+            XCTAssertNil(item.commissionPct, item.name)
+            XCTAssertTrue(item.soldProjects.isEmpty, item.name)
+        }
+        let projects = try context.fetch(FetchDescriptor<Project>())
+        XCTAssertEqual(projects.count, 11)
+        XCTAssertEqual(projects.filter(\.isTemplate).count, 10)
+        for project in projects {
+            let b = project.breakdown(billableHours: 1500)
+            XCTAssertEqual(b.price, pinned[project.name], project.name)
+            XCTAssertEqual(b.commission, 0, project.name)
+            XCTAssertEqual(b.profitAfterCommission, b.profit, project.name)
+            XCTAssertNil(project.commissionPct, project.name)
+            XCTAssertNil(project.commissionPctOverride, project.name)
+            XCTAssertNil(project.salesperson, project.name)
+            XCTAssertNil(project.salespersonName, project.name)
+            XCTAssertNil(project.salesAllowancePct, project.name)
+            XCTAssertNil(project.commissionBurdenPct, project.name)
+            XCTAssertEqual(project.effectiveCommissionPct, 0, project.name)
+            XCTAssertFalse(ProjectText.showsCommissionFigures(project), "the header is today's: \(project.name)")
+        }
+        XCTAssertEqual(Project.templatesUnderOlderAllowance(projects, settings: AppSettings()), 0, "no banner on install day")
+
+        // The rehearsal's last step: the salesperson's row marked not on the crew, then Re-price on the two projects
+        // that predate it appends no line for him, and every price stays.
+        let lead = items.first { $0.name == "Sales lead" }!
+        lead.trackOnly = true
+        lead.commissionPct = 7
+        try context.save()
+        for name in ["New package", "New project"] {
+            let project = projects.first { $0.name == name }!
+            XCTAssertEqual(project.lines.count, 19)
+            project.reprice(items: items, settings: AppSettings())
+            XCTAssertFalse(project.lines.contains { $0.name == "Sales lead" }, name)
+            XCTAssertTrue(project.lines.contains { $0.name == "Sales salary" }, "the salary line is appended, as any new overhead row is")
+        }
+        XCTAssertEqual(projects.first { $0.name == "Removal medium" }!.breakdown(billableHours: 1500).price, 421_792)
+    }
+}

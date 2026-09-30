@@ -170,6 +170,9 @@ final class AppState {
                               link: item.link, calcInputs: item.calcInputs,
                               sortOrder: BucketItem.nextSortOrder(in: item.bucket, context: context))
         copy.subcontractor = item.subcontractor
+        // A copy of a row not on the crew stays off the crew, with the same commission % (DECISIONS 83, 94).
+        copy.trackOnly = item.trackOnly
+        copy.commissionPct = item.commissionPct
         // Another unit of the same thing: same make/model/year, its own code, no serial yet (DECISIONS 66).
         copy.make = item.make; copy.model = item.model; copy.year = item.year; copy.serial = nil
         if item.bucket == .equipment {
@@ -183,9 +186,10 @@ final class AppState {
         selectedItem = copy.persistentModelID
     }
 
-    /// Delete only when no project references the row; otherwise the caller archives (DECISIONS 22).
+    /// Delete only when no project line references the row and no project names it as Sold by; otherwise the caller
+    /// archives (DECISIONS 22, 94).
     func delete(_ item: BucketItem) {
-        guard item.referenceCount == 0 else { return }
+        guard item.canDelete else { return }
         if selectedItem == item.persistentModelID { selectedItem = nil }
         context.delete(item)
         save()

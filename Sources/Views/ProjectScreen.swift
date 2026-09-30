@@ -31,6 +31,7 @@ private struct ProjectEditor: View {
     @Environment(AppState.self) private var appState
     @Environment(\.modelContext) private var modelContext
     @Query(sort: [SortDescriptor(\Loadout.sortOrder), SortDescriptor(\Loadout.name)]) private var loadouts: [Loadout]
+    @Query private var allItems: [BucketItem]
     @AppStorage(AppSettings.Key.billableHoursPerYear) private var billableHoursPerYear = AppSettings.defaults.billableHoursPerYear
     /// Sections start open; collapsing is per project (the editor is re-created per selection).
     @State private var collapsed: Set<Bucket> = []
@@ -44,10 +45,14 @@ private struct ProjectEditor: View {
         let breakdown = project.breakdown(billableHours: billableHours)
         let unresolved = project.unresolvedEnabledLines()
         VStack(spacing: 0) {
-            ProjectHeader(project: project, breakdown: breakdown, loadouts: loadouts, unresolvedCount: unresolved.count) { loadout in
+            ProjectHeader(project: project, breakdown: breakdown, loadouts: loadouts, laborRows: allItems.rows(in: .labor),
+                          unresolvedCount: unresolved.count, applyLoadout: { loadout in
                 project.apply(loadout)
                 save()
-            }
+            }, setSalesperson: { row in
+                project.setSalesperson(row)
+                save()
+            })
             Divider()
             Form {
                 ForEach(Bucket.allCases, id: \.self) { bucket in
@@ -123,6 +128,7 @@ private struct ProjectEditor: View {
         .onChange(of: project.hours) { _, _ in save() }
         .onChange(of: project.multiplier) { _, _ in save() }
         .onChange(of: project.notes) { _, _ in save() }
+        .onChange(of: project.commissionPctOverride) { _, _ in save() }
     }
 
     /// Re-price · Copy price · Copy breakdown (BRIEF §5.5; DECISIONS 18, 41).
@@ -149,7 +155,7 @@ private struct ProjectEditor: View {
             Label("Copy breakdown", systemImage: "list.bullet.clipboard")
         }
         .labelStyle(.titleAndIcon)
-        .help("Copy the bucket subtotals, cost, margin, price and profit — internal, no rows")
+        .help("Copy the bucket subtotals, cost, margin, price, commission and profit — internal, no rows, no names")
     }
 
     /// Category groups inside a bucket section, collapsed until opened (DECISIONS 69).
@@ -187,9 +193,12 @@ private struct ProjectHeader: View {
     @Bindable var project: Project
     let breakdown: Breakdown
     let loadouts: [Loadout]
+    /// Every Labor row in table order, for the Sold by menu (DECISIONS 94).
+    let laborRows: [BucketItem]
     /// Enabled lines whose row is unresolved (DECISIONS 72): shown as a caption, never priced differently.
     let unresolvedCount: Int
     let applyLoadout: (Loadout) -> Void
+    let setSalesperson: (BucketItem?) -> Void
 
     var body: some View {
         VStack(alignment: .leading, spacing: 12) {
@@ -208,12 +217,14 @@ private struct ProjectHeader: View {
                     hoursField
                     multiplierPicker
                     crewMenu
+                    soldBy
                     Spacer(minLength: 0)
                 }
                 VStack(alignment: .leading, spacing: 8) {
                     hoursField
                     multiplierPicker
                     crewMenu
+                    soldBy
                 }
             }
 
@@ -227,7 +238,7 @@ private struct ProjectHeader: View {
 
             HStack(alignment: .top, spacing: 8) {
                 figure("Cost", Money.format(breakdown.cost))
-                figure(project.targetMarginPct == nil ? "Markup" : "Target margin", ProjectText.pricingString(project))
+                figure(project.targetMarginPct == nil ? "Markup" : "Target margin", ProjectText.pricingFigure(project))
                 VStack(alignment: .leading, spacing: 2) {
                     Text("Price").font(.caption).foregroundStyle(.secondary)
                     Text(Money.format(breakdown.price)).font(.largeTitle).bold().monospacedDigit()
@@ -236,7 +247,17 @@ private struct ProjectHeader: View {
                 }
                 .layoutPriority(1)
                 .frame(maxWidth: .infinity, alignment: .leading)
-                figure("Profit", Money.format(breakdown.profit), caption: "\(percentString(breakdown.marginPct)) margin")
+                if ProjectText.showsCommissionFigures(project) {
+                    // DECISIONS 92: margin in the header means after commission; the gross profit is the caption.
+                    if let commission = ProjectText.commissionFigure(project, breakdown) {
+                        figure("Commission", commission.value, caption: commission.caption)
+                    }
+                    let caption = ProjectText.profitCaption(project, breakdown)
+                    figure("Profit", Money.format(breakdown.profitAfterCommission), caption: caption.text,
+                           captionStyle: caption.isWarning ? AnyShapeStyle(.orange) : AnyShapeStyle(.secondary))
+                } else {
+                    figure("Profit", Money.format(breakdown.profit), caption: "\(percentString(breakdown.marginPct)) margin")
+                }
             }
 
             if unresolvedCount > 0 {
@@ -265,6 +286,39 @@ private struct ProjectHeader: View {
         }
     }
 
+    /// Sold by (DECISIONS 94): who sold the job and the commission it pays. Shown once any Labor row carries a
+    /// commission % or the project names someone; never on a package. The % field beside it is the negotiated
+    /// override, disabled until a salesperson is picked.
+    @ViewBuilder private var soldBy: some View {
+        if ProjectText.showsSoldBy(project, laborRows: laborRows) {
+            HStack(spacing: 6) {
+                Menu {
+                    Button("None") { setSalesperson(nil) }
+                    Divider()
+                    ForEach(laborRows.filter(\.isActive)) { row in
+                        Button(ProjectText.salespersonTitle(row)) { setSalesperson(row) }
+                    }
+                } label: {
+                    Label(ProjectText.soldByTitle(project), systemImage: "person.crop.circle.badge.checkmark")
+                }
+                .fixedSize()
+                .help("Who sold this job; their commission % is copied onto the project")
+                OptionalDecimalField(label: "Commission %", value: $project.commissionPctOverride,
+                                     placeholder: project.commissionPct.map { DecimalField.string($0) } ?? "")
+                    .labelsHidden()
+                    .textFieldStyle(.roundedBorder)
+                    .frame(width: 52)
+                    .disabled(!ProjectText.overrideIsEnabled(project))
+                    .help("Commission % negotiated for this job; empty uses the person's rate")
+                    .accessibilityIdentifier("commissionOverride")
+                Text("%").foregroundStyle(.secondary)
+                if let caption = ProjectText.personRateCaption(project) {
+                    Text(caption).font(.caption).foregroundStyle(.secondary).fixedSize()
+                }
+            }
+        }
+    }
+
     private var hoursField: some View {
         HStack(spacing: 6) {
             Text("Hours").fixedSize()
@@ -285,11 +339,12 @@ private struct ProjectHeader: View {
         .fixedSize()
     }
 
-    private func figure(_ title: String, _ value: String, caption: String? = nil) -> some View {
+    private func figure(_ title: String, _ value: String, caption: String? = nil,
+                        captionStyle: AnyShapeStyle = AnyShapeStyle(.secondary)) -> some View {
         VStack(alignment: .leading, spacing: 2) {
             Text(title).font(.caption).foregroundStyle(.secondary)
             Text(value).monospacedDigit()
-            if let caption { Text(caption).font(.caption).foregroundStyle(.secondary) }
+            if let caption { Text(caption).font(.caption).foregroundStyle(captionStyle) }
         }
         .frame(maxWidth: .infinity, alignment: .leading)
     }
@@ -414,7 +469,9 @@ enum ProjectText {
     }
 
     /// Internal: one line each — name, date, hours, multiplier, the five subtotals, Cost, Markup %, Price,
-    /// Profit (margin). Never a row name, a rate, or a subcontractor (DECISIONS 41).
+    /// Profit (margin). Never a row name, a rate, or a subcontractor (DECISIONS 41). With an allowance or a commission
+    /// (DECISIONS 92): after Price, the allowance, the commission and its payroll tax, and after Profit the profit
+    /// after commission. Never a person's name (DECISIONS 41, 88, 94).
     static func breakdown(_ project: Project, breakdown b: Breakdown) -> String {
         var lines = [
             project.displayName,
@@ -427,9 +484,102 @@ enum ProjectText {
             "Cost: \(Money.format(b.cost))",
             "\(project.targetMarginPct == nil ? "Markup" : "Target margin"): \(pricingString(project))",
             "Price: \(Money.format(b.price))",
-            "Profit: \(Money.format(b.profit)) (\(percentString(b.marginPct)) margin)",
         ]
+        let showsCommission = showsCommissionFigures(project)
+        if let allowance = allowanceLine(project) { lines.append(allowance) }
+        if b.commission > 0 {
+            lines.append("Commission: \(Money.format(b.commission)) (\(markupString(project.effectiveCommissionPct)))")
+            lines.append("Commission payroll tax: \(Money.format(b.commissionTax))")
+        }
+        lines.append("Profit: \(Money.format(b.profit)) (\(percentString(b.marginPct)) margin)")
+        if showsCommission {
+            lines.append("Profit after commission: \(Money.format(b.profitAfterCommission)) (\(percentString(b.marginAfterCommissionPct)) margin)")
+        }
         return lines.joined(separator: "\n")
+    }
+
+    // MARK: Commission (DECISIONS 92, 94)
+
+    /// The allowance the project prices with; 0 for a legacy markup project, which ignores it (DECISIONS 92).
+    static func allowancePct(_ project: Project) -> Decimal {
+        project.targetMarginPct == nil ? 0 : PriceRule.percent(project.salesAllowancePct ?? 0)
+    }
+
+    /// The header shows the commission figures when the project prices with an allowance or pays a commission;
+    /// otherwise it is exactly the header from before the allowance existed.
+    static func showsCommissionFigures(_ project: Project) -> Bool {
+        allowancePct(project) > 0 || project.effectiveCommissionPct > 0
+    }
+
+    /// "50%", or "50% · 7% allowance".
+    static func pricingFigure(_ project: Project) -> String {
+        let a = allowancePct(project)
+        return a > 0 ? "\(pricingString(project)) · \(markupString(a)) allowance" : pricingString(project)
+    }
+
+    /// "Sales allowance: 7% (+7.65% payroll tax)" for Copy breakdown; nil without an allowance.
+    static func allowanceLine(_ project: Project) -> String? {
+        let a = allowancePct(project)
+        guard a > 0 else { return nil }
+        return "Sales allowance: \(markupString(a)) (+\(markupString(PriceRule.percent(project.commissionBurdenPct ?? 0))) payroll tax)"
+    }
+
+    /// The Commission figure, "$366.04 · 7%" with "+ $28.00 payroll tax"; nil when no commission is paid.
+    static func commissionFigure(_ project: Project, _ b: Breakdown) -> (value: String, caption: String?)? {
+        guard b.commission > 0 else { return nil }
+        return (value: "\(Money.format(b.commission)) · \(markupString(project.effectiveCommissionPct))",
+                caption: b.commissionTax > 0 ? "+ \(Money.format(b.commissionTax)) payroll tax" : nil)
+    }
+
+    struct ProfitCaption: Equatable {
+        var text: String
+        /// Shown in `.orange`: below the target margin, or a loss after commission.
+        var isWarning: Bool
+    }
+
+    /// The Profit figure's caption when the header shows commission (DECISIONS 92):
+    /// "50.0% after commission · $3,008.65 before"; "42.5% after commission · below 50% target" (orange);
+    /// "loses $59.27 after commission" (orange); "57.5% margin · no commission" when none is paid.
+    static func profitCaption(_ project: Project, _ b: Breakdown) -> ProfitCaption {
+        if b.profitAfterCommission < 0 {
+            return ProfitCaption(text: "loses \(Money.format(-b.profitAfterCommission)) after commission", isWarning: true)
+        }
+        let margin = percentString(b.marginAfterCommissionPct)
+        if let target = project.targetMarginPct, Project.rounded1(b.marginAfterCommissionPct) < target {
+            return ProfitCaption(text: "\(margin) after commission · below \(markupString(target)) target", isWarning: true)
+        }
+        if b.commission + b.commissionTax == 0 {
+            return ProfitCaption(text: "\(margin) margin · no commission", isWarning: false)
+        }
+        return ProfitCaption(text: "\(margin) after commission · \(Money.format(b.profit)) before", isWarning: false)
+    }
+
+    /// Sold by is offered once any Labor row carries a commission % or the project already names someone; never on a
+    /// package (DECISIONS 94).
+    static func showsSoldBy(_ project: Project, laborRows: [BucketItem]) -> Bool {
+        !project.isTemplate && (project.hasSalesperson || laborRows.contains { $0.commissionPct != nil })
+    }
+
+    /// "Sold by" with nobody picked; "Sold by Sam Rivera"; "Sold by Sam Rivera (row deleted)" once the row is gone.
+    static func soldByTitle(_ project: Project) -> String {
+        guard project.hasSalesperson else { return "Sold by" }
+        let name = (project.salespersonName ?? "").isEmpty ? "Untitled" : project.salespersonName!
+        return project.salesperson == nil ? "Sold by \(name) (row deleted)" : "Sold by \(name)"
+    }
+
+    /// A Sold by menu entry: "Sam Rivera · 7%", or the name alone when the row has no %.
+    static func salespersonTitle(_ row: BucketItem) -> String {
+        let name = row.name.isEmpty ? "Untitled" : row.name
+        return row.commissionText.map { "\(name) · \($0)" } ?? name
+    }
+
+    /// The override is typed only once Sold by is set (DECISIONS 94).
+    static func overrideIsEnabled(_ project: Project) -> Bool { project.hasSalesperson }
+
+    /// "person's rate: 7%" beside the override when the override differs from the person's %; nil otherwise.
+    static func personRateCaption(_ project: Project) -> String? {
+        guard project.hasSalesperson, let override = project.commissionPctOverride, override != project.commissionPct else { return nil }
+        return "person's rate: \(project.commissionPct.map { markupString($0) } ?? "none")"
     }
 
     /// "50%" target margin, or the legacy "35%" markup (DECISIONS 70).
