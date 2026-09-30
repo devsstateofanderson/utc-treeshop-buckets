@@ -404,3 +404,18 @@ Append entries using this structure:
 - Not done here (vault side): data layer v5 (the salary overhead row's `calcInputs` through `tools/build_layer_v2.py`) and its rehearsal.
 - Next owner/action: Codex reviews slice 1b on `claude/sales-commission`. Then vault layers v4 and v5 and the rehearsal before any install.
 - Branch/commit: `claude/sales-commission`, cd6b36e (change) and this commit (log). No PR opened.
+
+## 2026-09-30 — Claude Code — Slice 1b review fixes (0.2.5, build 7)
+
+- Context read: the review of slice 1b (`cd6b36e`, `729e1ad`): one Medium, four Low.
+- Work completed (10f7892):
+  - (1, Medium, DECISIONS 88) The 0.2.3 entry above no longer names the Sales Manager or states his pay: the labor row and the overhead line are described by role only, with no figures. The $200/day figure in DECISIONS 93 and BRIEF §2.3 is now an unattributed example. The earlier text remains in pushed history; whether to rewrite it is Mr. Anderson's call, and it was not done on this branch.
+  - (2) BRIEF §5.3's `calcInputs` comment reads "Labor, Equipment or Overhead salary calculator inputs (DECISIONS 93)".
+  - (3) DECISIONS 34 gains "(amended by 93 for a salary line)".
+  - (4) `SalaryCalcTests.testTransferCarriesTheInputs` round-trips 4.5 days, 50.5 weeks and 7.65% through export/import, with the rate from `SalaryCalc.annualCents`.
+  - (5, note only) The Projects list builds each project's breakdown on every body evaluation; left as is at this client's scale.
+- Evidence/tests: `Scripts/test.sh`: 347 executed, 3 skipped (the same three), 0 failures. `Scripts/build.sh Release`: `build/Buckets.app`, 0.2.5 (7), codesign verified. No `.store` file tracked. Not installed; the live store and the vault were not touched.
+- Decisions: 34 annotated (pointer to 93 only).
+- Not done here: vault data layer v5 and its rehearsal.
+- Next owner/action: Codex re-reviews slice 1b on `claude/sales-commission`. Mr. Anderson decides whether to rewrite pushed history for the old 0.2.3 wording.
+- Branch/commit: `claude/sales-commission`, 10f7892 (fixes) and this commit (log). No PR opened.
