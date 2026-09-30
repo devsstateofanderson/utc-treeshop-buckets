@@ -261,3 +261,40 @@ Append entries using this structure:
   - Owner: open Projects → Packages and use one; enter the real wages.
   - Codex: review the PR for `claude/merge-packages` (stacked on PR #8).
 - Branch/commit: `claude/merge-packages`, this commit (log).
+
+## 2026-09-30 — Claude Code — Planning section reserved; merge can remove or archive a subcontractor (0.2.3, build 5)
+
+- Context read: Mr. Anderson's instructions, relayed through the workflow on 09-30. He wants a place for business planning and operating documents, marked under construction for now, which he will build with Fable 5.1. He also wants a merge file to be able to take out a subcontractor. Also read `AGENTS.md`, `CLAUDE.md`, `docs/REPOSITORY-WORKFLOW.md`, DECISIONS 22, 55, 60, 66 and 89, `Transfer.mergeItems`, `Subcontractor`, `AppState`, `RootView` and `Scripts/screenshot.sh`.
+- Work completed: branch `claude/planning-and-sub-removal`, stacked on `claude/merge-packages` (PR #9, unmerged).
+  - **Planning (DECISIONS 90).** A new sidebar section, Business, with one item: Planning.
+    - `PlanningScreen` shows "Under construction" and five planned tools as plain text, each marked "Coming soon": revenue forecast; cash flow, 30/60/90 days; annual budget and break-even; crew capacity and utilization; business plan and operating documents.
+    - The detail column is empty. The screen has no model, reads no data and shows no figures. ⌘N and ⌘D do nothing on it (new `AppState.canCreate`).
+    - `BUCKETS_SCREEN=planning` opens it.
+    - The header doc comment marks it as the reserved seam for the section.
+  - **Subcontractor removal (DECISIONS 91).** `SubcontractorRecord.remove: Bool?` is new; the format stays 2 and export never writes the key.
+    - A matching sub with `remove: true` is deleted with its services when none of them is on a project. Otherwise it is archived, and project lines keep their snapshots.
+    - A matching sub with `isActive: false` is archived. A file never un-archives a sub.
+    - A `remove` for a name the store lacks does nothing and creates nothing.
+    - File rows under a removed or never-created sub are skipped, and their file position is held so later references stay aligned. New rows under a sub the same file archives are added archived.
+    - `MergeResult` gains `subcontractorsRemoved` and `subcontractorsArchived`. The `BUCKETS_MERGE_FILE` stderr line reports both, and the Settings message reports each one that is not zero.
+  - README, DECISIONS 90–91, version 0.2.3, build 5.
+- Evidence/tests:
+  - `Scripts/test.sh`: 298 executed, 3 skipped (the same three), 0 failures.
+  - New `SubcontractorMergeRemovalTests` (6 tests):
+    - remove deletes an unreferenced sub and its services;
+    - remove archives a referenced sub, and the line keeps its snapshot and the price;
+    - `isActive: false` archives and never un-archives;
+    - an unknown remove creates nothing;
+    - an old file without the key merges as before;
+    - export never writes `remove`.
+  - New `PlanningScreenTests` (3 tests): the screen hook and no creation; the planned-tools list; the screen hosts in light and dark.
+  - `Scripts/build.sh Release`: `build/Buckets.app`, 0.2.3 (5), codesign verified.
+  - Screenshots: Planning rendered with `--fixture --render` in light and dark. In the first render, `ContentUnavailableView` inside a grouped Form drew nothing offscreen, so it was replaced with a plain header row.
+  - Not installed; the live store was not touched.
+- Decisions: DECISIONS 90 and 91.
+- Open questions: none new. From the owner's 09-30 notes, for the next data layer (not this branch):
+  - Florida Stump Grind is not TreeShop, and TreeShop is never a sub or vendor. With 91, a layer file can now remove or archive that sub.
+  - The crane sub is deferred.
+  - One crew for now.
+- Next owner/action: Codex reviews `claude/planning-and-sub-removal` after PR #9. The caller rehearses on a store copy before installing.
+- Branch/commit: `claude/planning-and-sub-removal`, pushed: 8d4d5b5 (change) and this commit (log). No PR opened.
