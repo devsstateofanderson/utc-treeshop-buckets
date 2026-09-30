@@ -97,25 +97,89 @@ private struct CompanyLicensesSection: View {
     }
 }
 
-/// The company's pricing defaults (DECISIONS 70): every new project and every Re-price copies these two figures.
+/// The company's pricing defaults (DECISIONS 70, 92): every new project and every Re-price copies these figures.
 /// They live in UserDefaults like the other settings so the Core math and the launch hooks see one source.
+/// The margin, the sales allowance and its payroll tax are refused together when `M + A(1 + B/100)` passes 95%.
 private struct CompanyPricingSection: View {
+    @Environment(\.modelContext) private var modelContext
+    @Query private var projects: [Project]
     @AppStorage(AppSettings.Key.targetMarginPct) private var targetMarginPct = AppSettings.defaults.targetMarginPct
     @AppStorage(AppSettings.Key.minimumJobCents) private var minimumJobCents = AppSettings.defaults.minimumJobCents
+    @AppStorage(AppSettings.Key.salesAllowancePct) private var salesAllowancePct = AppSettings.defaults.salesAllowancePct
+    @AppStorage(AppSettings.Key.commissionBurdenPct) private var commissionBurdenPct = AppSettings.defaults.commissionBurdenPct
+    /// The last Re-price packages result: how many were stale, or why the save failed (DECISIONS 92).
+    @State private var repriceResult: (text: String, failed: Bool)?
+
+    /// The defaults as they stand now, from the same UserDefaults keys `AppSettings.current()` reads.
+    private var settings: AppSettings {
+        var s = AppSettings.current()
+        s.targetMarginPct = targetMarginPct
+        s.salesAllowancePct = salesAllowancePct
+        s.commissionBurdenPct = commissionBurdenPct
+        s.minimumJobCents = minimumJobCents
+        return s
+    }
+
+    private var staleCount: Int { Project.templatesUnderOlderAllowance(projects, settings: settings) }
 
     var body: some View {
         Section {
             VStack(alignment: .leading, spacing: 4) {
-                DecimalField(label: "Target margin", value: SettingsField.margin($targetMarginPct), placeholder: "50")
-                Text("\(SettingsText.marginCaption) Equivalent markup: \(SettingsText.markupString(marginPct: Money.decimal(from: targetMarginPct))).")
+                DecimalField(label: "Target margin",
+                             value: SettingsField.margin($targetMarginPct, allowance: salesAllowancePct, burden: commissionBurdenPct),
+                             placeholder: "50")
+                Text("\(SettingsText.marginCaption) Equivalent markup: \(SettingsText.markupString(settings.pricingRule)).")
                     .font(.caption).foregroundStyle(.secondary)
             }
             VStack(alignment: .leading, spacing: 4) {
                 CentsField(label: "Minimum job", cents: $minimumJobCents, placeholder: "750.00")
                 Text(SettingsText.minimumJobCaption).font(.caption).foregroundStyle(.secondary)
             }
+            VStack(alignment: .leading, spacing: 4) {
+                DecimalField(label: "Sales allowance",
+                             value: SettingsField.allowance($salesAllowancePct, margin: targetMarginPct, burden: commissionBurdenPct),
+                             placeholder: "0")
+                Text(SettingsText.salesAllowanceCaption).font(.caption).foregroundStyle(.secondary)
+            }
+            VStack(alignment: .leading, spacing: 4) {
+                DecimalField(label: "Payroll tax on commission",
+                             value: SettingsField.commissionBurden($commissionBurdenPct, margin: targetMarginPct, allowance: salesAllowancePct),
+                             placeholder: "7.65")
+                Text(SettingsText.commissionBurdenCaption).font(.caption).foregroundStyle(.secondary)
+            }
+            if staleCount > 0 {
+                HStack {
+                    Label(SettingsText.stalePackages(staleCount), systemImage: "exclamationmark.triangle")
+                        .foregroundStyle(.orange)
+                    Spacer()
+                    Button("Re-price packages") { repricePackages() }
+                        .help("Re-price every package at today's rates, margin and allowance, so the list prices marketing reads are current")
+                }
+                .accessibilityIdentifier("stalePackages")
+            }
+            if let result = repriceResult {
+                Label(result.text, systemImage: result.failed ? "exclamationmark.octagon" : "checkmark.circle")
+                    .font(.caption)
+                    .foregroundStyle(result.failed ? AnyShapeStyle(.red) : AnyShapeStyle(.secondary))
+                    .accessibilityIdentifier("repriceResult")
+            }
         } header: {
             Text("Pricing defaults")
+        } footer: {
+            Text(SettingsText.pricingShareFooter).font(.caption).foregroundStyle(.secondary)
+        }
+        // A new allowance, tax or margin makes the last result stale; the banner speaks again if packages are.
+        .onChange(of: salesAllowancePct) { _, _ in repriceResult = nil }
+        .onChange(of: commissionBurdenPct) { _, _ in repriceResult = nil }
+        .onChange(of: targetMarginPct) { _, _ in repriceResult = nil }
+    }
+
+    private func repricePackages() {
+        do {
+            let stale = try Project.repriceTemplates(in: modelContext, settings: settings)
+            repriceResult = (SettingsText.repricedPackages(stale), false)
+        } catch {
+            repriceResult = (SettingsText.repriceFailed(error), true)
         }
     }
 }

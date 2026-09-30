@@ -57,6 +57,15 @@ enum CalcMessage {
             case .negativeCostOfMoney: return "Cost of money in Settings can't be negative."
             }
         }
+        if let e = error as? SalaryCalcError {
+            switch e {
+            case .negativeAmount: return "Pay can't be negative."
+            case .negativeDaysPerWeek: return "Days per week can't be negative."
+            case .negativeWeeksPerYear: return "Weeks per year can't be negative."
+            case .negativeBurden: return "The salary burden can't be negative."
+            case .aboveMaximum: return "That is more than $9,999,999.99 a year, the most a row can hold."
+            }
+        }
         return error.localizedDescription
     }
 }

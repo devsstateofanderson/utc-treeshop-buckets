@@ -3,8 +3,8 @@ import SwiftUI
 import SwiftData
 @testable import Buckets
 
-/// Non-view logic behind the Projects list and the Settings screen: the variance column, the settings
-/// field bindings, and the Export / Import texts.
+/// Non-view logic behind the Projects list and the Settings screen: the variance, Sold by and Profit after columns and
+/// their sorting, the settings field bindings, and the Export / Import texts.
 @MainActor
 final class ProjectsListTests: XCTestCase {
     private var container: ModelContainer!
@@ -33,6 +33,99 @@ final class ProjectsListTests: XCTestCase {
         project.actualHours = 6
         project.line("Dump fee").actualQty = 3
         XCTAssertEqual(ProjectsText.variance(project.actuals(billableHours: 1500)?.totalVariance), "-$350.74")
+    }
+
+    // MARK: Sold by and Profit after columns (DECISIONS 92, 94; plan 13, slice 1b)
+
+    /// Three jobs priced alike at the 50% target (cost 185,296, price 370,592, payroll tax on commission 7.65%), sold
+    /// by two synthetic salespeople and by nobody. Profit after: 7% → 370,592 − 185,296 − 25,941 − 1,985 = 157,370;
+    /// 10% → 370,592 − 185,296 − 37,059 − 2,835 = 145,402; nobody → the profit, 185,296.
+    private func threeSoldJobs() throws -> (sam: Project, alex: Project, nobody: Project) {
+        func job(_ name: String, day: Double) throws -> Project {
+            let project = try StoreFixture.baseProject(in: context)
+            project.name = name
+            project.date = Date(timeIntervalSince1970: 1_757_000_000 + day * 86_400)
+            project.setPricing(from: AppSettings())
+            return project
+        }
+        let sam = try job("Oak removal", day: 3)
+        let nobody = try job("Hedge trim", day: 2)
+        let alex = try job("Palm install", day: 1)
+        func seller(_ name: String, _ pct: Decimal) -> BucketItem {
+            let row = BucketItem(bucket: .labor, name: name, rateCents: 4000,
+                                 sortOrder: BucketItem.nextSortOrder(in: .labor, context: context))
+            row.trackOnly = true
+            row.commissionPct = pct
+            context.insert(row)
+            return row
+        }
+        sam.setSalesperson(seller("Sam Rivera", 7))
+        alex.setSalesperson(seller("Alex Moreno", 10))
+        try context.save()
+        return (sam, alex, nobody)
+    }
+
+    func testSoldByAndProfitAfterShowTheHeaderFigures() throws {
+        let (sam, alex, nobody) = try threeSoldJobs()
+        let rows = [sam, alex, nobody].map { ProjectsListRow($0, billableHours: 1500) }
+        XCTAssertEqual(rows.map(\.soldBy), ["Sam Rivera", "Alex Moreno", ""])
+        XCTAssertEqual(rows.map(\.priceCents), [370_592, 370_592, 370_592])
+        XCTAssertEqual(rows.map(\.profitAfterCents), [157_370, 145_402, 185_296])
+        for (row, project) in zip(rows, [sam, alex, nobody]) {
+            let header = project.breakdown(billableHours: 1500)
+            XCTAssertEqual(row.profitAfterCents, header.profitAfterCommission, project.name)
+            XCTAssertEqual(row.priceCents, header.price, project.name)
+            XCTAssertEqual(row.id, project.persistentModelID)
+            XCTAssertNil(row.varianceCents)
+        }
+        XCTAssertEqual(Money.format(rows[0].profitAfterCents), "$1,573.70")
+
+        // The name is the project's snapshot: it survives the row's deletion (DECISIONS 94), and a nameless row reads Untitled.
+        context.delete(try XCTUnwrap(alex.salesperson))
+        try context.save()
+        XCTAssertNil(alex.salesperson)
+        XCTAssertEqual(ProjectsText.soldBy(alex), "Alex Moreno")
+        XCTAssertEqual(ProjectsListRow(alex, billableHours: 1500).profitAfterCents, 145_402, "the kept name still pays")
+        sam.salespersonName = ""
+        XCTAssertEqual(ProjectsText.soldBy(sam), "Sam Rivera", "the linked row's name when the snapshot is blank")
+        sam.salesperson?.name = ""
+        XCTAssertEqual(ProjectsText.soldBy(sam), "Untitled")
+        sam.setSalesperson(nil)
+        XCTAssertEqual(ProjectsText.soldBy(sam), "")
+        XCTAssertEqual(ProjectsListRow(sam, billableHours: 1500).profitAfterCents, 185_296, "no salesperson, no commission")
+    }
+
+    func testTheTwoColumnsSort() throws {
+        let (sam, alex, nobody) = try threeSoldJobs()
+        let rows = [alex, nobody, sam].map { ProjectsListRow($0, billableHours: 1500) }
+        func names(_ order: [KeyPathComparator<ProjectsListRow>]) -> [String] {
+            ProjectsListRow.sorted(rows, by: order).map(\.name)
+        }
+        // The list opens newest first, as before, with or without a column clicked.
+        XCTAssertEqual(names(ProjectsListRow.defaultOrder), ["Oak removal", "Hedge trim", "Palm install"])
+        XCTAssertEqual(names([]), ["Oak removal", "Hedge trim", "Palm install"])
+
+        // Sold by, as the column sorts it (localized standard): nobody first ascending, last descending.
+        var soldBy = KeyPathComparator(\ProjectsListRow.soldBy, comparator: .localizedStandard)
+        XCTAssertEqual(names([soldBy]), ["Hedge trim", "Palm install", "Oak removal"])
+        soldBy.order = .reverse
+        XCTAssertEqual(names([soldBy]), ["Oak removal", "Palm install", "Hedge trim"])
+
+        // Profit after: 145,402 · 157,370 · 185,296.
+        var profitAfter = KeyPathComparator(\ProjectsListRow.profitAfterCents)
+        XCTAssertEqual(names([profitAfter]), ["Palm install", "Oak removal", "Hedge trim"])
+        profitAfter.order = .reverse
+        XCTAssertEqual(names([profitAfter]), ["Hedge trim", "Oak removal", "Palm install"])
+
+        // Ties fall back to newest first: all three share a price.
+        XCTAssertEqual(names([KeyPathComparator(\ProjectsListRow.priceCents)]), ["Oak removal", "Hedge trim", "Palm install"])
+
+        // Actual variance: jobs without actuals sort below every variance ascending.
+        nobody.actualHours = 10
+        let withActuals = [alex, nobody, sam].map { ProjectsListRow($0, billableHours: 1500) }
+        XCTAssertNotNil(withActuals[1].varianceCents)
+        XCTAssertEqual(ProjectsListRow.sorted(withActuals, by: [KeyPathComparator(\ProjectsListRow.varianceSortKey, order: .reverse)]).first?.name,
+                       "Hedge trim")
     }
 
     // MARK: Settings fields (DECISIONS 10, 11, 12)

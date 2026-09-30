@@ -28,6 +28,12 @@ Profit   = Price − Cost
 Margin   = Profit ÷ Price          (display only)
 ```
 
+Amended (DECISIONS 70, 92): the input is the company's target margin, after an optional sales allowance for commission and the employer payroll tax on it, in one division:
+
+```
+Price = max( MinimumJob , Cost × 10000 × Multiplier ÷ (10000 − 100·Margin − Allowance·(100 + CommissionTax)) )
+```
+
 Settings (set once):
 
 | Setting | Default | Rule |
@@ -66,6 +72,8 @@ Marcus: $30 × 1.30 × 2,080 ÷ 1,500 = $54.08/hr
 ```
 
 The row stores `$54.08`. A "Calculate…" sheet on the row does the math from wage / paid hours (default 2,080) / burden (default from Settings). Day-to-day nobody sees the math.
+
+Salaried staff who are not on the crew (sales, office) are Overhead lines; their Labor row is marked not on the crew and is never priced (DECISIONS 83, 93).
 
 Tree-service workers comp (FL class 0106) is heavy — burden of 25–45% is normal. Read the real number off the Southern Personnel Leasing invoice once.
 
@@ -126,6 +134,8 @@ Row = one annual cost. The app shows it as $/hr = annual ÷ billable hours. Ente
 
 Goes here: GL/umbrella insurance, phones, internet, website, marketing, software (Jobber, Workspace), accounting, shop rent, licenses.
 Does **not**: workers comp (in labor burden), vehicle insurance (on the vehicle row), fuel (on equipment).
+
+Salaries of staff who are not on the crew (§2.1) are entered through the overhead row's "Calculate…" sheet: pay per day, week, two weeks, half month, month or year × periods a year × (1 + burden%), one division, rounded once, stored as the row's $/yr (DECISIONS 93, amending 34 for this case). $200/day × 5 × 52 × 1.30 = $67,600/yr = $45.07/hr at 1,500. Every other overhead line is typed as its annual cost.
 
 | Overhead | $/yr | $/hr |
 |---|---|---|
@@ -231,7 +241,7 @@ Enter actual hours → read variance.
 ## 5. Mac app spec
 
 ### 5.1 Scope fence — what killed OO, and is not in this app
-No compliance, insurance, credentials, verification queue, flags. No positions, ladders, pay bands. No vendors, subcontractor dossiers. No loadouts or inheritance. No maintenance profiles. No expense ledger, assets, loans. No Jobber / QuickBooks / Slack, no Connections screen. No import prompts, no activity log. No lookup editors. No price-history tables. No sample data ever.
+No compliance, insurance, credentials, verification queue, flags. No positions, ladders, pay bands. No CRM, no pipeline stages, no pixels, no email, no payroll (DECISIONS 92–95: Buckets prices commission and shows it; it pays nobody). No vendors, subcontractor dossiers. No loadouts or inheritance. No maintenance profiles. No expense ledger, assets, loans. No Jobber / QuickBooks / Slack, no Connections screen. No import prompts, no activity log. No lookup editors. No price-history tables. No sample data ever.
 
 OO: 28K lines, 228 files, 75 tables, 27 screens, production DB never created. Target: ~2,000 lines, 3 models, 4 screens.
 
@@ -254,7 +264,7 @@ enum Bucket: String, Codable, CaseIterable { case labor, equipment, materials, c
   var isActive: Bool          // archived rows stay for old projects, hidden from new ones
   var source: String?         // free text (vendor, supplier, sub name)
   var notes: String?
-  var calcInputs: Data?       // JSON of the Labor or Equipment calculator inputs so "Calculate…" reopens filled in
+  var calcInputs: Data?       // JSON of the Labor, Equipment or Overhead salary calculator inputs (DECISIONS 93) so "Calculate…" reopens filled in
   var sortOrder: Int
 }
 

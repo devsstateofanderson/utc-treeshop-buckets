@@ -320,15 +320,15 @@ Append entries using this structure:
 ## 2026-09-30 — Claude Code — 0.2.3 installed; Sacred Tree layer v3 applied (sales manager, single crew, sub corrections)
 
 - Context read: Mr. Anderson in chat on 09-30.
-  - New Sales Manager, Noah Aquinas: $200/day salary on a 5-day week, plus 7% commission on revenue he creates.
+  - A new Sales Manager: salaried, plus a commission on revenue he creates.
   - One crew for now, lean. The wage estimates stand until he edits them.
   - Gaston and J&J both run 50 and 65 yd grapple trucks, so treat them as equivalent.
   - **Correction:** "Florida Stump Grind" is NOT TreeShop. TreeShop is Mr. Anderson's own company and must never appear as a subcontractor or vendor. He believes Florida Stump Grind was a demo entry.
   - Cranes are deferred (billed as a flat add plus an hourly increase; no data yet).
   - Reserve a Planning section (this branch).
 - Work completed: layer v3 (`~/Developer/sacred-tree-local-vault/sacred-tree-layer-v3-2026-09-30.json`, built from the live export with `tools/build_layer_v2.py` and `tools/layer-v3-overrides.json`):
-  - **Noah Aquinas as a labor row** (Sales, $25/h over 2,080 paid h, 30% burden, 4,507¢/h; owner confirmed). Off in every package, so he is never double-counted.
-  - **His salary as an overhead line:** "Sales manager salary – Noah Aquinas", $67,600/yr = $52,000 + 30% burden, which is +$45.07 per crew hour at 1,500 h.
+  - **The Sales Manager's labor row** (Sales; owner confirmed). Off in every package, so he is never double-counted.
+  - **His salary as an overhead line** (salary plus a 30% burden, spread over billable hours like any overhead).
   - **PPE budgeted for one crew:** "PPE & uniforms" goes to $1,118.71/yr, and PPE-04..06 are archived.
   - **Grapple subs:** Gaston's notes corrected, with its public Lake/Orange phone; J&J's Grapple Service added as a sub with no rate row yet.
   - **The "Florida Stump Grind (TreeShop)" sub removed** through DECISIONS 91; the older vault files were scrubbed of it too.
@@ -348,3 +348,96 @@ Append entries using this structure:
   - (d) Crane pricing later.
 - Next owner/action: owner — review the Planning placeholder and the package prices. Codex — review this branch after PR #9.
 - Branch/commit: `claude/planning-and-sub-removal`, this commit (log).
+
+## 2026-09-30 — Claude Code — Commission-aware pricing, Sold by, rows not on the crew (0.2.4, build 6)
+
+- Context read: the reviewed plan "Sales and marketing in Buckets" (now `docs/treeshop/13-sales-marketing-plan.md`, reworded so it names nobody and states pay only as example figures, DECISIONS 88), `AGENTS.md`, `CLAUDE.md`, `docs/REPOSITORY-WORKFLOW.md`, BRIEF, DECISIONS. Scope: slice 1a only.
+- Work completed: branch `claude/sales-commission`, stacked on `claude/planning-and-sub-removal` (PRs #8 → #9 → #10, unmerged).
+  - **Price rule (DECISIONS 92).** A company sales allowance A and payroll tax on commission B (Company → Pricing defaults; defaults 0 and 7.65) sit in the one price division; margin means after commission. A = 0 prices exactly as 0.2.3, so no price moves on install. The Company screen refuses a margin, allowance or tax over the 95% share and offers **Re-price packages** when packages were priced under an older allowance.
+  - **Sold by (DECISIONS 94).** A project names its salesperson (a Labor row with a commission %), with name and % snapshots and a per-job override. The header shows the commission, its payroll tax, and the profit and margin after commission (orange when under the target or a loss). Copy breakdown adds the same lines and never a name.
+  - **Not on the crew (DECISIONS 83, 93).** A Labor row can be marked not on the crew: new projects, Re-price, loadouts and the member picker skip it; readiness counts priced rows only.
+  - **Format 3 (DECISIONS 95).** Exports carry the new keys; formats 1–3 read; 0.2.3 refuses format 3. Merge sets `trackOnly` and never clears it.
+  - BRIEF §1, §2.1, §5.1 amended; README; `onboard.sh` readiness gates count priced rows.
+- Evidence/tests:
+  - `Scripts/test.sh`: 333 executed, 3 skipped (the same three), 0 failures.
+  - New: `PricerCommissionTests` (the A = 0 loop over every pinned fixture; 522,921 / 516,409 / 1,045,843 / 1,568,764; 36,604 + 2,800 → 261,461; floor 75,000 with 5,250 / 402 / 39,356; −5,927; the 864.5 → 865 tie), `ProjectSalespersonTests`, `RepriceTemplatesTests`, `TransferFormat3Tests`, `StoreMigrationV023Tests` (`BucketsSchemaV023`: nine packages, an empty package, a legacy project and a salary line keep every price).
+  - `Scripts/build.sh Release`: `build/Buckets.app`, 0.2.4 (6), codesign verified. Project, Labor and Company screens rendered from the screenshot fixture (now with a synthetic salesperson on the Oak removal).
+  - Not installed; the live store and the vault were not touched.
+- Decisions: 83 (shared text), 92, 93 (first paragraph), 94, 95.
+- Not done here (the plan's other 1a items, vault side): `tools/build_layer_v2.py` learning `trackOnly`, `commissionPct` and the two settings keys; data layer v4; the rehearsal on a store copy.
+- Open questions: the plan's ten, unchanged. The first is the owner's: turn on a 7% allowance (prices rise 17.75%) or keep today's prices at about 42.5% after commission.
+- Next owner/action: Codex reviews `claude/sales-commission` after PR #10. Then the vault layer v4 and the rehearsal before any install.
+- Branch/commit: `claude/sales-commission`, 9e2c113 (change) and this commit (log). No PR opened.
+
+## 2026-09-30 — Claude Code — Sales commission review fixes (0.2.4, build 6)
+
+- Context read: the review of `claude/sales-commission` (slice 1a): no High or Medium issues, six Low.
+- Work completed (7ab3679):
+  - (1) The plan's Copy breakdown clause now matches DECISIONS 92: "Profit after commission" follows Profit.
+  - (2) The plan's store table is retitled "Shape of the store … example rates" and keeps only the loaded rates ($35.01, $86.67, $45.07); the hourly wage inputs are gone. The worked-examples heading no longer says "live export".
+  - (3) Re-price packages reports "Re-priced N stale packages" (or none stale) beside the banner, and a failed save in red; cleared when the margin, allowance or tax changes.
+  - (4) Sold by shows only when an active Labor row carries a %, the same rows the menu lists.
+  - (5) Import refuses a `salespersonIndex` that points outside Labor (`TransferError.salespersonNotLabor`); the out-of-range refusal is now tested.
+  - (6) Import and merge apply a file's `trackOnly` to Labor rows only until Equipment has its own toggle; DECISIONS 95 says so.
+- Evidence/tests: `Scripts/test.sh`: 335 executed, 3 skipped (the same three), 0 failures. `Scripts/build.sh Release`: `build/Buckets.app`, 0.2.4 (6), codesign verified. Not installed; the live store and the vault were not touched.
+- Decisions: 95 amended (non-Labor salesperson refused; `trackOnly` Labor-only from files for 0.2.4).
+- Next owner/action: Codex re-reviews `claude/sales-commission`.
+- Branch/commit: `claude/sales-commission`, 7ab3679 (fixes) and this commit (log). No PR opened.
+
+## 2026-09-30 — Claude Code — Salary calculator on overhead rows, Projects list columns (0.2.5, build 7)
+
+- Context read: `docs/treeshop/13-sales-marketing-plan.md` (slice 1b), `AGENTS.md`, `CLAUDE.md`, `docs/REPOSITORY-WORKFLOW.md`, BRIEF, DECISIONS, the entries above. Scope: slice 1b only, on `claude/sales-commission` after slice 1a.
+- Work completed:
+  - **Salary calculator (DECISIONS 93, second paragraph; amends 34 for this case).** `Sources/Core/SalaryCalc.swift`: `SalaryPeriod` (day · week · biweekly · semimonthly · month · year), `SalaryCalcInputs {amountCents, period, daysPerWeek, weeksPerYear, burdenPct}`, `SalaryCalc.annualCents` = `round(amount × periods a year × (100 + burden) ÷ 100)`, one division, rounded once; throws on negatives (as 9) and on a result above the $9,999,999.99 rate bound (30).
+  - **Overhead Form.** "Calculate…" beside "Cost per year" opens `SalaryCalcSheet`: pay and period, days per week (day rate), weeks per year (day and week rates), burden (default from Settings), billable hours read-only, and "= $67,600.00 per year · $45.07 per hour at 1,500 billable hours" over its formula. Save stores `rateCents` and `calcInputs`; `BucketItem.salaryInputs` reads them back (derived, no new attribute). Other overhead lines are typed as before.
+  - **Projects list.** "Sold by" (the project's name snapshot) and "Profit after" (the header's profit after commission and its payroll tax; a loss in orange) columns. Every column of the Projects list sorts, newest first by default. Packages unchanged. DECISIONS 94 records it.
+  - `BUCKETS_SCREEN=salarycalc` opens the sheet (first overhead row with salary inputs); the screenshot fixture gains a synthetic salary line added after its two projects.
+  - BRIEF §2.3; README; the plan's status line; `docs/treeshop/README.md`.
+- Evidence/tests:
+  - `Scripts/test.sh`: 347 executed, 3 skipped (the same three), 0 failures.
+  - New: `SalaryCalcTests` (20,000/day × 5 × 52 at 30% → 6,760,000, at 10% → 5,720,000; the period table; the 4,212,344.5 → 4,212,345 tie and the 4,212,260 two-step figure; negatives and the bound throw; `salaryInputs` round-trips through `calcInputs` and through export/import; the sheet's draft; the calculator moves no price, before and after Re-price; the screen hook). `ProjectsListTests`: the two columns match the header's figures (157,370 / 145,402 / 185,296) and sort both ways; ties fall back to newest first.
+  - `PricerCommissionTests.testZeroAllowanceReproducesEveryPinnedPrice` (A = 0 loop over every pinned fixture) still passes.
+  - `Scripts/build.sh Release`: `build/Buckets.app`, 0.2.5 (7), codesign verified. The sheet and the list were rendered from a synthetic fixture store in the scratch area (light and dark).
+  - Not installed; the live store and the vault were not touched.
+- Decisions: 93 (second paragraph, amending 34); 94 (one sentence on the list columns). No format change: `calcInputs` already travels (43, 95).
+- Known limits: at the default 1,180-point window the Projects list's Name and Sold by cells truncate long names; widening the list pane shows them. The Project header's figure row was already cramped at that width before this change.
+- Not done here (vault side): data layer v5 (the salary overhead row's `calcInputs` through `tools/build_layer_v2.py`) and its rehearsal.
+- Next owner/action: Codex reviews slice 1b on `claude/sales-commission`. Then vault layers v4 and v5 and the rehearsal before any install.
+- Branch/commit: `claude/sales-commission`, cd6b36e (change) and this commit (log). No PR opened.
+
+## 2026-09-30 — Claude Code — Slice 1b review fixes (0.2.5, build 7)
+
+- Context read: the review of slice 1b (`cd6b36e`, `729e1ad`): one Medium, four Low.
+- Work completed (10f7892):
+  - (1, Medium, DECISIONS 88) The 0.2.3 entry above no longer names the Sales Manager or states his pay: the labor row and the overhead line are described by role only, with no figures. The $200/day figure in DECISIONS 93 and BRIEF §2.3 is now an unattributed example. The earlier text remains in pushed history; whether to rewrite it is Mr. Anderson's call, and it was not done on this branch.
+  - (2) BRIEF §5.3's `calcInputs` comment reads "Labor, Equipment or Overhead salary calculator inputs (DECISIONS 93)".
+  - (3) DECISIONS 34 gains "(amended by 93 for a salary line)".
+  - (4) `SalaryCalcTests.testTransferCarriesTheInputs` round-trips 4.5 days, 50.5 weeks and 7.65% through export/import, with the rate from `SalaryCalc.annualCents`.
+  - (5, note only) The Projects list builds each project's breakdown on every body evaluation; left as is at this client's scale.
+- Evidence/tests: `Scripts/test.sh`: 347 executed, 3 skipped (the same three), 0 failures. `Scripts/build.sh Release`: `build/Buckets.app`, 0.2.5 (7), codesign verified. No `.store` file tracked. Not installed; the live store and the vault were not touched.
+- Decisions: 34 annotated (pointer to 93 only).
+- Not done here: vault data layer v5 and its rehearsal.
+- Next owner/action: Codex re-reviews slice 1b on `claude/sales-commission`. Mr. Anderson decides whether to rewrite pushed history for the old 0.2.3 wording.
+- Branch/commit: `claude/sales-commission`, 10f7892 (fixes) and this commit (log). No PR opened.
+
+## 2026-09-30 — Claude Code — 0.2.5 installed; data layer v4 applied (salesperson not on the crew, salary by calculator)
+
+- Context read: Mr. Anderson in chat on 09-30. Combine sales and marketing in Buckets; handle commission and salary accurately with clear cost, profit and reports; "plan and then upgrade". Plan: `docs/treeshop/13-sales-marketing-plan.md` (4 planners plus an adversarial review; slices 1a and 1b built on this branch, each with a second-model review and fixes).
+- Work completed:
+  - **Rehearsal.** 0.2.5 was opened on a copy of the live store and exported. Only `formatVersion` 2 → 3 and the two new settings changed (`salesAllowancePct` 0, `commissionBurdenPct` 7.65); every row and every project line was identical.
+  - **Data layer v4** (vault `sacred-tree-layer-v4-2026-09-30.json`, format 3, built by `tools/build_layer_v2.py` with `tools/layer-v4-overrides.json`): the Sales Manager's labor row is `trackOnly` (not on the crew) with `commissionPct` 7. The "Sales manager salary" overhead line now carries salary-calculator inputs ($200/day, 5 days, 52 weeks, 30% burden), for the same $67,600/yr.
+  - Merged on the copy: updated 2, unchanged 231, packages updated 9, with project lines identical. A second run changed 0.
+  - **Installed** with `onboard.sh`: 0.2.3 parked in the vault, 0.2.5 (build 7) at `/Applications`, backup in `onboard-2026-09-30-111431/`. The live export equals the rehearsal.
+- Evidence/tests: this branch's `Scripts/test.sh` ran 347 executed, 3 skipped, 0 failures (see the entries above). No price moved (allowance 0).
+- Decisions: 83 and 92–95 (in the entries above). Nothing new.
+- Open questions (owner):
+  - (1) Sales allowance: 7 (every price +17.75%, 50% after commission) or keep today's prices (42.5% after commission).
+  - (2) Commission base: the full price (default).
+  - (3) Payroll tax on commission: 7.65% (default).
+  - (4) Salary burden: 30% (default).
+  - (5) When commission is payable: on customer payment (default).
+- Next owner/action:
+  - Owner: in a project, pick Sold by → the Sales Manager to see commission and profit after it; decide the allowance in Company → Pricing defaults, then press Re-price packages.
+  - Codex: review the PR for this branch after #10.
+  - Next build: slice 2 (Offers for marketing).
+- Branch/commit: `claude/sales-commission`, this commit (log).

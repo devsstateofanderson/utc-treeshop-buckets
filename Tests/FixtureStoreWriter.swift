@@ -34,6 +34,13 @@ final class FixtureStoreWriter: XCTestCase {
         removal.actualHours = 10
         removal.line("Dump fee").actualQty = 3
         removal.setPricing(from: AppSettings())   // priced at the company's 50% target margin (DECISIONS 70)
+        // A salaried salesperson, not on the crew, who sold the removal at 7% (DECISIONS 83, 94). Synthetic.
+        let sales = BucketItem(bucket: .labor, name: "Sam Rivera", rateCents: 4000,
+                               sortOrder: BucketItem.nextSortOrder(in: .labor, context: context))
+        sales.trackOnly = true
+        sales.commissionPct = 7
+        context.insert(sales)
+        removal.setSalesperson(sales)
 
         let palms = Project.make(name: "Palm install", date: Date(timeIntervalSince1970: 1_757_900_000),
                                  items: try StoreFixture.items(in: context), settings: AppSettings())
@@ -44,6 +51,12 @@ final class FixtureStoreWriter: XCTestCase {
         let palm = palms.line("Queen palm, 10 gal"); palm.isOn = true; palm.qty = 6
         let stakes = palms.line("Stakes + ties kit"); stakes.isOn = true; stakes.qty = 6
         let mulch = palms.line("Mulch"); mulch.isOn = true; mulch.qty = 3
+        // The salesperson's salary as an Overhead line worked out by the salary calculator (DECISIONS 93). Synthetic;
+        // added after both projects so their prices stay the brief's.
+        let pay = SalaryCalcInputs(amountCents: 22_500, period: .day, daysPerWeek: 5, weeksPerYear: 52, burdenPct: 30)
+        context.insert(BucketItem(bucket: .overhead, name: "Sales salary", rateCents: try SalaryCalc.annualCents(pay),
+                                  calcInputs: try JSONEncoder().encode(pay),
+                                  sortOrder: BucketItem.nextSortOrder(in: .overhead, context: context)))
         try context.save()
     }
 }

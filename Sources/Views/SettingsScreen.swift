@@ -42,7 +42,7 @@ struct SettingsScreen: View {
             } header: {
                 Text("Rates")
             } footer: {
-                Text("The target margin and the minimum job are company defaults: set them in the Company profile.")
+                Text("The target margin, the minimum job, the sales allowance and the payroll tax on commission are company defaults: set them in the Company profile.")
                     .font(.caption).foregroundStyle(.secondary)
             }
             Section {
@@ -234,6 +234,44 @@ enum SettingsField {
         return value
     }
 
+    /// Whether the margin, the sales allowance and its payroll tax leave a price: `100·M + A·(100 + B) ≤ 9,500`,
+    /// i.e. `M + A(1 + B/100) ≤ 95` (DECISIONS 92). Each is a whole percent 0…100 (the margin 0…95).
+    static func pricingShareFits(margin: Decimal, allowance: Decimal, burden: Decimal) -> Bool {
+        guard [margin, allowance, burden].allSatisfy({ $0.isFinite && $0 >= 0 && $0 <= 100 }),
+              margin <= PriceRule.maximumMarginPct else { return false }
+        return 100 * margin + allowance * (100 + burden) <= 100 * PriceRule.maximumMarginPct
+    }
+
+    /// The target margin, also refused when the allowance leaves no room for it.
+    static func margin(_ stored: Binding<Double>, allowance: Double, burden: Double) -> Binding<Decimal> {
+        Binding(get: { Money.decimal(from: stored.wrappedValue) },
+                set: { new in
+                    if pricingShareFits(margin: new, allowance: Money.decimal(from: allowance), burden: Money.decimal(from: burden)) {
+                        stored.wrappedValue = double(new)
+                    }
+                })
+    }
+
+    /// The sales allowance, 0…100 and within the 95% share (DECISIONS 92).
+    static func allowance(_ stored: Binding<Double>, margin: Double, burden: Double) -> Binding<Decimal> {
+        Binding(get: { Money.decimal(from: stored.wrappedValue) },
+                set: { new in
+                    if pricingShareFits(margin: Money.decimal(from: margin), allowance: new, burden: Money.decimal(from: burden)) {
+                        stored.wrappedValue = double(new)
+                    }
+                })
+    }
+
+    /// The payroll tax on commission, 0…100 and within the 95% share (DECISIONS 92).
+    static func commissionBurden(_ stored: Binding<Double>, margin: Double, allowance: Double) -> Binding<Decimal> {
+        Binding(get: { Money.decimal(from: stored.wrappedValue) },
+                set: { new in
+                    if pricingShareFits(margin: Money.decimal(from: margin), allowance: Money.decimal(from: allowance), burden: new) {
+                        stored.wrappedValue = double(new)
+                    }
+                })
+    }
+
     static func double(_ value: Decimal) -> Double {
         guard value.isFinite, value > 0 else { return 0 }
         return NSDecimalNumber(decimal: value).doubleValue
@@ -251,6 +289,34 @@ enum SettingsText {
     /// "100%" markup for a 50% margin: markup = margin ÷ (100 − margin).
     static func markupString(marginPct: Decimal) -> String {
         percentString(PriceRule.targetMargin(marginPct).markupPercent)
+    }
+
+    /// The markup equivalent of the whole rule, allowance included: 50/7/7.65 → "135.5%" (DECISIONS 92).
+    static func markupString(_ rule: PriceRule) -> String {
+        percentString(rule.markupPercent)
+    }
+
+    static let salesAllowanceCaption = "Share of every price set aside for sales commission. Packages price with it, whoever closes the job."
+    static let commissionBurdenCaption = "Employer cost on each commission dollar: FICA 7.65% plus workers' comp at the sales class rate and any PEO % fee. Read it off the PEO invoice."
+    static let pricingShareFooter = "Margin is what is left after commission. The target margin plus the allowance and its payroll tax cannot pass 95%."
+
+    /// "9 packages priced under an older allowance" (DECISIONS 92).
+    static func stalePackages(_ count: Int) -> String {
+        count == 1 ? "1 package priced under an older allowance" : "\(count) packages priced under an older allowance"
+    }
+
+    /// What Re-price packages reports (DECISIONS 92): "Re-priced 9 stale packages", or that none were stale.
+    static func repricedPackages(_ count: Int) -> String {
+        switch count {
+        case 0: "No package was stale; nothing changed"
+        case 1: "Re-priced 1 stale package"
+        default: "Re-priced \(count) stale packages"
+        }
+    }
+
+    /// A failed Re-price packages save, in words the owner can act on.
+    static func repriceFailed(_ error: Error) -> String {
+        "Could not re-price packages: \(error.localizedDescription)"
     }
 
     /// "Buckets-export-2026-09-14.json", the day in the local calendar.

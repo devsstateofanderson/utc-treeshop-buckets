@@ -60,13 +60,22 @@ struct Readiness: Equatable {
     }
 
     /// Active rows only: archived rows are hidden from new projects, and the projects that still use them get
-    /// their own warning on the Project screen.
+    /// their own warning on the Project screen. The Labor and Equipment gates count priced rows: a track-only row
+    /// (a salaried manager "not on the crew", DECISIONS 83, 93) does not make a crew, and is listed separately.
     init(items: [BucketItem], company: Company?, settings: AppSettings, now: Date = .now) {
         let active = items.filter(\.isActive)
         func count(_ bucket: Bucket) -> Int { active.filter { $0.bucket == bucket }.count }
+        func priced(_ bucket: Bucket) -> Int { active.filter { $0.bucket == bucket && !$0.trackOnly }.count }
         func rowsDetail(_ bucket: Bucket) -> String {
             let n = count(bucket)
             return n == 0 ? "none yet" : "\(n) active \(n == 1 ? "row" : "rows")"
+        }
+        /// "3 active rows", or with track-only rows "3 priced · 1 not on the crew" (Labor) / "· 1 track only" (Equipment).
+        func crewDetail(_ bucket: Bucket) -> String {
+            let tracked = count(bucket) - priced(bucket)
+            guard tracked > 0 else { return rowsDetail(bucket) }
+            let n = priced(bucket)
+            return "\(n == 0 ? "none" : "\(n)") priced · \(tracked) \(bucket.trackOnlyLabel.lowercased())"
         }
         let name = (company?.name ?? "").trimmingCharacters(in: .whitespaces)
         let area = (company?.serviceArea ?? "").trimmingCharacters(in: .whitespaces)
@@ -83,8 +92,8 @@ struct Readiness: Equatable {
                   detail: settings.targetMarginPct > 0 ? "\(settings.targetMarginPctDecimal)%" : "not set"),
             .init(title: "Minimum job", isResolved: settings.minimumJobCents > 0,
                   detail: settings.minimumJobCents > 0 ? Money.format(settings.minimumJobCents) : "not set"),
-            .init(title: "Labor rows", isResolved: count(.labor) > 0, detail: rowsDetail(.labor)),
-            .init(title: "Equipment rows", isResolved: count(.equipment) > 0, detail: rowsDetail(.equipment)),
+            .init(title: "Labor rows", isResolved: priced(.labor) > 0, detail: crewDetail(.labor)),
+            .init(title: "Equipment rows", isResolved: priced(.equipment) > 0, detail: crewDetail(.equipment)),
             .init(title: "Overhead rows", isResolved: count(.overhead) > 0, detail: rowsDetail(.overhead)),
         ]
         buckets = Bucket.allCases.map { bucket in
@@ -103,4 +112,9 @@ struct Readiness: Equatable {
         firstBucket = first
         lastVerified = buckets.compactMap(\.lastVerified).max()
     }
+}
+
+extension Bucket {
+    /// What a track-only row is called in this bucket (DECISIONS 83): "Not on the crew" for Labor, "Track only" elsewhere.
+    var trackOnlyLabel: String { self == .labor ? "Not on the crew" : "Track only" }
 }

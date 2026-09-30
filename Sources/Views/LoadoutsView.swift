@@ -108,7 +108,9 @@ private struct LoadoutBucketSection: View {
     let items: [BucketItem]
     @Environment(\.modelContext) private var modelContext
 
-    private var rows: [BucketItem] { items.filter { $0.isActive || loadout.contains($0) } }
+    /// Rows on the crew: a track-only row (not on the crew, DECISIONS 83) is not offered; one already a member stays
+    /// listed so it can be taken out.
+    private var rows: [BucketItem] { items.filter { ($0.isActive && !$0.trackOnly) || loadout.contains($0) } }
 
     private var groups: [(title: String, rows: [BucketItem])] {
         let keyed = Dictionary(grouping: rows) { $0.categoryText }

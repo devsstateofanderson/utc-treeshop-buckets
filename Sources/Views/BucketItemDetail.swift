@@ -1,7 +1,7 @@
 import SwiftUI
 import SwiftData
 
-/// The Form for the selected row (BRIEF §5.5 item 1; DECISIONS 25, 26, 27, 34).
+/// The Form for the selected row (BRIEF §5.5 item 1; DECISIONS 25, 26, 27, 34, 93).
 struct BucketItemDetail: View {
     @Environment(AppState.self) private var appState
     @Environment(\.modelContext) private var modelContext
@@ -32,7 +32,8 @@ private struct ItemForm: View {
     @State private var showingCalc = false
     @FocusState private var nameFocused: Bool
 
-    private var hasCalcSheet: Bool { item.bucket == .labor || item.bucket == .equipment }
+    /// Labor and Equipment work their rate out (DECISIONS 35, 36); an Overhead line can work a salary out (93).
+    private var hasCalcSheet: Bool { item.bucket == .labor || item.bucket == .equipment || item.bucket == .overhead }
 
     var body: some View {
         Form {
@@ -55,6 +56,9 @@ private struct ItemForm: View {
                     Text("Link")
                     Text("Product or supplier page").foregroundStyle(.secondary)
                 }
+            }
+            if item.bucket == .labor {
+                LaborSalesFields(item: item)
             }
             if item.bucket == .equipment {
                 Section {
@@ -98,7 +102,7 @@ private struct ItemForm: View {
         .sheet(isPresented: $showingCalc) { calcSheet }
         .onAppear { if item.name.isEmpty { nameFocused = true } }
         .task {
-            // Screenshot hook: BUCKETS_SCREEN=laborcalc|equipmentcalc opens the sheet for the selected row.
+            // Screenshot hook: BUCKETS_SCREEN=laborcalc|equipmentcalc|salarycalc opens the sheet for the selected row.
             guard appState.wantsCalcSheet, hasCalcSheet else { return }
             appState.wantsCalcSheet = false
             try? await Task.sleep(for: .milliseconds(400))
@@ -148,6 +152,8 @@ private struct ItemForm: View {
                         .labelsHidden()
                         .frame(width: 120)
                     Text("/yr").foregroundStyle(.secondary)
+                    Button("Calculate…") { showingCalc = true }
+                        .help("For a salary: work the cost per year out from the pay, how often it is paid and the burden")
                 }
             } label: {
                 Text("Cost per year")
@@ -180,23 +186,23 @@ private struct ItemForm: View {
         }
     }
 
-    /// DECISIONS 34: "= $4.00 per hour at 1,500 billable hours".
+    /// DECISIONS 34: "= $4.00 per hour at 1,500 billable hours" (display only, 4).
     private var overheadCaption: String {
         let hourly = item.hourlyRateCents(billableHours: Decimal(billableHoursPerYear)) ?? 0
         return "= \(Money.format(hourly)) per hour at \(hoursString(Decimal(billableHoursPerYear))) billable hours"
     }
 
+    /// DECISIONS 22, 94: a row used on a project line, or named as Sold by on a project, is archived, not deleted.
     private var usage: String {
-        switch item.referenceCount {
-        case 0: "Not used in any project yet, so it can be deleted."
-        default: "Used in \(projectsPhrase(item.referenceCount)). It can be archived, not deleted."
-        }
+        if item.canDelete { return "Not used in any project yet, so it can be deleted." }
+        return "\(item.usagePhrase.prefix(1).uppercased())\(item.usagePhrase.dropFirst()). It can be archived, not deleted."
     }
 
     @ViewBuilder private var calcSheet: some View {
         switch item.bucket {
         case .labor: LaborCalcSheet(item: item)
         case .equipment: EquipmentCalcSheet(item: item)
+        case .overhead: SalaryCalcSheet(item: item)
         default: EmptyView()
         }
     }
@@ -204,6 +210,43 @@ private struct ItemForm: View {
     private func save() {
         try? modelContext.save()
     }
+}
+
+/// Labor only (DECISIONS 83, 93, 94): "Not on the crew" for a salaried salesperson or office manager whose pay is an
+/// Overhead line, so the price never touches the row; and the commission % paid on the jobs this person sells.
+private struct LaborSalesFields: View {
+    @Bindable var item: BucketItem
+    @Environment(\.modelContext) private var modelContext
+
+    var body: some View {
+        Section {
+            Toggle(isOn: $item.trackOnly) {
+                Text(Bucket.labor.trackOnlyLabel)
+                Text(LaborText.notOnCrewCaption).foregroundStyle(.secondary)
+            }
+            LabeledContent {
+                HStack(spacing: 6) {
+                    OptionalDecimalField(label: "Commission %", value: $item.commissionPct, placeholder: "none")
+                        .labelsHidden()
+                        .frame(width: 80)
+                    Text("%").foregroundStyle(.secondary)
+                }
+            } label: {
+                Text("Commission %")
+                Text(LaborText.commissionCaption).foregroundStyle(.secondary)
+            }
+        } header: {
+            Text("Crew and sales")
+        }
+        .onChange(of: item.trackOnly) { _, _ in try? modelContext.save() }
+        .onChange(of: item.commissionPct) { _, _ in try? modelContext.save() }
+    }
+}
+
+/// Captions for the Labor Form's crew and sales fields.
+enum LaborText {
+    static let notOnCrewCaption = "Salary or sales: never priced as labor; a salary goes on an Overhead line"
+    static let commissionCaption = "Paid on the price of each job this person sells, picked as Sold by on the project"
 }
 
 /// The review section of a row's Form (DECISIONS 72): confidence, evidence, the two dates, who approved, the

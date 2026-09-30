@@ -58,8 +58,10 @@ unres = collections.Counter(i["bucket"] for i in active if i.get("confidence") n
 print("== catalog (active rows / still unresolved) ==")
 for b in ("labor", "equipment", "materials", "consumables", "subcontractors", "overhead"):
     print(f"  {b:15s} {by.get(b,0):4d} / {unres.get(b,0):4d}")
+# The Labor and Equipment gates count priced rows: a track-only row ("not on the crew") makes no crew (DECISIONS 83).
+priced = collections.Counter(i["bucket"] for i in active if not i.get("trackOnly"))
 gates = {"Company name": bool(c.get("name")), "Service area": bool(c.get("serviceArea")) or (c.get("serviceRadiusMiles") or 0) > 0,
-         "Labor rows": by.get("labor",0) > 0, "Equipment rows": by.get("equipment",0) > 0, "Overhead rows": by.get("overhead",0) > 0}
+         "Labor rows": priced.get("labor",0) > 0, "Equipment rows": priced.get("equipment",0) > 0, "Overhead rows": by.get("overhead",0) > 0}
 missing = [k for k, ok in gates.items() if not ok]
 print("== readiness ==")
 print("  " + ("NOT READY — setup inputs unresolved: " + ", ".join(missing) if missing else

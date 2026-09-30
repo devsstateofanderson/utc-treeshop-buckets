@@ -128,4 +128,32 @@ final class ReadinessTests: XCTestCase {
         r = Readiness(items: [], company: company, settings: AppSettings(), now: now)
         XCTAssertEqual(r.setupInputs.first { $0.title == "Service area" }?.detail, "not set")
     }
+
+    /// DECISIONS 83, 93: a salaried manager not on the crew does not make a crew. The Labor and Equipment gates count
+    /// priced rows and list track-only rows separately.
+    func testTrackOnlyRowsDoNotMakeACrew() {
+        let company = Company(name: "STS"); company.serviceArea = "Apopka"
+        let manager = BucketItem(bucket: .labor, name: "Sales manager", rateCents: 4000)
+        manager.trackOnly = true
+        let saw = BucketItem(bucket: .equipment, name: "Saw", rateCents: 300)
+        let rent = BucketItem(bucket: .overhead, name: "Rent", rateCents: 960_000)
+        var r = Readiness(items: [manager, saw, rent], company: company, settings: AppSettings(), now: now)
+        let labor = r.setupInputs.first { $0.title == "Labor rows" }!
+        XCTAssertFalse(labor.isResolved, "the only labor row is not on the crew")
+        XCTAssertEqual(labor.detail, "none priced · 1 not on the crew")
+        XCTAssertEqual(r.status, .notReady(missingInputs: 1))
+        XCTAssertEqual(r.setupInputs.first { $0.title == "Equipment rows" }?.detail, "1 active row", "no track-only rows: as before")
+
+        let crew = [BucketItem(bucket: .labor, name: "Climber", rateCents: 3500), BucketItem(bucket: .labor, name: "Ground", rateCents: 3000),
+                    BucketItem(bucket: .labor, name: "Lead", rateCents: 4500)]
+        let cones = BucketItem(bucket: .equipment, name: "Cones", rateCents: 10)
+        cones.trackOnly = true
+        r = Readiness(items: crew + [manager, saw, cones, rent], company: company, settings: AppSettings(), now: now)
+        XCTAssertEqual(r.setupInputs.first { $0.title == "Labor rows" }?.detail, "3 priced · 1 not on the crew")
+        XCTAssertEqual(r.setupInputs.first { $0.title == "Labor rows" }?.isResolved, true)
+        XCTAssertEqual(r.setupInputs.first { $0.title == "Equipment rows" }?.detail, "1 priced · 1 track only")
+        XCTAssertEqual(r.missingInputs, 0)
+        XCTAssertEqual(Bucket.labor.trackOnlyLabel, "Not on the crew")
+        XCTAssertEqual(Bucket.equipment.trackOnlyLabel, "Track only")
+    }
 }
